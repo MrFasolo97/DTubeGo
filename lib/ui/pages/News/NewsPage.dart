@@ -66,9 +66,9 @@ class NewsScreen extends StatelessWidget {
 }
 
 class NewsScreenLoading extends StatelessWidget {
-  NewsScreenLoading({
-    Key? key,
-  }) : super(key: key);
+  NewsScreenLoading({Key? key, required this.crossAxisCount}) : super(key: key);
+
+  final int crossAxisCount;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class NewsScreenLoading extends StatelessWidget {
         child: DtubeLogoPulseWithSubtitle(
           subtitle:
               "Checking recent news about DTube and the Avalon blockchain...",
-          size: 40.w,
+          size: crossAxisCount == 1 ? 40.w : 20.w,
         ),
       ),
     );
