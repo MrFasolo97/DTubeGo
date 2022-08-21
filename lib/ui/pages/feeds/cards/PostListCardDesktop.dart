@@ -1,40 +1,45 @@
-import 'dart:developer';
+import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:dtube_go/ui/pages/feeds/cards/widets/CollapsedDescription.dart';
+import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
+import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
+import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
-import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
-import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
-
-import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
-import 'package:ovh.fso.dtubego/style/ThemeData.dart';
-import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VotingDialog/VotingDialog.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/Comments/CommentDialog.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayIcon.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/gifts/GiftDialog/GiftDialog.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/tags/TagChip.dart';
-import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
+import 'dart:io';
+import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:dtube_go/bloc/user/user_bloc_full.dart';
+import 'package:dtube_go/style/ThemeData.dart';
+import 'package:dtube_go/ui/pages/post/widgets/VotingDialog.dart';
+import 'package:dtube_go/ui/widgets/Comments/CommentDialog.dart';
+import 'package:dtube_go/ui/pages/post/widgets/VoteButtons.dart';
+import 'package:dtube_go/ui/widgets/Inputs/OverlayInputs.dart';
+import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
+import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:dtube_go/ui/widgets/gifts/GiftDialog.dart';
+import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
+import 'package:dtube_go/utils/Random/randomGenerator.dart';
+import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
-import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer.dart';
+import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
+import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
+import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:ovh.fso.dtubego/utils/System/hw_none.dart'
-  if(dart.lib.html) 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementOnDesktop.dart'
-  if(dart.lib.io) 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
-
 
 class PostListCardDesktop extends StatefulWidget {
-  PostListCardDesktop(
+  const PostListCardDesktop(
       {Key? key,
       required this.blur,
       required this.defaultCommentVotingWeight,
@@ -43,11 +48,7 @@ class PostListCardDesktop extends StatefulWidget {
       required this.fixedDownvoteActivated,
       required this.fixedDownvoteWeight,
       required this.autoPauseVideoOnPopup,
-      required this.feedItem,
-      required this.crossAxisCount,
-      required this.width,
-      this.deactivatePlayback,
-      this.hideSpeedDial})
+      required this.feedItem})
       : super(key: key);
 
   final bool blur;
@@ -59,10 +60,6 @@ class PostListCardDesktop extends StatefulWidget {
 
   final String fixedDownvoteActivated;
   final String fixedDownvoteWeight;
-  final int crossAxisCount;
-  final double width;
-  bool? deactivatePlayback;
-  bool? hideSpeedDial;
 
   @override
   _PostListCardDesktopState createState() => _PostListCardDesktopState();
@@ -87,12 +84,9 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
   late VideoPlayerController _bpController;
   late YoutubePlayerController _ytController;
 
-  late bool countedForAds;
-
   @override
   void initState() {
     super.initState();
-    countedForAds = false;
     _showVotingBars = false;
     _votingDirection = true;
     _showCommentInput = false;
@@ -103,8 +97,11 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
       initialVideoId: widget.feedItem.videoUrl,
       params: YoutubePlayerParams(
           showControls: true,
-          showFullscreenButton: true
-      ),
+          showFullscreenButton: true,
+          desktopMode: kIsWeb ? true : !Platform.isIOS,
+          privacyEnhanced: true,
+          useHybridComposition: true,
+          autoPlay: true),
     );
   }
 
@@ -127,33 +124,17 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
             !_showVotingBars) {
           _ytController.pause();
           _bpController.pause();
-          log("VISIBILITY OF " +
+          print("VISIBILITY OF " +
               widget.feedItem.author +
               "/" +
               widget.feedItem.link +
               "CHANGED TO " +
               visiblePercentage.toString());
-          if (globals.enableAdvertisements && !this.countedForAds) {
-            globals.scrolledPostsBetweenAds += 1;
-            log("Scrolled " +
-                globals.scrolledPostsBetweenAds.toString() +
-                " posts...");
-            this.countedForAds = true;
-          }
         }
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: PostData(
-          disablePlayback:
-              widget.deactivatePlayback != null && widget.deactivatePlayback!
-                  ? true
-                  : false,
-          hideSpeedDial: widget.hideSpeedDial != null && widget.hideSpeedDial!
-              ? true
-              : false,
-          author: widget.feedItem.author,
-          link: widget.feedItem.link,
           thumbnailTapped: _thumbnailTapped,
           widget: widget,
           bpController: _bpController,
@@ -166,11 +147,11 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
           showGiftInput: _showGiftInput,
           giftDTCController: _giftDTCController,
           giftMemoController: _giftMemoController,
+          avatarSize: _avatarSize,
           blur: widget.blur,
           thumbUrl: widget.feedItem.thumbUrl,
           videoSource: widget.feedItem.videoSource,
           videoUrl: widget.feedItem.videoUrl,
-          width: widget.width,
           thumbnailTappedCallback: () {
             setState(() {
               _thumbnailTapped = true;
@@ -207,42 +188,38 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
 }
 
 class PostData extends StatefulWidget {
-  PostData(
-      {Key? key,
-      required bool thumbnailTapped,
-      required this.widget,
-      required VideoPlayerController bpController,
-      required YoutubePlayerController ytController,
-      required bool showVotingBars,
-      required UserBloc userBloc,
-      required bool votingDirection,
-      required bool showCommentInput,
-      required TextEditingController replyController,
-      required bool showGiftInput,
-      required TextEditingController giftDTCController,
-      required TextEditingController giftMemoController,
-      required this.thumbnailTappedCallback,
-      required this.votingOpenCallback,
-      required this.commentOpenCallback,
-      required this.giftOpenCallback,
-      required this.videoSource,
-      required this.videoUrl,
-      required this.thumbUrl,
-      required this.blur,
-      required this.feedItem,
-      required this.defaultCommentVotingWeight,
-      required this.defaultPostVotingWeight,
-      required this.defaultPostVotingTip,
-      required this.fixedDownvoteActivated,
-      required this.fixedDownvoteWeight,
-      required this.parentContext,
-      required this.autoPauseVideoOnPopup,
-      required this.width,
-      required this.hideSpeedDial,
-      required this.disablePlayback,
-      required this.author,
-      required this.link})
-      : _thumbnailTapped = thumbnailTapped,
+  PostData({
+    Key? key,
+    required bool thumbnailTapped,
+    required this.widget,
+    required VideoPlayerController bpController,
+    required YoutubePlayerController ytController,
+    required bool showVotingBars,
+    required UserBloc userBloc,
+    required bool votingDirection,
+    required bool showCommentInput,
+    required TextEditingController replyController,
+    required bool showGiftInput,
+    required TextEditingController giftDTCController,
+    required TextEditingController giftMemoController,
+    required double avatarSize,
+    required this.thumbnailTappedCallback,
+    required this.votingOpenCallback,
+    required this.commentOpenCallback,
+    required this.giftOpenCallback,
+    required this.videoSource,
+    required this.videoUrl,
+    required this.thumbUrl,
+    required this.blur,
+    required this.feedItem,
+    required this.defaultCommentVotingWeight,
+    required this.defaultPostVotingWeight,
+    required this.defaultPostVotingTip,
+    required this.fixedDownvoteActivated,
+    required this.fixedDownvoteWeight,
+    required this.parentContext,
+    required this.autoPauseVideoOnPopup,
+  })  : _thumbnailTapped = thumbnailTapped,
         _bpController = bpController,
         _ytController = ytController,
         _showVotingBars = showVotingBars,
@@ -253,6 +230,7 @@ class PostData extends StatefulWidget {
         _showGiftInput = showGiftInput,
         _giftDTCController = giftDTCController,
         _giftMemoController = giftMemoController,
+        _avatarSize = avatarSize,
         super(key: key);
 
   final bool _thumbnailTapped;
@@ -268,7 +246,7 @@ class PostData extends StatefulWidget {
   bool _showGiftInput;
   final TextEditingController _giftDTCController;
   final TextEditingController _giftMemoController;
-
+  final double _avatarSize;
   final VoidCallback thumbnailTappedCallback;
   final VoidCallback votingOpenCallback;
   final VoidCallback commentOpenCallback;
@@ -287,41 +265,21 @@ class PostData extends StatefulWidget {
   final bool autoPauseVideoOnPopup;
 
   final BuildContext parentContext;
-  final double width;
-  bool disablePlayback;
-  bool hideSpeedDial;
-  final String author;
-  final String link;
 
   @override
   State<PostData> createState() => _PostDataState();
 }
 
 class _PostDataState extends State<PostData> {
-  Widget ShowAdsOrPost({post}) {
-    Widget? show;
-    if(globals.scrolledPostsBetweenAds >= globals.minimumPostsBetweenAds && globals.enableAdvertisements) {
-      show = Advertisement(post: post);
-      globals.scrolledPostsBetweenAds = 0;
-    } else {
-      show = post;
-    }
-    return Padding(padding: EdgeInsets.only(top: 16), child: SizedBox(width: Device.width, height: 380, child: show,));
-  }
   @override
   Widget build(BuildContext context) {
-    Widget post = Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         InkWell(
           onTap: () {
-            if (!widget.disablePlayback) {
-              widget.thumbnailTappedCallback();
-            } else {
-              navigateToPostDetailPage(
-                  context, widget.author, widget.link, "none", false, () {});
-            }
+            widget.thumbnailTappedCallback();
           },
           child: Stack(
             alignment: Alignment.topCenter,
@@ -336,14 +294,14 @@ class _PostDataState extends State<PostData> {
                 videoSource: widget.videoSource,
                 videoUrl: widget.videoUrl,
                 ytController: widget._ytController,
-                placeholderWidth: widget.width * 0.9,
-                placeholderSize: widget.width * 0.9,
+                placeholderWidth: globals.mobileMode ? 100.w : 15.w,
+                placeholderSize: globals.mobileMode ? 40.w : 15.w,
               ),
             ],
           ),
         ),
         PostInfoBaseRow(
-          hideSpeedDial: widget.hideSpeedDial,
+          avatarSize: widget._avatarSize,
           autoPauseVideoOnPopup: widget.autoPauseVideoOnPopup,
           defaultCommentVotingWeight: widget.defaultCommentVotingWeight,
           defaultPostVotingTip: widget.defaultPostVotingTip,
@@ -354,7 +312,6 @@ class _PostDataState extends State<PostData> {
           parentContext: widget.parentContext,
           videoController: widget._bpController,
           ytController: widget._ytController,
-          width: widget.width,
           commentCloseCallback: () {
             setState(() {
               widget._showCommentInput = false;
@@ -388,163 +345,103 @@ class _PostDataState extends State<PostData> {
         ),
         globals.disableAnimations
             ? PostInfoDetailsRow(
-                width: widget.width,
-                author: widget.feedItem.author,
-                dist: widget.feedItem.dist,
-                dur: int.tryParse(widget.feedItem.jsonString!.dur) != null
-                    ? int.tryParse(widget.feedItem.jsonString!.dur)!
-                    : 0,
-                oc: widget.feedItem.jsonString!.oc == 1,
-                tag: widget.feedItem.jsonString!.tag,
-                ts: widget.feedItem.ts,
+                widget: widget.widget,
               )
             : FadeInDown(
                 preferences:
                     AnimationPreferences(offset: Duration(milliseconds: 500)),
-                child: PostInfoDetailsRow(
-                  width: widget.width,
-                  author: widget.feedItem.author,
-                  dist: widget.feedItem.dist,
-                  dur: int.tryParse(widget.feedItem.jsonString!.dur) != null
-                      ? int.tryParse(widget.feedItem.jsonString!.dur)!
-                      : 0,
-                  oc: widget.feedItem.jsonString!.oc == 1,
-                  tag: widget.feedItem.jsonString!.tag,
-                  ts: widget.feedItem.ts,
+                child: Padding(
+                  padding: EdgeInsets.only(left: globals.mobileMode ? 12.w : 0),
+                  child: PostInfoDetailsRow(
+                    widget: widget.widget,
+                  ),
                 ),
               ),
+        SizedBox(height: 1.h),
       ],
     );
-    return ShowAdsOrPost(post: post);
   }
 }
 
 class PostInfoDetailsRow extends StatelessWidget {
-  const PostInfoDetailsRow(
-      {Key? key,
-      required this.width,
-      required this.author,
-      required this.dist,
-      required this.dur,
-      required this.oc,
-      required this.tag,
-      required this.ts})
-      : super(key: key);
+  const PostInfoDetailsRow({
+    Key? key,
+    required this.widget,
+  }) : super(key: key);
 
-  final double width;
-  final String author;
-
-  final bool oc;
-  final String tag;
-  final int ts;
-  final int dur;
-  final double dist;
+  final PostListCardDesktop widget;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                globals.disableAnimations
-                    ? Padding(
-                        padding: EdgeInsets.only(top: 2),
-                        child: AccountIconContainer(
-                            authorName: author, avatarSize: 40),
-                      )
-                    : FadeIn(
-                        preferences: AnimationPreferences(
-                            offset: Duration(milliseconds: 500),
-                            duration: Duration(seconds: 1)),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 2),
-                          child: AccountIconContainer(
-                              authorName: author, avatarSize: 40),
-                        ),
-                      ),
-                SizedBox(width: width * 0.01),
-                Container(
-                  width: width * 0.3,
-                  child: Text(
-                    author,
-                    //'@${width}',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
+            Container(
+              width: globals.mobileMode ? 50.w : 200,
+              child: Text(
+                '@${widget.feedItem.author}',
+                style: Theme.of(context).textTheme.bodyText2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                oc
-                    ? globals.disableAnimations
-                        ? OriginalContentIcon()
-                        : FadeIn(
-                            preferences: AnimationPreferences(
-                                offset: Duration(milliseconds: 700),
-                                duration: Duration(seconds: 1)),
-                            child: OriginalContentIcon(),
-                          )
-                    : SizedBox(width: globalIconSizeSmall),
-                SizedBox(width: width * 0.01),
-                TagChip(
-                    waitBeforeFadeIn: Duration(milliseconds: 600),
-                    fadeInFromLeft: false,
-                    tagName: tag,
-                    width: width * 0.2,
-                    fontStyle: Theme.of(context).textTheme.bodySmall),
+                Text(
+                  TimeAgo.timeInAgoTSShort(widget.feedItem.ts),
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                // Text(
+                //   ' - ' +
+                //       (new Duration(
+                //                       seconds: int.tryParse(widget.feedItem.jsonString!.dur) != null
+                //                           ? int.parse(
+                //                               widget.feedItem.jsonString!.dur)
+                //                           : 0)
+                //                   .inHours ==
+                //               0
+                //           ? (new Duration(seconds: int.tryParse(widget.feedItem.jsonString!.dur) != null ? int.parse(widget.feedItem.jsonString!.dur) : 0)
+                //                           .inHours ==
+                //                       0)
+                //                   .toString()
+                //                   .substring(2, 7) +
+                //               ' min'
+                //           : (new Duration(
+                //                               seconds:
+                //                                   int.tryParse(widget.feedItem.jsonString!.dur) !=
+                //                                           null
+                //                                       ? int.parse(widget.feedItem.jsonString!.dur)
+                //                                       : 0)
+                //                           .inHours ==
+                //                       0)
+                //                   .toString()
+                //                   .substring(0, 7) +
+                //               ' h'),
+                // style: Theme.of(context).textTheme.bodyText2,
+                //),
               ],
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Text(
-                  TimeAgo.timeInAgoTSShort(ts),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                dur > 0
-                    ? Text(
-                        ' - ' +
-                            (new Duration(seconds: dur).inHours == 0
-                                ? (new Duration(seconds: dur).inMinutes)
-                                        .toString() +
-                                    ' min'
-                                : (new Duration(seconds: dur).inHours)
-                                        .toString() +
-                                    ' h'),
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      )
-                    : SizedBox(
-                        width: 0,
-                      ),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  (dist / 100).round().toString(),
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 5),
-                  child: DTubeLogoShadowed(size: 20),
-                ),
-              ],
-            ),
-          ],
+        Padding(
+          padding: EdgeInsets.only(right: 0.w),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                (widget.feedItem.dist / 100).round().toString(),
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: globals.mobileMode ? 1.w : 5),
+                child: DTubeLogoShadowed(size: globals.mobileMode ? 5.w : 20),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -552,28 +449,29 @@ class PostInfoDetailsRow extends StatelessWidget {
 }
 
 class PostInfoBaseRow extends StatelessWidget {
-  PostInfoBaseRow(
-      {Key? key,
-      required this.ytController,
-      required this.videoController,
-      required this.votingCloseCallback,
-      required this.votingOpenCallback,
-      required this.commentOpenCallback,
-      required this.commentCloseCallback,
-      required this.giftOpenCallback,
-      required this.giftCloseCallback,
-      required this.feedItem,
-      required this.defaultCommentVotingWeight,
-      required this.defaultPostVotingWeight,
-      required this.defaultPostVotingTip,
-      required this.fixedDownvoteActivated,
-      required this.fixedDownvoteWeight,
-      required this.parentContext,
-      required this.autoPauseVideoOnPopup,
-      required this.width,
-      required this.hideSpeedDial})
-      : super(key: key);
+  PostInfoBaseRow({
+    Key? key,
+    required double avatarSize,
+    required this.ytController,
+    required this.videoController,
+    required this.votingCloseCallback,
+    required this.votingOpenCallback,
+    required this.commentOpenCallback,
+    required this.commentCloseCallback,
+    required this.giftOpenCallback,
+    required this.giftCloseCallback,
+    required this.feedItem,
+    required this.defaultCommentVotingWeight,
+    required this.defaultPostVotingWeight,
+    required this.defaultPostVotingTip,
+    required this.fixedDownvoteActivated,
+    required this.fixedDownvoteWeight,
+    required this.parentContext,
+    required this.autoPauseVideoOnPopup,
+  })  : _avatarSize = avatarSize,
+        super(key: key);
 
+  final double _avatarSize;
   final YoutubePlayerController ytController;
   final VideoPlayerController videoController;
   final VoidCallback votingOpenCallback;
@@ -592,8 +490,6 @@ class PostInfoBaseRow extends StatelessWidget {
   final bool autoPauseVideoOnPopup;
 
   final BuildContext parentContext;
-  final double width;
-  final bool hideSpeedDial;
 
   @override
   Widget build(BuildContext context) {
@@ -601,311 +497,375 @@ class PostInfoBaseRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        globals.disableAnimations
-            ? TitleWidgetForRow(
-                author: feedItem.author,
-                link: feedItem.link,
-                title: feedItem.jsonString!.title,
-                width: width * 0.65
-                )
-            : FadeInLeftBig(
-                preferences: AnimationPreferences(
-                  offset: Duration(milliseconds: 100),
-                  duration: Duration(milliseconds: 350),
-                ),
-                child: TitleWidgetForRow(
+        Row(
+          children: [
+            globals.disableAnimations
+                ? AccountIconContainer(
+                    authorName: feedItem.author, avatarSize: _avatarSize)
+                : FadeIn(
+                    preferences: AnimationPreferences(
+                        offset: Duration(milliseconds: 500),
+                        duration: Duration(seconds: 1)),
+                    child: AccountIconContainer(
+                        authorName: feedItem.author, avatarSize: _avatarSize),
+                  ),
+            SizedBox(width: globals.mobileMode ? 2.w : 10),
+            globals.disableAnimations
+                ? TitleWidgetForRow(
                     author: feedItem.author,
                     link: feedItem.link,
                     title: feedItem.jsonString!.title,
-                    width: width * 0.65),
-              ),
+                  )
+                : FadeInLeftBig(
+                    preferences: AnimationPreferences(
+                      offset: Duration(milliseconds: 100),
+                      duration: Duration(milliseconds: 350),
+                    ),
+                    child: TitleWidgetForRow(
+                      author: feedItem.author,
+                      link: feedItem.link,
+                      title: feedItem.jsonString!.title,
+                    ),
+                  ),
+          ],
+        ),
+        SizedBox(height: 2.h),
         Container(
-          width: width * 0.1,
-          child: globals.keyPermissions.isEmpty || hideSpeedDial
-              ? Container()
-              : Align(
-                  alignment: Alignment.centerRight,
-                  child: SpeedDial(
-                      child: globals.disableAnimations
-                          ? ShadowedIcon(
-                              icon: FontAwesomeIcons.ellipsisVertical,
-                              color: globalAlmostWhite,
-                              shadowColor: Colors.black,
-                              size: globalIconSizeMedium)
-                          : HeartBeat(
+          width: globals.mobileMode ? 28.w : 100,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  feedItem.jsonString!.oc == 1
+                      ? globals.disableAnimations
+                          ? OriginalContentIcon()
+                          : FadeIn(
                               preferences: AnimationPreferences(
-                                  magnitude: 1.2,
-                                  offset: Duration(seconds: 3),
-                                  autoPlay: AnimationPlayStates.Loop),
-                              child: ShadowedIcon(
-                                  icon: FontAwesomeIcons.ellipsisVertical,
-                                  color: globalAlmostWhite,
-                                  shadowColor: Colors.black,
-                                  size: globalIconSizeMedium),
-                            ),
-                      // ),
-
-                      activeChild: ShadowedIcon(
-                          icon: FontAwesomeIcons.sortDown,
-                          color: globalAlmostWhite,
-                          shadowColor: Colors.black,
-                          size: globalIconSizeMedium),
-
-                      // buttonSize:
-                      //     Size(globalIconSizeMedium, globalIconSizeMedium),
-                      useRotationAnimation: false,
-                      direction: SpeedDialDirection.up,
-                      visible: true,
-                      spacing: 0.0,
-                      closeManually: false,
-                      curve: Curves.bounceIn,
-                      overlayColor: globalAlmostWhite,
-                      overlayOpacity: 0,
-                      onOpen: () => log('OPENING DIAL'),
-                      onClose: () => log('DIAL CLOSED'),
-                      tooltip: 'menu',
-                      heroTag: 'submenu' + feedItem.jsonString!.title,
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: globalAlmostWhite,
-                      elevation: 0.0,
-                      children: [
-                        // DOWNVOTE BUTTON
-                        SpeedDialChild(
+                                  offset: Duration(milliseconds: 700),
+                                  duration: Duration(seconds: 1)),
+                              child: OriginalContentIcon(),
+                            )
+                      : SizedBox(width: globalIconSizeSmall),
+                  TagChip(
+                      waitBeforeFadeIn: Duration(milliseconds: 600),
+                      fadeInFromLeft: false,
+                      tagName: feedItem.jsonString!.tag,
+                      width: globals.mobileMode ? 14.w : 50,
+                      fontStyle: Theme.of(context).textTheme.caption),
+                ],
+              ),
+              globals.keyPermissions.isEmpty
+                  ? Container()
+                  : Align(
+                      alignment: Alignment.centerRight,
+                      child: SpeedDial(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 12.w),
+                            child: globals.disableAnimations
+                                ? ShadowedIcon(
+                                    icon: FontAwesomeIcons.ellipsisVertical,
+                                    color: globalAlmostWhite,
+                                    shadowColor: Colors.black,
+                                    size: globalIconSizeMedium)
+                                : HeartBeat(
+                                    preferences: AnimationPreferences(
+                                        magnitude: 1.2,
+                                        offset: Duration(seconds: 3),
+                                        autoPlay: AnimationPlayStates.Loop),
+                                    child: ShadowedIcon(
+                                        icon: FontAwesomeIcons.ellipsisVertical,
+                                        color: globalAlmostWhite,
+                                        shadowColor: Colors.black,
+                                        size: globalIconSizeMedium),
+                                  ),
+                            // ),
+                          ),
+                          activeChild: Padding(
+                            padding: EdgeInsets.only(left: 12.w),
                             child: ShadowedIcon(
-                                visible: globals.keyPermissions.contains(5),
-                                icon: FontAwesomeIcons.flag,
-                                color: !feedItem.alreadyVoted!
-                                    ? globalAlmostWhite
-                                    : globalRed,
+                                icon: FontAwesomeIcons.sortDown,
+                                color: globalAlmostWhite,
                                 shadowColor: Colors.black,
                                 size: globalIconSizeMedium),
-                            foregroundColor: globalAlmostWhite,
-                            elevation: 0,
-                            backgroundColor: Colors.transparent,
-                            onTap: () {
-                              if (!feedItem.alreadyVoted!) {
-                                if (autoPauseVideoOnPopup) {
-                                  videoController.pause();
-                                  ytController.pause();
-                                }
-                                votingOpenCallback();
-                                showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      MultiBlocProvider(
-                                    providers: [
-                                      BlocProvider<PostBloc>(
-                                          create: (context) => PostBloc(
-                                              repository:
-                                                  PostRepositoryImpl())),
-                                      BlocProvider<UserBloc>(
-                                          create: (context) => UserBloc(
-                                              repository:
-                                                  UserRepositoryImpl())),
-                                    ],
-                                    child: VotingDialog(
-                                      defaultVote:
-                                          double.parse(defaultPostVotingWeight),
-                                      defaultTip:
-                                          double.parse(defaultPostVotingTip),
-                                      postBloc: PostBloc(
-                                          repository: PostRepositoryImpl()),
-                                      txBloc: BlocProvider.of<TransactionBloc>(
-                                          context),
-                                      author: feedItem.author,
-                                      link: feedItem.link,
-                                      downvote: true,
-                                      //currentVT: state.vtBalance['v']! + 0.0,
-                                      isPost: true,
-                                      fixedDownvoteActivated:
-                                          fixedDownvoteActivated == "true",
-                                      fixedDownvoteWeight:
-                                          double.parse(fixedDownvoteWeight),
+                          ),
+                          // buttonSize:
+                          //     Size(globalIconSizeMedium, globalIconSizeMedium),
+                          useRotationAnimation: false,
+                          direction: SpeedDialDirection.up,
+                          visible: true,
+                          spacing: 0.0,
+                          closeManually: false,
+                          curve: Curves.bounceIn,
+                          overlayColor: globalAlmostWhite,
+                          overlayOpacity: 0,
+                          onOpen: () => print('OPENING DIAL'),
+                          onClose: () => print('DIAL CLOSED'),
+                          tooltip: 'menu',
+                          heroTag: 'submenu' + feedItem.jsonString!.title,
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: globalAlmostWhite,
+                          elevation: 0.0,
+                          children: [
+                            // COMMENT BUTTON
+                            SpeedDialChild(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 7.w),
+                                  child: ShadowedIcon(
+                                      visible:
+                                          globals.keyPermissions.contains(4),
+                                      icon: FontAwesomeIcons.comment,
+                                      color: globalAlmostWhite,
+                                      shadowColor: Colors.black,
+                                      size: globalIconSizeBig),
+                                ),
+                                foregroundColor: globalAlmostWhite,
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
+                                onTap: () {
+                                  if (autoPauseVideoOnPopup) {
+                                    videoController.pause();
+                                    ytController.pause();
+                                  }
+                                  commentOpenCallback();
+
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        BlocProvider<UserBloc>(
+                                      create: (context) => UserBloc(
+                                          repository: UserRepositoryImpl()),
+                                      child: CommentDialog(
+                                        txBloc:
+                                            BlocProvider.of<TransactionBloc>(
+                                                context),
+                                        originAuthor: feedItem.author,
+                                        originLink: feedItem.link,
+                                        defaultCommentVote: double.parse(
+                                            defaultCommentVotingWeight),
+                                        okCallback: () {
+                                          commentCloseCallback();
+                                          if (autoPauseVideoOnPopup) {
+                                            ytController.play();
+                                            videoController.play();
+                                          }
+                                        },
+                                        cancelCallback: () {
+                                          commentCloseCallback();
+                                          if (autoPauseVideoOnPopup) {
+                                            ytController.play();
+                                            videoController.play();
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                }),
+                            // DOWNVOTE BUTTON
+                            SpeedDialChild(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 7.w),
+                                  child: ShadowedIcon(
+                                      visible:
+                                          globals.keyPermissions.contains(5),
+                                      icon: FontAwesomeIcons.flag,
+                                      color: !feedItem.alreadyVoted!
+                                          ? globalAlmostWhite
+                                          : globalRed,
+                                      shadowColor: Colors.black,
+                                      size: globalIconSizeBig),
+                                ),
+                                foregroundColor: globalAlmostWhite,
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
+                                onTap: () {
+                                  if (!feedItem.alreadyVoted!) {
+                                    if (autoPauseVideoOnPopup) {
+                                      videoController.pause();
+                                      ytController.pause();
+                                    }
+                                    votingOpenCallback();
+                                    showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          MultiBlocProvider(
+                                        providers: [
+                                          BlocProvider<PostBloc>(
+                                              create: (context) => PostBloc(
+                                                  repository:
+                                                      PostRepositoryImpl())),
+                                          BlocProvider<UserBloc>(
+                                              create: (context) => UserBloc(
+                                                  repository:
+                                                      UserRepositoryImpl())),
+                                        ],
+                                        child: VotingDialog(
+                                          defaultVote: double.parse(
+                                              defaultPostVotingWeight),
+                                          defaultTip: double.parse(
+                                              defaultPostVotingTip),
+                                          postBloc: BlocProvider.of<PostBloc>(
+                                              context),
+                                          txBloc:
+                                              BlocProvider.of<TransactionBloc>(
+                                                  context),
+                                          author: feedItem.author,
+                                          link: feedItem.link,
+                                          downvote: true,
+                                          //currentVT: state.vtBalance['v']! + 0.0,
+                                          isPost: true,
+                                          fixedDownvoteActivated:
+                                              fixedDownvoteActivated == "true",
+                                          fixedDownvoteWeight:
+                                              double.parse(fixedDownvoteWeight),
+                                          okCallback: () {
+                                            votingCloseCallback();
+                                            if (autoPauseVideoOnPopup) {
+                                              ytController.play();
+                                              videoController.play();
+                                            }
+                                          },
+                                          cancelCallback: () {
+                                            votingCloseCallback();
+                                            if (autoPauseVideoOnPopup) {
+                                              ytController.play();
+                                              videoController.play();
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }),
+                            // UPVOTE BUTTON
+
+                            SpeedDialChild(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 7.w),
+                                  child: ShadowedIcon(
+                                      visible:
+                                          globals.keyPermissions.contains(5),
+                                      icon: FontAwesomeIcons.heart,
+                                      color: !feedItem.alreadyVoted!
+                                          ? globalAlmostWhite
+                                          : globalRed,
+                                      shadowColor: Colors.black,
+                                      size: globalIconSizeBig),
+                                ),
+                                foregroundColor: globalAlmostWhite,
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
+                                onTap: () {
+                                  if (!feedItem.alreadyVoted!) {
+                                    votingOpenCallback();
+                                    if (autoPauseVideoOnPopup) {
+                                      videoController.pause();
+                                      ytController.pause();
+                                    }
+
+                                    showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          MultiBlocProvider(
+                                        providers: [
+                                          BlocProvider<PostBloc>(
+                                              create: (context) => PostBloc(
+                                                  repository:
+                                                      PostRepositoryImpl())),
+                                          BlocProvider<UserBloc>(
+                                              create: (context) => UserBloc(
+                                                  repository:
+                                                      UserRepositoryImpl())),
+                                        ],
+                                        child: VotingDialog(
+                                          defaultVote: double.parse(
+                                              defaultPostVotingWeight),
+                                          defaultTip: double.parse(
+                                              defaultPostVotingTip),
+                                          postBloc: BlocProvider.of<PostBloc>(
+                                              context),
+                                          txBloc:
+                                              BlocProvider.of<TransactionBloc>(
+                                                  context),
+                                          author: feedItem.author,
+                                          link: feedItem.link,
+                                          downvote: false,
+                                          //currentVT: state.vtBalance['v']! + 0.0,
+                                          isPost: true,
+                                          fixedDownvoteActivated:
+                                              fixedDownvoteActivated == "true",
+                                          fixedDownvoteWeight:
+                                              double.parse(fixedDownvoteWeight),
+                                          okCallback: () {
+                                            votingCloseCallback();
+                                            if (autoPauseVideoOnPopup) {
+                                              ytController.play();
+                                              videoController.play();
+                                            }
+                                          },
+                                          cancelCallback: () {
+                                            votingCloseCallback();
+                                            if (autoPauseVideoOnPopup) {
+                                              ytController.play();
+                                              videoController.play();
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }),
+                            // GIFT BUTTON
+                            SpeedDialChild(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 7.w),
+                                  child: ShadowedIcon(
+                                      visible:
+                                          globals.keyPermissions.contains(3),
+                                      icon: FontAwesomeIcons.gift,
+                                      color: globalAlmostWhite,
+                                      shadowColor: Colors.black,
+                                      size: globalIconSizeBig),
+                                ),
+                                foregroundColor: globalAlmostWhite,
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
+                                onTap: () {
+                                  if (autoPauseVideoOnPopup) {
+                                    videoController.pause();
+                                    ytController.pause();
+                                  }
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        GiftDialog(
                                       okCallback: () {
-                                        votingCloseCallback();
+                                        giftCloseCallback();
                                         if (autoPauseVideoOnPopup) {
                                           ytController.play();
                                           videoController.play();
                                         }
                                       },
                                       cancelCallback: () {
-                                        votingCloseCallback();
+                                        giftCloseCallback();
                                         if (autoPauseVideoOnPopup) {
                                           ytController.play();
                                           videoController.play();
                                         }
                                       },
-                                    ),
-                                  ),
-                                );
-                              }
-                            }),
-
-                        // COMMENT BUTTON
-                        SpeedDialChild(
-                            child: ShadowedIcon(
-                                visible: globals.keyPermissions.contains(4),
-                                icon: FontAwesomeIcons.comment,
-                                color: globalAlmostWhite,
-                                shadowColor: Colors.black,
-                                size: globalIconSizeMedium),
-                            foregroundColor: globalAlmostWhite,
-                            elevation: 0,
-                            backgroundColor: Colors.transparent,
-                            onTap: () {
-                              if (autoPauseVideoOnPopup) {
-                                videoController.pause();
-                                ytController.pause();
-                              }
-                              commentOpenCallback();
-
-                              showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    BlocProvider<UserBloc>(
-                                  create: (context) => UserBloc(
-                                      repository: UserRepositoryImpl()),
-                                  child: CommentDialog(
-                                    txBloc: BlocProvider.of<TransactionBloc>(
-                                        context),
-                                    originAuthor: feedItem.author,
-                                    originLink: feedItem.link,
-                                    defaultCommentVote: double.parse(
-                                        defaultCommentVotingWeight),
-                                    okCallback: () {
-                                      commentCloseCallback();
-                                      if (autoPauseVideoOnPopup) {
-                                        ytController.play();
-                                        videoController.play();
-                                      }
-                                    },
-                                    cancelCallback: () {
-                                      commentCloseCallback();
-                                      if (autoPauseVideoOnPopup) {
-                                        ytController.play();
-                                        videoController.play();
-                                      }
-                                    },
-                                  ),
-                                ),
-                              );
-                            }),
-
-                        // UPVOTE BUTTON
-
-                        SpeedDialChild(
-                            child: ShadowedIcon(
-                                visible: globals.keyPermissions.contains(5),
-                                icon: FontAwesomeIcons.heart,
-                                color: !feedItem.alreadyVoted!
-                                    ? globalAlmostWhite
-                                    : globalRed,
-                                shadowColor: Colors.black,
-                                size: globalIconSizeMedium),
-                            foregroundColor: globalAlmostWhite,
-                            elevation: 0,
-                            backgroundColor: Colors.transparent,
-                            onTap: () {
-                              if (!feedItem.alreadyVoted!) {
-                                votingOpenCallback();
-                                if (autoPauseVideoOnPopup) {
-                                  videoController.pause();
-                                  ytController.pause();
-                                }
-
-                                showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      MultiBlocProvider(
-                                    providers: [
-                                      BlocProvider<PostBloc>(
-                                          create: (context) => PostBloc(
-                                              repository:
-                                                  PostRepositoryImpl())),
-                                      BlocProvider<UserBloc>(
-                                          create: (context) => UserBloc(
-                                              repository:
-                                                  UserRepositoryImpl())),
-                                    ],
-                                    child: VotingDialog(
-                                      defaultVote:
-                                          double.parse(defaultPostVotingWeight),
-                                      defaultTip:
-                                          double.parse(defaultPostVotingTip),
-                                      postBloc: PostBloc(
-                                          repository: PostRepositoryImpl()),
                                       txBloc: BlocProvider.of<TransactionBloc>(
                                           context),
-                                      author: feedItem.author,
-                                      link: feedItem.link,
-                                      downvote: false,
-                                      //currentVT: state.vtBalance['v']! + 0.0,
-                                      isPost: true,
-                                      fixedDownvoteActivated:
-                                          fixedDownvoteActivated == "true",
-                                      fixedDownvoteWeight:
-                                          double.parse(fixedDownvoteWeight),
-                                      okCallback: () {
-                                        votingCloseCallback();
-                                        if (autoPauseVideoOnPopup) {
-                                          ytController.play();
-                                          videoController.play();
-                                        }
-                                      },
-                                      cancelCallback: () {
-                                        votingCloseCallback();
-                                        if (autoPauseVideoOnPopup) {
-                                          ytController.play();
-                                          videoController.play();
-                                        }
-                                      },
+                                      receiver: feedItem.author,
+                                      originLink: feedItem.link,
                                     ),
-                                  ),
-                                );
-                              }
-                            }),
-                        // GIFT BUTTON
-                        SpeedDialChild(
-                            child: ShadowedIcon(
-                                visible: globals.keyPermissions.contains(3),
-                                icon: FontAwesomeIcons.gift,
-                                color: globalAlmostWhite,
-                                shadowColor: Colors.black,
-                                size: globalIconSizeMedium),
-                            foregroundColor: globalAlmostWhite,
-                            elevation: 0,
-                            backgroundColor: Colors.transparent,
-                            onTap: () {
-                              if (autoPauseVideoOnPopup) {
-                                videoController.pause();
-                                ytController.pause();
-                              }
-                              showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => GiftDialog(
-                                  okCallback: () {
-                                    giftCloseCallback();
-                                    if (autoPauseVideoOnPopup) {
-                                      ytController.play();
-                                      videoController.play();
-                                    }
-                                  },
-                                  cancelCallback: () {
-                                    giftCloseCallback();
-                                    if (autoPauseVideoOnPopup) {
-                                      ytController.play();
-                                      videoController.play();
-                                    }
-                                  },
-                                  txBloc:
-                                      BlocProvider.of<TransactionBloc>(context),
-                                  receiver: feedItem.author,
-                                  originLink: feedItem.link,
-                                ),
-                              );
-                            }),
-                      ]),
-                ),
+                                  );
+                                }),
+                          ]),
+                    ),
+            ],
+          ),
         ),
       ],
     );
@@ -955,24 +915,21 @@ class OriginalContentIcon extends StatelessWidget {
 }
 
 class TitleWidgetForRow extends StatelessWidget {
-  const TitleWidgetForRow(
-      {Key? key,
-      required this.author,
-      required this.link,
-      required this.title,
-      required this.width})
-      : super(key: key);
+  const TitleWidgetForRow({
+    Key? key,
+    required this.author,
+    required this.link,
+    required this.title,
+  }) : super(key: key);
 
   final String author;
   final String link;
   final String title;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: 4.5.h,
+      width: globals.mobileMode ? 55.w : 10.w,
       child: InkWell(
         onTap: () {
           navigateToPostDetailPage(context, author, link, "none", false, () {});
@@ -981,7 +938,7 @@ class TitleWidgetForRow extends StatelessWidget {
           title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
     );
