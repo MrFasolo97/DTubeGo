@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/pages/News/Widgets/NewsPostListCard.dart';
 
 import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
+=======
+import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:dtube_go/ui/pages/News/Widgets/NewsPostListCard.dart';
+
+import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
+>>>>>>> edcb13a (post details now rsposnive #2)
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 

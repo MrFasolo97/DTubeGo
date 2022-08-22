@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+<<<<<<< HEAD
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/Comments.dart';
@@ -28,10 +29,49 @@ import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+=======
+import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggested.dart';
+import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
+import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
+import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
+import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
+import 'package:dtube_go/ui/pages/post/widgets/TitleWidget.dart';
+import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
+import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:dtube_go/bloc/feed/feed_bloc.dart';
+import 'package:dtube_go/bloc/feed/feed_event.dart';
+import 'package:dtube_go/bloc/feed/feed_repository.dart';
+import 'package:dtube_go/style/ThemeData.dart';
+import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
+import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels.dart';
+import 'package:dtube_go/ui/MainContainer/NavigationContainer.dart';
+import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_animator/flutter_animator.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
+import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
+import 'package:dtube_go/bloc/user/user_bloc_full.dart';
+import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
+import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
+import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+>>>>>>> edcb13a (post details now rsposnive #2)
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
+<<<<<<< HEAD
+=======
+import 'dart:io' show Platform;
+>>>>>>> edcb13a (post details now rsposnive #2)
 
 class PostDetailPageDesktop extends StatefulWidget {
   String link;
@@ -119,11 +159,21 @@ class _PostDetailPageDesktopState extends State<PostDetailPageDesktop> {
             // resizeToAvoidBottomInset: true,
             extendBodyBehindAppBar: true,
             // backgroundColor: Colors.transparent,
+<<<<<<< HEAD
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
               toolbarHeight: 28,
             ),
+=======
+            appBar: kIsWeb
+                ? null
+                : AppBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    toolbarHeight: 28,
+                  ),
+>>>>>>> edcb13a (post details now rsposnive #2)
             body: BlocBuilder<PostBloc, PostState>(builder: (context, state) {
               if (state is PostLoadingState) {
                 return Center(
@@ -135,16 +185,30 @@ class _PostDetailPageDesktopState extends State<PostDetailPageDesktop> {
               } else if (state is PostLoadedState) {
                 reloadCount++;
                 if (!state.post.isFlaggedByUser) {
+<<<<<<< HEAD
                   return PostDetails(
                     post: state.post,
                     directFocus: reloadCount <= 1 ? widget.directFocus : "none",
+=======
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: PostDetails(
+                      post: state.post,
+                      directFocus:
+                          reloadCount <= 1 ? widget.directFocus : "none",
+                    ),
+>>>>>>> edcb13a (post details now rsposnive #2)
                   );
                 } else {
                   flagged = true;
 
                   return Center(
                       child: Text("this post got flagged by you!",
+<<<<<<< HEAD
                           style: Theme.of(context).textTheme.headlineMedium));
+=======
+                          style: Theme.of(context).textTheme.headline4));
+>>>>>>> edcb13a (post details now rsposnive #2)
                 }
               } else {
                 return Center(
@@ -193,7 +257,11 @@ class _PostDetailsState extends State<PostDetails> {
   late TransactionBloc txBloc =
       new TransactionBloc(repository: TransactionRepositoryImpl());
 
+<<<<<<< HEAD
   double suggestedSize = 450;
+=======
+  double suggestedSize = 350;
+>>>>>>> edcb13a (post details now rsposnive #2)
 
   void fetchBlockedUsers() async {
     blockedUsers = await sec.getBlockedUsers();
@@ -213,9 +281,28 @@ class _PostDetailsState extends State<PostDetails> {
       initialVideoId: widget.post.videoUrl!,
       params: YoutubePlayerParams(
           showControls: true,
+<<<<<<< HEAD
           showFullscreenButton: true
       ),
     );
+=======
+          showFullscreenButton: true,
+          desktopMode: true,
+          privacyEnhanced: true,
+          useHybridComposition: true,
+          autoPlay: !(widget.directFocus != "none")),
+    );
+    _controller.onEnterFullscreen = () {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      print('Entered Fullscreen');
+    };
+    _controller.onExitFullscreen = () {
+      print('Exited Fullscreen');
+    };
+>>>>>>> edcb13a (post details now rsposnive #2)
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
   }
@@ -230,6 +317,10 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+=======
+    const player = YoutubePlayerIFrame();
+>>>>>>> edcb13a (post details now rsposnive #2)
     return BlocListener<TransactionBloc, TransactionState>(
       bloc: txBloc,
       listener: (context, state) {
@@ -238,8 +329,14 @@ class _PostDetailsState extends State<PostDetails> {
               "PostDetailPageV2.dart listener 1"));
         }
       },
+<<<<<<< HEAD
       child:
           Container(
+=======
+      child: YoutubePlayerControllerProvider(
+          controller: _controller,
+          child: Container(
+>>>>>>> edcb13a (post details now rsposnive #2)
             child: SingleChildScrollView(
               child: Stack(
                 children: <Widget>[
@@ -290,6 +387,7 @@ class _PostDetailsState extends State<PostDetails> {
                                 children: [
                                   //player /thumbnail
                                   widget.post.videoSource == "youtube"
+<<<<<<< HEAD
                                       ? YTPlayerIFrame(
                                           controller: _controller,
                                           videoUrl: widget.post.videoUrl!,
@@ -299,6 +397,12 @@ class _PostDetailsState extends State<PostDetails> {
                                       : ["ipfs", "sia"]
                                               .contains(widget.post.videoSource)
                                           ? P2PSourcePlayer(
+=======
+                                      ? player
+                                      : ["ipfs", "sia"]
+                                              .contains(widget.post.videoSource)
+                                          ? ChewiePlayer(
+>>>>>>> edcb13a (post details now rsposnive #2)
                                               videoUrl: widget.post.videoUrl!,
                                               autoplay: !(widget.directFocus !=
                                                   "none"),
@@ -309,8 +413,12 @@ class _PostDetailsState extends State<PostDetails> {
                                               allowFullscreen: true,
                                               portraitVideoPadding: 5.w,
                                               videocontroller: _videocontroller,
+<<<<<<< HEAD
                                               placeholderWidth:
                                                   (100.w - suggestedSize),
+=======
+                                              placeholderWidth: 100.w,
+>>>>>>> edcb13a (post details now rsposnive #2)
                                               placeholderSize: 40.w,
                                             )
                                           : CachedNetworkImage(
@@ -408,8 +516,19 @@ class _PostDetailsState extends State<PostDetails> {
                                             link: widget.post.link,
                                           )),
                                   globals.disableAnimations
+<<<<<<< HEAD
                                       ? Padding(
                                           padding: EdgeInsets.only(top: 10),
+=======
+                                      ? CollapsedDescription(
+                                          startCollapsed: false,
+                                          description: widget
+                                                      .post.jsonString!.desc !=
+                                                  null
+                                              ? widget.post.jsonString!.desc!
+                                              : "")
+                                      : FadeInDown(
+>>>>>>> edcb13a (post details now rsposnive #2)
                                           child: CollapsedDescription(
                                               startCollapsed: false,
                                               description: widget.post
@@ -418,6 +537,7 @@ class _PostDetailsState extends State<PostDetails> {
                                                   ? widget
                                                       .post.jsonString!.desc!
                                                   : ""),
+<<<<<<< HEAD
                                         )
                                       : FadeInDown(
                                           child: Padding(
@@ -431,6 +551,8 @@ class _PostDetailsState extends State<PostDetails> {
                                                         .post.jsonString!.desc!
                                                     : ""),
                                           ),
+=======
+>>>>>>> edcb13a (post details now rsposnive #2)
                                         ),
                                   globals.disableAnimations
                                       ? ShareAndCommentChips(
@@ -543,10 +665,14 @@ class _PostDetailsState extends State<PostDetails> {
                                       ..add(FetchSuggestedUsersForPost(
                                           currentUsername: widget.post.author,
                                           tags: widget.post.tags)),
+<<<<<<< HEAD
                                     child: SuggestedChannels(
                                       avatarSize: 100,
                                       crossAxisCount: 3,
                                     ),
+=======
+                                    child: SuggestedChannels(avatarSize: 100),
+>>>>>>> edcb13a (post details now rsposnive #2)
                                   ),
                                   SizedBox(height: 200)
                                 ],
@@ -563,10 +689,13 @@ class _PostDetailsState extends State<PostDetails> {
                               alignment: Alignment.topCenter,
                               child: FeedListSuggestedPosts(
                                 feedType: 'SuggestedPosts',
+<<<<<<< HEAD
                                 clickedCallback: () {
                                   _controller.pause();
                                   _videocontroller.pause();
                                 },
+=======
+>>>>>>> edcb13a (post details now rsposnive #2)
                                 width: suggestedSize * 0.9,
                                 scrollCallback: (bool) {},
                               ),
@@ -579,7 +708,11 @@ class _PostDetailsState extends State<PostDetails> {
                 ],
               ),
             ),
+<<<<<<< HEAD
           )
+=======
+          )),
+>>>>>>> edcb13a (post details now rsposnive #2)
     );
   }
 }

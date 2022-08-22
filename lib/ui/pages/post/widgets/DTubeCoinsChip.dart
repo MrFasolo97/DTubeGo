@@ -24,14 +24,20 @@ class DtubeCoinsChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputChip(
       label: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
             (dist / 100).round().toString(),
             style: Theme.of(context).textTheme.headline5,
           ),
           Padding(
+<<<<<<< HEAD
             padding: EdgeInsets.only(left: 2.w),
             child: DTubeLogoShadowed(size: 5.w),
+=======
+            padding: EdgeInsets.only(left: 10),
+            child: DTubeLogoShadowed(size: width),
+>>>>>>> edcb13a (post details now rsposnive #2)
           ),
         ],
       ),

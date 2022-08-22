@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+=======
+import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
+import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+>>>>>>> edcb13a (post details now rsposnive #2)
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 
@@ -25,7 +30,11 @@ class TitleWidget extends StatelessWidget {
           width: width - 10 - chipWidth,
           child: Text(
             title,
+<<<<<<< HEAD
             style: Theme.of(context).textTheme.displaySmall,
+=======
+            style: Theme.of(context).textTheme.headline3,
+>>>>>>> edcb13a (post details now rsposnive #2)
             maxLines: 3,
           ),
         ),

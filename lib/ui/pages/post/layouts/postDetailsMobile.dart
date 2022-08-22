@@ -297,21 +297,29 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
                               margin: EdgeInsets.all(5.0),
                               child: globals.disableAnimations
                                   ? AccountNavigationChip(
+<<<<<<< HEAD:lib/ui/pages/post/postDetailsMobile.dart
 <<<<<<<< HEAD:lib/ui/pages/post/layouts/postDetailsMobile.dart
                                       author: widget.post.author, size: 230)
 ========
                                       author: widget.post.author, size: 40.w)
 >>>>>>>> adf1cbc (post details responsive):lib/ui/pages/post/postDetailsMobile.dart
+=======
+                                      author: widget.post.author, size: 230)
+>>>>>>> edcb13a (post details now rsposnive #2):lib/ui/pages/post/layouts/postDetailsMobile.dart
                                   : SlideInDown(
                                       preferences: AnimationPreferences(
                                           offset: Duration(milliseconds: 500)),
                                       child: AccountNavigationChip(
                                           author: widget.post.author,
+<<<<<<< HEAD:lib/ui/pages/post/postDetailsMobile.dart
 <<<<<<<< HEAD:lib/ui/pages/post/layouts/postDetailsMobile.dart
                                           size: 230),
 ========
                                           size: 40.w),
 >>>>>>>> adf1cbc (post details responsive):lib/ui/pages/post/postDetailsMobile.dart
+=======
+                                          size: 230),
+>>>>>>> edcb13a (post details now rsposnive #2):lib/ui/pages/post/layouts/postDetailsMobile.dart
                                     ),
                             ),
                             globals.disableAnimations
