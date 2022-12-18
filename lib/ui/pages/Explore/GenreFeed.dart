@@ -101,7 +101,7 @@ class _GenreFeedState extends State<GenreFeed> {
   }
 
   Widget buildPostList(List<FeedItem> feed, BuildContext context) {
-    return StaggeredGridView.countBuilder(
+    return ListView.builder(
       // controller: _scrollController
       //   ..addListener(() {
       //     if (_scrollController.offset >=
@@ -131,9 +131,8 @@ class _GenreFeedState extends State<GenreFeed> {
       //     }
       //   }),
       padding: EdgeInsets.only(top: 19.h),
-      crossAxisCount: 4,
       itemCount: feed.length,
-      itemBuilder: (BuildContext context, int index) => GestureDetector(
+        itemBuilder: (BuildContext context, int index) => GestureDetector(
         onTap: () {
           navigateToPostDetailPage(context, feed[index].author,
               feed[index].link, "none", false, () {});
@@ -167,9 +166,6 @@ class _GenreFeedState extends State<GenreFeed> {
                         ))),
               ),
       ),
-      staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-      mainAxisSpacing: 4.0,
-      crossAxisSpacing: 4.0,
     );
   }
 }

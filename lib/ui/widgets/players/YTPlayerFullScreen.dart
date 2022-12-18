@@ -1,12 +1,10 @@
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:overlay_dialog/overlay_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import 'dart:io' show Platform;
 
 class YoutubePlayerFullScreenPage extends StatefulWidget {
   final String link;
@@ -31,14 +29,10 @@ class _YoutubePlayerFullScreenPageState
   @override
   void initState() {
     _controller = YoutubePlayerController(
-      initialVideoId: widget.link,
       params: YoutubePlayerParams(
           showControls: false,
           showFullscreenButton: false,
-          desktopMode: !Platform.isIOS,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: true),
+      ),
     );
     if (Device.orientation != Orientation.landscape) {
       AutoOrientation.landscapeAutoMode();
@@ -49,7 +43,7 @@ class _YoutubePlayerFullScreenPageState
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
     AutoOrientation.portraitAutoMode();
     super.dispose();
@@ -68,7 +62,7 @@ class _YoutubePlayerFullScreenPageState
                   alignment: Alignment.topCenter,
                   child: YoutubePlayerControllerProvider(
                     controller: _controller,
-                    child: YoutubePlayerIFrame(
+                    child: YoutubePlayer(
                       aspectRatio: 16 / 9,
                     ),
                   ),

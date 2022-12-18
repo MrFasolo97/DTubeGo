@@ -26,15 +26,12 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void initState() {
     super.initState();
-    widget.controller.onEnterFullscreen = () {
+    widget.controller.onFullscreenChange = (event) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
-      print('Entered Fullscreen');
-    };
-    widget.controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
+      print('Changed Fullscreen');
     };
   }
 
@@ -47,7 +44,7 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void dispose() {
     widget.controller.close();
-    widget.controller.pause();
+    widget.controller.pauseVideo();
     super.dispose();
   }
 

@@ -108,7 +108,7 @@ class _UploadFormState extends State<UploadForm> {
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
 
     _ytController =
-        YoutubePlayerController(initialVideoId: stateUploadData.videoLocation);
+        YoutubePlayerController();
   }
 
   @override

@@ -142,7 +142,7 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
-    _ytController = YoutubePlayerController(initialVideoId: 'tFa7Om3Au8M');
+    _ytController = YoutubePlayerController();
   }
 
   @override

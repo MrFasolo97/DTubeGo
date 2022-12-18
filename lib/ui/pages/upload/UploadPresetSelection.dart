@@ -19,7 +19,7 @@ class UploadPresetSelection extends StatefulWidget {
 }
 
 class _UploadPresetSelectionState extends State<UploadPresetSelection> {
-  List<int> _ativeCustomPresets = [0];
+  List<int> _activeCustomPresets = [0];
   List<Preset> _initiativePresets = [];
   List<Preset> _customPresets = [];
   bool _presetSelected = false;
@@ -78,31 +78,21 @@ class _UploadPresetSelectionState extends State<UploadPresetSelection> {
                       height: 30.h,
                       width: 100.w,
                       color: globalBGColor,
-                      child: StaggeredGridView.countBuilder(
-                        padding: EdgeInsets.only(
-                          // bottom: 16.h,
-                          top: 1.h,
+                      child: GridView.custom(
+                        gridDelegate: SliverQuiltedGridDelegate(
+                          crossAxisCount: 6,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          repeatPattern: QuiltedGridRepeatPattern.inverted,
+                          pattern: const [
+                            QuiltedGridTile(4, 4),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                          ],
                         ),
-                        shrinkWrap: true,
-                        // scrollDirection: Axis.vertical,
-                        itemCount: _initiativePresets.length,
-                        crossAxisCount: 4,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InitiativePresetCard(
-                              currentIndex: index,
-                              initiative: _initiativePresets[index],
-                              // activated: _activatedGenres.contains(index),
-                              onTapCallback: () {
-                                setState(() {
-                                  _selectedPreset = _initiativePresets[index];
-                                  _presetSelected = true;
-                                });
-                              });
-                        },
-                        staggeredTileBuilder: (int index) =>
-                            new StaggeredTile.fit(2),
-                        mainAxisSpacing: 8.0,
-                        crossAxisSpacing: 8.0,
+                        childrenDelegate: SliverChildBuilderDelegate((context, index) {
+                          return Container();
+                        }),
                       ),
                     ),
                     Container(
@@ -129,34 +119,9 @@ class _UploadPresetSelectionState extends State<UploadPresetSelection> {
                             height: 30.h,
                             width: 100.w,
                             color: globalBGColor,
-                            child: StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.only(
-                                bottom: 5.h,
-                                top: 1.h,
-                              ),
-                              itemCount: _ativeCustomPresets.length,
-                              crossAxisCount:
-                                  _ativeCustomPresets.length > 3 ? 4 : 1,
+                            child: CustomScrollView(
                               //shrinkWrap: true,
                               // scrollDirection: Axis.vertical,
-                              itemBuilder: (BuildContext context, int index) {
-                                return PresetCard(
-                                    currentIndex: _ativeCustomPresets[index],
-                                    preset: _customPresets[
-                                        _ativeCustomPresets[index]],
-                                    // activated: _activatedGenres.contains(index),
-                                    onTapCallback: () {
-                                      setState(() {
-                                        _selectedPreset = _customPresets[
-                                            _ativeCustomPresets[index]];
-                                        _presetSelected = true;
-                                      });
-                                    });
-                              },
-                              staggeredTileBuilder: (int index) =>
-                                  new StaggeredTile.fit(2),
-                              mainAxisSpacing: 8.0,
-                              crossAxisSpacing: 8.0,
                             ),
                           );
                         })
