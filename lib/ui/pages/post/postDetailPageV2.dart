@@ -224,24 +224,17 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.post.videoUrl!,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: !(widget.directFocus != "none")),
+      ),
     );
-    _controller.onEnterFullscreen = () {
+    _controller.onFullscreenChange = (event) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
-      print('Entered Fullscreen');
-    };
-    _controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
+      print('Fullscreen changed');
     };
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
@@ -249,7 +242,7 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
 
     super.dispose();

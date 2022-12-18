@@ -1162,7 +1162,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                               child: TextFieldTags(
                                                 initialTags: _hiveDefaultTags,
                                                 textFieldStyler:
-                                                    TextFieldStyler(
+                                                  TextFieldStyler(
                                                   //These are properties you can tweek for customization
 
                                                   // bool textFieldFilled = false,

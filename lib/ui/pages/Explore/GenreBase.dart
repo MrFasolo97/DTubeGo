@@ -92,13 +92,12 @@ class _GenreBaseState extends State<GenreBase> {
                     Container(
                         height: 100.h,
                         child: !_showResults
-                            ? StaggeredGridView.countBuilder(
+                            ? ListView.builder(
                                 padding: EdgeInsets.only(
                                   bottom: 16.h,
                                   top: 18.h,
                                 ),
                                 itemCount: genreList.length,
-                                crossAxisCount: 3,
                                 itemBuilder: (BuildContext context, int index) {
                                   return GenreCard(
                                       currentIndex: index,
@@ -117,12 +116,7 @@ class _GenreBaseState extends State<GenreBase> {
                                         });
                                       });
                                 },
-                                staggeredTileBuilder: (int index) =>
-                                    new StaggeredTile.fit(1),
-                                mainAxisSpacing: 8.0,
-                                crossAxisSpacing: 8.0,
-                              )
-                            : Padding(
+                            ): Padding(
                                 padding: EdgeInsets.only(left: 2.w, right: 2.w),
                                 child: GenreFeed(),
                               )),

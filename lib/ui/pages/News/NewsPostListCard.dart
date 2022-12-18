@@ -99,14 +99,10 @@ class _NewsPostListCardState extends State<NewsPostListCard> {
     _userBloc = BlocProvider.of<UserBloc>(context);
     _bpController = VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
-      initialVideoId: widget.videoUrl,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: true),
+      ),
     );
   }
 
@@ -127,7 +123,7 @@ class _NewsPostListCardState extends State<NewsPostListCard> {
             !_showCommentInput &&
             !_showGiftInput &&
             !_showVotingBars) {
-          _ytController.pause();
+          _ytController.pauseVideo();
           _bpController.pause();
           print("VISIBILITY OF " +
               widget.author +

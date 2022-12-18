@@ -31,7 +31,7 @@ import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
 import 'package:dtube_go/ui/pages/post/widgets/VoteButtons.dart';
-import 'package:dtube_go/utils/GlobalStorage/secureStorage.dart';
+import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -86,24 +86,17 @@ class _WebPostDetailsState extends State<WebPostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.post.videoUrl!,
-      params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: !(widget.directFocus != "none")),
+        params: YoutubePlayerParams(
+            showControls: true,
+            showFullscreenButton: true,
+      )
     );
-    _controller.onEnterFullscreen = () {
+    _controller.onFullscreenChange = (event) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
-      print('Entered Fullscreen');
-    };
-    _controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
+      print('Changed Fullscreen');
     };
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
@@ -111,7 +104,7 @@ class _WebPostDetailsState extends State<WebPostDetails> {
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
 
     super.dispose();
@@ -136,11 +129,11 @@ class _WebPostDetailsState extends State<WebPostDetails> {
             onVisibilityChanged: (visibilityInfo) {
               var visiblePercentage = visibilityInfo.visibleFraction * 100;
               if (visiblePercentage < 1) {
-                _controller.pause();
+                _controller.pauseVideo();
                 _videocontroller.pause();
               }
               if (visiblePercentage > 90) {
-                _controller.play();
+                _controller.playVideo();
                 _videocontroller.play();
               }
             },

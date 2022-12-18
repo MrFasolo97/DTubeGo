@@ -16,7 +16,7 @@ class APINodeConfig {
     'https://avalon.tibfox.com',
     'https://avalon.d.tube',
     // 'https://dtube.club/mainnetapi',
-    'https://avalon.oneloved.tube',
+    'https://api.avalonblocks.com',
     'https://dtube.fso.ovh'
   ];
 
