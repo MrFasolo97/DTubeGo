@@ -1,13 +1,20 @@
-import 'package:dtube_go/res/Config/UploadConfigValues.dart';
-import 'package:http_parser/http_parser.dart';
+import 'dart:convert';
+import 'dart:developer';
 
-//TODO: connect to local ipfs deamon:
+import 'package:dio/dio.dart';
+import 'package:dtube_go/res/Config/UploadConfigValues.dart';
+import 'package:dtube_go/utils/Crypto/crypto_convert.dart';
+import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:dtube_go/bloc/transaction/sign_offchain_data.dart';
+import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+
+//TODO: connect to local ipfs daemon:
 // - https://github.com/hanerx/ipfs-dart
 // - https://github.com/ngngardner/dart_ipfs_client
-
+import 'package:tus_client/tus_client.dart';
 import 'dart:io';
 import 'package:video_compress/video_compress.dart';
-import 'package:dio/dio.dart';
 import 'package:dtube_go/res/Config/secretConfigValues.dart' as secret;
 
 abstract class Web3StorageRepository {
@@ -73,51 +80,94 @@ class Web3StorageRepositoryImpl implements Web3StorageRepository {
   }
 
   Future<String> uploadVideo(String localFilePath, String endpoint) async {
-    String _url = endpoint + 'uploadVideo';
+    Uri _url = Uri.parse(endpoint + '/upload');
+    String apiKeyHeader = secret.web3ApiKey;
+    String _privKey = await sec.getPrivateKey();
+    String pubKey = privToPub(_privKey);
+    int ts = DateTime.now().millisecondsSinceEpoch;
+    DataSigner dataSigner = new DataSigner();
+    SignData signedData = await dataSigner.signOffchainData(applicationUsername+"_"+ts.toString(), applicationUsername, ts);
+    print(jsonEncode(signedData));
+    String localFileName = localFilePath.split("/")[localFilePath.split("/").length-1];
+    print(localFileName);
+    final xfile = XFile(localFilePath);
+    print(await xfile.length());
+    JsonUtf8Encoder JSONToUTF8 = new JsonUtf8Encoder();
+    print(base64UrlEncode(JSONToUTF8.convert(signedData.toJson().toString())));
+    print(signedData.toJson().toString());
+    final client = TusClient(
+        _url,
+        xfile,
+        store: TusMemoryStore(),
+        headers: {
+          'contentType': 'video/mp4',
+          'apikey': apiKeyHeader,
+          'username': applicationUsername,
+          'ts': ts.toString(),
+          'signature': base64UrlEncode(JSONToUTF8.convert(signedData.toJson())),
+          "pubkey": pubKey,
+        },
+        metadata: {
+          "filename": localFileName,"filetype": "video/mp4",
+          "username": applicationUsername, "pubkey": pubKey
+        },
+    );
     String cid = "";
+    do {
+      await client.upload(
+        onComplete: () async {
+          log("Complete!");
+          String tmpUrl = client.uploadUrl.toString();
+          String token = tmpUrl.split("/")[tmpUrl
+              .split("/")
+              .length - 1];
+          String _tokenUrl = endpoint + "/progress/" + token;
+          var dioToken = Dio();
+          dioToken.options.headers["apikey"] = apiKeyHeader;
+          do {
+            try {
+              await Future.delayed(Duration(seconds: 5));
+              print(_tokenUrl);
+              var responseTokenQuery = await dioToken.get(_tokenUrl);
+              if (responseTokenQuery.statusCode == 200) {
+                print("progress checked");
+                var progressData = responseTokenQuery.data;
+                if (progressData["progress"] == "uploaded") {
+                  cid = progressData["cid"];
+                  print("cid=" + cid);
+                }
+              }
+            } on DioError catch (e) {
+              if (e.response != null) {
+                if (e.response?.statusCode != 404) {
+                  throw e;
+                }
+              } else {
+                throw e;
+              }
+            }
+          } while (cid == "");
+          // var url = client.uploadUrl.toString();
+          log(cid);
+          return cid;
+          // var pathImageThumb = await getThumbnail(xfile.path);
+        },
+        onProgress: (progress) {
+          log("Progress: $progress");
+        },
+      );
+    } while (cid == "");
+    return cid;
+  /*
     var formData = FormData.fromMap({
       'video': await MultipartFile.fromFile(
-        localFilePath,
+        // localFilePath,
         filename: 'video.mp4',
-        contentType: new MediaType('video', 'mp4'),
+
       )
-    });
-    //String authHeader = "Bearer " + secret.Web3StorageAPIToken;
-    String apiKeyHeader = secret.web3ApiKey;
 
-    var dio = Dio();
-    //dio.options.headers["Authorization"] = authHeader;
-    dio.options.headers["apikey"] = apiKeyHeader;
-    dio.options.headers["Content-Type"] = "multipart/form-data";
-    //var response = await dio.post(_url, data: formData);
-    var response = await dio.post(_url, data: formData);
-
-    if (response.statusCode == 200) {
-      print("source file uploaded");
-      var data = response.data;
-
-      String token = data["token"];
-      String _tokenUrl = endpoint + "progress/" + token;
-      var dioToken = Dio();
-      dioToken.options.headers["apikey"] = apiKeyHeader;
-      do {
-        await Future.delayed(Duration(seconds: 5));
-        var responseTokenQuery = await dioToken.get(_tokenUrl);
-        if (responseTokenQuery.statusCode == 200) {
-          print("progress checked");
-          var progressData = responseTokenQuery.data;
-          if (progressData["progress"] == "complete") {
-            cid = progressData["cid"];
-            return cid;
-          }
-        }
-      } while (cid == "");
-      return cid;
-    } else {
-      throw Exception();
+   */
     }
-  }
-
 // TODO: support more providers
   Future<String> uploadThumbnail(String localFilePath) async {
     //String _url = endpoint;

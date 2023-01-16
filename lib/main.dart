@@ -29,6 +29,10 @@ const MaterialColor kPrimaryColor = const MaterialColor(
 void main() async {
   // deactivate landscape mode
   WidgetsFlutterBinding.ensureInitialized();
+
+  ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: FirebaseOptions(

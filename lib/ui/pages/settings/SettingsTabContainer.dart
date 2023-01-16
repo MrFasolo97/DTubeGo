@@ -138,56 +138,56 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                   onTap: () async {
                     Map<String, String> newSettings = {
                       sec.settingKey_defaultVotingWeight:
-                          _defaultVote.toString(),
+                      _defaultVote.toString(),
                       sec.settingKey_defaultVotingWeightComments:
-                          _defaultVoteComments.toString(),
+                      _defaultVoteComments.toString(),
                       sec.settingKey_defaultVotingTip: _defaultTip.toString(),
                       sec.settingKey_defaultVotingTipComments:
-                          _defaultTipComments.toString(),
+                      _defaultTipComments.toString(),
                       sec.settingKey_showHidden: _showHidden,
                       sec.settingKey_showNSFW: _showNsfw,
                       sec.settingKey_templateTitle:
-                          _templateTitleController.value.text,
+                      _templateTitleController.value.text,
                       sec.settingKey_templateBody:
-                          _templateBodyController.value.text,
+                      _templateBodyController.value.text,
                       sec.settingKey_templateTag:
-                          _templateTagController.value.text,
+                      _templateTagController.value.text,
                       sec.settingKey_imageUploadService: _imageUploadProvider,
                       sec.settingKey_DefaultUploadNSFW:
-                          _defaultUploadNSFW.toString(),
+                      _defaultUploadNSFW.toString(),
                       sec.settingKey_DefaultUploadOC:
-                          _defaultUploadOC.toString(),
+                      _defaultUploadOC.toString(),
                       sec.settingKey_DefaultUploadUnlist:
-                          _defaultUploadUnlist.toString(),
+                      _defaultUploadUnlist.toString(),
                       sec.settingKey_DefaultUploadCrosspost:
-                          _defaultUploadCrossPost.toString(),
+                      _defaultUploadCrossPost.toString(),
                       sec.settingKey_DefaultMomentNSFW:
-                          _defaultMomentsNSFW.toString(),
+                      _defaultMomentsNSFW.toString(),
                       sec.settingKey_DefaultMomentOC:
-                          _defaultMomentsOC.toString(),
+                      _defaultMomentsOC.toString(),
                       sec.settingKey_DefaultMomentUnlist:
-                          _defaultMomentsUnlist.toString(),
+                      _defaultMomentsUnlist.toString(),
                       sec.settingKey_DefaultMomentCrosspost:
-                          _defaultMomentsCrossPost.toString(),
+                      _defaultMomentsCrossPost.toString(),
                       sec.settingKey_DefaultUploadVotingWeigth:
-                          _defaultUploadVotingWeight.toString(),
+                      _defaultUploadVotingWeight.toString(),
                       sec.settingKey_DefaultMomentVotingWeigth:
-                          _defaultMomentVotingWeight.toString(),
+                      _defaultMomentVotingWeight.toString(),
                       sec.settingKey_momentTitle:
-                          _momentTitleController.value.text,
+                      _momentTitleController.value.text,
                       sec.settingKey_momentBody:
-                          _momentBodyController.value.text,
+                      _momentBodyController.value.text,
                       sec.settingKey_hiveSignerDefaultCommunity:
-                          _hiveDefaultCommunityController.value.text,
+                      _hiveDefaultCommunityController.value.text,
                       sec.settingKey_hiveSignerDefaultTags:
-                          _hiveDefaultTags.join(","),
+                      _hiveDefaultTags.join(","),
                       sec.settingKey_FixedDownvoteActivated:
-                          _downvoteFixed.toString(),
+                      _downvoteFixed.toString(),
                       sec.settingKey_FixedDownvoteWeight:
-                          _downvoteFixedAmount.toString(),
+                      _downvoteFixedAmount.toString(),
                       sec.settingKey_videoAutoPause: _videoAutoPause.toString(),
                       sec.settingKey_disableAnimations:
-                          _disableAnimation.toString(),
+                      _disableAnimation.toString(),
                     };
 
                     _settingsBloc.add(PushSettingsEvent(
@@ -202,9 +202,9 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
         if (state is SettingsLoadingState || state is SettingsSavingState) {
           return Center(
               child: DtubeLogoPulseWithSubtitle(
-            subtitle: "loading settings..",
-            size: 30.w,
-          ));
+                subtitle: "loading settings..",
+                size: 30.w,
+              ));
         } else if (state is SettingsLoadedState) {
           if (settings.length == 1) {
             settings = state.settings;
@@ -220,40 +220,40 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                 ? double.parse(settings[sec.settingKey_defaultVotingWeight]!)
                 : 5.0;
             _defaultVoteComments =
-                settings[sec.settingKey_defaultVotingWeightComments] != null
-                    ? double.parse(
-                        settings[sec.settingKey_defaultVotingWeightComments]!)
-                    : 5.0;
+            settings[sec.settingKey_defaultVotingWeightComments] != null
+                ? double.parse(
+                settings[sec.settingKey_defaultVotingWeightComments]!)
+                : 5.0;
             _defaultTip = settings[sec.settingKey_defaultVotingTip] != null
                 ? double.parse(settings[sec.settingKey_defaultVotingTip]!)
                 : 25;
             _defaultTipComments =
-                settings[sec.settingKey_defaultVotingTipComments] != null
-                    ? double.parse(
-                        settings[sec.settingKey_defaultVotingTipComments]!)
-                    : 25.0;
+            settings[sec.settingKey_defaultVotingTipComments] != null
+                ? double.parse(
+                settings[sec.settingKey_defaultVotingTipComments]!)
+                : 25.0;
             _hiveUsername = settings[sec.settingKey_hiveSignerUsername] != null
                 ? settings[sec.settingKey_hiveSignerUsername]!
                 : "";
             _hiveDefaultCommunity =
-                settings[sec.settingKey_hiveSignerDefaultCommunity] != null &&
-                        settings[sec.settingKey_hiveSignerDefaultCommunity] !=
-                            ""
-                    ? settings[sec.settingKey_hiveSignerDefaultCommunity]!
-                    : "hive-196037";
+            settings[sec.settingKey_hiveSignerDefaultCommunity] != null &&
+                settings[sec.settingKey_hiveSignerDefaultCommunity] !=
+                    ""
+                ? settings[sec.settingKey_hiveSignerDefaultCommunity]!
+                : "hive-196037";
             _hiveDefaultCommunityController = new TextEditingController(
                 text: settings[sec.settingKey_hiveSignerDefaultCommunity] !=
-                            null &&
-                        settings[sec.settingKey_hiveSignerDefaultCommunity]!
-                            .startsWith("hive-")
+                    null &&
+                    settings[sec.settingKey_hiveSignerDefaultCommunity]!
+                        .startsWith("hive-")
                     ? settings[sec.settingKey_hiveSignerDefaultCommunity]!
                     : "hive-196037");
 
             _hiveDefaultTags =
-                settings[sec.settingKey_hiveSignerDefaultTags] != null &&
-                        settings[sec.settingKey_hiveSignerDefaultTags] != ""
-                    ? settings[sec.settingKey_hiveSignerDefaultTags]!.split(",")
-                    : [];
+            settings[sec.settingKey_hiveSignerDefaultTags] != null &&
+                settings[sec.settingKey_hiveSignerDefaultTags] != ""
+                ? settings[sec.settingKey_hiveSignerDefaultTags]!.split(",")
+                : [];
 
             _templateTitleController = new TextEditingController(
                 text: settings[sec.settingKey_templateTitle] != null
@@ -292,66 +292,66 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                 ? settings[sec.settingKey_videoAutoPause]! == "true"
                 : false;
             _disableAnimation =
-                settings[sec.settingKey_disableAnimations] != null
-                    ? settings[sec.settingKey_disableAnimations]! == "true"
-                    : false;
+            settings[sec.settingKey_disableAnimations] != null
+                ? settings[sec.settingKey_disableAnimations]! == "true"
+                : false;
 
             _imageUploadProvider =
-                settings[sec.settingKey_imageUploadService] != null
-                    ? settings[sec.settingKey_imageUploadService]!
-                    : "imgur";
+            settings[sec.settingKey_imageUploadService] != null
+                ? settings[sec.settingKey_imageUploadService]!
+                : "imgur";
 
             _defaultUploadNSFW =
-                settings[sec.settingKey_DefaultUploadNSFW] != null
-                    ? settings[sec.settingKey_DefaultUploadNSFW]! == 'true'
-                    : false;
+            settings[sec.settingKey_DefaultUploadNSFW] != null
+                ? settings[sec.settingKey_DefaultUploadNSFW]! == 'true'
+                : false;
             _defaultUploadOC = settings[sec.settingKey_DefaultUploadOC] != null
                 ? settings[sec.settingKey_DefaultUploadOC]! == 'true'
                 : false;
             _defaultUploadUnlist =
-                settings[sec.settingKey_DefaultUploadUnlist] != null
-                    ? settings[sec.settingKey_DefaultUploadUnlist]! == 'true'
-                    : false;
+            settings[sec.settingKey_DefaultUploadUnlist] != null
+                ? settings[sec.settingKey_DefaultUploadUnlist]! == 'true'
+                : false;
             _defaultUploadCrossPost =
-                settings[sec.settingKey_DefaultUploadCrosspost] != null
-                    ? settings[sec.settingKey_DefaultUploadCrosspost]! == 'true'
-                    : false;
+            settings[sec.settingKey_DefaultUploadCrosspost] != null
+                ? settings[sec.settingKey_DefaultUploadCrosspost]! == 'true'
+                : false;
 
             _defaultMomentsNSFW =
-                settings[sec.settingKey_DefaultMomentNSFW] != null
-                    ? settings[sec.settingKey_DefaultMomentNSFW]! == 'true'
-                    : false;
+            settings[sec.settingKey_DefaultMomentNSFW] != null
+                ? settings[sec.settingKey_DefaultMomentNSFW]! == 'true'
+                : false;
             _defaultMomentsOC = settings[sec.settingKey_DefaultMomentOC] != null
                 ? settings[sec.settingKey_DefaultMomentOC]! == 'true'
                 : false;
             _defaultMomentsUnlist =
-                settings[sec.settingKey_DefaultMomentUnlist] != null
-                    ? settings[sec.settingKey_DefaultMomentUnlist]! == 'true'
-                    : false;
+            settings[sec.settingKey_DefaultMomentUnlist] != null
+                ? settings[sec.settingKey_DefaultMomentUnlist]! == 'true'
+                : false;
             _defaultMomentsCrossPost =
-                settings[sec.settingKey_DefaultMomentCrosspost] != null
-                    ? settings[sec.settingKey_DefaultMomentCrosspost]! == 'true'
-                    : false;
+            settings[sec.settingKey_DefaultMomentCrosspost] != null
+                ? settings[sec.settingKey_DefaultMomentCrosspost]! == 'true'
+                : false;
 
             _defaultUploadVotingWeight =
-                settings[sec.settingKey_DefaultUploadVotingWeigth] != null
-                    ? double.parse(
-                        settings[sec.settingKey_DefaultUploadVotingWeigth]!)
-                    : 5.0;
+            settings[sec.settingKey_DefaultUploadVotingWeigth] != null
+                ? double.parse(
+                settings[sec.settingKey_DefaultUploadVotingWeigth]!)
+                : 5.0;
             _defaultMomentVotingWeight =
-                settings[sec.settingKey_DefaultMomentVotingWeigth] != null
-                    ? double.parse(
-                        settings[sec.settingKey_DefaultMomentVotingWeigth]!)
-                    : 5.0;
+            settings[sec.settingKey_DefaultMomentVotingWeigth] != null
+                ? double.parse(
+                settings[sec.settingKey_DefaultMomentVotingWeigth]!)
+                : 5.0;
             _downvoteFixed =
-                settings[sec.settingKey_FixedDownvoteActivated] != null
-                    ? settings[sec.settingKey_FixedDownvoteActivated] == "true"
-                    : true;
+            settings[sec.settingKey_FixedDownvoteActivated] != null
+                ? settings[sec.settingKey_FixedDownvoteActivated] == "true"
+                : true;
             _downvoteFixedAmount =
-                settings[sec.settingKey_FixedDownvoteWeight] != null
-                    ? double.parse(
-                        settings[sec.settingKey_FixedDownvoteWeight]!)
-                    : 1.0;
+            settings[sec.settingKey_FixedDownvoteWeight] != null
+                ? double.parse(
+                settings[sec.settingKey_FixedDownvoteWeight]!)
+                : 1.0;
           }
 
           return Column(
@@ -408,7 +408,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                           children: [
                             Visibility(
                               visible:
-                                  false, // to get accepted by google we had to remove this option
+                              false, // to get accepted by google we had to remove this option
                               child: DTubeFormCard(
                                 waitBeforeFadeIn: Duration(milliseconds: 200),
                                 avoidAnimation: _visitedTabs.contains(0) ||
@@ -420,7 +420,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                         onPressed: () {
                                           setState(() {
                                             _showDisplayHints =
-                                                !_showDisplayHints;
+                                            !_showDisplayHints;
                                           });
                                         },
                                         alignment: Alignment.topRight,
@@ -444,17 +444,17 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                   ),
                                   DropdownButtonFormField(
                                     decoration: InputDecoration(
-                                        //filled: true,
-                                        //fillColor: Hexcolor('#ecedec'),
+                                      //filled: true,
+                                      //fillColor: Hexcolor('#ecedec'),
                                         labelText: 'negative videos:',
                                         labelStyle: Theme.of(context)
                                             .textTheme
                                             .headline5
-                                        //border: new CustomBorderTextFieldSkin().getSkin(),
-                                        ),
+                                      //border: new CustomBorderTextFieldSkin().getSkin(),
+                                    ),
                                     value: _showHidden,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                    Theme.of(context).textTheme.bodyText1,
                                     onChanged: (newValue) {
                                       setState(() {
                                         _showHidden = newValue.toString();
@@ -462,7 +462,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                       });
                                     },
                                     items:
-                                        _showHiddentNsfwOptions.map((option) {
+                                    _showHiddentNsfwOptions.map((option) {
                                       return DropdownMenuItem(
                                         child: new Text(option),
                                         value: option,
@@ -472,20 +472,20 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                   VisibilityHintText(
                                       showHint: _showDisplayHints,
                                       hintText:
-                                          "If a video has a higher sum of VP spent for downvotes than for upvotes it counts as a \"negative\" video."),
+                                      "If a video has a higher sum of VP spent for downvotes than for upvotes it counts as a \"negative\" video."),
                                   DropdownButtonFormField(
                                     decoration: InputDecoration(
-                                        //filled: true,
-                                        //fillColor: Hexcolor('#ecedec'),
+                                      //filled: true,
+                                      //fillColor: Hexcolor('#ecedec'),
                                         labelText: 'NSFW videos:',
                                         labelStyle: Theme.of(context)
                                             .textTheme
                                             .headline5
-                                        //border: new CustomBorderTextFieldSkin().getSkin(),
-                                        ),
+                                      //border: new CustomBorderTextFieldSkin().getSkin(),
+                                    ),
                                     value: _showNsfw,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                    Theme.of(context).textTheme.bodyText1,
                                     onChanged: (newValue) {
                                       setState(() {
                                         _showNsfw = newValue.toString();
@@ -493,7 +493,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                       });
                                     },
                                     items:
-                                        _showHiddentNsfwOptions.map((option) {
+                                    _showHiddentNsfwOptions.map((option) {
                                       return DropdownMenuItem(
                                         child: new Text(option),
                                         value: option,
@@ -503,7 +503,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                   VisibilityHintText(
                                       showHint: _showDisplayHints,
                                       hintText:
-                                          "The author can tag the new video as NSFW (not safe for work). But also curators can vote with the NSFW curator tag. If this tag has more VP spent than the original video tag the video will also count as \"NSFW\"."),
+                                      "The author can tag the new video as NSFW (not safe for work). But also curators can vote with the NSFW curator tag. If this tag has more VP spent than the original video tag the video will also count as \"NSFW\"."),
                                 ],
                               ),
                             ),
@@ -519,7 +519,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                       onPressed: () {
                                         setState(() {
                                           _showSecurityHints =
-                                              !_showSecurityHints;
+                                          !_showSecurityHints;
                                         });
                                       },
                                       alignment: Alignment.topRight,
@@ -535,7 +535,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       width: 60.w,
@@ -553,7 +553,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                               builder: (BuildContext context) =>
                                                   BlocProvider<SettingsBloc>(
                                                       create: (BuildContext
-                                                              context) =>
+                                                      context) =>
                                                           SettingsBloc(),
                                                       child: PinCodeDialog(
                                                         currentPin: _pinCode,
@@ -567,7 +567,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 VisibilityHintText(
                                     showHint: _showSecurityHints,
                                     hintText:
-                                        "Your login data is stored in a secure storage on your device. The app will automatically login you when you start the app. To prevent anyone else to use your account on your device, make sure to set this pin."),
+                                    "Your login data is stored in a secure storage on your device. The app will automatically login you when you start the app. To prevent anyone else to use your account on your device, make sure to set this pin."),
                               ],
                             ),
                             DTubeFormCard(
@@ -581,7 +581,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                       onPressed: () {
                                         setState(() {
                                           _showBehaviourHints =
-                                              !_showBehaviourHints;
+                                          !_showBehaviourHints;
                                         });
                                       },
                                       alignment: Alignment.topRight,
@@ -597,7 +597,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       width: 60.w,
@@ -620,10 +620,10 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 VisibilityHintText(
                                     showHint: _showBehaviourHints,
                                     hintText:
-                                        "If you play back a video and you are goign to comment / vote on it - the video playback is automatically paused. You can turn off this behvaiour with this setting."),
+                                    "If you play back a video and you are goign to comment / vote on it - the video playback is automatically paused. You can turn off this behvaiour with this setting."),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                       width: 60.w,
@@ -646,7 +646,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 VisibilityHintText(
                                     showHint: _showBehaviourHints,
                                     hintText:
-                                        "You can turn off all animations in the app to receive a more resource-saving experience without many distractions."),
+                                    "You can turn off all animations in the app to receive a more resource-saving experience without many distractions."),
                               ],
                             ),
                             // deactivated until we have more providers
@@ -701,7 +701,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showVotingWeightHints =
-                                            !_showVotingWeightHints;
+                                        !_showVotingWeightHints;
                                       });
                                     },
                                     alignment: Alignment.topRight,
@@ -723,7 +723,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             .bodyText1)),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 2,
@@ -759,7 +759,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             .bodyText1)),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 2,
@@ -768,8 +768,8 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                         max: 100.0,
                                         value: _defaultVoteComments,
                                         label: _defaultVoteComments
-                                                .floor()
-                                                .toString() +
+                                            .floor()
+                                            .toString() +
                                             "%",
                                         divisions: 20,
                                         inactiveColor: globalBlue,
@@ -792,7 +792,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 VisibilityHintText(
                                   showHint: _showVotingWeightHints,
                                   hintText:
-                                      "Those settings set the default setting of the vote sliders. The voting weight defines how much of your VP you want to spend for the vote.",
+                                  "Those settings set the default setting of the vote sliders. The voting weight defines how much of your VP you want to spend for the vote.",
                                 ),
                               ],
                             ),
@@ -806,7 +806,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showVotingTipHints =
-                                            !_showVotingTipHints;
+                                        !_showVotingTipHints;
                                       });
                                     },
                                     alignment: Alignment.topRight,
@@ -821,10 +821,10 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 ]),
                                 Text("default voting tip (posts):",
                                     style:
-                                        Theme.of(context).textTheme.bodyText1),
+                                    Theme.of(context).textTheme.bodyText1),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 2,
@@ -860,7 +860,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             .bodyText1)),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 2,
@@ -869,8 +869,8 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                         max: 100.0,
                                         value: _defaultTipComments,
                                         label: _defaultTipComments
-                                                .floor()
-                                                .toString() +
+                                            .floor()
+                                            .toString() +
                                             "%",
                                         divisions: 20,
                                         inactiveColor: globalBlue,
@@ -893,7 +893,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 VisibilityHintText(
                                   showHint: _showVotingTipHints,
                                   hintText:
-                                      "Those settings set the default setting of the tipping sliders. Every vote can generate DTC for you as curation rewards. By tipping you give away x % of those rewards to the content creator you are voting on.",
+                                  "Those settings set the default setting of the tipping sliders. Every vote can generate DTC for you as curation rewards. By tipping you give away x % of those rewards to the content creator you are voting on.",
                                 ),
                               ],
                             ),
@@ -907,7 +907,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showDefaultDownvoteHints =
-                                            !_showDefaultDownvoteHints;
+                                        !_showDefaultDownvoteHints;
                                       });
                                     },
                                     alignment: Alignment.topRight,
@@ -937,56 +937,56 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 ),
                                 _downvoteFixed
                                     ? Column(
-                                        children: [
-                                          Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                  "default downvote weight:",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1)),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                flex: 2,
-                                                child: Slider(
-                                                  min: 0.1,
-                                                  max: 100.0,
-                                                  value: _downvoteFixedAmount,
-                                                  label: _downvoteFixedAmount
-                                                          .floor()
-                                                          .toString() +
-                                                      "%",
-                                                  divisions: 20,
-                                                  inactiveColor: globalBlue,
-                                                  activeColor: globalRed,
-                                                  onChanged: (dynamic value) {
-                                                    setState(() {
-                                                      _downvoteFixedAmount =
-                                                          value;
-                                                      // widget.justSaved = false;
-                                                    });
-                                                  },
-                                                ),
-                                              ),
-                                              Text(
-                                                _downvoteFixedAmount
-                                                        .floor()
-                                                        .toString() +
-                                                    "%",
-                                                style: TextStyle(fontSize: 18),
-                                              )
-                                            ],
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                            "default downvote weight:",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1)),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Slider(
+                                            min: 0.1,
+                                            max: 100.0,
+                                            value: _downvoteFixedAmount,
+                                            label: _downvoteFixedAmount
+                                                .floor()
+                                                .toString() +
+                                                "%",
+                                            divisions: 20,
+                                            inactiveColor: globalBlue,
+                                            activeColor: globalRed,
+                                            onChanged: (dynamic value) {
+                                              setState(() {
+                                                _downvoteFixedAmount =
+                                                    value;
+                                                // widget.justSaved = false;
+                                              });
+                                            },
                                           ),
-                                        ],
-                                      )
+                                        ),
+                                        Text(
+                                          _downvoteFixedAmount
+                                              .floor()
+                                              .toString() +
+                                              "%",
+                                          style: TextStyle(fontSize: 18),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                )
                                     : Container(),
                                 VisibilityHintText(
                                   showHint: _showDefaultDownvoteHints,
                                   hintText:
-                                      "If you activate the fixed downvote setting you will not be able to set the downvote weight anymore. This setting does not affect the user experience inside of the app. All downvoted posts will get hidden automatically for you. ",
+                                  "If you activate the fixed downvote setting you will not be able to set the downvote weight anymore. This setting does not affect the user experience inside of the app. All downvoted posts will get hidden automatically for you. ",
                                 ),
                               ],
                             ),
@@ -1008,14 +1008,14 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showHivesignerHints =
-                                            !_showHivesignerHints;
+                                        !_showHivesignerHints;
                                       });
                                     },
                                     alignment: Alignment.topRight,
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                    EdgeInsets.only(top: 1.h, bottom: 1.h),
                                     child: Text("Hivesigner settings",
                                         style: Theme.of(context)
                                             .textTheme
@@ -1039,7 +1039,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                               create: (BuildContext context) =>
                                                   HivesignerBloc(
                                                       repository:
-                                                          HivesignerRepositoryImpl()),
+                                                      HivesignerRepositoryImpl()),
                                               child: HiveSignerForm(
                                                 username: _hiveUsername,
                                               ),
@@ -1048,7 +1048,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                           VisibilityHintText(
                                             showHint: _showHivesignerHints,
                                             hintText:
-                                                "This authorizing does not include voting, commenting or any other functionality of the hive blockchain! For security reasons you have to renew the connection every 7 days.",
+                                            "This authorizing does not include voting, commenting or any other functionality of the hive blockchain! For security reasons you have to renew the connection every 7 days.",
                                           ),
                                         ],
                                       ),
@@ -1068,14 +1068,14 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showHiveDefaultCommunityHint =
-                                            !_showHiveDefaultCommunityHint;
+                                        !_showHiveDefaultCommunityHint;
                                       });
                                     },
                                     alignment: Alignment.topRight,
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                    EdgeInsets.only(top: 1.h, bottom: 1.h),
                                     child: Text("Hive community",
                                         style: Theme.of(context)
                                             .textTheme
@@ -1097,11 +1097,11 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             padding: const EdgeInsets.all(8.0),
                                             child: TextFormField(
                                               controller:
-                                                  _hiveDefaultCommunityController,
+                                              _hiveDefaultCommunityController,
                                               cursorColor: globalRed,
                                               decoration: new InputDecoration(
                                                   labelText:
-                                                      "hive community id:"),
+                                                  "hive community id:"),
                                               maxLines: 1,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -1110,9 +1110,9 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                           ),
                                           VisibilityHintText(
                                             showHint:
-                                                _showHiveDefaultCommunityHint,
+                                            _showHiveDefaultCommunityHint,
                                             hintText:
-                                                "The code is very important in order to post your video in the correct community! You can look the id for your desired community up on a hive user interface like peakd.com.",
+                                            "The code is very important in order to post your video in the correct community! You can look the id for your desired community up on a hive user interface like peakd.com.",
                                           ),
                                         ],
                                       ),
@@ -1131,20 +1131,21 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showHiveDefaultTagsHint =
-                                            !_showHiveDefaultTagsHint;
+                                        !_showHiveDefaultTagsHint;
                                       });
                                     },
                                     alignment: Alignment.topRight,
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                    EdgeInsets.only(top: 1.h, bottom: 1.h),
                                     child: Text("Hive Tags",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline5),
                                   ),
                                 ]),
+                                /*
                                 Row(
                                   children: [
                                     Container(
@@ -1158,26 +1159,16 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                                   .bodyText1),
                                           Padding(
                                               padding:
-                                                  const EdgeInsets.all(8.0),
+                                              const EdgeInsets.all(8.0),
                                               child: TextFieldTags(
                                                 initialTags: _hiveDefaultTags,
                                                 textFieldStyler:
-                                                  TextFieldStyler(
+                                                TextFieldStyler(
                                                   //These are properties you can tweek for customization
 
                                                   // bool textFieldFilled = false,
                                                   // Icon icon,
-                                                  helperText: _hiveDefaultTags
-                                                          .length
-                                                          .toString() +
-                                                      ' tags (hit space to add tag)\n' +
-                                                      _hiveDefaultTags
-                                                          .join("\n"),
-                                                  // TextStyle helperStyle,
-                                                  hintText: '',
-                                                  textStyle: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1,
+
                                                   // TextStyle hintStyle,
                                                   // EdgeInsets contentPadding,
                                                   // Color textFieldFilledColor,
@@ -1187,40 +1178,29 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                                   // OutlineInputBorder textFieldFocusedBorder,
                                                   // OutlineInputBorder textFieldDisabledBorder,
                                                   // OutlineInputBorder textFieldEnabledBorder
-                                                ),
                                                 tagsStyler: TagsStyler(
                                                   //These are properties you can tweek for customization
 
                                                   // showHashtag = false,
                                                   // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
                                                   // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
+                                                  tagsDistanceFromBorderEnd: 0.50,
                                                   tagDecoration: BoxDecoration(
                                                       shape: BoxShape.rectangle,
                                                       borderRadius:
-                                                          new BorderRadius.all(
+                                                      new BorderRadius.all(
                                                         Radius.circular(10.0),
                                                       ),
                                                       color: globalRed),
                                                   tagTextStyle:
-                                                      Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1,
+                                                  Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1,
                                                   tagCancelIcon: Icon(
                                                       Icons.cancel,
                                                       size: 4.w,
                                                       color: globalAlmostWhite),
                                                 ),
-                                                onTag: (tag) {
-                                                  setState(() {
-                                                    _hiveDefaultTags.add(tag);
-                                                  });
-                                                },
-                                                onDelete: (tag) {
-                                                  setState(() {
-                                                    _hiveDefaultTags
-                                                        .remove(tag);
-                                                  });
-                                                },
                                                 validator: (tag) {
                                                   if (_hiveDefaultTags.length ==
                                                       8) {
@@ -1240,35 +1220,37 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                                   }
                                                   return null;
                                                 },
-                                                tagsDistanceFromBorderEnd: 0.50,
 
                                                 //scrollableTagsMargin: EdgeInsets.only(left: 9),
                                                 //scrollableTagsPadding: EdgeInsets.only(left: 9),
-                                              )
-
-                                              // TextFormField(
-                                              //   controller:
-                                              //       _hiveDefaultTagsController,
-                                              //   cursorColor: globalRed,
-                                              //   decoration: new InputDecoration(
-                                              //       labelText:
-                                              //           "hive tags (space-separated):"),
-                                              //   maxLines: 1,
-                                              //   style: Theme.of(context)
-                                              //       .textTheme
-                                              //       .bodyText1,
-                                              // ),
                                               ),
+                                                inputfieldBuilder: (BuildContext context, TextEditingController tec, FocusNode fn, String? error, void Function(String)? onChanged, void Function(String)? onSubmitted) {
+                                                  textFieldStyler: null;
+                                              },
+
+                                            // TextFormField(
+                                            //   controller:
+                                            //       _hiveDefaultTagsController,
+                                            //   cursorColor: globalRed,
+                                            //   decoration: new InputDecoration(
+                                            //       labelText:
+                                            //           "hive tags (space-separated):"),
+                                            //   maxLines: 1,
+                                            //   style: Theme.of(context)
+                                            //       .textTheme
+                                            //       .bodyText1,
+                                            // ),
+                                          ),
                                           VisibilityHintText(
                                             showHint: _showHiveDefaultTagsHint,
                                             hintText:
-                                                "Your cross-posted video will receive those tags on the hive blockchain. Only up to 8 tags are allowed (dtube and the tag of your post will be added automatically) and you should set them separated by spaces in the textfield above.",
+                                            "Your cross-posted video will receive those tags on the hive blockchain. Only up to 8 tags are allowed (dtube and the tag of your post will be added automatically) and you should set them separated by spaces in the textfield above.",
                                           ),
                                         ],
                                       ),
                                     ),
                                   ],
-                                ),
+                                ),*/
                               ],
                             ),
                           ],
@@ -1293,14 +1275,14 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showVotingUploadDefaultsHints =
-                                            !_showVotingUploadDefaultsHints;
+                                        !_showVotingUploadDefaultsHints;
                                       });
                                     },
                                     alignment: Alignment.topRight,
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                    EdgeInsets.only(top: 1.h, bottom: 1.h),
                                     child: Text("Video upload default settings",
                                         style: Theme.of(context)
                                             .textTheme
@@ -1319,22 +1301,22 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             .bodyText1,
                                         avatar: _defaultUploadOC
                                             ? FaIcon(
-                                                FontAwesomeIcons.check,
-                                                size: 15,
-                                              )
+                                          FontAwesomeIcons.check,
+                                          size: 15,
+                                        )
                                             : null,
                                         backgroundColor:
-                                            Colors.grey.withAlpha(30),
+                                        Colors.grey.withAlpha(30),
                                         selectedColor: Colors.green[700],
                                         onSelected: (bool selected) {
                                           setState(() {
                                             _defaultUploadOC =
-                                                !_defaultUploadOC;
+                                            !_defaultUploadOC;
                                           });
                                         }),
                                     Visibility(
                                       visible:
-                                          false, // to get accepted by google we had to remove this option
+                                      false, // to get accepted by google we had to remove this option
                                       child: ChoiceChip(
                                           selected: _defaultUploadNSFW,
                                           label: Text('nsfw content'),
@@ -1343,17 +1325,17 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                               .bodyText1,
                                           avatar: _defaultUploadNSFW
                                               ? FaIcon(
-                                                  FontAwesomeIcons.check,
-                                                  size: 15,
-                                                )
+                                            FontAwesomeIcons.check,
+                                            size: 15,
+                                          )
                                               : null,
                                           backgroundColor:
-                                              Colors.grey.withAlpha(30),
+                                          Colors.grey.withAlpha(30),
                                           selectedColor: Colors.green[700],
                                           onSelected: (bool selected) {
                                             setState(() {
                                               _defaultUploadNSFW =
-                                                  !_defaultUploadNSFW;
+                                              !_defaultUploadNSFW;
                                             });
                                           }),
                                     ),
@@ -1365,44 +1347,44 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             .bodyText1,
                                         avatar: _defaultUploadUnlist
                                             ? FaIcon(
-                                                FontAwesomeIcons.check,
-                                                size: 15,
-                                              )
+                                          FontAwesomeIcons.check,
+                                          size: 15,
+                                        )
                                             : null,
                                         backgroundColor:
-                                            Colors.grey.withAlpha(30),
+                                        Colors.grey.withAlpha(30),
                                         selectedColor: Colors.green[700],
                                         onSelected: (bool selected) {
                                           setState(() {
                                             _defaultUploadUnlist =
-                                                !_defaultUploadUnlist;
+                                            !_defaultUploadUnlist;
                                           });
                                         }),
                                     _hiveUsername != ""
                                         ? ChoiceChip(
-                                            selected: _defaultUploadCrossPost,
-                                            label: Text('cross-post to hive'),
-                                            labelStyle: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                            avatar: _defaultUploadCrossPost
-                                                ? FaIcon(
-                                                    FontAwesomeIcons.check,
-                                                    size: 15,
-                                                  )
-                                                : null,
-                                            backgroundColor:
-                                                Colors.grey.withAlpha(30),
-                                            selectedColor: Colors.green[700],
-                                            onSelected: (bool selected) {
-                                              setState(() {
-                                                _defaultUploadCrossPost =
-                                                    !_defaultUploadCrossPost;
-                                              });
-                                            })
+                                        selected: _defaultUploadCrossPost,
+                                        label: Text('cross-post to hive'),
+                                        labelStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                        avatar: _defaultUploadCrossPost
+                                            ? FaIcon(
+                                          FontAwesomeIcons.check,
+                                          size: 15,
+                                        )
+                                            : null,
+                                        backgroundColor:
+                                        Colors.grey.withAlpha(30),
+                                        selectedColor: Colors.green[700],
+                                        onSelected: (bool selected) {
+                                          setState(() {
+                                            _defaultUploadCrossPost =
+                                            !_defaultUploadCrossPost;
+                                          });
+                                        })
                                         : SizedBox(
-                                            width: 0,
-                                          ),
+                                      width: 0,
+                                    ),
                                   ],
                                 ),
                                 Align(
@@ -1411,7 +1393,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                         style: TextStyle(color: Colors.grey))),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 2,
@@ -1420,8 +1402,8 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                         max: 100.0,
                                         value: _defaultUploadVotingWeight,
                                         label: _defaultUploadVotingWeight
-                                                .floor()
-                                                .toString() +
+                                            .floor()
+                                            .toString() +
                                             "%",
                                         divisions: 20,
                                         inactiveColor: globalBlue,
@@ -1436,8 +1418,8 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     ),
                                     Text(
                                       _defaultUploadVotingWeight
-                                              .floor()
-                                              .toString() +
+                                          .floor()
+                                          .toString() +
                                           "%",
                                       style: TextStyle(fontSize: 18),
                                     )
@@ -1446,7 +1428,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 VisibilityHintText(
                                   showHint: _showVotingUploadDefaultsHints,
                                   hintText:
-                                      "Those are defaults so you can always change those values in the upload process. can also set a template (see tabs above).",
+                                  "Those are defaults so you can always change those values in the upload process. can also set a template (see tabs above).",
                                 ),
                               ],
                             ),
@@ -1457,7 +1439,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                               childs: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                  EdgeInsets.only(top: 1.h, bottom: 1.h),
                                   child: Text("Title",
                                       style: Theme.of(context)
                                           .textTheme
@@ -1483,7 +1465,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                               childs: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                  EdgeInsets.only(top: 1.h, bottom: 1.h),
                                   child: Text("Body",
                                       style: Theme.of(context)
                                           .textTheme
@@ -1514,7 +1496,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                               childs: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                  EdgeInsets.only(top: 1.h, bottom: 1.h),
                                   child: Text("Tag",
                                       style: Theme.of(context)
                                           .textTheme
@@ -1540,7 +1522,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                               childs: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                  EdgeInsets.only(top: 1.h, bottom: 1.h),
                                   child: Text("Preview",
                                       style: Theme.of(context)
                                           .textTheme
@@ -1558,7 +1540,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                   width: 90.w,
                                   height: 200,
                                   child:
-                                      MarkdownBody(data: _templatePreviewBody),
+                                  MarkdownBody(data: _templatePreviewBody),
                                 )
                               ],
                             ),
@@ -1584,14 +1566,14 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     onPressed: () {
                                       setState(() {
                                         _showVotingMomentDefaultsHints =
-                                            !_showVotingMomentDefaultsHints;
+                                        !_showVotingMomentDefaultsHints;
                                       });
                                     },
                                     alignment: Alignment.topRight,
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                    EdgeInsets.only(top: 1.h, bottom: 1.h),
                                     child: Text("Moments upload settings",
                                         style: Theme.of(context)
                                             .textTheme
@@ -1622,22 +1604,22 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             .bodyText1,
                                         avatar: _defaultMomentsOC
                                             ? FaIcon(
-                                                FontAwesomeIcons.check,
-                                                size: 15,
-                                              )
+                                          FontAwesomeIcons.check,
+                                          size: 15,
+                                        )
                                             : null,
                                         backgroundColor:
-                                            Colors.grey.withAlpha(30),
+                                        Colors.grey.withAlpha(30),
                                         selectedColor: Colors.green[700],
                                         onSelected: (bool selected) {
                                           setState(() {
                                             _defaultMomentsOC =
-                                                !_defaultMomentsOC;
+                                            !_defaultMomentsOC;
                                           });
                                         }),
                                     Visibility(
                                       visible:
-                                          false, // to get accepted by google we had to remove this option
+                                      false, // to get accepted by google we had to remove this option
                                       child: ChoiceChip(
                                           selected: _defaultMomentsNSFW,
                                           label: Text('nsfw content'),
@@ -1646,17 +1628,17 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                               .bodyText1,
                                           avatar: _defaultMomentsNSFW
                                               ? FaIcon(
-                                                  FontAwesomeIcons.check,
-                                                  size: 15,
-                                                )
+                                            FontAwesomeIcons.check,
+                                            size: 15,
+                                          )
                                               : null,
                                           backgroundColor:
-                                              Colors.grey.withAlpha(30),
+                                          Colors.grey.withAlpha(30),
                                           selectedColor: Colors.green[700],
                                           onSelected: (bool selected) {
                                             setState(() {
                                               _defaultMomentsNSFW =
-                                                  !_defaultMomentsNSFW;
+                                              !_defaultMomentsNSFW;
                                             });
                                           }),
                                     ),
@@ -1668,44 +1650,44 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                             .bodyText1,
                                         avatar: _defaultMomentsUnlist
                                             ? FaIcon(
-                                                FontAwesomeIcons.check,
-                                                size: 15,
-                                              )
+                                          FontAwesomeIcons.check,
+                                          size: 15,
+                                        )
                                             : null,
                                         backgroundColor:
-                                            Colors.grey.withAlpha(30),
+                                        Colors.grey.withAlpha(30),
                                         selectedColor: Colors.green[700],
                                         onSelected: (bool selected) {
                                           setState(() {
                                             _defaultMomentsUnlist =
-                                                !_defaultMomentsUnlist;
+                                            !_defaultMomentsUnlist;
                                           });
                                         }),
                                     _hiveUsername != ""
                                         ? ChoiceChip(
-                                            selected: _defaultMomentsCrossPost,
-                                            label: Text('cross-post to hive'),
-                                            labelStyle: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                            avatar: _defaultMomentsCrossPost
-                                                ? FaIcon(
-                                                    FontAwesomeIcons.check,
-                                                    size: 15,
-                                                  )
-                                                : null,
-                                            backgroundColor:
-                                                Colors.grey.withAlpha(30),
-                                            selectedColor: Colors.green[700],
-                                            onSelected: (bool selected) {
-                                              setState(() {
-                                                _defaultMomentsCrossPost =
-                                                    !_defaultMomentsCrossPost;
-                                              });
-                                            })
+                                        selected: _defaultMomentsCrossPost,
+                                        label: Text('cross-post to hive'),
+                                        labelStyle: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                        avatar: _defaultMomentsCrossPost
+                                            ? FaIcon(
+                                          FontAwesomeIcons.check,
+                                          size: 15,
+                                        )
+                                            : null,
+                                        backgroundColor:
+                                        Colors.grey.withAlpha(30),
+                                        selectedColor: Colors.green[700],
+                                        onSelected: (bool selected) {
+                                          setState(() {
+                                            _defaultMomentsCrossPost =
+                                            !_defaultMomentsCrossPost;
+                                          });
+                                        })
                                         : SizedBox(
-                                            width: 0,
-                                          ),
+                                      width: 0,
+                                    ),
                                   ],
                                 ),
                                 Align(
@@ -1714,7 +1696,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                         style: TextStyle(color: Colors.grey))),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 2,
@@ -1723,8 +1705,8 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                         max: 100.0,
                                         value: _defaultMomentVotingWeight,
                                         label: _defaultMomentVotingWeight
-                                                .floor()
-                                                .toString() +
+                                            .floor()
+                                            .toString() +
                                             "%",
                                         divisions: 20,
                                         inactiveColor: globalBlue,
@@ -1739,8 +1721,8 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                     ),
                                     Text(
                                       _defaultMomentVotingWeight
-                                              .floor()
-                                              .toString() +
+                                          .floor()
+                                          .toString() +
                                           "%",
                                       style: TextStyle(fontSize: 18),
                                     )
@@ -1749,7 +1731,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                                 VisibilityHintText(
                                   showHint: _showVotingMomentDefaultsHints,
                                   hintText:
-                                      "To keep the posting process of moments as quick as possible there are no extra settings in the uploader. That's why you should set the desired values here.",
+                                  "To keep the posting process of moments as quick as possible there are no extra settings in the uploader. That's why you should set the desired values here.",
                                 ),
                               ],
                             ),
@@ -1760,7 +1742,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                               childs: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                  EdgeInsets.only(top: 1.h, bottom: 1.h),
                                   child: Text("Title",
                                       style: Theme.of(context)
                                           .textTheme
@@ -1786,7 +1768,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                               childs: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                  EdgeInsets.only(top: 1.h, bottom: 1.h),
                                   child: Text("Body",
                                       style: Theme.of(context)
                                           .textTheme
@@ -1817,7 +1799,7 @@ class _SettingsTabContainerState extends State<SettingsTabContainer>
                               childs: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                  EdgeInsets.only(top: 1.h, bottom: 1.h),
                                   child: Text("Preview",
                                       style: Theme.of(context)
                                           .textTheme

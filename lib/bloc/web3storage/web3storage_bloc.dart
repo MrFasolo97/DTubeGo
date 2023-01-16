@@ -93,7 +93,7 @@ class Web3StorageBloc extends Bloc<Web3StorageEvent, Web3StorageState> {
                   e.toString();
           uploadErrorCount++;
         }
-        // thumnail upload
+        // thumbnail upload
         try {
           _thumbnailOnlineLocation =
               await repository.uploadThumbnail(_newThumbnail);
@@ -115,7 +115,7 @@ class Web3StorageBloc extends Bloc<Web3StorageEvent, Web3StorageState> {
           // thumbnail upload failed
 
           uploadErrorMessage =
-              "Thumnail upload failed!\n\nPlease report this error to the dtube team with a screenshot!\n\n" +
+              "Thumbnail upload failed!\n\nPlease report this error to the dtube team with a screenshot!\n\n" +
                   e.toString();
           uploadErrorCount++;
         }

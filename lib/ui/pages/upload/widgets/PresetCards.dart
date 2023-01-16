@@ -79,7 +79,7 @@ class InitiativePresetCard extends StatelessWidget {
                 onTapCallback();
               },
               textStyle: Theme.of(context).textTheme.headline6!,
-              width: 50.w,
+              width: 100.w,
             ),
             Align(
               alignment: Alignment.topRight,

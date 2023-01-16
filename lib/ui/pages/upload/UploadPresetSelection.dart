@@ -3,7 +3,6 @@ import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/pages/upload/widgets/PresetCards.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -68,70 +67,94 @@ class _UploadPresetSelectionState extends State<UploadPresetSelection> {
         padding: const EdgeInsets.only(top: 90.0),
         child: !_presetSelected
             ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Initiatives",
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text("Initiatives",
+                  style: Theme.of(context).textTheme.headline5),
+              Container(
+                height: 30.h,
+                // width: 100.w,
+                color: globalBGColor,
+                child: ListView.builder(
+                  padding: EdgeInsets.only(
+                    // bottom: 16.h,
+                    top: 1.h,
+                  ),
+                  shrinkWrap: true,
+                  // scrollDirection: Axis.vertical,
+                  itemCount: _initiativePresets.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InitiativePresetCard(
+                        currentIndex: index,
+                        initiative: _initiativePresets[index],
+                        // activated: _activatedGenres.contains(index),
+                        onTapCallback: () {
+                          setState(() {
+                            _selectedPreset = _initiativePresets[index];
+                            _presetSelected = true;
+                          });
+                        });
+                  },
+                ),
+              ),
+              Container(
+                color: globalBGColor,
+                width: 100.w,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 2.h),
+                  child: Center(
+                    child: Text("Your presets",
                         style: Theme.of(context).textTheme.headline5),
-                    Container(
+                  ),
+                ),
+              ),
+              FutureBuilder(
+                  future: _customPresetsLoaded,
+                  builder: (context, exploreTagsSnapshot) {
+                    if (exploreTagsSnapshot.connectionState ==
+                        ConnectionState.none ||
+                        exploreTagsSnapshot.connectionState ==
+                            ConnectionState.waiting) {
+                      return Container();
+                    }
+                    return Container(
                       height: 30.h,
                       width: 100.w,
                       color: globalBGColor,
-                      child: GridView.custom(
-                        gridDelegate: SliverQuiltedGridDelegate(
-                          crossAxisCount: 6,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                          repeatPattern: QuiltedGridRepeatPattern.inverted,
-                          pattern: const [
-                            QuiltedGridTile(4, 4),
-                            QuiltedGridTile(2, 2),
-                            QuiltedGridTile(2, 2),
-                          ],
+                      child: ListView.builder(
+                        padding: EdgeInsets.only(
+                          bottom: 5.h,
+                          top: 1.h,
                         ),
-                        childrenDelegate: SliverChildBuilderDelegate((context, index) {
-                          return Container();
-                        }),
+                        itemCount: _activeCustomPresets.length,
+                        //shrinkWrap: true,
+                        // scrollDirection: Axis.vertical,
+                        itemBuilder: (BuildContext context, int index) {
+                          return PresetCard(
+                              currentIndex: _activeCustomPresets[index],
+                              preset: _customPresets[
+                              _activeCustomPresets[index]],
+                              // activated: _activatedGenres.contains(index),
+                              onTapCallback: () {
+                                setState(() {
+                                  _selectedPreset = _customPresets[
+                                  _activeCustomPresets[index]];
+                                  _presetSelected = true;
+                                });
+                              });
+                        },
                       ),
-                    ),
-                    Container(
-                      color: globalBGColor,
-                      width: 100.w,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 2.h),
-                        child: Center(
-                          child: Text("Your presets",
-                              style: Theme.of(context).textTheme.headline5),
-                        ),
-                      ),
-                    ),
-                    FutureBuilder(
-                        future: _customPresetsLoaded,
-                        builder: (context, exploreTagsSnapshot) {
-                          if (exploreTagsSnapshot.connectionState ==
-                                  ConnectionState.none ||
-                              exploreTagsSnapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                            return Container();
-                          }
-                          return Container(
-                            height: 30.h,
-                            width: 100.w,
-                            color: globalBGColor,
-                            child: CustomScrollView(
-                              //shrinkWrap: true,
-                              // scrollDirection: Axis.vertical,
-                            ),
-                          );
-                        })
-                  ],
-                ),
-              )
+                    );
+                  })
+            ],
+          ),
+        )
             : UploaderMainPage(
-                callback: widget.uploaderCallback,
-                key: UniqueKey(),
-                preset: _presetSelected ? _selectedPreset : _customPresets[0]),
+            callback: widget.uploaderCallback,
+            key: UniqueKey(),
+            preset: _presetSelected ? _selectedPreset : _customPresets[0]),
       ),
     );
   }
