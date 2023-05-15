@@ -126,7 +126,7 @@ class _PostResultCardDesktopState extends State<PostResultCardDesktop> {
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS,
+          desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
           privacyEnhanced: true,
           useHybridComposition: true,
           autoPlay: true),

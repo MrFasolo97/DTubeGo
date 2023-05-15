@@ -4,7 +4,6 @@ import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 class P2PSourcePlayerMobile extends StatefulWidget {
   final String videoUrl;

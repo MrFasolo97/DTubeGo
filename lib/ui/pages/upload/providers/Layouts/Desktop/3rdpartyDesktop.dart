@@ -90,7 +90,7 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: false,
-          desktopMode: kIsWeb ? true : !Platform.isIOS,
+          desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
           privacyEnhanced: true,
           useHybridComposition: true,
           autoPlay: false),
@@ -191,7 +191,7 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
                                                   showFullscreenButton: false,
                                                   desktopMode: kIsWeb
                                                       ? true
-                                                      : !Platform.isIOS,
+                                                      : !Platform.isIOS && !Platform.isAndroid,
                                                   privacyEnhanced: true,
                                                   useHybridComposition: true,
                                                   autoPlay: false),

@@ -222,10 +222,11 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS,
+          desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
           privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: !(widget.directFocus != "none")),
+          useHybridComposition: false,
+          autoPlay: true
+      ),
     );
     _controller.onEnterFullscreen = () {
       SystemChrome.setPreferredOrientations([

@@ -34,7 +34,7 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS,
+          desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
           privacyEnhanced: true,
           useHybridComposition: true,
           autoPlay: true),
@@ -53,7 +53,7 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
           params: YoutubePlayerParams(
               showControls: true,
               showFullscreenButton: true,
-              desktopMode: kIsWeb ? true : !Platform.isIOS,
+              desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
               privacyEnhanced: true,
               useHybridComposition: true,
               autoPlay: true),
@@ -93,7 +93,7 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
               Center(
                 child: Text(
                   "No video or supported video player detected :(",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.center,
                 ),
               )
