@@ -5,7 +5,7 @@ import 'package:dtube_go/res/Config/appConfigValues.dart';
 import 'package:dtube_go/ui/pages/upload/dialogs/HivePostCooldownDialog.dart';
 import 'package:dtube_go/ui/pages/upload/dialogs/UploadTermsDialog.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/UploadStartedDialog.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2SourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
 import 'package:flutter/services.dart';
 import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
@@ -114,7 +114,11 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
 
     _ytController =
-        YoutubePlayerController(initialVideoId: stateUploadData.videoLocation);
+        YoutubePlayerController();
+    _ytController.load(
+        params: YoutubePlayerParams(showFullscreenButton: true, showControls: true),
+        baseUrl: stateUploadData.videoLocation
+    );
   }
 
   @override

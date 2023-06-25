@@ -1,6 +1,6 @@
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2SourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
@@ -142,7 +142,7 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
-    _ytController = YoutubePlayerController(initialVideoId: 'tFa7Om3Au8M');
+    _ytController = YoutubePlayerController();
   }
 
   @override
@@ -165,11 +165,7 @@ class _PostDetailsState extends State<PostDetails> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 widget.post.videoSource == "youtube"
-                    ? YTPlayerIFrame(
-                        videoUrl: widget.post.videoUrl!,
-                        autoplay: false,
-                        allowFullscreen: false,
-                        controller: _ytController)
+                    ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, controller: _ytController, allowFullscreen: true)
                     : ["ipfs", "sia"].contains(widget.post.videoSource)
                         ? P2PSourcePlayer(
                             videoUrl: widget.post.videoUrl!,

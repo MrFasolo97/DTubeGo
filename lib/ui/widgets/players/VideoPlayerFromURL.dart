@@ -30,14 +30,10 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
     _videoController =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
-      initialVideoId: "jlTUhhHSX00",
       params: YoutubePlayerParams(
           showControls: true,
-          showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: true),
+          showFullscreenButton: true
+      ),
     );
   }
 
@@ -48,16 +44,20 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
         return DtubeLogoPulseWithSubtitle(
             subtitle: "Loading video..", size: 10.w);
       } else if (state is PostLoadedState) {
-        _ytController = YoutubePlayerController(
-          initialVideoId: state.post.videoUrl!,
+        _ytController = YoutubePlayerController.fromVideoId(videoId: widget.url,
           params: YoutubePlayerParams(
+            origin: "https://www.youtube.com",
+            showControls: true,
+            showFullscreenButton: true,
+          )
+        );
+        _ytController.load(
+            params: YoutubePlayerParams(
+              origin: "https://www.youtube.com",
               showControls: true,
               showFullscreenButton: true,
-              desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
-              privacyEnhanced: true,
-              useHybridComposition: true,
-              autoPlay: true),
-        );
+            ),
+            baseUrl: state.post.videoUrl!);
         return InkWell(
           onTap: () {
             setState(() {

@@ -4,7 +4,8 @@ import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
 import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
 import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
 import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2SourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:dtube_go/bloc/feed/feed_bloc.dart';
@@ -218,25 +219,28 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.post.videoUrl!,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
-          desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
-          privacyEnhanced: true,
-          useHybridComposition: false,
-          autoPlay: true
       ),
     );
-    _controller.onEnterFullscreen = () {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-      print('Entered Fullscreen');
-    };
-    _controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
+    _controller.load(
+        params: YoutubePlayerParams(
+          showControls: true,
+          showFullscreenButton: true,
+        ),
+        baseUrl: widget.post.videoUrl!
+    );
+    _controller.onFullscreenChange = (isFullscreen) {
+      if (isFullscreen) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]);
+        print('Entered Fullscreen');
+      } else {
+        print('Exited Fullscreen');
+      }
     };
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
@@ -244,7 +248,7 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
 
     super.dispose();
@@ -252,7 +256,7 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
 
   @override
   Widget build(BuildContext context) {
-    const player = YoutubePlayerIFrame();
+    var player = YoutubePlayer(controller: _controller);
     return BlocListener<TransactionBloc, TransactionState>(
       bloc: txBloc,
       listener: (context, state) {
@@ -301,7 +305,7 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
                           ],
                         ),
                         widget.post.videoSource == "youtube"
-                            ? player
+                            ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: YoutubePlayerController())
                             : ["ipfs", "sia"].contains(widget.post.videoSource)
                                 ? P2PSourcePlayer(
                                     videoUrl: widget.post.videoUrl!,

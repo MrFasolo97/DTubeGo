@@ -7,7 +7,7 @@ import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
 import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
 import 'package:dtube_go/ui/pages/post/widgets/TitleWidget.dart';
 import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2SourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:dtube_go/bloc/feed/feed_bloc.dart';
@@ -216,24 +216,19 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.post.videoUrl!,
       params: YoutubePlayerParams(
           showControls: true,
-          showFullscreenButton: true,
-          desktopMode: true,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: !(widget.directFocus != "none")),
+          showFullscreenButton: true,)
     );
-    _controller.onEnterFullscreen = () {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-      print('Entered Fullscreen');
-    };
-    _controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
+    _controller.onFullscreenChange = (isFullscreen) {
+      if(isFullscreen) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]);
+      } else {
+        print('Exited Fullscreen');
+      }
     };
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
@@ -241,7 +236,7 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
 
     super.dispose();
@@ -249,7 +244,7 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   Widget build(BuildContext context) {
-    const player = YoutubePlayerIFrame();
+    var player = YoutubePlayer(controller: _controller);
     return BlocListener<TransactionBloc, TransactionState>(
       bloc: txBloc,
       listener: (context, state) {
@@ -564,7 +559,7 @@ class _PostDetailsState extends State<PostDetails> {
                               child: FeedListSuggestedPosts(
                                 feedType: 'SuggestedPosts',
                                 clickedCallback: () {
-                                  _controller.pause();
+                                  _controller.pauseVideo();
                                   _videocontroller.pause();
                                 },
                                 width: suggestedSize * 0.9,
