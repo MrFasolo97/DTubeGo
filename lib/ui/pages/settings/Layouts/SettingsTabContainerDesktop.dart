@@ -94,7 +94,6 @@ class _SettingsTabContainerDesktopState
   bool _showHiveDefaultTagsHint = false;
 
   bool _showNSFWSettings = false;
-
   List<String> _imageUploadProviders = ['imgur', 'ipfs'];
   List<int> _visitedTabs = [];
 
@@ -154,7 +153,6 @@ class _SettingsTabContainerDesktopState
   void initState() {
     settings = {"none": "none"};
     _tabController = new TabController(length: 5, vsync: this);
-
     _settingsBloc = BlocProvider.of<SettingsBloc>(context);
     _settingsBloc.add(FetchSettingsEvent()); // statements;
     _templateBodyController = TextEditingController(text: "");
@@ -172,6 +170,7 @@ class _SettingsTabContainerDesktopState
 
   @override
   Widget build(BuildContext context) {
+    double _distanceToField = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: showExitPopup, //call function on back button press
       child: Scaffold(
@@ -254,6 +253,7 @@ class _SettingsTabContainerDesktopState
               size: 20.w,
             ));
           } else if (state is SettingsLoadedState) {
+            TextfieldTagsController _tagsController = TextfieldTagsController();
             if (settings.length == 1) {
               settings = state.settings;
 
@@ -1228,169 +1228,207 @@ class _SettingsTabContainerDesktopState
                                 ),
                               ),
                               Container(
-                                width: 50.w,
-                                child: DTubeFormCard(
-                                  avoidAnimation: _visitedTabs.contains(2) ||
-                                      globals.disableAnimations,
-                                  waitBeforeFadeIn: Duration(milliseconds: 900),
-                                  childs: [
-                                    Stack(children: [
-                                      ShowHintIcon(
-                                        onPressed: () {
-                                          setState(() {
-                                            _showHiveDefaultTagsHint =
-                                                !_showHiveDefaultTagsHint;
-                                          });
-                                        },
-                                        alignment: Alignment.topRight,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 1.h, bottom: 1.h),
-                                        child: Text("Hive Tags",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5),
-                                      ),
-                                    ]),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 30.w,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                  "Cross-posted videos can get tagged with up to 8 custom tags.",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyText1),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: TextFieldTags(
-                                                    initialTags:
-                                                        _hiveDefaultTags,
-                                                    textFieldStyler:
-                                                        TextFieldStyler(
-                                                      //These are properties you can tweek for customization
-
-                                                      // bool textFieldFilled = false,
-                                                      // Icon icon,
-                                                      helperText: _hiveDefaultTags
-                                                              .length
-                                                              .toString() +
-                                                          ' tags (hit space to add tag)\n' +
-                                                          _hiveDefaultTags
-                                                              .join("\n"),
-                                                      // TextStyle helperStyle,
-                                                      hintText: '',
-                                                      textStyle:
-                                                          Theme.of(context)
-                                                              .textTheme
-                                                              .bodyText1,
-                                                      // TextStyle hintStyle,
-                                                      // EdgeInsets contentPadding,
-                                                      // Color textFieldFilledColor,
-                                                      // bool isDense = true,
-                                                      // bool textFieldEnabled = true,
-                                                      // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
-                                                      // OutlineInputBorder textFieldFocusedBorder,
-                                                      // OutlineInputBorder textFieldDisabledBorder,
-                                                      // OutlineInputBorder textFieldEnabledBorder
-                                                    ),
-                                                    tagsStyler: TagsStyler(
-                                                      //These are properties you can tweek for customization
+                                  width: 50.w,
+                                  child: DTubeFormCard(
+                                      avoidAnimation:
+                                          _visitedTabs.contains(2) ||
+                                              globals.disableAnimations,
+                                      waitBeforeFadeIn:
+                                          Duration(milliseconds: 900),
+                                      childs: [
+                                        Stack(children: [
+                                          ShowHintIcon(
+                                            onPressed: () {
+                                              setState(() {
+                                                _showHiveDefaultTagsHint =
+                                                    !_showHiveDefaultTagsHint;
+                                              });
+                                            },
+                                            alignment: Alignment.topRight,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 1.h, bottom: 1.h),
+                                            child: Text("Hive Tags",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineSmall),
+                                          ),
+                                        ]),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 30.w,
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                      "Cross-posted videos can get tagged with up to 8 custom tags.",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: TextFieldTags(
+                                                      textfieldTagsController:
+                                                          _tagsController,
+                                                      initialTags:
+                                                          _hiveDefaultTags,
+                                                      textSeparators: const [
+                                                        ' ',
+                                                        ','
+                                                      ],
+                                                      letterCase:
+                                                          LetterCase.normal,
+                                                      validator: (String tag) {
+                                                        if (_tagsController
+                                                                .getTags
+                                                                ?.contains(
+                                                                    tag) !=
+                                                            null) {
+                                                          return 'you already entered that';
+                                                        }
+                                                        return null;
+                                                      },
+                                                      inputfieldBuilder:
+                                                          (context,
+                                                              tec,
+                                                              fn,
+                                                              error,
+                                                              onChanged,
+                                                              onSubmitted) {
+                                                        return ((context, sc,
+                                                            tags, onTagDelete) {
+                                                          return Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: TextField(
+                                                              controller: tec,
+                                                              focusNode: fn,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                isDense: true,
+                                                                border:
+                                                                    const OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            74,
+                                                                            137,
+                                                                            92),
+                                                                    width: 3.0,
+                                                                  ),
+                                                                ),
+                                                                focusedBorder:
+                                                                    const OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            74,
+                                                                            137,
+                                                                            92),
+                                                                    width: 3.0,
+                                                                  ),
+                                                                ),
+                                                                helperText:
+                                                                    'Enter language...',
+                                                                helperStyle:
+                                                                    const TextStyle(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          74,
+                                                                          137,
+                                                                          92),
+                                                                ),
+                                                                hintText: _tagsController
+                                                                        .hasTags
+                                                                    ? ''
+                                                                    : "Enter tag...",
+                                                                errorText:
+                                                                    error,
+                                                                prefixIconConstraints:
+                                                                    BoxConstraints(
+                                                                        maxWidth:
+                                                                            _distanceToField *
+                                                                                0.74),
+                                                                prefixIcon: tags
+                                                                        .isNotEmpty
+                                                                    ? SingleChildScrollView(
+                                                                        controller:
+                                                                            sc,
+                                                                        scrollDirection:
+                                                                            Axis.horizontal,
+                                                                        child: Row(
+                                                                            children: tags.map((String tag) {
+                                                                          return Container(
+                                                                            decoration:
+                                                                                const BoxDecoration(
+                                                                              borderRadius: BorderRadius.all(
+                                                                                Radius.circular(20.0),
+                                                                              ),
+                                                                              color: Color.fromARGB(255, 74, 137, 92),
+                                                                            ),
+                                                                            margin:
+                                                                                const EdgeInsets.symmetric(horizontal: 5.0),
+                                                                            padding:
+                                                                                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                              children: [
+                                                                                InkWell(
+                                                                                  child: Text(
+                                                                                    '#$tag',
+                                                                                    style: const TextStyle(color: Colors.white),
+                                                                                  ),
+                                                                                  onTap: () {
+                                                                                    print("$tag selected");
+                                                                                  },
+                                                                                ),
+                                                                                const SizedBox(width: 4.0),
+                                                                                InkWell(
+                                                                                  child: const Icon(
+                                                                                    Icons.cancel,
+                                                                                    size: 14.0,
+                                                                                    color: Color.fromARGB(255, 233, 233, 233),
+                                                                                  ),
+                                                                                  onTap: () {
+                                                                                    onTagDelete(tag);
+                                                                                  },
+                                                                                )
+                                                                              ],
+                                                                            ),
+                                                                          );
+                                                                        }).toList()),
+                                                                      )
+                                                                    : null,
+                                                              ),
+                                                              onChanged:
+                                                                  onChanged,
+                                                              onSubmitted:
+                                                                  onSubmitted,
+                                                            ),
+                                                          );
+                                                        });
+                                                      },
 
                                                       // showHashtag = false,
                                                       // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
-                                                      // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
-                                                      tagDecoration:
-                                                          BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .rectangle,
-                                                              borderRadius:
-                                                                  new BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    10.0),
-                                                              ),
-                                                              color: globalRed),
-                                                      tagTextStyle:
-                                                          Theme.of(context)
-                                                              .textTheme
-                                                              .bodyText1,
-                                                      tagCancelIcon: Icon(
-                                                          Icons.cancel,
-                                                          size: 4.w,
-                                                          color:
-                                                              globalAlmostWhite),
                                                     ),
-                                                    onTag: (tag) {
-                                                      setState(() {
-                                                        _hiveDefaultTags
-                                                            .add(tag);
-                                                      });
-                                                    },
-                                                    onDelete: (tag) {
-                                                      setState(() {
-                                                        _hiveDefaultTags
-                                                            .remove(tag);
-                                                      });
-                                                    },
-                                                    validator: (tag) {
-                                                      if (_hiveDefaultTags
-                                                              .length ==
-                                                          8) {
-                                                        return "max 8 tags allowed";
-                                                      }
-                                                      if (!RegExp(r'^[a-z]+$')
-                                                          .hasMatch(tag)) {
-                                                        return "only alhabetic characters allowed";
-                                                      }
-                                                      if (_hiveDefaultTags
-                                                          .contains(tag)) {
-                                                        return "tag is already in the list";
-                                                      }
-                                                      if (tag.toLowerCase() ==
-                                                          "dtube") {
-                                                        return "dtube is as default in the list";
-                                                      }
-                                                      return null;
-                                                    },
-                                                    tagsDistanceFromBorderEnd:
-                                                        0.50,
-
-                                                    //scrollableTagsMargin: EdgeInsets.only(left: 9),
-                                                    //scrollableTagsPadding: EdgeInsets.only(left: 9),
-                                                  )
-
-                                                  // TextFormField(
-                                                  //   controller:
-                                                  //       _hiveDefaultTagsController,
-                                                  //   cursorColor: globalRed,
-                                                  //   decoration: new InputDecoration(
-                                                  //       labelText:
-                                                  //           "hive tags (space-separated):"),
-                                                  //   maxLines: 1,
-                                                  //   style: Theme.of(context)
-                                                  //       .textTheme
-                                                  //       .bodyText1,
-                                                  // ),
                                                   ),
-                                              VisibilityHintText(
-                                                showHint:
-                                                    _showHiveDefaultTagsHint,
-                                                hintText:
-                                                    "Your cross-posted video will receive those tags on the hive blockchain. Only up to 8 tags are allowed (dtube and the tag of your post will be added automatically) and you should set them separated by spaces in the textfield above.",
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                      ])),
                             ],
                           ),
                         ),

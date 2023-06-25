@@ -114,7 +114,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                       'Do you really want to leave the settings without saving?',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                       textAlign: TextAlign.center),
                 ),
                 SizedBox(height: 2.h),
@@ -130,7 +130,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                       ),
                       child: Text(
                         "Yes",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -420,7 +420,8 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                           settings[sec.settingKey_FixedDownvoteWeight]!)
                       : 1.0;
             }
-
+            double _distanceToField = MediaQuery.of(context).size.width;
+            TextfieldTagsController _tagsController = TextfieldTagsController();
             return Column(
               children: [
                 Container(
@@ -497,7 +498,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           child: Text("Display",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline5),
+                                                  .headlineSmall),
                                         ),
                                       ],
                                     ),
@@ -507,7 +508,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           "How do you want to see those kind of videos in the app?",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1),
+                                              .bodyLarge),
                                     ),
                                     DropdownButtonFormField(
                                       decoration: InputDecoration(
@@ -516,12 +517,12 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           labelText: 'negative videos:',
                                           labelStyle: Theme.of(context)
                                               .textTheme
-                                              .headline5
+                                              .headlineSmall
                                           //border: new CustomBorderTextFieldSkin().getSkin(),
                                           ),
                                       value: _showHidden,
                                       style:
-                                          Theme.of(context).textTheme.bodyText1,
+                                          Theme.of(context).textTheme.bodyLarge,
                                       onChanged: (newValue) {
                                         setState(() {
                                           _showHidden = newValue.toString();
@@ -547,12 +548,12 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           labelText: 'NSFW videos:',
                                           labelStyle: Theme.of(context)
                                               .textTheme
-                                              .headline5
+                                              .headlineSmall
                                           //border: new CustomBorderTextFieldSkin().getSkin(),
                                           ),
                                       value: _showNsfw,
                                       style:
-                                          Theme.of(context).textTheme.bodyText1,
+                                          Theme.of(context).textTheme.bodyLarge,
                                       onChanged: (newValue) {
                                         setState(() {
                                           _showNsfw = newValue.toString();
@@ -596,7 +597,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                         child: Text("Security",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline5),
+                                                .headlineSmall),
                                       ),
                                     ],
                                   ),
@@ -611,7 +612,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                             maxLines: 2,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1),
+                                                .bodyLarge),
                                       ),
                                       ElevatedButton(
                                           onPressed: () {
@@ -659,7 +660,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                         child: Text("Behaviour",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline5),
+                                                .headlineSmall),
                                       ),
                                     ],
                                   ),
@@ -673,7 +674,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                             maxLines: 2,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1),
+                                                .bodyLarge),
                                       ),
                                       Switch(
                                         value: _videoAutoPause,
@@ -699,7 +700,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                             maxLines: 2,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1),
+                                                .bodyLarge),
                                       ),
                                       Switch(
                                         value: _disableAnimation,
@@ -779,7 +780,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       child: Text("Voting weight",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Align(
@@ -788,7 +789,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           "default voting weight (posts):",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1)),
+                                              .bodyLarge)),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -825,7 +826,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           "default voting weight (comments):",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1)),
+                                              .bodyLarge)),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -887,13 +888,13 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       child: Text("Vote tipping",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Text("default voting tip (posts):",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1),
+                                          .bodyLarge),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -930,7 +931,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           "default voting tip (comments):",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1)),
+                                              .bodyLarge)),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -990,7 +991,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       child: Text("Downvotes",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Row(
@@ -1005,7 +1006,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       Text("downvote with a FIXED weight",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1)
+                                              .bodyLarge)
                                     ],
                                   ),
                                   _downvoteFixed
@@ -1017,7 +1018,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                     "default downvote weight:",
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1)),
+                                                        .bodyLarge)),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -1094,7 +1095,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       child: Text("Hivesigner settings",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Row(
@@ -1107,7 +1108,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                 "Cross-posting to the hive blockchain is possible by authorizing the app via hivesigner.",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1),
+                                                    .bodyLarge),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -1157,7 +1158,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       child: Text("Hive community",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Row(
@@ -1170,7 +1171,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                 "Cross-posted videos are usually published in the DTube-Community on Hive. Here you can change this to any other hive community by entering the correct community ID (e.g. hive-196037 for DTube).",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1),
+                                                    .bodyLarge),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -1184,7 +1185,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                 maxLines: 1,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1,
+                                                    .bodyLarge,
                                               ),
                                             ),
                                             VisibilityHintText(
@@ -1221,7 +1222,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       child: Text("Hive Tags",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Row(
@@ -1234,123 +1235,178 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                 "Cross-posted videos can get tagged with up to 8 custom tags.",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1),
+                                                    .bodyLarge),
                                             Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: TextFieldTags(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextFieldTags(
+                                                  textfieldTagsController:
+                                                      _tagsController,
                                                   initialTags: _hiveDefaultTags,
-                                                  textFieldStyler:
-                                                      TextFieldStyler(
-                                                    //These are properties you can tweek for customization
-
-                                                    // bool textFieldFilled = false,
-                                                    // Icon icon,
-                                                    helperText: _hiveDefaultTags
-                                                            .length
-                                                            .toString() +
-                                                        ' tags (hit space to add tag)\n' +
-                                                        _hiveDefaultTags
-                                                            .join("\n"),
-                                                    // TextStyle helperStyle,
-                                                    hintText: '',
-                                                    textStyle: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText1,
-                                                    // TextStyle hintStyle,
-                                                    // EdgeInsets contentPadding,
-                                                    // Color textFieldFilledColor,
-                                                    // bool isDense = true,
-                                                    // bool textFieldEnabled = true,
-                                                    // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
-                                                    // OutlineInputBorder textFieldFocusedBorder,
-                                                    // OutlineInputBorder textFieldDisabledBorder,
-                                                    // OutlineInputBorder textFieldEnabledBorder
-                                                  ),
-                                                  tagsStyler: TagsStyler(
-                                                    //These are properties you can tweek for customization
-
-                                                    // showHashtag = false,
-                                                    // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
-                                                    // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
-                                                    tagDecoration:
-                                                        BoxDecoration(
-                                                            shape: BoxShape
-                                                                .rectangle,
-                                                            borderRadius:
-                                                                new BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  10.0),
-                                                            ),
-                                                            color: globalRed),
-                                                    tagTextStyle:
-                                                        Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText1,
-                                                    tagCancelIcon: Icon(
-                                                        Icons.cancel,
-                                                        size: 4.w,
-                                                        color:
-                                                            globalAlmostWhite),
-                                                  ),
-                                                  onTag: (tag) {
-                                                    setState(() {
-                                                      _hiveDefaultTags.add(tag);
-                                                    });
-                                                  },
-                                                  onDelete: (tag) {
-                                                    setState(() {
-                                                      _hiveDefaultTags
-                                                          .remove(tag);
-                                                    });
-                                                  },
-                                                  validator: (tag) {
-                                                    if (_hiveDefaultTags
-                                                            .length ==
-                                                        8) {
-                                                      return "max 8 tags allowed";
-                                                    }
-                                                    if (!RegExp(r'^[a-z]+$')
-                                                        .hasMatch(tag)) {
-                                                      return "only alhabetic characters allowed";
-                                                    }
-                                                    if (_hiveDefaultTags
-                                                        .contains(tag)) {
-                                                      return "tag is already in the list";
-                                                    }
-                                                    if (tag.toLowerCase() ==
-                                                        "dtube") {
-                                                      return "dtube is as default in the list";
+                                                  textSeparators: const [
+                                                    ' ',
+                                                    ','
+                                                  ],
+                                                  letterCase: LetterCase.normal,
+                                                  validator: (String tag) {
+                                                    if (_tagsController.getTags
+                                                            ?.contains(tag) !=
+                                                        null) {
+                                                      return 'you already entered that';
                                                     }
                                                     return null;
                                                   },
-                                                  tagsDistanceFromBorderEnd:
-                                                      0.50,
+                                                  inputfieldBuilder: (context,
+                                                      tec,
+                                                      fn,
+                                                      error,
+                                                      onChanged,
+                                                      onSubmitted) {
+                                                    return ((context, sc, tags,
+                                                        onTagDelete) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: TextField(
+                                                          controller: tec,
+                                                          focusNode: fn,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            isDense: true,
+                                                            border:
+                                                                const OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        74,
+                                                                        137,
+                                                                        92),
+                                                                width: 3.0,
+                                                              ),
+                                                            ),
+                                                            focusedBorder:
+                                                                const OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        74,
+                                                                        137,
+                                                                        92),
+                                                                width: 3.0,
+                                                              ),
+                                                            ),
+                                                            helperText:
+                                                                'Enter language...',
+                                                            helperStyle:
+                                                                const TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      74,
+                                                                      137,
+                                                                      92),
+                                                            ),
+                                                            hintText:
+                                                                _tagsController
+                                                                        .hasTags
+                                                                    ? ''
+                                                                    : "Enter tag...",
+                                                            errorText: error,
+                                                            prefixIconConstraints:
+                                                                BoxConstraints(
+                                                                    maxWidth:
+                                                                        _distanceToField *
+                                                                            0.74),
+                                                            prefixIcon: tags
+                                                                    .isNotEmpty
+                                                                ? SingleChildScrollView(
+                                                                    controller:
+                                                                        sc,
+                                                                    scrollDirection:
+                                                                        Axis.horizontal,
+                                                                    child: Row(
+                                                                        children:
+                                                                            tags.map((String
+                                                                                tag) {
+                                                                      return Container(
+                                                                        decoration:
+                                                                            const BoxDecoration(
+                                                                          borderRadius:
+                                                                              BorderRadius.all(
+                                                                            Radius.circular(20.0),
+                                                                          ),
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              74,
+                                                                              137,
+                                                                              92),
+                                                                        ),
+                                                                        margin: const EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                5.0),
+                                                                        padding: const EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                10.0,
+                                                                            vertical:
+                                                                                5.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            InkWell(
+                                                                              child: Text(
+                                                                                '#$tag',
+                                                                                style: const TextStyle(color: Colors.white),
+                                                                              ),
+                                                                              onTap: () {
+                                                                                print("$tag selected");
+                                                                              },
+                                                                            ),
+                                                                            const SizedBox(width: 4.0),
+                                                                            InkWell(
+                                                                              child: const Icon(
+                                                                                Icons.cancel,
+                                                                                size: 14.0,
+                                                                                color: Color.fromARGB(255, 233, 233, 233),
+                                                                              ),
+                                                                              onTap: () {
+                                                                                onTagDelete(tag);
+                                                                              },
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    }).toList()),
+                                                                  )
+                                                                : null,
+                                                          ),
+                                                          onChanged: onChanged,
+                                                          onSubmitted:
+                                                              onSubmitted,
+                                                        ),
+                                                      );
+                                                    });
 
-                                                  //scrollableTagsMargin: EdgeInsets.only(left: 9),
-                                                  //scrollableTagsPadding: EdgeInsets.only(left: 9),
-                                                )
-
-                                                // TextFormField(
-                                                //   controller:
-                                                //       _hiveDefaultTagsController,
-                                                //   cursorColor: globalRed,
-                                                //   decoration: new InputDecoration(
-                                                //       labelText:
-                                                //           "hive tags (space-separated):"),
-                                                //   maxLines: 1,
-                                                //   style: Theme.of(context)
-                                                //       .textTheme
-                                                //       .bodyText1,
-                                                // ),
-                                                ),
-                                            VisibilityHintText(
-                                              showHint:
-                                                  _showHiveDefaultTagsHint,
-                                              hintText:
-                                                  "Your cross-posted video will receive those tags on the hive blockchain. Only up to 8 tags are allowed (dtube and the tag of your post will be added automatically) and you should set them separated by spaces in the textfield above.",
-                                            ),
+                                                    // TextFormField(
+                                                    //   controller:
+                                                    //       _hiveDefaultTagsController,
+                                                    //   cursorColor: globalRed,
+                                                    //   decoration: new InputDecoration(
+                                                    //       labelText:
+                                                    //           "hive tags (space-separated):"),
+                                                    //   maxLines: 1,
+                                                    //   style: Theme.of(context)
+                                                    //       .textTheme
+                                                    //       .bodyText1,
+                                                    // ),
+                                                  }),
+                                            )
                                           ],
                                         ),
                                       ),
@@ -1370,7 +1426,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                 child: Text(
                                     "Default Values for Regular Uploads",
                                     style:
-                                        Theme.of(context).textTheme.headline5),
+                                        Theme.of(context).textTheme.headlineSmall),
                               ),
                               DTubeFormCard(
                                 waitBeforeFadeIn: Duration(milliseconds: 200),
@@ -1394,7 +1450,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           "Video upload default settings",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Wrap(
@@ -1406,7 +1462,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           label: Text('original content'),
                                           labelStyle: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           avatar: _defaultUploadOC
                                               ? FaIcon(
                                                   FontAwesomeIcons.check,
@@ -1430,7 +1486,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                             label: Text('nsfw content'),
                                             labelStyle: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1,
+                                                .bodyLarge,
                                             avatar: _defaultUploadNSFW
                                                 ? FaIcon(
                                                     FontAwesomeIcons.check,
@@ -1452,7 +1508,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           label: Text('unlist video'),
                                           labelStyle: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           avatar: _defaultUploadUnlist
                                               ? FaIcon(
                                                   FontAwesomeIcons.check,
@@ -1474,7 +1530,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                               label: Text('cross-post to hive'),
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1,
+                                                  .bodyLarge,
                                               avatar: _defaultUploadCrossPost
                                                   ? FaIcon(
                                                       FontAwesomeIcons.check,
@@ -1553,7 +1609,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     child: Text("Title",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ),
                                   Divider(
                                     height: 1,
@@ -1565,7 +1621,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     cursorColor: globalRed,
                                     maxLines: 1,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ],
                               ),
@@ -1580,7 +1636,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     child: Text("Body",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ),
                                   Divider(
                                     height: 1,
@@ -1592,7 +1648,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     cursorColor: globalRed,
                                     maxLines: 6,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyLarge,
                                     onChanged: (String text) {
                                       setState(() {
                                         _templatePreviewBody = text;
@@ -1612,7 +1668,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     child: Text("Tag",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ),
                                   Divider(
                                     height: 1,
@@ -1624,7 +1680,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     cursorColor: globalRed,
                                     maxLines: 1,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ],
                               ),
@@ -1639,7 +1695,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     child: Text("Preview",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ),
                                   Divider(
                                     height: 1,
@@ -1668,7 +1724,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                 padding: EdgeInsets.only(top: 1.h, bottom: 1.h),
                                 child: Text("Moment Values",
                                     style:
-                                        Theme.of(context).textTheme.headline5),
+                                        Theme.of(context).textTheme.headlineSmall),
                               ),
                               DTubeFormCard(
                                 waitBeforeFadeIn: Duration(milliseconds: 400),
@@ -1691,19 +1747,19 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       child: Text("Moments upload settings",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5),
+                                              .headlineSmall),
                                     ),
                                   ]),
                                   Text(
                                     "Define how your moments are being posted.",
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                   Text(
                                     "You can not change those values in the upload process!",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1!
+                                        .bodyLarge!
                                         .copyWith(color: globalRed),
                                   ),
                                   SizedBox(height: 2.h),
@@ -1716,7 +1772,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           label: Text('original content'),
                                           labelStyle: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           avatar: _defaultMomentsOC
                                               ? FaIcon(
                                                   FontAwesomeIcons.check,
@@ -1740,7 +1796,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                             label: Text('nsfw content'),
                                             labelStyle: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1,
+                                                .bodyLarge,
                                             avatar: _defaultMomentsNSFW
                                                 ? FaIcon(
                                                     FontAwesomeIcons.check,
@@ -1762,7 +1818,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           label: Text('only show in moments'),
                                           labelStyle: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           avatar: _defaultMomentsUnlist
                                               ? FaIcon(
                                                   FontAwesomeIcons.check,
@@ -1785,7 +1841,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                               label: Text('cross-post to hive'),
                                               labelStyle: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1,
+                                                  .bodyLarge,
                                               avatar: _defaultMomentsCrossPost
                                                   ? FaIcon(
                                                       FontAwesomeIcons.check,
@@ -1864,7 +1920,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     child: Text("Title",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ),
                                   Divider(
                                     height: 1,
@@ -1876,7 +1932,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     cursorColor: globalRed,
                                     maxLines: 1,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ],
                               ),
@@ -1891,7 +1947,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     child: Text("Body",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ),
                                   Divider(
                                     height: 1,
@@ -1903,7 +1959,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     cursorColor: globalRed,
                                     maxLines: 6,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyLarge,
                                     onChanged: (String text) {
                                       setState(() {
                                         _momentPreviewBody = text;
@@ -1923,7 +1979,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                     child: Text("Preview",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ),
                                   Divider(
                                     height: 1,
@@ -2040,7 +2096,7 @@ class _VisibilityHintTextState extends State<VisibilityHintText> {
             widget.hintText,
             style: Theme.of(context)
                 .textTheme
-                .bodyText1!
+                .bodyLarge!
                 .copyWith(fontStyle: FontStyle.italic),
           ),
         ),
