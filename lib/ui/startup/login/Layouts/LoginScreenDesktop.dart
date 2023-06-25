@@ -167,7 +167,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                     activated: true,
                                                     loggedInCallback:
                                                         loggedInCallback,
-                                                  ),
+                                                  ),/*
                                                   SignInButton(
                                                     width: 100,
                                                     faIcon: FaIcon(
@@ -177,7 +177,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                     activated: true,
                                                     loggedInCallback:
                                                         loggedInCallback,
-                                                  ),
+                                                  ),*/
                                                   SignInButton(
                                                     width: 100,
                                                     faIcon: FaIcon(

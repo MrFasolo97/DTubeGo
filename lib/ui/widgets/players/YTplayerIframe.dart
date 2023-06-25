@@ -26,16 +26,17 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void initState() {
     super.initState();
-    widget.controller.onEnterFullscreen = () {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-      print('Entered Fullscreen');
-    };
-    widget.controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
-    };
+    widget.controller.setFullScreenListener((isFullScreen) {
+      if (isFullScreen) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]);
+        print('Entered Fullscreen');
+      } else {
+        print('Exited Fullscreen');
+      }
+    });
   }
 
   // @override
@@ -47,19 +48,23 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void dispose() {
     widget.controller.close();
-    widget.controller.pause();
+    widget.controller.pauseVideo();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
+  YoutubePlayer build(BuildContext context) {
     //const _player = YoutubePlayerIFrame();
-
-    return YoutubePlayerControllerProvider(
-      controller: widget.controller,
-      child: YoutubePlayerIFrame(
-        aspectRatio: 16 / 9,
+    YoutubePlayerController _controller = YoutubePlayerController.fromVideoId(videoId: widget.videoUrl,
+      params: YoutubePlayerParams(
+        origin: "https://www.youtube.com",
+        showControls: true,
+        showFullscreenButton: true,
       ),
+    );
+    return YoutubePlayer(
+      controller: _controller,
+      aspectRatio: 16 / 9,
     );
   }
 }

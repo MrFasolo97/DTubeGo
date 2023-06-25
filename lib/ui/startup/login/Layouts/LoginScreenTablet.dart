@@ -157,7 +157,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                               activated: true,
                                               loggedInCallback:
                                                   loggedInCallback,
-                                            ),
+                                            ),/*
                                             SignInButton(
                                               width: 100,
                                               faIcon: FaIcon(
@@ -166,7 +166,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                               activated: true,
                                               loggedInCallback:
                                                   loggedInCallback,
-                                            ),
+                                            ),*/
                                             SignInButton(
                                               width: 100,
                                               faIcon: FaIcon(
