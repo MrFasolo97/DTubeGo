@@ -44,9 +44,9 @@ class _QRCodeDialogDesktopState extends State<QRCodeDialogDesktop> {
                 child: Center(
                   child: Column(
                     children: [
-                      QrImage(
+                      QrImageView(
                         eyeStyle: const QrEyeStyle(
-                          eyeShape: QrEyeShape.circle,
+                          eyeShape: QrEyeShape.circle
                         ),
                         data: widget.code,
                         padding: EdgeInsets.zero,
@@ -73,7 +73,7 @@ class _QRCodeDialogDesktopState extends State<QRCodeDialogDesktop> {
                     ),
                     child: Text(
                       "Thanks",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),
