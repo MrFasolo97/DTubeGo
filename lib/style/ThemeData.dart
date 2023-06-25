@@ -71,7 +71,7 @@ final ThemeData dtubeDarkTheme = ThemeData(
       style: ElevatedButton.styleFrom(
     alignment: Alignment.center,
     elevation: 8,
-    primary: globalRed,
+    backgroundColor: globalRed,
   )),
   buttonTheme: ButtonThemeData(
     textTheme: ButtonTextTheme.normal,
