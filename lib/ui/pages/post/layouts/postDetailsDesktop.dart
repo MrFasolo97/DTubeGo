@@ -8,6 +8,7 @@ import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
 import 'package:dtube_go/ui/pages/post/widgets/TitleWidget.dart';
 import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
 import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:dtube_go/bloc/feed/feed_bloc.dart';
@@ -250,7 +251,6 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   Widget build(BuildContext context) {
-    var player = YoutubePlayer(controller: _controller!);
     return BlocListener<TransactionBloc, TransactionState>(
       bloc: txBloc,
       listener: (context, state) {
@@ -312,7 +312,7 @@ class _PostDetailsState extends State<PostDetails> {
                                 children: [
                                   //player /thumbnail
                                   widget.post.videoSource == "youtube"
-                                      ? player
+                                      ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: _controller)
                                       : ["ipfs", "sia"]
                                               .contains(widget.post.videoSource)
                                           ? P2PSourcePlayer(
