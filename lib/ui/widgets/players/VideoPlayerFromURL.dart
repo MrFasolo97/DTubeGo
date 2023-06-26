@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardLarge.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
@@ -46,14 +43,12 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
       } else if (state is PostLoadedState) {
         _ytController = YoutubePlayerController.fromVideoId(videoId: widget.url,
           params: YoutubePlayerParams(
-            origin: "https://www.youtube.com",
             showControls: true,
             showFullscreenButton: true,
           )
         );
         _ytController.load(
             params: YoutubePlayerParams(
-              origin: "https://www.youtube.com",
               showControls: true,
               showFullscreenButton: true,
             ),

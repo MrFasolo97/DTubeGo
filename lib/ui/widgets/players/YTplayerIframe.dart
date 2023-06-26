@@ -54,10 +54,8 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
 
   @override
   YoutubePlayer build(BuildContext context) {
-    //const _player = YoutubePlayerIFrame();
     YoutubePlayerController _controller = YoutubePlayerController.fromVideoId(videoId: widget.videoUrl,
       params: YoutubePlayerParams(
-        origin: "https://www.youtube.com",
         showControls: true,
         showFullscreenButton: true,
       ),

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import 'dart:io' show Platform;
 
 class YoutubePlayerFullScreenPage extends StatefulWidget {
   final String link;
@@ -33,7 +32,6 @@ class _YoutubePlayerFullScreenPageState
   void initState() {
     _controller = YoutubePlayerController(
       params: YoutubePlayerParams(
-          origin: "https://www.youtube.com",
           showControls: false,
           showFullscreenButton: true,
           ),
