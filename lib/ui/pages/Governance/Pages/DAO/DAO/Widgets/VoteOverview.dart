@@ -41,7 +41,7 @@ class _ProposalVoteOverviewState extends State<ProposalVoteOverview> {
             children: [
               Text(
                 "Vote Overview",
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Expanded(
                 child: SingleChildScrollView(

@@ -78,14 +78,14 @@ class _VotesOverviewDesktopState extends State<VotesOverviewDesktop> {
                                         _allVotes[index].u,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                       ),
                                       Text(
                                         TimeAgo.timeInAgoTSShort(
                                             _allVotes[index].ts),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText2,
+                                            .bodyMedium,
                                       ),
                                     ],
                                   ),
@@ -116,7 +116,7 @@ class _VotesOverviewDesktopState extends State<VotesOverviewDesktop> {
                                               : "0"),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         DTubeLogoShadowed(size: 20),
                                       ],
@@ -128,7 +128,7 @@ class _VotesOverviewDesktopState extends State<VotesOverviewDesktop> {
                                           shortVP(_allVotes[index].vt),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Center(
                                           child: ShadowedIcon(
@@ -163,7 +163,7 @@ class _VotesOverviewDesktopState extends State<VotesOverviewDesktop> {
           },
           label: Text(
             'Close',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
       ],

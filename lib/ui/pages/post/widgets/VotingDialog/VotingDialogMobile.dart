@@ -140,14 +140,14 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                                 " If the curation team agrees it will get removed from the whole platform.",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1),
+                                                .bodyLarge),
                                         Padding(
                                           padding: EdgeInsets.only(top: 1.h),
                                           child: Text(
                                             "You can not undo this action!",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline6!
+                                                .titleLarge!
                                                 .copyWith(color: globalRed),
                                           ),
                                         )
@@ -170,7 +170,7 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                                 Text("weight: ",
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline5),
+                                                        .headlineSmall),
                                                 Text(
                                                     (_vpValue.floor() *
                                                                 (widget.downvote
@@ -180,7 +180,7 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                                         '%',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline5),
+                                                        .headlineSmall),
                                               ],
                                             ),
                                             RotatedBox(
@@ -216,7 +216,7 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                                     " VP",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headline6),
+                                                    .titleLarge),
                                           ],
                                         ),
                                         widget.downvote
@@ -234,7 +234,7 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
-                                                                .headline5),
+                                                                .headlineSmall),
                                                         Text(
                                                             _tipValue
                                                                     .floor()
@@ -243,7 +243,7 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
-                                                                .headline5),
+                                                                .headlineSmall),
                                                       ],
                                                     ),
                                                     RotatedBox(
@@ -271,7 +271,7 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                                     Text("",
                                                         style: Theme.of(context)
                                                             .textTheme
-                                                            .headline6),
+                                                            .titleLarge),
                                                   ],
                                                 ),
                                               ),
@@ -309,7 +309,7 @@ class _VotingDialogMobileState extends State<VotingDialogMobile> {
                                 ),
                                 child: Text(
                                   widget.downvote ? "Flag now!" : "Send Vote",
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                   textAlign: TextAlign.center,
                                 ),
                               ),
