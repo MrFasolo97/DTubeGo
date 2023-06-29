@@ -16,7 +16,9 @@ class APINodeConfig {
     'https://avalon.d.tube',
     // 'https://dtube.club/mainnetapi',
     'https://api.avalonblocks.com',
-    'https://dtube.fso.ovh'
+    'https://dtube.fso.ovh',
+    'https://avalon.d00k13.com'
+
   ];
 
 // node discovery & api node configs
