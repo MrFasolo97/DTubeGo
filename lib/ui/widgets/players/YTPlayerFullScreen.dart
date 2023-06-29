@@ -51,9 +51,16 @@ class _YoutubePlayerFullScreenPageState
   @override
   Widget build(BuildContext context) {
     _controller.loadVideoById(videoId: widget.link);
+    _controller.setFullScreenListener((isFullscreen) {
+      if(!isFullscreen) {
+        dispose();
+      }
+    });
     return YoutubePlayerScaffold(
-      autoFullScreen: true,
+      enableFullScreenOnVerticalDrag: false,
+      autoFullScreen: false,
       controller: _controller,
+      defaultOrientations: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight],
       builder: (context, player) {
         return Material(child: SingleChildScrollView(
             child: Padding(

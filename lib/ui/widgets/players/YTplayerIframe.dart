@@ -50,6 +50,10 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
     );
     player.controller.setFullScreenListener((isFullscreen) {
       if (isFullscreen) {
+        SystemChrome.setPreferredOrientations([
+            DeviceOrientation.landscapeRight,
+            DeviceOrientation.landscapeLeft
+          ]);
         AutoOrientation.landscapeAutoMode();
         HiOverlay.show(
           context,
@@ -58,6 +62,10 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
           print('---received:$value');
         });
       } else {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown
+        ]);
         AutoOrientation.portraitAutoMode();
         HiOverlay.close(context);
       }
