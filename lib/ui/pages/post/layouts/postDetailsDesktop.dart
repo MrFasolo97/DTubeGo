@@ -150,7 +150,7 @@ class _PostDetailPageDesktopState extends State<PostDetailPageDesktop> {
 
                   return Center(
                       child: Text("this post got flagged by you!",
-                          style: Theme.of(context).textTheme.headline4));
+                          style: Theme.of(context).textTheme.headlineMedium));
                 }
               } else {
                 return Center(

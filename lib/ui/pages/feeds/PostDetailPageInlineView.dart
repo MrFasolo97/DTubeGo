@@ -198,8 +198,8 @@ class _PostDetailsState extends State<PostDetails> {
                               username: widget.post.author,
                               width: 30.w,
                               height: 10.h,
-                              mainStyle: Theme.of(context).textTheme.headline5!,
-                              subStyle: Theme.of(context).textTheme.bodyText1!)
+                              mainStyle: Theme.of(context).textTheme.headlineSmall!,
+                              subStyle: Theme.of(context).textTheme.bodyLarge!)
                         ],
                       ),
                       onPressed: () {
@@ -221,7 +221,7 @@ class _PostDetailsState extends State<PostDetails> {
                         width: 49.w,
                         child: Text(
                           widget.post.jsonString!.title,
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                           maxLines: 4,
                         ),
                       ),
@@ -262,7 +262,7 @@ class _PostDetailsState extends State<PostDetails> {
                           )
                         : SizedBox(height: 0),
                     Text((widget.post.dist / 100).round().toString() + " DTC",
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
                 Row(

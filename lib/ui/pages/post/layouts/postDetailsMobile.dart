@@ -155,7 +155,7 @@ class _PostDetailPageMobileState extends State<PostDetailPageMobile> {
 
                   return Center(
                       child: Text("this post got flagged by you!",
-                          style: Theme.of(context).textTheme.headline4));
+                          style: Theme.of(context).textTheme.headlineMedium));
                 }
               } else {
                 return Center(
@@ -551,7 +551,7 @@ class TitleWidget extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
     );
   }
