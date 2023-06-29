@@ -5,6 +5,7 @@ import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
 import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
 import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
 import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/YTPlayerFullScreen.dart';
 import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
@@ -231,17 +232,6 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
         ),
         baseUrl: widget.post.videoUrl!
     );
-    _controller.onFullscreenChange = (isFullscreen) {
-      if (isFullscreen) {
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight,
-        ]);
-        print('Entered Fullscreen');
-      } else {
-        print('Exited Fullscreen');
-      }
-    };
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
   }
@@ -256,7 +246,6 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
 
   @override
   Widget build(BuildContext context) {
-    var player = YoutubePlayer(controller: _controller);
     return BlocListener<TransactionBloc, TransactionState>(
       bloc: txBloc,
       listener: (context, state) {
@@ -305,7 +294,7 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
                           ],
                         ),
                         widget.post.videoSource == "youtube"
-                            ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: YoutubePlayerController())
+                            ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: _controller)
                             : ["ipfs", "sia"].contains(widget.post.videoSource)
                                 ? P2PSourcePlayer(
                                     videoUrl: widget.post.videoUrl!,

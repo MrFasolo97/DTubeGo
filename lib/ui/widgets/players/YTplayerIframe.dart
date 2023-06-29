@@ -1,6 +1,9 @@
+import 'package:auto_orientation/auto_orientation.dart';
+import 'package:dtube_go/ui/widgets/players/YTPlayerFullScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:flutter_overlay/flutter_overlay.dart';
 
 class YTPlayerIFrame extends StatefulWidget {
   YTPlayerIFrame(
@@ -10,11 +13,10 @@ class YTPlayerIFrame extends StatefulWidget {
       required this.allowFullscreen,
       required this.controller})
       : super(key: key);
-
+  final YoutubePlayerController controller;
   final String videoUrl;
   final bool autoplay;
   final bool allowFullscreen;
-  final YoutubePlayerController controller;
 
   @override
   _YTPlayerIFrameState createState() => _YTPlayerIFrameState();
@@ -26,17 +28,6 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void initState() {
     super.initState();
-    widget.controller.setFullScreenListener((isFullScreen) {
-      if (isFullScreen) {
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight,
-        ]);
-        print('Entered Fullscreen');
-      } else {
-        print('Exited Fullscreen');
-      }
-    });
   }
 
   // @override
@@ -53,16 +44,25 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   }
 
   @override
-  YoutubePlayer build(BuildContext context) {
-    YoutubePlayerController _controller = YoutubePlayerController.fromVideoId(videoId: widget.videoUrl,
-      params: YoutubePlayerParams(
-        showControls: true,
-        showFullscreenButton: true,
-      ),
+  Widget build(BuildContext context) {
+    YoutubePlayer player = YoutubePlayer(
+        controller: widget.controller
     );
-    return YoutubePlayer(
-      controller: _controller,
-      aspectRatio: 16 / 9,
-    );
+    player.controller.setFullScreenListener((isFullscreen) {
+      if (isFullscreen) {
+        AutoOrientation.landscapeAutoMode();
+        HiOverlay.show(
+          context,
+          child: YoutubePlayerFullScreenPage(link: widget.videoUrl),
+        ).then((value) {
+          print('---received:$value');
+        });
+      } else {
+        AutoOrientation.portraitAutoMode();
+        HiOverlay.close(context);
+      }
+    });
+    player.controller.loadVideoById(videoId: widget.videoUrl);
+    return player;
   }
 }

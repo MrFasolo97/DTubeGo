@@ -71,7 +71,6 @@ dependencies:
   native_device_orientation: ^1.0.0 # get the real device orientation
   responsive_sizer: ^3.1.0 # measuring sizes related to the screen size
   auto_orientation: ^2.2.1 # rotate screen from code
-  overlay_dialog: ^0.2.1 # used as workaround for fullscreen video
   # responsive_framework: ^0.1.4 #detect device type
 
   # UI - specific elements related
@@ -136,6 +135,7 @@ dependencies:
   carousel_slider: ^4.1.1
   visibility_detector: ^0.3.3
   tus_client: ^1.0.2
+  flutter_overlay: ^1.0.0
 
 dev_dependencies:
   flutter_test:

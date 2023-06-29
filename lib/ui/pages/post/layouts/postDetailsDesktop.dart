@@ -226,17 +226,6 @@ class _PostDetailsState extends State<PostDetails> {
         showFullscreenButton: true
     ),
     baseUrl: widget.post.videoUrl!);
-    _controller.onFullscreenChange = (isFullscreen) {
-      if (isFullscreen) {
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight,
-        ]);
-        print('Entered Fullscreen');
-      } else {
-        print('Exited Fullscreen');
-      }
-    };
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
   }

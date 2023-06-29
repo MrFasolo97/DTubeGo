@@ -1,8 +1,6 @@
 import 'package:auto_orientation/auto_orientation.dart';
-import 'package:flutter/foundation.dart';
-import 'package:overlay_dialog/overlay_dialog.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -11,7 +9,7 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 class YoutubePlayerFullScreenPage extends StatefulWidget {
   final String link;
 
-  const YoutubePlayerFullScreenPage({Key? key, required this.link})
+  YoutubePlayerFullScreenPage({Key? key, required this.link})
       : super(key: key);
   @override
   _YoutubePlayerFullScreenPageState createState() =>
@@ -30,17 +28,15 @@ class _YoutubePlayerFullScreenPageState
 
   @override
   void initState() {
-    _controller = YoutubePlayerController(
+    _controller = YoutubePlayerController.fromVideoId(
+      autoPlay: true,
+      videoId: widget.link,
       params: YoutubePlayerParams(
           showControls: false,
           showFullscreenButton: true,
           ),
     );
-
-    if (Device.orientation != Orientation.landscape) {
-      AutoOrientation.landscapeAutoMode();
-    }
-
+    AutoOrientation.landscapeAutoMode();
     super.initState();
   }
 
@@ -54,40 +50,27 @@ class _YoutubePlayerFullScreenPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.black,
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Stack(
+    _controller.loadVideoById(videoId: widget.link);
+    return YoutubePlayerScaffold(
+      autoFullScreen: true,
+      controller: _controller,
+      builder: (context, player) {
+        return Material(child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Stack(
               children: [
                 Align(
                   alignment: Alignment.topCenter,
-                  child: YoutubePlayerControllerProvider(
-                    controller: _controller,
-                    child: YoutubePlayerScaffold(
+                  child: YoutubePlayer(
                       controller: _controller,
                       aspectRatio: 16 / 9,
-                      builder: (BuildContext context, Widget player) {
-                        return Column(
-                                children: [player]
-                        );
-                      },
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10.h),
-                  child: IconButton(
-                      onPressed: () {
-                        DialogHelper().hide(context);
-                        AutoOrientation.fullAutoMode();
-                      },
-                      icon: FaIcon(FontAwesomeIcons.arrowLeft)),
-                ),
+                )
               ],
             ),
           ),
         ));
+      });
   }
 }

@@ -654,6 +654,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.15"
+  flutter_overlay:
+    dependency: "direct main"
+    description:
+      name: flutter_overlay
+      sha256: "59d367deab0e97eb4c9333e938d61cb1bcd317c61429168aad4d5a28bc0a05b1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   flutter_phoenix:
     dependency: "direct main"
     description:
@@ -1136,14 +1144,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  overlay_dialog:
-    dependency: "direct main"
-    description:
-      name: overlay_dialog
-      sha256: "8ee424ecf7ddb79e340a7a0485a2c83e2d5f8e2741a10a876d781b5e6151120d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.1"
   package_config:
     dependency: transitive
     description:
