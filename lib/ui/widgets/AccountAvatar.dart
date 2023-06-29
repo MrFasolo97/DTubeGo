@@ -124,30 +124,32 @@ class _AccountNameState extends State<AccountName> {
                       state.user.jsonString!.additionals!.displayName != null
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        widget.withShadow
-                            ? ShadowedText(
-                                data: state
-                                    .user.jsonString!.additionals!.displayName!,
-                                style: widget.mainStyle,
-                              )
-                            : Text(
-                                state
-                                    .user.jsonString!.additionals!.displayName!,
-                                overflow: TextOverflow.ellipsis,
-                                style: widget.mainStyle,
-                              ),
-                        widget.withShadow
-                            ? ShadowedText(
-                                data: "@" + state.user.name,
-                                style: widget.subStyle,
-                              )
-                            : Text(
-                                "@" + state.user.name,
-                                overflow: TextOverflow.ellipsis,
-                                style: widget.subStyle,
-                              )
+                        Expanded(
+                            child: widget.withShadow
+                                ? ShadowedText(
+                                    data: state.user.jsonString!.additionals!
+                                        .displayName!,
+                                    style: widget.mainStyle,
+                                  )
+                                : Text(
+                                    state.user.jsonString!.additionals!
+                                        .displayName!,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: widget.mainStyle,
+                                  )),
+                        Expanded(
+                            child: widget.withShadow
+                                ? ShadowedText(
+                                    data: "@" + state.user.name,
+                                    style: widget.subStyle,
+                                  )
+                                : Text(
+                                    "@" + state.user.name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: widget.subStyle,
+                                  ))
                       ],
                     )
                   : Align(
@@ -373,8 +375,8 @@ class AccountNavigationChip extends StatelessWidget {
               username: author,
               width: size * 0.65,
               height: 5.h,
-              mainStyle: Theme.of(context).textTheme.headline6!,
-              subStyle: Theme.of(context).textTheme.bodyText1!,
+              mainStyle: Theme.of(context).textTheme.titleLarge!,
+              subStyle: Theme.of(context).textTheme.bodyLarge!,
             ),
           ],
         ),
