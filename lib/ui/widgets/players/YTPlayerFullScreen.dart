@@ -1,5 +1,5 @@
 import 'package:auto_orientation/auto_orientation.dart';
-import 'package:overlay_dialog/overlay_dialog.dart';
+//import 'package:overlay_dialog/overlay_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +77,7 @@ class _YoutubePlayerFullScreenPageState
                   padding: EdgeInsets.only(top: 10.h),
                   child: IconButton(
                       onPressed: () {
-                        DialogHelper().hide(context);
+                        //DialogHelper().hide(context);
                         AutoOrientation.fullAutoMode();
                       },
                       icon: FaIcon(FontAwesomeIcons.arrowLeft)),

@@ -58,6 +58,7 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
     return YoutubePlayerControllerProvider(
       controller: widget.controller,
       child: YoutubePlayerIFrame(
+        controller: widget.controller,
         aspectRatio: 16 / 9,
       ),
     );
