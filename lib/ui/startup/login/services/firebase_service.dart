@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -6,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:dtube_go/ui/startup/login/services/ressources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -93,13 +94,11 @@ class FirebaseService {
         await FirebaseAuth.instance.signInWithPopup(TwitterAuthProvider());
     return userCredential;
   }
-
   Future<UserCredential?> signInWithGithubWeb() async {
     final userCredential =
         await FirebaseAuth.instance.signInWithPopup(GithubAuthProvider());
     return userCredential;
   }
-
   Future<UserCredential?> signInWithFacebookWeb() async {
 // Create a new provider
     FacebookAuthProvider facebookProvider = FacebookAuthProvider();
@@ -112,7 +111,7 @@ class FirebaseService {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithPopup(facebookProvider);
   }
-
+  /*
   Future<UserCredential> signInWithGitHubMobile(BuildContext context) async {
     // Create a GitHubSignIn instance
     String _githubClientId =
@@ -134,7 +133,7 @@ class FirebaseService {
     return await FirebaseAuth.instance
         .signInWithCredential(githubAuthCredential);
   }
-
+  */
   Future<UserCredential> signInWithFacebookMobile() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();

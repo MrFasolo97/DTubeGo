@@ -95,16 +95,18 @@ class _SignInButtonState extends State<SignInButton> {
           }
           _provider = "twitter";
           break;
+        /*
         case LoginType.Github:
           if (kIsWeb) {
             usercred = await service.signInWithGithubWeb();
           } else {
             usercred = await service.signInWithGitHubMobile(context);
           }
-          //
 
-          _provider = "github";
+         _provider = "github";
           break;
+
+         */
         case LoginType.Facebook:
           service.signInWithFacebookMobile();
           _provider = "facebook";
