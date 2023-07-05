@@ -1,8 +1,7 @@
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2SourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
@@ -142,7 +141,8 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
-    _ytController = YoutubePlayerController(initialVideoId: 'tFa7Om3Au8M');
+    YoutubePlayerParams youtubePlayerParams = YoutubePlayerParams(autoPlay: true, useHybridComposition: true, showFullscreenButton: true);
+    _ytController = YoutubePlayerController(initialVideoId: widget.post.videoUrl!, params: youtubePlayerParams);
   }
 
   @override
@@ -152,6 +152,7 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   Widget build(BuildContext context) {
+    YoutubePlayerIFrame player = YoutubePlayerIFrame(controller: _ytController);
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UserDTCVPLoadedState) {}
@@ -165,11 +166,7 @@ class _PostDetailsState extends State<PostDetails> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 widget.post.videoSource == "youtube"
-                    ? YTPlayerIFrame(
-                        videoUrl: widget.post.videoUrl!,
-                        autoplay: false,
-                        allowFullscreen: false,
-                        controller: _ytController)
+                    ? player
                     : ["ipfs", "sia"].contains(widget.post.videoSource)
                         ? P2PSourcePlayer(
                             videoUrl: widget.post.videoUrl!,
@@ -202,8 +199,8 @@ class _PostDetailsState extends State<PostDetails> {
                               username: widget.post.author,
                               width: 30.w,
                               height: 10.h,
-                              mainStyle: Theme.of(context).textTheme.headline5!,
-                              subStyle: Theme.of(context).textTheme.bodyText1!)
+                              mainStyle: Theme.of(context).textTheme.headlineSmall!,
+                              subStyle: Theme.of(context).textTheme.bodyLarge!)
                         ],
                       ),
                       onPressed: () {
@@ -225,7 +222,7 @@ class _PostDetailsState extends State<PostDetails> {
                         width: 49.w,
                         child: Text(
                           widget.post.jsonString!.title,
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                           maxLines: 4,
                         ),
                       ),
@@ -266,7 +263,7 @@ class _PostDetailsState extends State<PostDetails> {
                           )
                         : SizedBox(height: 0),
                     Text((widget.post.dist / 100).round().toString() + " DTC",
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
                 Row(
