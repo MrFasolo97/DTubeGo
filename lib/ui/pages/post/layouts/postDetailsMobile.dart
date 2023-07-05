@@ -19,7 +19,6 @@ import 'package:dtube_go/ui/MainContainer/NavigationContainer.dart';
 import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
-import 'package:flutter_overlay/flutter_overlay.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:image_compression_flutter/flutter_image_compress.dart';
 import 'package:quiver/async.dart';
