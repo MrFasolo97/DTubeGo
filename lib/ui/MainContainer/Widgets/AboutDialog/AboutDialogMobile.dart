@@ -95,7 +95,14 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                       Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: Text(
-                          "Main Developer: @tibfox",
+                          "Main Developer: @MrFasolo97 / @fasolo97",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Former Main Developer: @tibfox",
                           textAlign: TextAlign.center,
                         ),
                       ),
