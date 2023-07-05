@@ -67,8 +67,8 @@ android {
             //Enable the proguard
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), "proguard-rules.pro"
-
             //Other parameters
+            signingConfig signingConfigs.release
             debuggable false
             jniDebuggable false
             renderscriptDebuggable false
