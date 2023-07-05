@@ -7,7 +7,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.6.4+107
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -25,7 +25,7 @@ dependencies:
 
   # auth related - not web enabled
   twitter_login: ^4.2.3 #android, ios
-  github_sign_in: ^0.0.5-dev.4  #android, ios
+  # github_sign_in: ^0.0.5-dev.4  #android, ios # incompatible with updated YT player and the new dart 3
 
 
   # CRYPTO RELATED
@@ -48,7 +48,7 @@ dependencies:
   video_player: ^2.4.4
   youtube_explode_dart: ^1.12.0 #loading youtube metadata
   better_player: ^0.0.83 # player for ipfs/sia/local files
-  youtube_player_iframe: 2.3.0
+  youtube_player_iframe: ^2.3.0
   gallery_saver: ^2.3.2
   #chewie: ^1.3.4
   flick_video_player: ^0.5.0
@@ -61,7 +61,7 @@ dependencies:
   # UI - image/video related
   #camera: ^0.8.1+3 # gives possibility to capture camera input in own widget
 
-  image_cropper: ^3.0.1 # cropping tool for thumbnails
+  image_cropper: ^4.0.1 # cropping tool for thumbnails
   image_picker: ^0.8.5+3 # open file browser / record image/video
   file_picker: ^5.0.1
   mime: ^1.0.2
@@ -71,7 +71,6 @@ dependencies:
   native_device_orientation: ^1.0.0 # get the real device orientation
   responsive_sizer: ^3.1.0 # measuring sizes related to the screen size
   auto_orientation: ^2.2.1 # rotate screen from code
-  overlay_dialog: ^0.2.1 # used as workaround for fullscreen video
   # responsive_framework: ^0.1.4 #detect device type
 
   # UI - specific elements related
@@ -82,13 +81,13 @@ dependencies:
   font_awesome_flutter: ^10.1.0 # icons
   google_fonts: ^4.0.3
   rflutter_alert: ^2.0.4
-  flutter_speed_dial: ^6.0.0 # drop out menu
+  flutter_speed_dial: ^7.0.0 # drop out menu
   chips_input: ^0.1.0
-  textfield_tags: ^1.4.2 # crete list of tags in a textfield style <=== UPGRADE NEXT
+  textfield_tags: 1.4.2 # crete list of tags in a textfield style <=== UPGRADE NEXT
 
   another_flushbar: ^1.10.29 # global snackbar to inform the user about transactions
   loadmore: ^2.0.1 # collapsable widget for long video descriptions
-  jiffy: ^5.0.1 # library to display time in a user friendly way
+  jiffy: ^6.1.0 # library to display time in a user friendly way
   # scroll_snap_list: ^0.8.1 # not needed for now (snapping lists like instagram explore page)
   share_plus: ^6.3.1 # share post
   introduction_screen: ^3.0.2 # onboarding screen
@@ -104,7 +103,7 @@ dependencies:
   flutter_animator: ^3.2.2 # various transform animations
   animations: ^2.0.3
   wave: ^0.2.2 # wave animation for upload button, login screen and more
-  fl_chart: ^0.61.0 # charts
+  fl_chart: ^0.63.0 # charts
 
   # NETWORK - cache related
   cached_network_image: ^3.2.1
@@ -116,7 +115,7 @@ dependencies:
 
   # OTHERS - global stuff
   flutter_phoenix: ^1.0.0 # for restarting the app on purpose (e.g. logout)
-  flutter_launcher_icons: ^0.11.0 # creating app icons
+  flutter_launcher_icons: ^0.13.1 # creating app icons
   package_info_plus: ^3.0.3 # reading version and build number from pubspec
 
   # state management and storage
@@ -136,6 +135,8 @@ dependencies:
   carousel_slider: ^4.1.1
   visibility_detector: ^0.3.3
   tus_client: ^1.0.2
+  quiver: ^3.2.1
+  webview_flutter: ^4.2.2
 
 dev_dependencies:
   flutter_test:
