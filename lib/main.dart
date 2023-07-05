@@ -1,4 +1,4 @@
-// @dart=2.9
+// @dart>=3.0
 //
 import 'dart:io';
 
