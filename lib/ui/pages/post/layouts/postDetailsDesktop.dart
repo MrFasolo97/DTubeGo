@@ -217,16 +217,18 @@ class _PostDetailsState extends State<PostDetails> {
 
     _controller = YoutubePlayerController(
       initialVideoId: widget.post.videoUrl!
-
+      params: YoutubePlayerParams(
+          showControls: true,
+          showFullscreenButton: true
+      ),
     );
-    // _controller.load(widget.post.videoUrl!);
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
   }
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
 
     super.dispose();
@@ -568,7 +570,7 @@ class _PostDetailsState extends State<PostDetails> {
                               child: FeedListSuggestedPosts(
                                 feedType: 'SuggestedPosts',
                                 clickedCallback: () {
-                                  _controller.pause();
+                                  _controller.pauseVideo();
                                   _videocontroller.pause();
                                 },
                                 width: suggestedSize * 0.9,

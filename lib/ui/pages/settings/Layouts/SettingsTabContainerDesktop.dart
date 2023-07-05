@@ -94,7 +94,6 @@ class _SettingsTabContainerDesktopState
   bool _showHiveDefaultTagsHint = false;
 
   bool _showNSFWSettings = false;
-
   List<String> _imageUploadProviders = ['imgur', 'ipfs'];
   List<int> _visitedTabs = [];
 
@@ -154,7 +153,6 @@ class _SettingsTabContainerDesktopState
   void initState() {
     settings = {"none": "none"};
     _tabController = new TabController(length: 5, vsync: this);
-
     _settingsBloc = BlocProvider.of<SettingsBloc>(context);
     _settingsBloc.add(FetchSettingsEvent()); // statements;
     _templateBodyController = TextEditingController(text: "");
@@ -172,6 +170,7 @@ class _SettingsTabContainerDesktopState
 
   @override
   Widget build(BuildContext context) {
+    double _distanceToField = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: showExitPopup, //call function on back button press
       child: Scaffold(
@@ -254,6 +253,7 @@ class _SettingsTabContainerDesktopState
               size: 20.w,
             ));
           } else if (state is SettingsLoadedState) {
+            TextfieldTagsController _tagsController = TextfieldTagsController();
             if (settings.length == 1) {
               settings = state.settings;
 
@@ -1325,72 +1325,13 @@ class _SettingsTabContainerDesktopState
                                                           color:
                                                               globalAlmostWhite),
                                                     ),
-                                                    onTag: (tag) {
-                                                      setState(() {
-                                                        _hiveDefaultTags
-                                                            .add(tag);
-                                                      });
-                                                    },
-                                                    onDelete: (tag) {
-                                                      setState(() {
-                                                        _hiveDefaultTags
-                                                            .remove(tag);
-                                                      });
-                                                    },
-                                                    validator: (tag) {
-                                                      if (_hiveDefaultTags
-                                                              .length ==
-                                                          8) {
-                                                        return "max 8 tags allowed";
-                                                      }
-                                                      if (!RegExp(r'^[a-z]+$')
-                                                          .hasMatch(tag)) {
-                                                        return "only alhabetic characters allowed";
-                                                      }
-                                                      if (_hiveDefaultTags
-                                                          .contains(tag)) {
-                                                        return "tag is already in the list";
-                                                      }
-                                                      if (tag.toLowerCase() ==
-                                                          "dtube") {
-                                                        return "dtube is as default in the list";
-                                                      }
-                                                      return null;
-                                                    },
-                                                    tagsDistanceFromBorderEnd:
-                                                        0.50,
-
-                                                    //scrollableTagsMargin: EdgeInsets.only(left: 9),
-                                                    //scrollableTagsPadding: EdgeInsets.only(left: 9),
-                                                  )
-
-                                                  // TextFormField(
-                                                  //   controller:
-                                                  //       _hiveDefaultTagsController,
-                                                  //   cursorColor: globalRed,
-                                                  //   decoration: new InputDecoration(
-                                                  //       labelText:
-                                                  //           "hive tags (space-separated):"),
-                                                  //   maxLines: 1,
-                                                  //   style: Theme.of(context)
-                                                  //       .textTheme
-                                                  //       .bodyText1,
-                                                  // ),
                                                   ),
-                                              VisibilityHintText(
-                                                showHint:
-                                                    _showHiveDefaultTagsHint,
-                                                hintText:
-                                                    "Your cross-posted video will receive those tags on the hive blockchain. Only up to 8 tags are allowed (dtube and the tag of your post will be added automatically) and you should set them separated by spaces in the textfield above.",
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                      ])),
                             ],
                           ),
                         ),

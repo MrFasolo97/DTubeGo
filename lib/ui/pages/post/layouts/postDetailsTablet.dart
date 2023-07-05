@@ -216,32 +216,31 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.post.videoUrl!,
       params: YoutubePlayerParams(
           showControls: true,
-          showFullscreenButton: true,
-          desktopMode: true,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: !(widget.directFocus != "none")),
+          showFullscreenButton: true,)
     );
-    _controller.onEnterFullscreen = () {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-      print('Entered Fullscreen');
-    };
-    _controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
-    };
+    _controller.setFullScreenListener((isFullscreen) {
+      if(isFullscreen) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]);
+      } else {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+        print('Exited Fullscreen');
+      }
+    });
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
   }
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
 
     super.dispose();
@@ -249,7 +248,6 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   Widget build(BuildContext context) {
-    const player = YoutubePlayerIFrame();
     return BlocListener<TransactionBloc, TransactionState>(
       bloc: txBloc,
       listener: (context, state) {
@@ -312,7 +310,7 @@ class _PostDetailsState extends State<PostDetails> {
                                 children: [
                                   //player /thumbnail
                                   widget.post.videoSource == "youtube"
-                                      ? player
+                                      ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: _controller)
                                       : ["ipfs", "sia"]
                                               .contains(widget.post.videoSource)
                                           ? P2PSourcePlayer(
@@ -564,7 +562,7 @@ class _PostDetailsState extends State<PostDetails> {
                               child: FeedListSuggestedPosts(
                                 feedType: 'SuggestedPosts',
                                 clickedCallback: () {
-                                  _controller.pause();
+                                  _controller.pauseVideo();
                                   _videocontroller.pause();
                                 },
                                 width: suggestedSize * 0.9,

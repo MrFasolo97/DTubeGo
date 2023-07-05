@@ -55,7 +55,7 @@ class UserMoreInfoButtonDesktop extends StatelessWidget {
                                   Text(
                                     shortDTC(user.balance),
                                     style:
-                                        Theme.of(context).textTheme.headline4,
+                                        Theme.of(context).textTheme.headlineMedium,
                                   ),
                                 ],
                               ),
@@ -70,7 +70,7 @@ class UserMoreInfoButtonDesktop extends StatelessWidget {
                                   Text(
                                     shortVP(user.vt!.v),
                                     style:
-                                        Theme.of(context).textTheme.headline4,
+                                        Theme.of(context).textTheme.headlineMedium,
                                   ),
                                 ],
                               ),
@@ -89,16 +89,18 @@ class UserMoreInfoButtonDesktop extends StatelessWidget {
                                 children: [
                                   Text("From: ",
                                       style:
-                                          Theme.of(context).textTheme.headline6,
+                                          Theme.of(context).textTheme.titleLarge,
                                       textAlign: TextAlign.start),
-                                  Container(
-                                    width: 300,
-                                    child: Text(
-                                      user.jsonString!.profile!.location!,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
-                                      textAlign: TextAlign.start,
-                                      maxLines: 5,
+                                  Expanded(flex: 1, child:
+                                    Container(
+                                      width: 300,
+                                      child: Text(
+                                        user.jsonString!.profile!.location!,
+                                        style:
+                                            Theme.of(context).textTheme.bodyLarge,
+                                        textAlign: TextAlign.start,
+                                        maxLines: 5,
+                                      )
                                     ),
                                   ),
                                 ],
@@ -112,19 +114,21 @@ class UserMoreInfoButtonDesktop extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("Website: ",
                                       style:
-                                          Theme.of(context).textTheme.headline6,
+                                          Theme.of(context).textTheme.titleLarge,
                                       textAlign: TextAlign.start,
                                       maxLines: 1),
-                                  Container(
-                                    width: 300,
-                                    child: OpenableHyperlink(
-                                      url: user.jsonString!.profile!.website!,
-                                    ),
+                                  Expanded(flex: 1,
+                                      child: Container(
+                                        width: 300,
+                                        child: OpenableHyperlink(
+                                          url: user.jsonString!.profile!.website!,
+                                        ),
+                                      )
                                   ),
                                 ],
                               ),
@@ -144,15 +148,16 @@ class UserMoreInfoButtonDesktop extends StatelessWidget {
                                       style:
                                           Theme.of(context).textTheme.headline6,
                                       textAlign: TextAlign.start),
-                                  Container(
+                                  Expanded(flex: 1, child: Container(
                                     width: 300,
                                     child: Text(
                                       user.jsonString!.profile!.about!,
                                       style:
-                                          Theme.of(context).textTheme.bodyText1,
+                                          Theme.of(context).textTheme.bodyLarge,
                                       textAlign: TextAlign.start,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 10,
+                                      )
                                     ),
                                   ),
                                 ],

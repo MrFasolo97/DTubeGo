@@ -80,7 +80,7 @@ class _LoginWithCredentialsState extends State<LoginWithCredentials> {
                     Padding(
                       padding: EdgeInsets.only(top: 2.h),
                       child: Text("Please enter your dtube credentials:",
-                          style: Theme.of(context).textTheme.headline6),
+                          style: Theme.of(context).textTheme.titleLarge),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -88,14 +88,14 @@ class _LoginWithCredentialsState extends State<LoginWithCredentials> {
                         Container(
                           width: widget.width,
                           child: TextField(
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.bodyLarge,
                             controller: usernameController,
                             cursorColor: globalRed,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'Username',
                                 labelStyle:
-                                    Theme.of(context).textTheme.bodyText1),
+                                    Theme.of(context).textTheme.bodyLarge),
                           ),
                         ),
                       ],
@@ -106,7 +106,8 @@ class _LoginWithCredentialsState extends State<LoginWithCredentials> {
                         Container(
                           width: widget.width,
                           child: TextField(
-                            style: Theme.of(context).textTheme.bodyText1,
+                            enableInteractiveSelection: true,
+                            style: Theme.of(context).textTheme.bodyLarge,
                             obscureText: true,
                             cursorColor: globalRed,
                             controller: privateKeyController,
@@ -114,7 +115,7 @@ class _LoginWithCredentialsState extends State<LoginWithCredentials> {
                                 border: OutlineInputBorder(),
                                 labelText: 'Private Key',
                                 labelStyle:
-                                    Theme.of(context).textTheme.bodyText1),
+                                    Theme.of(context).textTheme.bodyLarge),
                           ),
                         ),
 
@@ -160,7 +161,7 @@ class _LoginWithCredentialsState extends State<LoginWithCredentials> {
                                               "Please check your username & private key.\n\nWe also recommend to use a custom private key. More info on how to create one:\n",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1,
+                                                  .bodyLarge,
                                               textAlign: TextAlign.center,
                                             ),
                                             OpenableHyperlink(

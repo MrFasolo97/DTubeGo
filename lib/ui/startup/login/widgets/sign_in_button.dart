@@ -74,7 +74,7 @@ class _SignInButtonState extends State<SignInButton> {
 
   Future<void> loginWithProviders() async {
     String? displayName;
-    String _provider;
+    late String _provider;
     Resource? result = Resource(status: Status.Error);
     UserCredential? usercred;
     try {
@@ -95,7 +95,7 @@ class _SignInButtonState extends State<SignInButton> {
           }
           _provider = "twitter";
           break;
-        /*
+          /*
         case LoginType.Github:
           if (kIsWeb) {
             usercred = await service.signInWithGithubWeb();
@@ -105,7 +105,6 @@ class _SignInButtonState extends State<SignInButton> {
 
          _provider = "github";
           break;
-
          */
         case LoginType.Facebook:
           service.signInWithFacebookMobile();

@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class Wizard3rdPartyDesktop extends StatefulWidget {
@@ -85,14 +86,9 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
     _userBloc.add(FetchMyAccountDataEvent());
     _hivesignerBloc = BlocProvider.of<HivesignerBloc>(context);
     _ytController = YoutubePlayerController(
-      initialVideoId: "none",
       params: YoutubePlayerParams(
           showControls: true,
-          showFullscreenButton: false,
-          desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
-          privacyEnhanced: true,
-          useHybridComposition: true,
-          autoPlay: false),
+          showFullscreenButton: false),
     );
     loadHiveSignerAccessToken();
   }
@@ -182,22 +178,14 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
                                             _showVideo = true;
                                             _ytController =
                                                 new YoutubePlayerController(
-                                              initialVideoId:
-                                                  _foreignUrlController.text
-                                                      .split("=")[1],
-                                              params: YoutubePlayerParams(
-                                                  showControls: true,
-                                                  showFullscreenButton: false,
-                                                  desktopMode: kIsWeb
-                                                      ? true
-                                                      : !Platform.isIOS && !Platform.isAndroid,
-                                                  privacyEnhanced: true,
-                                                  useHybridComposition: true,
-                                                  autoPlay: false),
+                                                    params: YoutubePlayerParams(
+                                                    showControls: true,
+                                                    showFullscreenButton: false)
                                             );
                                             _ytController.load(
-                                                _foreignUrlController.text
-                                                    .split("=")[1]);
+                                                params: YoutubePlayerParams(showFullscreenButton: true, showControls: true),
+                                                baseUrl: _foreignUrlController.text
+                                            );
                                             _uploadData = UploadData(
                                                 link: "",
                                                 title: _ytController

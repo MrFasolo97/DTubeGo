@@ -81,14 +81,14 @@ class _VotesOverviewMobileState extends State<VotesOverviewMobile> {
                                         _allVotes[index].u,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                       ),
                                       Text(
                                         TimeAgo.timeInAgoTSShort(
                                             _allVotes[index].ts),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText2,
+                                            .bodyMedium,
                                       ),
                                     ],
                                   ),
@@ -119,7 +119,7 @@ class _VotesOverviewMobileState extends State<VotesOverviewMobile> {
                                               : "0"),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 5.w,
@@ -136,7 +136,7 @@ class _VotesOverviewMobileState extends State<VotesOverviewMobile> {
                                           shortVP(_allVotes[index].vt),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 5.w,
@@ -174,7 +174,7 @@ class _VotesOverviewMobileState extends State<VotesOverviewMobile> {
           },
           label: Text(
             'Close',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
       ],

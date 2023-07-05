@@ -1,13 +1,10 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
 import 'package:dtube_go/bloc/dao/dao_response_model.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:dtube_go/ui/widgets/Inputs/OverlayInputs.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/Strings/shortBalanceStrings.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
@@ -100,7 +97,7 @@ class _VotingDialogState extends State<VotingDialog> {
                             child: Center(
                               child: Text(
                                 "Voting",
-                                style: Theme.of(context).textTheme.headline4,
+                                style: Theme.of(context).textTheme.headlineMedium,
                               ),
                             ),
                           ),
@@ -110,7 +107,7 @@ class _VotingDialogState extends State<VotingDialog> {
                               "The amount of DTube coins you use to vote here will get locked for as long as the voting period is going. " +
                                   "You still can vote for other proposals with the same DTube coins but you will not be able to transfer it or burn it.\n\n" +
                                   "When the voting period ends (failed or approved) your coins will get unlocked again and you can use them as usual.",
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ),
                           Row(
@@ -203,7 +200,7 @@ class _VotingDialogState extends State<VotingDialog> {
                                             " DTube",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6),
+                                            .titleLarge),
                                   ],
                                 ),
                               ],
@@ -220,7 +217,7 @@ class _VotingDialogState extends State<VotingDialog> {
                               ),
                               child: Text(
                                 "Send Vote",
-                                style: Theme.of(context).textTheme.headline4,
+                                style: Theme.of(context).textTheme.headlineMedium,
                                 textAlign: TextAlign.center,
                               ),
                             ),

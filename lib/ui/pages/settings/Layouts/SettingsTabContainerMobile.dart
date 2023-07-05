@@ -549,7 +549,8 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                           settings[sec.settingKey_FixedDownvoteWeight]!)
                       : 1.0;
             }
-
+            double _distanceToField = MediaQuery.of(context).size.width;
+            TextfieldTagsController _tagsController = TextfieldTagsController();
             return Column(
               children: [
                 Container(
@@ -1400,9 +1401,11 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                     .textTheme
                                                     .bodyLarge),
                                             Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: TextFieldTags(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextFieldTags(
+                                                  textfieldTagsController:
+                                                      _tagsController,
                                                   initialTags: _hiveDefaultTags,
                                                   textFieldStyler:
                                                       TextFieldStyler(
@@ -1469,6 +1472,11 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                           .remove(tag);
                                                     });
                                                   },
+                                                  textSeparators: const [
+                                                    ' ',
+                                                    ','
+                                                  ],
+                                                  letterCase: LetterCase.normal,
                                                   validator: (tag) {
                                                     if (_hiveDefaultTags
                                                             .length ==
@@ -1486,35 +1494,164 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                     if (tag.toLowerCase() ==
                                                         "dtube") {
                                                       return "dtube is as default in the list";
+                                                    if (_tagsController.getTags
+                                                            ?.contains(tag) !=
+                                                        null) {
+                                                      return 'you already entered that';
                                                     }
                                                     return null;
                                                   },
-                                                  tagsDistanceFromBorderEnd:
-                                                      0.50,
+                                                  inputfieldBuilder: (context,
+                                                      tec,
+                                                      fn,
+                                                      error,
+                                                      onChanged,
+                                                      onSubmitted) {
+                                                    return ((context, sc, tags,
+                                                        onTagDelete) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: TextField(
+                                                          controller: tec,
+                                                          focusNode: fn,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            isDense: true,
+                                                            border:
+                                                                const OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        74,
+                                                                        137,
+                                                                        92),
+                                                                width: 3.0,
+                                                              ),
+                                                            ),
+                                                            focusedBorder:
+                                                                const OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        74,
+                                                                        137,
+                                                                        92),
+                                                                width: 3.0,
+                                                              ),
+                                                            ),
+                                                            helperText:
+                                                                'Enter language...',
+                                                            helperStyle:
+                                                                const TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      74,
+                                                                      137,
+                                                                      92),
+                                                            ),
+                                                            hintText:
+                                                                _tagsController
+                                                                        .hasTags
+                                                                    ? ''
+                                                                    : "Enter tag...",
+                                                            errorText: error,
+                                                            prefixIconConstraints:
+                                                                BoxConstraints(
+                                                                    maxWidth:
+                                                                        _distanceToField *
+                                                                            0.74),
+                                                            prefixIcon: tags
+                                                                    .isNotEmpty
+                                                                ? SingleChildScrollView(
+                                                                    controller:
+                                                                        sc,
+                                                                    scrollDirection:
+                                                                        Axis.horizontal,
+                                                                    child: Row(
+                                                                        children:
+                                                                            tags.map((String
+                                                                                tag) {
+                                                                      return Container(
+                                                                        decoration:
+                                                                            const BoxDecoration(
+                                                                          borderRadius:
+                                                                              BorderRadius.all(
+                                                                            Radius.circular(20.0),
+                                                                          ),
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              74,
+                                                                              137,
+                                                                              92),
+                                                                        ),
+                                                                        margin: const EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                5.0),
+                                                                        padding: const EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                10.0,
+                                                                            vertical:
+                                                                                5.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            InkWell(
+                                                                              child: Text(
+                                                                                '#$tag',
+                                                                                style: const TextStyle(color: Colors.white),
+                                                                              ),
+                                                                              onTap: () {
+                                                                                print("$tag selected");
+                                                                              },
+                                                                            ),
+                                                                            const SizedBox(width: 4.0),
+                                                                            InkWell(
+                                                                              child: const Icon(
+                                                                                Icons.cancel,
+                                                                                size: 14.0,
+                                                                                color: Color.fromARGB(255, 233, 233, 233),
+                                                                              ),
+                                                                              onTap: () {
+                                                                                onTagDelete(tag);
+                                                                              },
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    }).toList()),
+                                                                  )
+                                                                : null,
+                                                          ),
+                                                          onChanged: onChanged,
+                                                          onSubmitted:
+                                                              onSubmitted,
+                                                        ),
+                                                      );
+                                                    });
 
-                                                  //scrollableTagsMargin: EdgeInsets.only(left: 9),
-                                                  //scrollableTagsPadding: EdgeInsets.only(left: 9),
-                                                )
-
-                                                // TextFormField(
-                                                //   controller:
-                                                //       _hiveDefaultTagsController,
-                                                //   cursorColor: globalRed,
-                                                //   decoration: new InputDecoration(
-                                                //       labelText:
-                                                //           "hive tags (space-separated):"),
-                                                //   maxLines: 1,
-                                                //   style: Theme.of(context)
-                                                //       .textTheme
-                                                //       .bodyText1,
-                                                // ),
-                                                ),
-                                            VisibilityHintText(
-                                              showHint:
-                                                  _showHiveDefaultTagsHint,
-                                              hintText:
-                                                  "Your cross-posted video will receive those tags on the hive blockchain. Only up to 8 tags are allowed (dtube and the tag of your post will be added automatically) and you should set them separated by spaces in the textfield above.",
-                                            ),
+                                                    // TextFormField(
+                                                    //   controller:
+                                                    //       _hiveDefaultTagsController,
+                                                    //   cursorColor: globalRed,
+                                                    //   decoration: new InputDecoration(
+                                                    //       labelText:
+                                                    //           "hive tags (space-separated):"),
+                                                    //   maxLines: 1,
+                                                    //   style: Theme.of(context)
+                                                    //       .textTheme
+                                                    //       .bodyText1,
+                                                    // ),
+                                                  }),
+                                            )
                                           ],
                                         ),
                                       ),

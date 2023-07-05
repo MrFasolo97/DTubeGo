@@ -1,6 +1,9 @@
+import 'package:auto_orientation/auto_orientation.dart';
+import 'package:dtube_go/ui/widgets/players/YTPlayerFullScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:flutter_overlay/flutter_overlay.dart';
 
 class YTPlayerIFrame extends StatefulWidget {
   YTPlayerIFrame(
@@ -10,11 +13,10 @@ class YTPlayerIFrame extends StatefulWidget {
       required this.allowFullscreen,
       required this.controller})
       : super(key: key);
-
+  final YoutubePlayerController controller;
   final String videoUrl;
   final bool autoplay;
   final bool allowFullscreen;
-  final YoutubePlayerController controller;
 
   @override
   _YTPlayerIFrameState createState() => _YTPlayerIFrameState();
@@ -26,16 +28,6 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void initState() {
     super.initState();
-    widget.controller.onEnterFullscreen = () {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-      print('Entered Fullscreen');
-    };
-    widget.controller.onExitFullscreen = () {
-      print('Exited Fullscreen');
-    };
   }
 
   // @override
@@ -47,14 +39,12 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void dispose() {
     widget.controller.close();
-    widget.controller.pause();
+    widget.controller.pauseVideo();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    //const _player = YoutubePlayerIFrame();
-
     return YoutubePlayerControllerProvider(
       controller: widget.controller,
       child: YoutubePlayerIFrame(
@@ -62,5 +52,29 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
         aspectRatio: 16 / 9,
       ),
     );
+    player.controller.setFullScreenListener((isFullscreen) {
+      if (isFullscreen) {
+        SystemChrome.setPreferredOrientations([
+            DeviceOrientation.landscapeRight,
+            DeviceOrientation.landscapeLeft
+          ]);
+        AutoOrientation.landscapeAutoMode();
+        HiOverlay.show(
+          context,
+          child: YoutubePlayerFullScreenPage(link: widget.videoUrl),
+        ).then((value) {
+          print('---received:$value');
+        });
+      } else {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown
+        ]);
+        AutoOrientation.portraitAutoMode();
+        HiOverlay.close(context);
+      }
+    });
+    player.controller.loadVideoById(videoId: widget.videoUrl);
+    return player;
   }
 }

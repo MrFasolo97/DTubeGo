@@ -2,7 +2,6 @@ import 'package:dtube_go/res/Config/APIUrlSchema.dart';
 import 'package:dtube_go/res/Config/appConfigValues.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_response_model.dart';
 import 'package:dtube_go/utils/Avalon/growInt.dart';
 import 'package:http/http.dart' as http;
@@ -68,20 +67,15 @@ class UserRepositoryImpl implements UserRepository {
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-
-      User user = ApiResultModel.fromJson(data, applicationUser).user;
-      dtcBalance = user.balance;
-      int vp = user.vt!.v;
-      int vpTS = user.vt!.t;
+      dtcBalance = data['balance'];
+      int vp = data['vt']['v'];
+      int vpTS = data['vt']['t'];
       var configResponse =
           await http.get(Uri.parse(apiNode + APIUrlSchema.avalonConfig));
       if (configResponse.statusCode == 200) {
         var configData = json.decode(configResponse.body);
-        AvalonConfig conf =
-            ApiResultModelAvalonConfig.fromJson(configData).conf;
-        int vpGrowth = conf.vtGrowth;
+        int vpGrowth = configData['vtGrowth'];
         currentVT = growInt(vp, vpTS, (dtcBalance / vpGrowth), 0, 0);
-        print(currentVT);
       } else {
         throw Exception();
       }

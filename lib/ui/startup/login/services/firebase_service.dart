@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:dtube_go/ui/startup/login/services/ressources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -111,7 +112,7 @@ class FirebaseService {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithPopup(facebookProvider);
   }
-  /*
+/*
   Future<UserCredential> signInWithGitHubMobile(BuildContext context) async {
     // Create a GitHubSignIn instance
     String _githubClientId =
@@ -120,7 +121,6 @@ class FirebaseService {
         await sec.getLocalConfigString(sec.settingKey_ghaSec);
     String _githubRedirectUrl =
         await sec.getLocalConfigString(sec.settingKey_ghaRU);
-
     final GitHubSignIn gitHubSignIn = GitHubSignIn(
         clientId: _githubClientId,
         clientSecret: _githubClientSecret,
