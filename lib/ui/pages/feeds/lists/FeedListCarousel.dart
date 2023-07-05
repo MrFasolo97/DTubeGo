@@ -206,6 +206,7 @@ class FeedListCarousel extends StatelessWidget {
                       create: (context) =>
                           UserBloc(repository: UserRepositoryImpl()),
                       child: PostListCardLarge(
+                        disableAdvertisements: true,
                         showDTCValue: true,
                         width: 80.w,
                         alreadyVoted: false,

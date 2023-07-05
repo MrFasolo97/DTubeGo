@@ -55,6 +55,7 @@ class PostListCardLarge extends StatefulWidget {
       required this.autoPauseVideoOnPopup,
       this.hideSpeedDial,
       this.disableVideoPlayback,
+      this.disableAdvertisements,
       required this.width})
       : super(key: key);
 
@@ -86,6 +87,7 @@ class PostListCardLarge extends StatefulWidget {
   final String fixedDownvoteWeight;
   bool? hideSpeedDial;
   bool? disableVideoPlayback;
+  bool? disableAdvertisements;
   final double width;
 
   @override
@@ -99,6 +101,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
   TextEditingController _giftMemoController = new TextEditingController();
   TextEditingController _giftDTCController = new TextEditingController();
 
+
   late bool _showVotingBars;
 
   late bool _votingDirection; // true = upvote | false = downvote
@@ -110,10 +113,11 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
 
   late VideoPlayerController _bpController;
   late YoutubePlayerController _ytController;
-
+  late bool disableAdvertisements;
   @override
   void initState() {
     super.initState();
+    disableAdvertisements = widget.disableAdvertisements != null ? widget.disableAdvertisements! : false;
     _avatarSize = widget.width * 0.1;
     _showVotingBars = false;
     _votingDirection = true;
@@ -206,7 +210,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
                 widget.link +
                 " CHANGED TO " +
                 visiblePercentage.toString());
-            if (globals.enableAdvertisements) {
+            if (globals.enableAdvertisements && !disableAdvertisements) {
               globals.scrolledPostsBetweenAds += 1;
               print("Scrolled " +
                   globals.scrolledPostsBetweenAds.toString() +
@@ -216,7 +220,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
         },
         child: (globals.scrolledPostsBetweenAds >=
                     globals.minimumPostsBetweenAds &&
-                globals.enableAdvertisements)
+                globals.enableAdvertisements && ! disableAdvertisements)
             ? Advertisement(post: post)
             : post);
   }
