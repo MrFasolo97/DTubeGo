@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -93,13 +95,11 @@ class FirebaseService {
         await FirebaseAuth.instance.signInWithPopup(TwitterAuthProvider());
     return userCredential;
   }
-
   Future<UserCredential?> signInWithGithubWeb() async {
     final userCredential =
         await FirebaseAuth.instance.signInWithPopup(GithubAuthProvider());
     return userCredential;
   }
-
   Future<UserCredential?> signInWithFacebookWeb() async {
 // Create a new provider
     FacebookAuthProvider facebookProvider = FacebookAuthProvider();
@@ -133,8 +133,7 @@ class FirebaseService {
     return await FirebaseAuth.instance
         .signInWithCredential(githubAuthCredential);
   }
- */
-
+  */
   Future<UserCredential> signInWithFacebookMobile() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();

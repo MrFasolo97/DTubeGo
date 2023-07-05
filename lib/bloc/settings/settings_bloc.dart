@@ -38,6 +38,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           sec.settingKey_pincode: await sec.getPinCode(),
           sec.settingKey_videoAutoPause: await sec.getVideoAutoPause(),
           sec.settingKey_disableAnimations: await sec.getDisableAnimations(),
+          sec.settingKey_enableAdvertisements: await sec.getEnableAdvertisements(),
           sec.settingKey_imageUploadService: await sec.getImageUploadService(),
           sec.settingKey_DefaultUploadNSFW: await sec.getUploadNSFW(),
           sec.settingKey_DefaultUploadOC: await sec.getUploadOC(),
@@ -62,11 +63,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           sec.settingKey_FixedDownvoteWeight:
               await sec.getFixedDownvoteWeight(),
           sec.settingKey_videoAutoPause: await sec.getVideoAutoPause(),
-          sec.settingKey_disableAnimations: await sec.getDisableAnimations()
+          sec.settingKey_disableAnimations: await sec.getDisableAnimations(),
+          sec.settingKey_enableAdvertisements: await sec.getEnableAdvertisements()
         };
         globals.disableAnimations = await sec.getDisableAnimations() == "true";
+        globals.enableAdvertisements = await sec.getEnableAdvertisements() == "true";
         emit(SettingsLoadedState(settings: newSettings));
       } catch (e) {
+        print(e);
         emit(SettingsErrorState(message: 'unknown error'));
       }
     });
@@ -115,6 +119,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await sec.persistVideoAutoPause(
             event.newSettings[sec.settingKey_videoAutoPause]!);
 
+        await sec.persistEnableAdvertisements(
+            event.newSettings[sec.settingKey_enableAdvertisements]!);
+        globals.enableAdvertisements =
+            event.newSettings[sec.settingKey_enableAdvertisements]! == "true";
+
         await sec.persistDisableAnimations(
             event.newSettings[sec.settingKey_disableAnimations]!);
         globals.disableAnimations =
@@ -123,6 +132,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         emit(SettingsSavedState(settings: event.newSettings));
         Phoenix.rebirth(event.context);
       } catch (e) {
+        print(e);
         emit(SettingsErrorState(message: 'unknown error'));
       }
     });

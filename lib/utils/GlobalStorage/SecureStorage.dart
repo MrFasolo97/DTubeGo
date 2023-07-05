@@ -56,6 +56,8 @@ const settingKey_tsLastNotificationSeen = 'LASTNOT';
 const settingKey_pincode = "PINC";
 const settingKey_videoAutoPause = "VAPAUSE";
 const settingKey_disableAnimations = "NOANIMS";
+const settingKey_enableAdvertisements = "ADVERTISEMENTS";
+
 
 const settingKey_imageUploadService = "IMGUS";
 
@@ -124,6 +126,11 @@ Future<void> persistVideoAutoPause(String autoPause) async {
 Future<void> persistDisableAnimations(String disableAnimations) async {
   await _storage.write(
       key: settingKey_disableAnimations, value: disableAnimations);
+}
+
+Future<void> persistEnableAdvertisements(String enableAdvertisements) async {
+  await _storage.write(
+      key: settingKey_enableAdvertisements, value: enableAdvertisements);
 }
 
 Future<void> persistLastHivePost() async {
@@ -507,6 +514,20 @@ Future<String> getDisableAnimations() async {
   String? _setting = "true";
   try {
     _setting = await _storage.read(key: settingKey_disableAnimations);
+  } catch (e) {
+    _setting = "true";
+  }
+  if (_setting != null) {
+    return _setting;
+  } else {
+    return "true";
+  }
+}
+
+Future<String> getEnableAdvertisements() async {
+  String? _setting = "true";
+  try {
+    _setting = await _storage.read(key: settingKey_enableAdvertisements);
   } catch (e) {
     _setting = "true";
   }

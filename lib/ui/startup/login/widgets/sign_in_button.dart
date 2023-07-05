@@ -102,11 +102,10 @@ class _SignInButtonState extends State<SignInButton> {
           } else {
             usercred = await service.signInWithGitHubMobile(context);
           }
-          //
 
-          _provider = "github";
+         _provider = "github";
           break;
-          */
+         */
         case LoginType.Facebook:
           service.signInWithFacebookMobile();
           _provider = "facebook";

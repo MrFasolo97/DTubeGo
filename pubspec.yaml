@@ -4,7 +4,7 @@ name: dtube_go
 description: Client to interact with the avalon blockchain
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.6.4+107
+version: 1.7.0+108
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -25,7 +25,7 @@ dependencies:
 
   # auth related - not web enabled
   twitter_login: ^4.2.3 #android, ios
-  # github_sign_in: ^0.0.5-dev.4  #android, ios # incompatible with updated YT player
+  # github_sign_in: ^0.0.5-dev.4  #android, ios # incompatible with updated YT player and the new dart 3
 
 
   # CRYPTO RELATED
@@ -48,7 +48,7 @@ dependencies:
   video_player: ^2.4.4
   youtube_explode_dart: ^1.12.0 #loading youtube metadata
   better_player: ^0.0.83 # player for ipfs/sia/local files
-  youtube_player_iframe: ^4.0.4
+  youtube_player_iframe: ^2.3.0
   gallery_saver: ^2.3.2
   #chewie: ^1.3.4
   flick_video_player: ^0.5.0
@@ -83,7 +83,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   flutter_speed_dial: ^7.0.0 # drop out menu
   chips_input: ^0.1.0
-  textfield_tags: ^2.0.2 # crete list of tags in a textfield style <=== UPGRADE NEXT
+  textfield_tags: 1.4.2 # crete list of tags in a textfield style <=== UPGRADE NEXT
 
   another_flushbar: ^1.10.29 # global snackbar to inform the user about transactions
   loadmore: ^2.0.1 # collapsable widget for long video descriptions
@@ -135,7 +135,8 @@ dependencies:
   carousel_slider: ^4.1.1
   visibility_detector: ^0.3.3
   tus_client: ^1.0.2
-  flutter_overlay: ^1.0.0
+  quiver: ^3.2.1
+  webview_flutter: ^4.2.2
 
 dev_dependencies:
   flutter_test:

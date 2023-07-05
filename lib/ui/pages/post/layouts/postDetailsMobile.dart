@@ -1,11 +1,11 @@
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:dtube_go/ui/pages/post/postDetailPage.dart';
 
 import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
 import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
 import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
 import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
 import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
-import 'package:dtube_go/ui/widgets/players/YTPlayerFullScreen.dart';
 import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
@@ -20,23 +20,25 @@ import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:image_compression_flutter/flutter_image_compress.dart';
+import 'package:quiver/async.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
 import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:equatable/equatable.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'dart:io' show Platform;
+
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class PostDetailPageMobile extends StatefulWidget {
   String link;
@@ -45,12 +47,17 @@ class PostDetailPageMobile extends StatefulWidget {
   String directFocus;
   VoidCallback? onPop;
 
+  Function? onFullscreenChange;
+
+
   PostDetailPageMobile(
       {required this.link,
       required this.author,
       required this.recentlyUploaded,
       required this.directFocus,
-      this.onPop});
+        this.onFullscreenChange,
+      this.onPop,
+      });
 
   @override
   _PostDetailPageMobileState createState() => _PostDetailPageMobileState();
@@ -60,6 +67,8 @@ class _PostDetailPageMobileState extends State<PostDetailPageMobile> {
   int reloadCount = 0;
   bool flagged = false;
 
+
+  _PostDetailPageMobileState();
   Future<bool> _onWillPop() async {
     if (widget.recentlyUploaded) {
       Navigator.pushAndRemoveUntil(
@@ -86,6 +95,7 @@ class _PostDetailPageMobileState extends State<PostDetailPageMobile> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
   }
 
   @override
@@ -177,18 +187,23 @@ class MobilePostDetails extends StatefulWidget {
   final Post post;
   final String directFocus;
 
-  const MobilePostDetails(
-      {Key? key, required this.post, required this.directFocus})
+  final Function? onFullscreenChange;
+
+
+  MobilePostDetails(
+      {Key? key, required this.post, required this.directFocus, this.onFullscreenChange,})
       : super(key: key);
+
 
   @override
   _MobilePostDetailsState createState() => _MobilePostDetailsState();
+
 }
 
 class _MobilePostDetailsState extends State<MobilePostDetails> {
-  late YoutubePlayerController _controller;
+  late YoutubePlayerController controller;
   late VideoPlayerController _videocontroller;
-
+  YTPlayerIFrame? _ytPlayer;
   late UserBloc _userBloc;
 
   late double _defaultVoteWeightPosts = 0;
@@ -200,10 +215,14 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
   late double _fixedDownvoteWeight = 1;
 
   late int _currentVT = 0;
+
   String blockedUsers = "";
   late PostBloc postBloc = new PostBloc(repository: PostRepositoryImpl());
   late TransactionBloc txBloc =
       new TransactionBloc(repository: TransactionRepositoryImpl());
+
+
+  
 
   void fetchBlockedUsers() async {
     blockedUsers = await sec.getBlockedUsers();
@@ -214,49 +233,33 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
     super.initState();
     fetchBlockedUsers();
 
+
     _userBloc = BlocProvider.of<UserBloc>(context);
 
     _userBloc.add(FetchAccountDataEvent(username: widget.post.author));
     _userBloc.add(FetchDTCVPEvent());
 
-    _controller = YoutubePlayerController(
-      params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true,
-      ),
-    );
-    _controller.load(
-        params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true,
-        ),
-        baseUrl: widget.post.videoUrl!
-    );
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
+
+
   }
+
 
   @override
   void dispose() {
-    _controller.pauseVideo();
-    _controller.close();
-
+    /*
+    _controller.pause();
+    _controller.dispose();
+    */
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<TransactionBloc, TransactionState>(
-      bloc: txBloc,
-      listener: (context, state) {
-        if (state is TransactionSent) {
-          postBloc.add(FetchPostEvent(widget.post.author, widget.post.link,
-              "PostDetailPageV2.dart listener 1"));
-        }
-      },
-      child: YoutubePlayerControllerProvider(
-          controller: _controller,
-          child: Container(
+    controller = YoutubePlayerController(params: YoutubePlayerParams(showFullscreenButton: true, privacyEnhanced: true), initialVideoId: widget.post.videoUrl!);
+    _ytPlayer = YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: controller,);
+        Container? mainContainer = Container(
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.only(top: 5.h),
@@ -294,7 +297,7 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
                           ],
                         ),
                         widget.post.videoSource == "youtube"
-                            ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: _controller)
+                            ? _ytPlayer!
                             : ["ipfs", "sia"].contains(widget.post.videoSource)
                                 ? P2PSourcePlayer(
                                     videoUrl: widget.post.videoUrl!,
@@ -531,7 +534,16 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
                 ),
               ),
             ),
-          )),
+        );
+    return BlocListener<TransactionBloc, TransactionState>(
+        bloc: txBloc,
+        listener: (context, state) {
+          if (state is TransactionSent) {
+            postBloc.add(FetchPostEvent(widget.post.author, widget.post.link,
+                "PostDetailPageV2.dart listener 1"));
+          }
+        },
+        child: mainContainer,
     );
   }
 }

@@ -46,6 +46,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
   late String _pinCode;
   late bool _videoAutoPause;
   late bool _disableAnimation;
+  late bool _enableAdvertisements;
 
   late String _imageUploadProvider;
 
@@ -78,7 +79,6 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
   bool _showDisplayHints = false;
   bool _showSecurityHints = false;
   bool _showBehaviourHints = false;
-
   bool _showInterestsHints = false;
 
   bool _showVotingWeightHints = false;
@@ -145,6 +145,128 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
             titleWidgetSize: 20.w,
           ),
         ) ??
+        false; //if showDialouge had returned null, then return false
+  }
+
+  Future<bool> showAdsPopup() async {
+    return await showDialog(
+      //show confirm dialogue
+      //the return value will be from "Yes" or "No" options
+      context: context,
+      builder: (context) => PopUpDialogWithTitleLogo(
+        showTitleWidget: true,
+        callbackOK: () {},
+        child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      'Those anonymous ads are supporting economically the DTubeGo development and DTube ecosystem. Are you sure to disable them?',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.center),
+                ),
+                SizedBox(height: 2.h),
+                SizedBox(height: 2.h),
+                Flex(mainAxisAlignment: MainAxisAlignment.spaceBetween, direction: Axis.horizontal, clipBehavior: Clip.hardEdge, children: [InkWell(
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 22.w, left: 9.w),
+                      decoration: BoxDecoration(
+                        color: globalRed,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20.0)),
+                      ),
+                      child: Text(
+                        "Yes",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop(true);
+                    }),
+                InkWell(
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0, left: 22.w, right: 9.w),
+                      decoration: BoxDecoration(
+                        color: globalRed,
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(20.0)),
+                      ),
+                      child: Text(
+                        "No",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop(false);
+                    }),
+              ],
+            )])),
+        titleWidget:
+        Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
+        titleWidgetPadding: 10.h,
+        titleWidgetSize: 20.w,
+      ),
+    ) ??
+        false; //if showDialouge had returned null, then return false
+  }
+
+  Future<bool> showAdsThankYouPopup() async {
+    return await showDialog(
+      //show confirm dialogue
+      //the return value will be from "Yes" or "No" options
+      context: context,
+      builder: (context) => PopUpDialogWithTitleLogo(
+        showTitleWidget: true,
+        callbackOK: () {},
+        child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        'Thank you for your support!',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
+                  ),
+                  SizedBox(height: 2.h),
+                  SizedBox(height: 2.h),
+                  InkWell(
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 22.w, left: 10.w),
+                        decoration: BoxDecoration(
+                          color: globalRed,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0)
+                          ),
+                        ),
+                        child: Text(
+                          "Ok",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pop(true);
+                      })])),
+        titleWidget:
+        Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
+        titleWidgetPadding: 10.h,
+        titleWidgetSize: 20.w,
+      ),
+    ) ??
         false; //if showDialouge had returned null, then return false
   }
 
@@ -245,6 +367,8 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                             _videoAutoPause.toString(),
                         sec.settingKey_disableAnimations:
                             _disableAnimation.toString(),
+                        sec.settingKey_enableAdvertisements:
+                            _enableAdvertisements.toString()
                       };
 
                       _settingsBloc.add(PushSettingsEvent(
@@ -357,6 +481,11 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                   settings[sec.settingKey_disableAnimations] != null
                       ? settings[sec.settingKey_disableAnimations]! == "true"
                       : false;
+
+              _enableAdvertisements =
+                  settings[sec.settingKey_enableAdvertisements] != null
+                      ? settings[sec.settingKey_enableAdvertisements]! == "true"
+                      : true;
 
               _imageUploadProvider =
                   settings[sec.settingKey_imageUploadService] != null
@@ -689,7 +818,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                   VisibilityHintText(
                                       showHint: _showBehaviourHints,
                                       hintText:
-                                          "If you play back a video and you are goign to comment / vote on it - the video playback is automatically paused. You can turn off this behvaiour with this setting."),
+                                          "If you play back a video and you are going to comment / vote on it - the video playback is automatically paused. You can turn off this behvaiour with this setting."),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -715,7 +844,42 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                   VisibilityHintText(
                                       showHint: _showBehaviourHints,
                                       hintText:
-                                          "You can turn off all animations in the app to receive a more resource-saving experience without many distractions."),
+                                          "You can turn off all the anonymous advertisements in the app, but remember, those ads helps us to keep going."),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 60.w,
+                                        child: Text("Show advertisements",
+                                            maxLines: 2,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge),
+                                      ),
+                                      Switch(
+                                        value: _enableAdvertisements,
+                                        onChanged: (value) async {
+                                          if(value) {
+                                            await showAdsThankYouPopup();
+                                            setState(() {
+                                              _enableAdvertisements = value;
+                                            });
+                                          } else {
+                                            if (await showAdsPopup()) {
+                                              setState(() {
+                                                _enableAdvertisements = value;
+                                              });
+                                            }
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  VisibilityHintText(
+                                      showHint: _showBehaviourHints,
+                                      hintText:
+                                          "This will support economically the DTubeGo development and DTube ecosystem, those are anonymous ads."),
                                 ],
                               ),
                               // deactivated until we have more providers
@@ -1243,12 +1407,93 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                                   textfieldTagsController:
                                                       _tagsController,
                                                   initialTags: _hiveDefaultTags,
+                                                  textFieldStyler:
+                                                      TextFieldStyler(
+                                                    //These are properties you can tweek for customization
+
+                                                    // bool textFieldFilled = false,
+                                                    // Icon icon,
+                                                    helperText: _hiveDefaultTags
+                                                            .length
+                                                            .toString() +
+                                                        ' tags (hit space to add tag)\n' +
+                                                        _hiveDefaultTags
+                                                            .join("\n"),
+                                                    // TextStyle helperStyle,
+                                                    hintText: '',
+                                                    textStyle: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyLarge,
+                                                    // TextStyle hintStyle,
+                                                    // EdgeInsets contentPadding,
+                                                    // Color textFieldFilledColor,
+                                                    // bool isDense = true,
+                                                    // bool textFieldEnabled = true,
+                                                    // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
+                                                    // OutlineInputBorder textFieldFocusedBorder,
+                                                    // OutlineInputBorder textFieldDisabledBorder,
+                                                    // OutlineInputBorder textFieldEnabledBorder
+                                                  ),
+                                                  tagsStyler: TagsStyler(
+                                                    //These are properties you can tweek for customization
+
+                                                    // showHashtag = false,
+                                                    // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
+                                                    // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
+                                                    tagDecoration:
+                                                        BoxDecoration(
+                                                            shape: BoxShape
+                                                                .rectangle,
+                                                            borderRadius:
+                                                                new BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  10.0),
+                                                            ),
+                                                            color: globalRed),
+                                                    tagTextStyle:
+                                                        Theme.of(context)
+                                                            .textTheme
+                                                            .bodyLarge,
+                                                    tagCancelIcon: Icon(
+                                                        Icons.cancel,
+                                                        size: 4.w,
+                                                        color:
+                                                            globalAlmostWhite),
+                                                  ),
+                                                  onTag: (tag) {
+                                                    setState(() {
+                                                      _hiveDefaultTags.add(tag);
+                                                    });
+                                                  },
+                                                  onDelete: (tag) {
+                                                    setState(() {
+                                                      _hiveDefaultTags
+                                                          .remove(tag);
+                                                    });
+                                                  },
                                                   textSeparators: const [
                                                     ' ',
                                                     ','
                                                   ],
                                                   letterCase: LetterCase.normal,
-                                                  validator: (String tag) {
+                                                  validator: (tag) {
+                                                    if (_hiveDefaultTags
+                                                            .length ==
+                                                        8) {
+                                                      return "max 8 tags allowed";
+                                                    }
+                                                    if (!RegExp(r'^[a-z]+$')
+                                                        .hasMatch(tag)) {
+                                                      return "only alhabetic characters allowed";
+                                                    }
+                                                    if (_hiveDefaultTags
+                                                        .contains(tag)) {
+                                                      return "tag is already in the list";
+                                                    }
+                                                    if (tag.toLowerCase() ==
+                                                        "dtube") {
+                                                      return "dtube is as default in the list";
                                                     if (_tagsController.getTags
                                                             ?.contains(tag) !=
                                                         null) {
@@ -1425,8 +1670,9 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                 padding: EdgeInsets.only(top: 1.h, bottom: 1.h),
                                 child: Text(
                                     "Default Values for Regular Uploads",
-                                    style:
-                                        Theme.of(context).textTheme.headlineSmall),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
                               ),
                               DTubeFormCard(
                                 waitBeforeFadeIn: Duration(milliseconds: 200),
@@ -1480,7 +1726,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           }),
                                       Visibility(
                                         visible:
-                                            false, // to get accepted by google we had to remove this option
+                                            _showNSFWSettings, // to get accepted by google we had to remove this option
                                         child: ChoiceChip(
                                             selected: _defaultUploadNSFW,
                                             label: Text('nsfw content'),
@@ -1723,8 +1969,9 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                               Padding(
                                 padding: EdgeInsets.only(top: 1.h, bottom: 1.h),
                                 child: Text("Moment Values",
-                                    style:
-                                        Theme.of(context).textTheme.headlineSmall),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
                               ),
                               DTubeFormCard(
                                 waitBeforeFadeIn: Duration(milliseconds: 400),
@@ -1790,7 +2037,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                           }),
                                       Visibility(
                                         visible:
-                                            false, // to get accepted by google we had to remove this option
+                                            _showNSFWSettings, // to get accepted by google we had to remove this option
                                         child: ChoiceChip(
                                             selected: _defaultMomentsNSFW,
                                             label: Text('nsfw content'),

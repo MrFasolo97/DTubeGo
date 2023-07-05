@@ -154,7 +154,7 @@ class Web3StorageRepositoryImpl implements Web3StorageRepository {
                 print("cid=" + cid);
               }
             }
-          } on DioError catch (e) {
+          } on DioException catch (e) {
             if (e.response != null) {
               if (e.response?.statusCode != 404) {
                 throw e;

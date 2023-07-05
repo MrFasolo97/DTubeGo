@@ -155,7 +155,7 @@ class Source {
   String? pubLeader;
   int? vt;
   int? vtTs;
-//posts
+  //posts
   String? author;
   String? link;
   double? dist;
@@ -202,7 +202,7 @@ class Source {
       vt = currentVT['v'] != null ? currentVT['v'] : 0;
       vtTs = json['vt']['t'];
     }
-//posts
+    //posts
     author = json['author'] != null ? json['author'] : "";
     dist = json['dist'] != null ? json['dist'] + 0.0 : 0.0;
     link = json['link'] != null ? json['link'] : "";
@@ -298,7 +298,7 @@ class Source {
     data['pub_leader'] = this.pubLeader != null ? this.pubLeader : "";
     data['vt'] = this.vt != null ? this.vt : 0;
     data['vtTs'] = this.vtTs != null ? this.vtTs : 0;
-//posts
+    //posts
     data['author'] = this.author != null ? this.author : "";
     data['dist'] = this.dist != null ? this.dist : 0.0;
     data['link'] = this.link != null ? this.link : "";

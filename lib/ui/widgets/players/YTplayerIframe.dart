@@ -45,8 +45,12 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
 
   @override
   Widget build(BuildContext context) {
-    YoutubePlayer player = YoutubePlayer(
-        controller: widget.controller
+    return YoutubePlayerControllerProvider(
+      controller: widget.controller,
+      child: YoutubePlayerIFrame(
+        controller: widget.controller,
+        aspectRatio: 16 / 9,
+      ),
     );
     player.controller.setFullScreenListener((isFullscreen) {
       if (isFullscreen) {

@@ -14,12 +14,12 @@ class TimeAgo {
   }
 
   static String timeInAgoTS(int ts) {
-    return Jiffy.parseFromDateTime(DateTime.fromMillisecondsSinceEpoch(ts)).fromNow();
+    return Jiffy.parseFromMillisecondsSinceEpoch(DateTime.fromMillisecondsSinceEpoch(ts) as int).fromNow();
   }
 
   static String timeInAgoTSShort(int ts) {
     // return Jiffy(DateTime.fromMillisecondsSinceEpoch(ts)).fromNow();
-    return Jiffy.parseFromDateTime(DateTime.fromMillisecondsSinceEpoch(ts))
+    return Jiffy.parseFromMillisecondsSinceEpoch(ts)
         .fromNow()
         .replaceAll("minute", "min")
         .replaceAll("second", "sec");

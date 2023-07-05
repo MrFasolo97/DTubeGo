@@ -216,16 +216,12 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
+      initialVideoId: widget.post.videoUrl!
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true
       ),
     );
-    _controller.load(params: YoutubePlayerParams(
-        showControls: true,
-        showFullscreenButton: true
-    ),
-    baseUrl: widget.post.videoUrl!);
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
   }
@@ -248,9 +244,8 @@ class _PostDetailsState extends State<PostDetails> {
               "PostDetailPageV2.dart listener 1"));
         }
       },
-      child: YoutubePlayerControllerProvider(
-          controller: _controller,
-          child: Container(
+      child:
+          Container(
             child: SingleChildScrollView(
               child: Stack(
                 children: <Widget>[
@@ -301,7 +296,12 @@ class _PostDetailsState extends State<PostDetails> {
                                 children: [
                                   //player /thumbnail
                                   widget.post.videoSource == "youtube"
-                                      ? YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: _controller)
+                                      ? YTPlayerIFrame(
+                                          controller: _controller,
+                                          videoUrl: widget.post.videoUrl!,
+                                          autoplay: true,
+                                          allowFullscreen: true,
+                                        )
                                       : ["ipfs", "sia"]
                                               .contains(widget.post.videoSource)
                                           ? P2PSourcePlayer(
@@ -585,7 +585,7 @@ class _PostDetailsState extends State<PostDetails> {
                 ],
               ),
             ),
-          )),
+          )
     );
   }
 }

@@ -86,7 +86,7 @@ class _UserResultCardMobileState extends State<UserResultCardMobile> {
                                             widget.name,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline6,
+                                                .titleLarge,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
@@ -130,11 +130,11 @@ class _UserResultCardMobileState extends State<UserResultCardMobile> {
                             children: [
                               Text(
                                 shortDTC(widget.dtcValue.round()) + 'DTC',
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Text(
                                 shortDTC(widget.vpBalance.round()) + 'VP',
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               SizedBox(height: 2.h),
                               Text(
@@ -142,14 +142,14 @@ class _UserResultCardMobileState extends State<UserResultCardMobile> {
                                     state.user.created != null
                                         ? state.user.created!.ts
                                         : 1593357855000),
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Text(
                                 "by " +
                                     (state.user.created != null
                                         ? state.user.created!.by
                                         : "dtube"),
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ],
                           ),

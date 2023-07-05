@@ -30,7 +30,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-
 class UploadFormDesktop extends StatefulWidget {
   UploadFormDesktop(
       {Key? key,
@@ -396,7 +395,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("Video preview", style: Theme.of(context).textTheme.headline5),
+            Text("Video preview", style: Theme.of(context).textTheme.headlineSmall),
             YTPlayerIFrame(
                 videoUrl: stateUploadData.videoLocation,
                 autoplay: false,

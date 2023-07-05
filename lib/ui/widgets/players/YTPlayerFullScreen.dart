@@ -1,5 +1,5 @@
 import 'package:auto_orientation/auto_orientation.dart';
-import 'package:flutter/services.dart';
+//import 'package:overlay_dialog/overlay_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -73,7 +73,17 @@ class _YoutubePlayerFullScreenPageState
                       controller: _controller,
                       aspectRatio: 16 / 9,
                     ),
-                )
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10.h),
+                  child: IconButton(
+                      onPressed: () {
+                        //DialogHelper().hide(context);
+                        AutoOrientation.fullAutoMode();
+                      },
+                      icon: FaIcon(FontAwesomeIcons.arrowLeft)),
+                ),
               ],
             ),
           ),

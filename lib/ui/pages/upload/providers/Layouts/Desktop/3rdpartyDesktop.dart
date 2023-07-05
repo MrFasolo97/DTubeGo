@@ -11,7 +11,6 @@ import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dar
 import 'package:dtube_go/ui/pages/upload/UploadForm/uploadForm.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

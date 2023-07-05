@@ -1,3 +1,4 @@
+import 'package:dtube_go/ui/pages/feeds/cards/widets/Advertisement.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'dart:io';
@@ -122,8 +123,12 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
     _bpController = VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
       params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true,
+        useHybridComposition: false,
+        autoPlay: true,
+        desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
+        privacyEnhanced: true,
+        showControls: true,
+        showFullscreenButton: true,
       ),
     );
     _ytController.load(params: YoutubePlayerParams(
@@ -140,73 +145,83 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
 
   @override
   Widget build(BuildContext context) {
-    return VisibilityDetector(
-      key: Key('postlist-large' + widget.link),
-      onVisibilityChanged: (visibilityInfo) {
-        var visiblePercentage = visibilityInfo.visibleFraction * 100;
-
-        if (visiblePercentage < 95 &&
-            !_showCommentInput &&
-            !_showGiftInput &&
-            !_showVotingBars) {
-          _ytController.pauseVideo();
-          _bpController.pause();
-          print("VISIBILITY OF " +
-              widget.author +
-              "/" +
-              widget.link +
-              " CHANGED TO " +
-              visiblePercentage.toString());
-        }
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: PostData(
-          width: widget.width,
-          thumbnailTapped: _thumbnailTapped,
-          widget: widget,
-          bpController: _bpController,
-          ytController: _ytController,
-          showVotingBars: _showVotingBars,
-          userBloc: _userBloc,
-          votingDirection: _votingDirection,
-          showCommentInput: _showCommentInput,
-          replyController: _replyController,
-          showGiftInput: _showGiftInput,
-          giftDTCController: _giftDTCController,
-          giftMemoController: _giftMemoController,
-          avatarSize: _avatarSize,
-          blur: widget.blur,
-          thumbUrl: widget.thumbnailUrl,
-          videoSource: widget.videoSource,
-          videoUrl: widget.videoUrl,
-          thumbnailTappedCallback: () {
-            setState(() {
-              if (widget.disableVideoPlayback == null ||
-                  !widget.disableVideoPlayback!) {
-                _thumbnailTapped = true;
-              }
-            });
-          },
-          votingOpenCallback: () {
-            setState(() {
-              _showVotingBars = false;
-            });
-          },
-          commentOpenCallback: () {
-            setState(() {
-              _showCommentInput = false;
-              _replyController.text = '';
-            });
-          },
-          giftOpenCallback: () {
-            setState(() {
-              _showGiftInput = false;
-            });
-          },
-        ),
+    Padding post = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: PostData(
+        width: widget.width,
+        thumbnailTapped: _thumbnailTapped,
+        widget: widget,
+        bpController: _bpController,
+        ytController: _ytController,
+        showVotingBars: _showVotingBars,
+        userBloc: _userBloc,
+        votingDirection: _votingDirection,
+        showCommentInput: _showCommentInput,
+        replyController: _replyController,
+        showGiftInput: _showGiftInput,
+        giftDTCController: _giftDTCController,
+        giftMemoController: _giftMemoController,
+        avatarSize: _avatarSize,
+        blur: widget.blur,
+        thumbUrl: widget.thumbnailUrl,
+        videoSource: widget.videoSource,
+        videoUrl: widget.videoUrl,
+        thumbnailTappedCallback: () {
+          setState(() {
+            if (widget.disableVideoPlayback == null ||
+                !widget.disableVideoPlayback!) {
+              _thumbnailTapped = true;
+            }
+          });
+        },
+        votingOpenCallback: () {
+          setState(() {
+            _showVotingBars = false;
+          });
+        },
+        commentOpenCallback: () {
+          setState(() {
+            _showCommentInput = false;
+            _replyController.text = '';
+          });
+        },
+        giftOpenCallback: () {
+          setState(() {
+            _showGiftInput = false;
+          });
+        },
       ),
     );
+    return VisibilityDetector(
+        key: Key('postlist-large' + widget.link),
+        onVisibilityChanged: (visibilityInfo) {
+          var visiblePercentage = visibilityInfo.visibleFraction * 100;
+
+          if (visiblePercentage < 95 &&
+              !_showCommentInput &&
+              !_showGiftInput &&
+              !_showVotingBars) {
+            _ytController.pause();
+            _bpController.pause();
+            print("VISIBILITY OF " +
+                widget.author +
+                "/" +
+                widget.link +
+                " CHANGED TO " +
+                visiblePercentage.toString());
+            if (globals.enableAdvertisements) {
+              globals.scrolledPostsBetweenAds += 1;
+              print("Scrolled " +
+                  globals.scrolledPostsBetweenAds.toString() +
+                  " posts...");
+            }
+          }
+        },
+        child: (globals.scrolledPostsBetweenAds >=
+                    globals.minimumPostsBetweenAds &&
+                globals.enableAdvertisements)
+            ? Advertisement(post: post)
+            : post);
   }
 }
 
@@ -407,23 +422,21 @@ class PostInfoDetailsRow extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [ LayoutBuilder(builder: (context, constraints) {
-              if (widget.showDTCValue == true) {
-                return Text(
-                  '${widget.dtcValue}',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium,
-                );
-              } else {
-                return Text("");
-              }
-            }),
+            children: [
+              LayoutBuilder(builder: (context, constraints) {
+                if (widget.showDTCValue == true) {
+                  return Text(
+                    '${widget.dtcValue}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  );
+                } else {
+                  return Text("");
+                }
+              }),
               Padding(
                   padding: EdgeInsets.only(left: 0.5.w),
-                  child: DTubeLogoShadowed(size: 4.w)
-              )],
+                  child: DTubeLogoShadowed(size: 4.w))
+            ],
           ),
         ),
       ],
@@ -465,31 +478,36 @@ class PostInfoBaseRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Expanded(child: Container(
-          width: widget.width * 0.50,
-          child: Row(
-            children: [
-              Expanded(flex: 0, child: globals.disableAnimations
-                  ? AccountIconContainer(widget: widget, avatarSize: _avatarSize)
-                  : FadeIn(
-                      preferences: AnimationPreferences(
-                          offset: Duration(milliseconds: 500),
-                          duration: Duration(seconds: 1)),
-                      child: AccountIconContainer(
-                          widget: widget, avatarSize: _avatarSize),
-                    )),
-              Expanded(flex: 1, child: globals.disableAnimations
-                  ? TitleWidgetForRow(widget: widget)
-                  : FadeInLeftBig(
-                      preferences: AnimationPreferences(
-                        offset: Duration(milliseconds: 100),
-                        duration: Duration(milliseconds: 350),
-                      ),
-                      child: TitleWidgetForRow(widget: widget),
-                    )),
-            ],
-          )
-        ),
+        Expanded(
+          child: Container(
+              width: widget.width * 0.50,
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 0,
+                      child: globals.disableAnimations
+                          ? AccountIconContainer(
+                              widget: widget, avatarSize: _avatarSize)
+                          : FadeIn(
+                              preferences: AnimationPreferences(
+                                  offset: Duration(milliseconds: 500),
+                                  duration: Duration(seconds: 1)),
+                              child: AccountIconContainer(
+                                  widget: widget, avatarSize: _avatarSize),
+                            )),
+                  Expanded(
+                      flex: 1,
+                      child: globals.disableAnimations
+                          ? TitleWidgetForRow(widget: widget)
+                          : FadeInLeftBig(
+                              preferences: AnimationPreferences(
+                                offset: Duration(milliseconds: 100),
+                                duration: Duration(milliseconds: 350),
+                              ),
+                              child: TitleWidgetForRow(widget: widget),
+                            )),
+                ],
+              )),
         ),
         SizedBox(height: 2.h),
         Container(
@@ -498,32 +516,33 @@ class PostInfoBaseRow extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [Expanded(
-                    flex: 1,
-                    child:
-                widget.oc ? globals.disableAnimations
-                          ? OriginalContentIcon()
-                          : FadeIn(
-                              preferences: AnimationPreferences(
-                                  offset: Duration(milliseconds: 700),
-                                  duration: Duration(seconds: 1)),
-                              child: OriginalContentIcon(),
-                            )
-                      : SizedBox(width: globalIconSizeSmall)),
-                    Expanded(flex: 0, child: Padding(
-                        padding: EdgeInsets.zero,
-                        child: TagChip(
-                          waitBeforeFadeIn: Duration(milliseconds: 600),
-                          fadeInFromLeft: false,
-                          tagName: widget.mainTag,
-                          width: widget.width * 0.14,
-                          fontStyle: Theme.of(context).textTheme.bodySmall,
-                        )
-                      ))
-                  ]
-              ),
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: widget.oc
+                            ? globals.disableAnimations
+                                ? OriginalContentIcon()
+                                : FadeIn(
+                                    preferences: AnimationPreferences(
+                                        offset: Duration(milliseconds: 700),
+                                        duration: Duration(seconds: 1)),
+                                    child: OriginalContentIcon(),
+                                  )
+                            : SizedBox(width: globalIconSizeSmall)),
+                    Expanded(
+                        flex: 0,
+                        child: Padding(
+                            padding: EdgeInsets.zero,
+                            child: TagChip(
+                              waitBeforeFadeIn: Duration(milliseconds: 600),
+                              fadeInFromLeft: false,
+                              tagName: widget.mainTag,
+                              width: widget.width * 0.14,
+                              fontStyle: Theme.of(context).textTheme.bodySmall,
+                            )))
+                  ]),
               globals.keyPermissions.isEmpty ||
                       (widget.hideSpeedDial != null && widget.hideSpeedDial!)
                   ? Container()

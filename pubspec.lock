@@ -621,6 +621,38 @@ packages:
       sha256: e43a89845873f7be10cb3884345ceb9aebf00a659f479d1c8f4293fcb37022a4
       url: "https://pub.dev"
     source: hosted
+    version: "5.7.2+3"
+  flutter_keyboard_visibility:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility
+      sha256: "4983655c26ab5b959252ee204c2fffa4afeb4413cd030455194ec0caa3b8e7cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.1"
+  flutter_keyboard_visibility_linux:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility_linux
+      sha256: "6fba7cd9bb033b6ddd8c2beb4c99ad02d728f1e6e6d9b9446667398b2ac39f08"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  flutter_keyboard_visibility_macos:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility_macos
+      sha256: c5c49b16fff453dfdafdc16f26bdd8fb8d55812a1d50b0ce25fc8d9f2e53d086
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  flutter_keyboard_visibility_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility_platform_interface
+      sha256: e43a89845873f7be10cb3884345ceb9aebf00a659f479d1c8f4293fcb37022a4
+      url: "https://pub.dev"
+    source: hosted
     version: "2.0.0"
   flutter_keyboard_visibility_web:
     dependency: transitive
@@ -654,14 +686,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.15"
-  flutter_overlay:
-    dependency: "direct main"
-    description:
-      name: flutter_overlay
-      sha256: "59d367deab0e97eb4c9333e938d61cb1bcd317c61429168aad4d5a28bc0a05b1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   flutter_phoenix:
     dependency: "direct main"
     description:
@@ -1329,7 +1353,7 @@ packages:
     source: hosted
     version: "4.1.0"
   quiver:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: quiver
       sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
@@ -1489,10 +1513,10 @@ packages:
     dependency: "direct main"
     description:
       name: textfield_tags
-      sha256: c1d215f481e7e8da5c79719825e595db4f829bf1ad3fce4c7ce43d340aa72683
+      sha256: "93db45f97c67ba63fd4f6df03d1cd2f39fc5aa686cd67f428e0a97b76b2b144d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "1.4.2"
   tus_client:
     dependency: "direct main"
     description:
@@ -1750,7 +1774,7 @@ packages:
     source: hosted
     version: "0.2.2"
   webview_flutter:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: webview_flutter
       sha256: "789d52bd789373cc1e100fb634af2127e86c99cf9abde09499743270c5de8d00"
@@ -1761,10 +1785,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: "532135f6f6b8030cd039f30eab23f340d650350e29f38e9b37d2eaad028f1018"
+      sha256: "69787707339e7588aad256386475c18223cc0da87d9812343bc27c33c01eeab4"
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.0"
+    version: "3.8.1"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
@@ -1777,10 +1801,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: ecc9e9ea15216afc5ba3b1f14aa19414ceba526e57b19cebd970bfa91a0f4058
+      sha256: "7ae75a1a76b9463ae9278de7759ead68aa0eeb70f8d0175e3f9a6c43e911fe76"
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.0"
+    version: "3.6.1"
   win32:
     dependency: transitive
     description:
