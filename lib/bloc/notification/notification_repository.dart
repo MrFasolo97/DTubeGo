@@ -19,7 +19,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       print(response.body);
-      // filter here for specfic notification types
+      // filter here for specific notification types
       List<AvalonNotification> posts =
           ApiResultModel.fromJson(data).notifications;
       return posts;

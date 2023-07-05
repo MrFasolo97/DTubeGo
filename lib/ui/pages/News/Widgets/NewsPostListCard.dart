@@ -14,7 +14,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +95,8 @@ class _NewsPostListCardState extends State<NewsPostListCard> {
           desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
           privacyEnhanced: true,
           useHybridComposition: false,
-          autoPlay: true),
+          autoPlay: true,
+      ),
     );
   }
 

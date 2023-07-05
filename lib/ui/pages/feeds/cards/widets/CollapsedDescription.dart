@@ -42,14 +42,14 @@ class _CollapsedDescriptionState extends State<CollapsedDescription> {
                       children: [
                         Text(
                           widget.description,
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyLarge,
                           softWrap: true,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           "...",
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
                     ),
@@ -58,7 +58,7 @@ class _CollapsedDescriptionState extends State<CollapsedDescription> {
                       styleSheet:
                           MarkdownStyleSheet.fromTheme(Theme.of(context))
                               .copyWith(
-                                  p: Theme.of(context).textTheme.bodyText1!),
+                                  p: Theme.of(context).textTheme.bodyLarge!),
                       onTapLink: (text, url, title) {
                         launchUrl(Uri.parse(url!));
                       },
@@ -106,7 +106,7 @@ class ReadmoreChip extends StatelessWidget {
     return InputChip(
       label: Text(
         controller.expanded ? "collapse" : "read more",
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       onPressed: () {
         controller.toggle();

@@ -44,7 +44,7 @@ class _QRCodeDialogDesktopState extends State<QRCodeDialogDesktop> {
                 child: Center(
                   child: Column(
                     children: [
-                      QrImage(
+                      QrImageView(
                         eyeStyle: const QrEyeStyle(
                           eyeShape: QrEyeShape.circle,
                         ),

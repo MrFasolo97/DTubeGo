@@ -47,7 +47,7 @@ class _QRCodeDialogMobileState extends State<QRCodeDialogMobile> {
                 child: Center(
                   child: Column(
                     children: [
-                      QrImage(
+                      QrImageView(
                         eyeStyle: const QrEyeStyle(
                           eyeShape: QrEyeShape.circle,
                         ),

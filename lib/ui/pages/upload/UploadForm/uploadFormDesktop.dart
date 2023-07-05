@@ -5,7 +5,7 @@ import 'package:dtube_go/res/Config/appConfigValues.dart';
 import 'package:dtube_go/ui/pages/upload/dialogs/HivePostCooldownDialog.dart';
 import 'package:dtube_go/ui/pages/upload/dialogs/UploadTermsDialog.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/UploadStartedDialog.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2SourcePlayer.dart';
+import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
 import 'package:flutter/services.dart';
 import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
@@ -29,7 +29,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-
 
 class UploadFormDesktop extends StatefulWidget {
   UploadFormDesktop(
@@ -392,7 +391,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("Video preview", style: Theme.of(context).textTheme.headline5),
+            Text("Video preview", style: Theme.of(context).textTheme.headlineSmall),
             YTPlayerIFrame(
                 videoUrl: stateUploadData.videoLocation,
                 autoplay: false,

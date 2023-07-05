@@ -65,7 +65,7 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                 children: [
                   Text(
                     'Version',
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 8.0),
@@ -74,7 +74,7 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                             ' (Build: ' +
                             _packageInfo.buildNumber +
                             ')',
-                        style: Theme.of(context).textTheme.headline4),
+                        style: Theme.of(context).textTheme.headlineMedium),
                   ),
                 ],
               ),
@@ -85,7 +85,7 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                   children: [
                     Text(
                       'App Development Team',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                       textAlign: TextAlign.center,
                     ),
                     Padding(
@@ -178,8 +178,8 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                       children: [
                         DTubeLogo(size: 8.w),
                         Text(
-                          " FAQ",
-                          style: Theme.of(context).textTheme.bodyText1,
+                          "FAQ",
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ],
                     )),

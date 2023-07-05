@@ -68,7 +68,7 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                     children: [
                       Text(
                         'Version',
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 8.0),
@@ -77,7 +77,7 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                                 ' (Build: ' +
                                 _packageInfo.buildNumber +
                                 ')',
-                            style: Theme.of(context).textTheme.headline4),
+                            style: Theme.of(context).textTheme.headlineMedium),
                       ),
                     ],
                   ),
@@ -90,10 +90,10 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                     children: [
                       Text(
                         'App Development Team',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 1.h),
+                        padding: EdgeInsets.only(top: 10),
                         child: Text(
                           "Main Developer: @tibfox",
                           textAlign: TextAlign.center,
@@ -126,8 +126,8 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text("DTube Go on ",
-                              style: Theme.of(context).textTheme.bodyText1),
+                          Text("DTubeGo on ",
+                              style: Theme.of(context).textTheme.bodyLarge),
                           FaIcon(FontAwesomeIcons.github, size: 8.w),
                         ],
                       )),
@@ -140,7 +140,7 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                     children: [
                       Text(
                         'Avalon Blockchain',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 1.h),
@@ -164,7 +164,7 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                                   Text("DTube on ",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1),
+                                          .bodyLarge),
                                   FaIcon(FontAwesomeIcons.github, size: 6.w),
                                 ],
                               ),
@@ -178,7 +178,7 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                                   Text("Avalon on ",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1),
+                                          .bodyLarge),
                                   FaIcon(FontAwesomeIcons.github, size: 6.w),
                                 ],
                               ),
@@ -194,12 +194,12 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                               launchUrl(Uri.parse(AppConfig.faqUrl));
                             },
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 DTubeLogo(size: 8.w),
                                 Text(
-                                  " FAQ",
-                                  style: Theme.of(context).textTheme.bodyText1,
+                                  "FAQ",
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ],
                             )),
@@ -218,7 +218,7 @@ class _AboutDialogMobileState extends State<AboutDialogMobile> {
                       ),
                       child: Text(
                         "Thanks",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       ),
                     ),
