@@ -113,11 +113,8 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
 
     _ytController =
-        YoutubePlayerController();
-    _ytController.load(
-        params: YoutubePlayerParams(showFullscreenButton: true, showControls: true),
-        baseUrl: stateUploadData.videoLocation
-    );
+        YoutubePlayerController(initialVideoId: stateUploadData.videoLocation, params: YoutubePlayerParams(showFullscreenButton: true, showControls: true),);
+
   }
 
   @override

@@ -253,7 +253,6 @@ class _SettingsTabContainerDesktopState
               size: 20.w,
             ));
           } else if (state is SettingsLoadedState) {
-            TextfieldTagsController _tagsController = TextfieldTagsController();
             if (settings.length == 1) {
               settings = state.settings;
 
@@ -1325,8 +1324,10 @@ class _SettingsTabContainerDesktopState
                                                           color:
                                                               globalAlmostWhite),
                                                     ),
+                                                    onTag: (String tag) {  },
+                                                    onDelete: (String tag) {  },
                                                   ),
-                                                ],
+                                                )],
                                               ),
                                             )
                                           ],
