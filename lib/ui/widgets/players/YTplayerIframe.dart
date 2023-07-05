@@ -44,6 +44,12 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
 
   @override
   Widget build(BuildContext context) {
+    widget.controller.onEnterFullscreen = () {
+      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    };
+    widget.controller.onExitFullscreen = () {
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    };
     return YoutubePlayerControllerProvider(
       controller: widget.controller,
       child: YoutubePlayerIFrame(
