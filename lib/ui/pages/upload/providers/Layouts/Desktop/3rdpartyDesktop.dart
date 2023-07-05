@@ -86,6 +86,7 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
     _userBloc.add(FetchMyAccountDataEvent());
     _hivesignerBloc = BlocProvider.of<HivesignerBloc>(context);
     _ytController = YoutubePlayerController(
+      initialVideoId: '',
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: false),
@@ -177,14 +178,11 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
                                           () {
                                             _showVideo = true;
                                             _ytController =
-                                                new YoutubePlayerController(
+                                                YoutubePlayerController(
+                                                    initialVideoId: _foreignUrlController.text,
                                                     params: YoutubePlayerParams(
                                                     showControls: true,
                                                     showFullscreenButton: false)
-                                            );
-                                            _ytController.load(
-                                                params: YoutubePlayerParams(showFullscreenButton: true, showControls: true),
-                                                baseUrl: _foreignUrlController.text
                                             );
                                             _uploadData = UploadData(
                                                 link: "",

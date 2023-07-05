@@ -216,7 +216,7 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.post.videoUrl!
+      initialVideoId: widget.post.videoUrl!,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true
@@ -228,7 +228,7 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   void dispose() {
-    _controller.pauseVideo();
+    _controller.pause();
     _controller.close();
 
     super.dispose();
@@ -570,7 +570,7 @@ class _PostDetailsState extends State<PostDetails> {
                               child: FeedListSuggestedPosts(
                                 feedType: 'SuggestedPosts',
                                 clickedCallback: () {
-                                  _controller.pauseVideo();
+                                  _controller.pause();
                                   _videocontroller.pause();
                                 },
                                 width: suggestedSize * 0.9,

@@ -3,7 +3,6 @@ import 'package:dtube_go/ui/widgets/players/YTPlayerFullScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:flutter_overlay/flutter_overlay.dart';
 
 class YTPlayerIFrame extends StatefulWidget {
   YTPlayerIFrame(
@@ -39,7 +38,7 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
   @override
   void dispose() {
     widget.controller.close();
-    widget.controller.pauseVideo();
+    widget.controller.pause();
     super.dispose();
   }
 
@@ -52,29 +51,5 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
         aspectRatio: 16 / 9,
       ),
     );
-    player.controller.setFullScreenListener((isFullscreen) {
-      if (isFullscreen) {
-        SystemChrome.setPreferredOrientations([
-            DeviceOrientation.landscapeRight,
-            DeviceOrientation.landscapeLeft
-          ]);
-        AutoOrientation.landscapeAutoMode();
-        HiOverlay.show(
-          context,
-          child: YoutubePlayerFullScreenPage(link: widget.videoUrl),
-        ).then((value) {
-          print('---received:$value');
-        });
-      } else {
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown
-        ]);
-        AutoOrientation.portraitAutoMode();
-        HiOverlay.close(context);
-      }
-    });
-    player.controller.loadVideoById(videoId: widget.videoUrl);
-    return player;
   }
 }

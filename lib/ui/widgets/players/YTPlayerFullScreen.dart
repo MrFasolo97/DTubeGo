@@ -1,4 +1,5 @@
 import 'package:auto_orientation/auto_orientation.dart';
+import 'package:flutter/services.dart';
 //import 'package:overlay_dialog/overlay_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,8 @@ class _YoutubePlayerFullScreenPageState
 
   @override
   void initState() {
-    _controller = YoutubePlayerController.fromVideoId(
-      autoPlay: true,
-      videoId: widget.link,
+    _controller = YoutubePlayerController(
+      initialVideoId: '',
       params: YoutubePlayerParams(
           showControls: false,
           showFullscreenButton: true,
@@ -42,7 +42,7 @@ class _YoutubePlayerFullScreenPageState
 
   @override
   void dispose() {
-    _controller.pauseVideo();
+    _controller.pause();
     _controller.close();
     AutoOrientation.portraitAutoMode();
     super.dispose();
@@ -50,13 +50,9 @@ class _YoutubePlayerFullScreenPageState
 
   @override
   Widget build(BuildContext context) {
-    _controller.loadVideoById(videoId: widget.link);
-    _controller.setFullScreenListener((isFullscreen) {
-      if(!isFullscreen) {
-        dispose();
-      }
-    });
-    return YoutubePlayerScaffold(
+    return Column(); // disabled, we're not using this file anymore.
+      /*
+      YoutubePlayerScaffold(
       enableFullScreenOnVerticalDrag: false,
       autoFullScreen: false,
       controller: _controller,
@@ -74,7 +70,6 @@ class _YoutubePlayerFullScreenPageState
                       aspectRatio: 16 / 9,
                     ),
                   ),
-                ),
                 Padding(
                   padding: EdgeInsets.only(top: 10.h),
                   child: IconButton(
@@ -89,5 +84,7 @@ class _YoutubePlayerFullScreenPageState
           ),
         ));
       });
+       */
+    }
   }
-}
+

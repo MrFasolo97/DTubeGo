@@ -27,6 +27,7 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
     _videoController =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
+      initialVideoId: widget.url,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true
@@ -41,18 +42,12 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
         return DtubeLogoPulseWithSubtitle(
             subtitle: "Loading video..", size: 10.w);
       } else if (state is PostLoadedState) {
-        _ytController = YoutubePlayerController.fromVideoId(videoId: widget.url,
+        _ytController = YoutubePlayerController(initialVideoId: widget.url,
           params: YoutubePlayerParams(
             showControls: true,
             showFullscreenButton: true,
           )
         );
-        _ytController.load(
-            params: YoutubePlayerParams(
-              showControls: true,
-              showFullscreenButton: true,
-            ),
-            baseUrl: state.post.videoUrl!);
         return InkWell(
           onTap: () {
             setState(() {

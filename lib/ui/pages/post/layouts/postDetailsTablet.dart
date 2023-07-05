@@ -34,7 +34,7 @@ import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-
+import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'dart:io' show Platform;
 
 class PostDetailPageTablet extends StatefulWidget {
@@ -216,31 +216,31 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
+      initialVideoId: widget.post.videoUrl!,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,)
     );
-    _controller.setFullScreenListener((isFullscreen) {
-      if(isFullscreen) {
+    _controller.onEnterFullscreen = () {
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.landscapeLeft,
           DeviceOrientation.landscapeRight,
         ]);
-      } else {
+      };
+    _controller.onExitFullscreen = () {
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.portraitUp,
           DeviceOrientation.portraitDown,
         ]);
         print('Exited Fullscreen');
-      }
-    });
+      };
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
   }
 
   @override
   void dispose() {
-    _controller.pauseVideo();
+    _controller.pause();
     _controller.close();
 
     super.dispose();
@@ -562,7 +562,7 @@ class _PostDetailsState extends State<PostDetails> {
                               child: FeedListSuggestedPosts(
                                 feedType: 'SuggestedPosts',
                                 clickedCallback: () {
-                                  _controller.pauseVideo();
+                                  _controller.pause();
                                   _videocontroller.pause();
                                 },
                                 width: suggestedSize * 0.9,

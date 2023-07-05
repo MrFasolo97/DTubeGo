@@ -108,11 +108,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
 
     _ytController =
-        YoutubePlayerController();
-    _ytController.load(
-        params: YoutubePlayerParams(showFullscreenButton: true, showControls: true),
-        baseUrl: stateUploadData.videoLocation
-    );
+        YoutubePlayerController(initialVideoId: stateUploadData.videoLocation);
   }
 
   @override
@@ -141,20 +137,20 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
             context: context,
             builder: (BuildContext context) => AlertDialog(
               title: Text('not enough free storage',
-                  style: Theme.of(context).textTheme.headline1),
+                  style: Theme.of(context).textTheme.displayLarge),
               content: Container(
                 height: MediaQuery.of(context).size.height / 5,
                 child: Column(
                   children: [
                     Text(
                         "In order to record a video with the app please make sure to have enough free internal storage on your device.",
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     SizedBox(
                       height: 2.h,
                     ),
                     Text(
                         "We have set the minimum required free space to ${AppConfig.minFreeSpaceRecordVideoInMB / 1000} GB internal storage.",
-                        style: Theme.of(context).textTheme.bodyText1)
+                        style: Theme.of(context).textTheme.bodyLarge)
                   ],
                 ),
               ),
@@ -315,7 +311,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                                               "Terms for UGC of DTube Go",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1!
+                                                  .bodyLarge!
                                                   .copyWith(color: globalRed),
                                             ),
                                             onTap: () {
@@ -343,13 +339,13 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                                 Text(
                                     "Info: direct uploads could take some time to get pinned on the ipfs network. That means they need a few minutes to be playable after the initial upload.",
                                     style:
-                                        Theme.of(context).textTheme.bodyText1),
+                                        Theme.of(context).textTheme.bodyLarge),
                                 InputChip(
                                   backgroundColor: globalRed,
                                   label: Text("upload",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline4),
+                                          .headlineMedium),
                                   onPressed: _formIsFilled && _termsAccepted
                                       ? () async {
                                           int _hiveCooldown = await sec
@@ -460,7 +456,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
             Column(
               children: [
                 Text("1. Video file",
-                    style: Theme.of(context).textTheme.headline5),
+                    style: Theme.of(context).textTheme.headlineSmall),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -471,7 +467,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                           Icon(FontAwesomeIcons.solidFolderOpen),
                           SizedBox(width: 8),
                           Text(_video == null ? "pick file" : "change file",
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: Theme.of(context).textTheme.bodyLarge),
                         ],
                       ),
                       onPressed: () {
@@ -488,7 +484,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                           SizedBox(width: 8),
                           Text(
                             _video == null ? "record" : "re-record",
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.bodyLarge,
                             maxLines: 2,
                           ),
                         ],
@@ -531,7 +527,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                             selectedColor: globalRed,
                             label: Text(
                               (showVideoPreview ? 'hide' : 'show') + " preview",
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyLarge,
                             ),
                             avatar: FaIcon(showVideoPreview
                                 ? FontAwesomeIcons.squareCheck
@@ -559,14 +555,14 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
       child: Column(
         children: [
           Text("2. Basic information",
-              style: Theme.of(context).textTheme.headline5),
+              style: Theme.of(context).textTheme.headlineSmall),
           TextFormField(
             cursorColor: globalRed,
             decoration: new InputDecoration(
               labelText: "Title",
-              labelStyle: Theme.of(context).textTheme.bodyText1,
+              labelStyle: Theme.of(context).textTheme.bodyLarge,
             ),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
             controller: _titleController,
             onChanged: (val) {
               checkIfFormIsFilled();
@@ -585,9 +581,9 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
             maxLines: 5,
             decoration: new InputDecoration(
               labelText: "Description",
-              labelStyle: Theme.of(context).textTheme.bodyText1,
+              labelStyle: Theme.of(context).textTheme.bodyLarge,
             ),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
             controller: _descController,
             onChanged: (val) {
               checkIfFormIsFilled();
@@ -613,9 +609,9 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                       cursorColor: globalRed,
                       decoration: new InputDecoration(
                         labelText: "Tag",
-                        labelStyle: Theme.of(context).textTheme.bodyText1,
+                        labelStyle: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                       controller: _tagController,
                       focusNode: _tagFocus,
                       keyboardType: TextInputType.name,
@@ -639,7 +635,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                 ChoiceChip(
                     selected: _tagController.text == "DTubeGo-Moments",
                     label: Text('add to moments',
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     labelStyle: TextStyle(color: globalAlmostWhite),
                     avatar: _tagController.value.text == "DTubeGo-Moments"
                         ? FaIcon(
@@ -677,14 +673,14 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
           Column(
             children: [
               Text("3. Additional information",
-                  style: Theme.of(context).textTheme.headline5),
+                  style: Theme.of(context).textTheme.headlineSmall),
               InputChip(
                 backgroundColor: globalRed,
                 label: Text(
                     stateUploadData.thumbnailLocation == ""
                         ? "pick a custom thumbnail"
                         : "change thumbnail",
-                    style: Theme.of(context).textTheme.bodyText1),
+                    style: Theme.of(context).textTheme.bodyLarge),
                 onPressed: () {
                   getFile(false, false);
                 },
@@ -710,13 +706,13 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                                       child: Text(_imageHints,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1)),
+                                              .bodyLarge)),
                                   InputChip(
                                     backgroundColor: globalRed,
                                     label: Text("crop thumbnail",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1),
+                                            .bodyLarge),
                                     onPressed: () async {
                                       File croppedFile = await cropImage(File(
                                           stateUploadData.thumbnailLocation));
@@ -753,7 +749,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
             ChoiceChip(
                 selected: stateUploadData.originalContent,
                 label: Text('original content',
-                    style: Theme.of(context).textTheme.bodyText1),
+                    style: Theme.of(context).textTheme.bodyLarge),
                 labelStyle: TextStyle(color: globalAlmostWhite),
                 avatar: stateUploadData.originalContent
                     ? FaIcon(
@@ -775,7 +771,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
               child: ChoiceChip(
                   selected: stateUploadData.nSFWContent,
                   label: Text('nsfw content',
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                   labelStyle: TextStyle(color: globalAlmostWhite),
                   avatar: stateUploadData.nSFWContent
                       ? FaIcon(
@@ -795,7 +791,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
             ChoiceChip(
                 selected: stateUploadData.unlistVideo,
                 label: Text('unlist video',
-                    style: Theme.of(context).textTheme.bodyText1),
+                    style: Theme.of(context).textTheme.bodyLarge),
                 labelStyle: TextStyle(color: globalAlmostWhite),
                 avatar: stateUploadData.unlistVideo
                     ? FaIcon(
@@ -814,7 +810,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                 ? ChoiceChip(
                     selected: stateUploadData.crossPostToHive,
                     label: Text('cross-post to hive',
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     labelStyle: TextStyle(color: globalAlmostWhite),
                     avatar: stateUploadData.crossPostToHive
                         ? FaIcon(
@@ -847,7 +843,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
           children: [
             Text(
               "bet in VP (initial selfvote):",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Container(
               width: 95.w,
@@ -877,13 +873,13 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
                               1000)
                           .toStringAsFixed(2) +
                       'K VP',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 2.w),
                   child: Text(
                     stateUploadData.vpPercent.toStringAsFixed(2) + '%',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ],
@@ -898,7 +894,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
           children: [
             Text(
               "Promote:",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Container(
               width: 95.w,
@@ -925,7 +921,7 @@ class _UploadFormMobileState extends State<UploadFormMobile> {
               children: [
                 Text(
                   stateUploadData.burnDtc.roundToDouble().toString() + ' DTC',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 // TODO: calculate approx. VP of burn
               ],
