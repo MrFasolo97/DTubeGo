@@ -232,7 +232,7 @@ class SearchScreenDesktopState extends State<SearchScreenDesktop> {
                                         maxLines: 1,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                       ),
                                     ),
                                     SizedBox(width: 15.w, child: _buildChips()),
