@@ -7,11 +7,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 
 class Advertisement extends StatefulWidget {
-  const Advertisement({
+  Advertisement({
     Key? key,
     required this.post,
+    this.iframe = "<iframe data-aa='2232160' src='https://acceptable.a-ads.com/2232160' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>",
   }) : super(key: key);
-
+  String iframe;
   final Padding post;
 
   @override
@@ -23,7 +24,7 @@ class _AdvertisementState extends State<Advertisement> {
   Widget build(BuildContext context) {
     WebViewController web_controller = WebViewController();
     web_controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    web_controller.loadHtmlString("<iframe data-aa='2232160' src='https://acceptable.a-ads.com/2232160' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>");
+    web_controller.loadHtmlString(widget.iframe);
 
     web_controller.setNavigationDelegate(
       NavigationDelegate(onNavigationRequest: (request) {
