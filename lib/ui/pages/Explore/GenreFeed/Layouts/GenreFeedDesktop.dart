@@ -88,7 +88,7 @@ class _GenreFeedDesktopState extends State<GenreFeedDesktop> {
             scrollCallback: (value) {},
             enableNavigation: true,
             tabletCrossAxisCount: 2,
-            desktopCrossAxisCount: 5),
+            desktopCrossAxisCount: 8),
       ),
     );
   }
