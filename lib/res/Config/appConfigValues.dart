@@ -16,7 +16,7 @@ class AppConfig {
   static String readmoreUrl = "https://token.d.tube";
   static String discordUrl = "https://discord.gg/dtube";
   static String faqUrl = "https://d.tube/#!/wiki/faq/README";
-  static String gitDTubeGoUrl = "https://github.com/dtube/DTubeGo";
+  static String gitDTubeGoUrl = "https://github.com/MrFasolo97/DTubeGo";
   static String gitAvalonUrl = "https://github.com/dtube/avalon";
   static String gitDtubeUrl = "https://github.com/dtube/dtube";
 

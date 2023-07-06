@@ -396,7 +396,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                             ]),
                         onTap: () {
                           launchUrl(Uri.parse(
-                              "https://github.com/dtube/DTubeGo/releases"));
+                              "https://github.com/MrFasolo97/DTubeGo/releases"));
                         },
                       ),
                       ListTile(
