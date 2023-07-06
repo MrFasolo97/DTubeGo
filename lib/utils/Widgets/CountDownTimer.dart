@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CountDownTimer extends StatefulWidget {
@@ -58,7 +60,7 @@ class _CountDownTimerState extends State<CountDownTimer>
           if (status == AnimationStatus.completed) {
             widget.whenTimeExpires();
           } else if (status == AnimationStatus.dismissed) {
-            print("Animation Complete");
+            log("Animation Complete");
           }
         });
       });

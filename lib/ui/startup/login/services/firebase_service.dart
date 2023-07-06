@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 
@@ -31,7 +32,7 @@ class FirebaseService {
       );
       await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      log(e.message!);
       throw e;
     }
   }

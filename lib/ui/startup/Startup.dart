@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -28,7 +29,7 @@ class _StartUpState extends State<StartUp> {
   @override
   void initState() {
     super.initState();
-    print(Device.width);
+    log(Device.width.toString());
     if (kIsWeb || (!Platform.isAndroid && !Platform.isIOS)) {
       globals.mobileMode = false;
       _logoSize = 20.w;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/bloc/config/txTypes.dart';
 import 'package:dtube_go/res/Config/APIUrlSchema.dart';
 import 'package:dtube_go/res/Config/appConfigValues.dart';
@@ -68,13 +70,13 @@ class AuthRepositoryImpl implements AuthRepository {
           for (var txType in txTypes.keys) {
             globals.keyPermissions.add(txType);
           }
-          print(globals.keyPermissions);
+          log(globals.keyPermissions.join(", "));
         } else {
           for (Keys key in authInformation.keys) {
             if (key.pub == pub.toString()) {
               _keyIsValid = true;
               globals.keyPermissions = key.types;
-              print(globals.keyPermissions);
+              log(globals.keyPermissions.join(", "));
               break;
             }
           }

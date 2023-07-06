@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/PostListCardLarge.dart';
 import 'package:dtube_go/utils/Random/randomGenerator.dart';
@@ -122,7 +124,7 @@ class FeedListCarousel extends StatelessWidget {
                             (_hiddenMode == 'Hide' && f.summaryOfVotes < 0) ||
                             (f.jsonString!.hide == 1 &&
                                 f.author != _applicationUser)) {
-                          print("skip item" + f.link);
+                          log("skip item" + f.link);
                         } else {
                           _feedItems.add(f);
                         }

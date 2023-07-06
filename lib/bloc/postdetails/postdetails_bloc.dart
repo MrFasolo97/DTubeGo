@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_event.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_repository.dart';
@@ -24,7 +26,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
         emit(PostLoadedState(post: post));
       } catch (e) {
-        print(e.toString());
+        log(e.toString());
         emit(PostErrorState(message: e.toString()));
       }
     });

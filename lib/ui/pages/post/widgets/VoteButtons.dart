@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
@@ -258,7 +260,7 @@ class VotingButtonRow extends StatelessWidget {
       child: BlocListener<TransactionBloc, TransactionState>(
         listener: (context, state) {
           if (state is TransactionSent) {
-            print(post.author + '/' + post.link);
+            log(post.author + '/' + post.link);
             BlocProvider.of<PostBloc>(context).add(
                 FetchPostEvent(post.author, post.link, "VoteButtons.dart"));
           }

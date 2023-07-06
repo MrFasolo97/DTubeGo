@@ -3,13 +3,14 @@ import 'package:bs58/bs58.dart';
 import 'package:bs58check/bs58check.dart' as bs58check;
 import 'package:elliptic/elliptic.dart';
 import 'dart:math';
+import 'dart:developer' as dev;
 import 'package:hex/hex.dart';
 import 'dart:typed_data';
 
 int generateRandom(int min, int max) {
   var _rn = new Random();
   var _randomInt = min + _rn.nextInt(max - min);
-  print(_randomInt);
+  dev.log(_randomInt.toString());
   return _randomInt;
 }
 
@@ -22,7 +23,7 @@ List<String> generateNewKeyPair() {
 
   var priv = base58.encode(Uint8List.fromList(_pk.bytes));
 
-  print('privateKey: 0x${priv}');
-  print('publicKey: 0x$pub');
+  dev.log('privateKey: 0x${priv}');
+  dev.log('publicKey: 0x$pub');
   return [pub, priv];
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -41,7 +43,7 @@ class PinPadWidget extends StatelessWidget {
 
       // eachFieldWidth: 40.0,
       // eachFieldHeight: 55.0,
-      onSubmitted: (String pin) => print(pin),
+      onSubmitted: (String pin) => log(pin),
       focusNode: _pinPutFocusNode,
       controller: _pinPutController,
       autofocus: requestFocus,

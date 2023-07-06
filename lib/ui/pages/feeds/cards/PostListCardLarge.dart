@@ -1,4 +1,6 @@
-import 'package:dtube_go/ui/pages/feeds/cards/widets/Advertisement.dart';
+import 'dart:developer';
+
+import 'package:dtube_go/ui/pages/feeds/cards/widets/AdvertisementAfterPost.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'dart:io';
@@ -204,7 +206,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
               !_showVotingBars) {
             _ytController.pause();
             _bpController.pause();
-            print("VISIBILITY OF " +
+            log("VISIBILITY OF " +
                 widget.author +
                 "/" +
                 widget.link +
@@ -212,7 +214,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
                 visiblePercentage.toString());
             if (globals.enableAdvertisements && !disableAdvertisements && !this.countedForAds) {
               globals.scrolledPostsBetweenAds += 1;
-              print("Scrolled " +
+              log("Scrolled " +
                   globals.scrolledPostsBetweenAds.toString() +
                   " posts...");
               this.countedForAds = true;
@@ -590,8 +592,8 @@ class PostInfoBaseRow extends StatelessWidget {
                           curve: Curves.bounceIn,
                           overlayColor: globalAlmostWhite,
                           overlayOpacity: 0,
-                          onOpen: () => print('OPENING DIAL'),
-                          onClose: () => print('DIAL CLOSED'),
+                          onOpen: () => log('OPENING DIAL'),
+                          onClose: () => log('DIAL CLOSED'),
                           tooltip: 'menu',
                           heroTag: 'submenu' + widget.title,
                           backgroundColor: Colors.transparent,

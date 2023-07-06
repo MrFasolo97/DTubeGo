@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dtube_go/style/ThemeData.dart';
@@ -30,7 +31,7 @@ class _EULAScreenState extends State<EULAScreen> {
 
   void loadEulaAssets() async {
     if (kIsWeb) {
-      print("web release");
+      log("web release");
     } else {
       if (Platform.isAndroid) {
         final _loadedEulaAndroidData =

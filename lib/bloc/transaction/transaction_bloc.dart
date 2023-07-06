@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -45,7 +46,6 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       );
 
       if (response.statusCode == 200) {
-        print(response);
         var uploadedUrl = response.data['data']['link'];
         // var uploadedUrl = "";
 
@@ -515,7 +515,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
           result = await repository
               .sign(_tx, _applicationUser!, _privKey!)
               .then((value) => repository.send(_avalonApiNode, value));
-          print(result);
+          log(result);
           if (!result.contains("error") && int.tryParse(result) != null) {
             emit(TransactionSent(
                 block: int.parse(result),

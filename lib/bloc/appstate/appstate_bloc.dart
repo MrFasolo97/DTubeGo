@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dtube_go/bloc/appstate/appstate_bloc_full.dart';
 
@@ -12,7 +14,7 @@ class AppStateBloc extends Bloc<AppStateEvent, AppState> {
   AppStateBloc() : super(UploadInitialState()) {
     on<UploadStateChangedEvent>((event, emit) async {
       emit(event.uploadState);
-      print(event.uploadState);
+      log(event.uploadState.toString());
     });
   }
 }

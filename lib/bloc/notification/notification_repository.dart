@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/bloc/notification/notification_response_model.dart';
 import 'package:dtube_go/res/Config/APIUrlSchema.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +20,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
             .replaceAll("##USERNAME", applicationUser)));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      print(response.body);
+      log(response.body);
       // filter here for specific notification types
       List<AvalonNotification> posts =
           ApiResultModel.fromJson(data).notifications;

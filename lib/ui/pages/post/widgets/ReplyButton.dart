@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
@@ -167,7 +169,7 @@ class _ReplyButtonState extends State<ReplyButton> {
                                 setState(() {
                                   _sendPressed = true;
                                 });
-                                print("SEND PRESSED");
+                                log("SEND PRESSED");
                                 UploadData _uploadData = new UploadData(
                                     link: "",
                                     parentAuthor: widget.author,

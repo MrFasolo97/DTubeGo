@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
@@ -119,7 +121,7 @@ class _NewsPostListCardState extends State<NewsPostListCard> {
             !_showVotingBars) {
           _ytController.pause();
           _bpController.pause();
-          print("VISIBILITY OF " +
+          log("VISIBILITY OF " +
               widget.author +
               "/" +
               widget.link +

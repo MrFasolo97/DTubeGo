@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dtube_go/bloc/feed/feed_state.dart';
 import 'package:dtube_go/bloc/feed/feed_event.dart';
@@ -69,7 +70,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
             feedType: event.feedType,
             fetchedWholeFeed: true));
       } catch (e) {
-        print(e.toString());
+        log(e.toString());
         emit(FeedErrorState(message: e.toString()));
       }
     });
@@ -109,7 +110,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         emit(FeedLoadedState(
             feed: feed, feedType: event.feedType, fetchedWholeFeed: true));
       } catch (e) {
-        print(e.toString());
+        log(e.toString());
         emit(FeedErrorState(message: e.toString()));
       }
     });
@@ -148,7 +149,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         emit(FeedLoadedState(
             feed: feed, feedType: "tagSearch", fetchedWholeFeed: true));
       } catch (e) {
-        print(e.toString());
+        log(e.toString());
         emit(FeedErrorState(message: e.toString()));
       }
     });
@@ -165,7 +166,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           _blockedUsersFilter = ",%5E" + u;
         }
       }
-      print("FETCH " + event.feedType);
+      log("FETCH " + event.feedType);
       emit(FeedLoadingState());
       try {
         List<FeedItem> feed = [];
@@ -262,7 +263,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         emit(FeedLoadedState(
             feed: feed, feedType: "UserFeed", fetchedWholeFeed: true));
       } catch (e) {
-        print(e.toString());
+        log(e.toString());
         emit(FeedErrorState(message: e.toString()));
       }
     });
@@ -357,7 +358,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
                 (key2, key1) =>
                     _usersPostCount[key1]!.compareTo(_usersPostCount[key2]!));
             // add sorted users to list
-            print("// add sorted users to list");
+            log("// add sorted users to list");
             _sortedByValue.forEach((key, value) {
               _suggestedUsers.add(key.toString());
             });
@@ -369,7 +370,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
                 .take(ExploreConfig.maxUserSuggestions)
                 .toList()));
       } catch (e) {
-        print(e.toString());
+        log(e.toString());
         emit(FeedErrorState(message: e.toString()));
       }
     });

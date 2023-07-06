@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/bloc/accountHistory/accountHistory_response_model.dart';
 import 'package:dtube_go/res/Config/APIUrlSchema.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +21,7 @@ class AccountHistoryRepositoryImpl implements AccountHistoryRepository {
             .replaceAll("##FROMBLOC", fromBloc.toString())));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      print(response.body);
+      log(response.body);
       // filter here for specfic accountHistory types
       List<AvalonAccountHistoryItem> historyItems =
           ApiResultModel.fromJson(data).accountHistorys;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/res/Config/APINodesConfigValues.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,7 +29,7 @@ Future<String> discoverAPINode() async {
       } else if (_nodes.length == _ApiNodesOnError.length) {
         break;
       }
-      print("checking " + node);
+      log("checking " + node);
       try {
         var _beforeRequestMicroSeconds = DateTime.now().microsecondsSinceEpoch;
         var response = await http.get(Uri.parse(node + '/count')).timeout(
@@ -39,13 +41,13 @@ Future<String> discoverAPINode() async {
           return http.Response('Error', 408);
         });
         if (response.statusCode >= 400 && response.statusCode != 408) {
-          print(node + ": " + response.statusCode.toString());
+          log(node + ": " + response.statusCode.toString());
           _ApiNodesOnError[node] = -1;
         } else if (response.statusCode == 200) {
           // node responded
           // save responsetime to list
           var _afterRequestMicroSeconds = DateTime.now().microsecondsSinceEpoch;
-          print(_afterRequestMicroSeconds);
+          log(_afterRequestMicroSeconds.toString());
 
           _nodeResponses[node] =
               _afterRequestMicroSeconds - _beforeRequestMicroSeconds;
@@ -62,7 +64,7 @@ Future<String> discoverAPINode() async {
   _sortedApiNodesByResponseTime = SplayTreeMap.from(_nodeResponses,
       (key1, key2) => _nodeResponses[key1]!.compareTo(_nodeResponses[key2]!));
 
-  print("using " + _sortedApiNodesByResponseTime.entries.toList()[0].key);
+  log("using " + _sortedApiNodesByResponseTime.entries.toList()[0].key);
   // pick quickest node
   return _sortedApiNodesByResponseTime.entries.toList()[0].key;
 }

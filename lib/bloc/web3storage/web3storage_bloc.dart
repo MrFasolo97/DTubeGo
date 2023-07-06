@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dtube_go/bloc/appstate/appstate_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
@@ -60,7 +61,7 @@ class Web3StorageBloc extends Bloc<Web3StorageEvent, Web3StorageState> {
       do {
         try {
           _uploadEndpoint = await repository.getUploadEndpoint();
-          print("ENDPOINT: " + _uploadEndpoint["tus"]!);
+          log("ENDPOINT: " + _uploadEndpoint["tus"]!);
           if (_uploadEndpoint["tus"] == "" || _uploadEndpoint["api"] == "") {
             // yield Web3StorageErrorState(message: "no valid endpoint found");
             uploadErrorMessage = "no valid upload endpoint found!\n\n";
@@ -68,7 +69,7 @@ class Web3StorageBloc extends Bloc<Web3StorageEvent, Web3StorageState> {
             uploadErrorCount++;
           } else {
             _cid = await repository.uploadVideo(_newFile.path, _uploadEndpoint);
-            print("CID: " + _cid);
+            log("CID: " + _cid);
             emit(Web3StorageVideoUploadedState(uploadToken: _cid));
             appStateBloc.add(UploadStateChangedEvent(
                 uploadState: UploadProcessingState(progressPercent: 70)));
@@ -85,7 +86,7 @@ class Web3StorageBloc extends Bloc<Web3StorageEvent, Web3StorageState> {
           }
         } catch (e) {
           // ipfs upload failed
-          print(
+          log(
               "Video upload failed!\n\nPlease report this error to the dtube team with a screenshot!\n\n" +
                   e.toString());
           uploadErrorMessage =

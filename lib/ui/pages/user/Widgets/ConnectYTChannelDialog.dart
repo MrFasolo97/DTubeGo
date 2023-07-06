@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
@@ -250,7 +252,7 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                                       secretConfig.encryptYTChannelId(
                                           widget.user,
                                           _channelIdController.value.text);
-                                  print(encryptedChannelID);
+                                  log(encryptedChannelID);
                                   widget.connectCallback([
                                     _channelIdController.value.text,
                                     encryptedChannelID

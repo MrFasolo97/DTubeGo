@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dtube_go/bloc/avalonConfig/avalonConfig_event.dart';
 import 'package:dtube_go/bloc/avalonConfig/avalonConfig_repository.dart';
@@ -31,7 +33,7 @@ class AvalonConfigBloc extends Bloc<AvalonConfigEvent, AvalonConfigState> {
           _avalonApiNode,
           event.accountName,
         );
-        print("acc price " + _accountPrice.toString());
+        log("acc price " + _accountPrice.toString());
         if (_accountPrice > 0) {
           emit(AvalonAccountAvailableState(dtcCosts: _accountPrice));
         } else {

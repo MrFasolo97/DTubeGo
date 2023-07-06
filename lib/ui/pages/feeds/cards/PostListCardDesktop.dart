@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
@@ -119,7 +121,7 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
             !_showVotingBars) {
           _ytController.pause();
           _bpController.pause();
-          print("VISIBILITY OF " +
+          log("VISIBILITY OF " +
               widget.feedItem.author +
               "/" +
               widget.feedItem.link +
@@ -635,8 +637,8 @@ class PostInfoBaseRow extends StatelessWidget {
                       curve: Curves.bounceIn,
                       overlayColor: globalAlmostWhite,
                       overlayOpacity: 0,
-                      onOpen: () => print('OPENING DIAL'),
-                      onClose: () => print('DIAL CLOSED'),
+                      onOpen: () => log('OPENING DIAL'),
+                      onClose: () => log('DIAL CLOSED'),
                       tooltip: 'menu',
                       heroTag: 'submenu' + feedItem.jsonString!.title,
                       backgroundColor: Colors.transparent,
