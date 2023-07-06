@@ -106,17 +106,17 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
 
   late bool _votingDirection; // true = upvote | false = downvote
 
+  late bool countedForAds;
   late bool _showCommentInput;
   late bool _showGiftInput;
-
   late UserBloc _userBloc;
-
   late VideoPlayerController _bpController;
   late YoutubePlayerController _ytController;
   late bool disableAdvertisements;
   @override
   void initState() {
     super.initState();
+    countedForAds = false;
     disableAdvertisements = widget.disableAdvertisements != null ? widget.disableAdvertisements! : false;
     _avatarSize = widget.width * 0.1;
     _showVotingBars = false;
@@ -210,17 +210,18 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
                 widget.link +
                 " CHANGED TO " +
                 visiblePercentage.toString());
-            if (globals.enableAdvertisements && !disableAdvertisements) {
+            if (globals.enableAdvertisements && !disableAdvertisements && !this.countedForAds) {
               globals.scrolledPostsBetweenAds += 1;
               print("Scrolled " +
                   globals.scrolledPostsBetweenAds.toString() +
                   " posts...");
+              this.countedForAds = true;
             }
           }
         },
         child: (globals.scrolledPostsBetweenAds >=
                     globals.minimumPostsBetweenAds &&
-                globals.enableAdvertisements && ! disableAdvertisements)
+                globals.enableAdvertisements && !disableAdvertisements)
             ? Advertisement(post: post)
             : post);
   }
