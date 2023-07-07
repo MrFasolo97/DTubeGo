@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
+import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'dart:io';

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:dtube_go/ui/pages/feeds/cards/widets/ThumbPlayerWidgets.dart';
+import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
