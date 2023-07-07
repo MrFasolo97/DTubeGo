@@ -9,12 +9,9 @@ import 'package:flutter/material.dart';
 class AdvertisementDesktop extends StatefulWidget {
   AdvertisementDesktop({
     Key? key,
-    this.showAdInRow = false,
     this.iframe = "<iframe data-aa='2232160' src='https://acceptable.a-ads.com/2232160' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>",
   }) : super(key: key);
   String iframe;
-  bool showAdInRow;
-
   @override
   _AdvertisementStateDesktop createState() => _AdvertisementStateDesktop();
 }

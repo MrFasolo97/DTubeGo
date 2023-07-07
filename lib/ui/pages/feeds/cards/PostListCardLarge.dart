@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:dtube_go/ui/pages/feeds/cards/widgets/AdvertisementOnDesktop.dart';
+import 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'dart:io';

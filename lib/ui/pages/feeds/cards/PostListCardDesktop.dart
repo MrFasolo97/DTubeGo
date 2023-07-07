@@ -29,7 +29,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/widgets/AdvertisementOnDesktop.dart';
+import 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart';
 
 
 class PostListCardDesktop extends StatefulWidget {
@@ -300,8 +300,8 @@ class _PostDataState extends State<PostData> {
   Widget ShowAdsOrPost({post}) {
     Widget? show;
     if(globals.scrolledPostsBetweenAds >= globals.minimumPostsBetweenAds && globals.enableAdvertisements) {
-      globals.scrolledPostsBetweenAds = 0;
       show = AdvertisementDesktop();
+      globals.scrolledPostsBetweenAds = 0;
     } else {
       show = post;
     }
