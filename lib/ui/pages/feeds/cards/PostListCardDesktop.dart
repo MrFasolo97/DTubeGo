@@ -29,6 +29,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:dtube_go/ui/pages/feeds/cards/widgets/AdvertisementOnDesktop.dart';
+
 
 class PostListCardDesktop extends StatefulWidget {
   PostListCardDesktop(
@@ -84,9 +86,12 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
   late VideoPlayerController _bpController;
   late YoutubePlayerController _ytController;
 
+  late bool countedForAds;
+
   @override
   void initState() {
     super.initState();
+    countedForAds = false;
     _showVotingBars = false;
     _votingDirection = true;
     _showCommentInput = false;
@@ -127,6 +132,13 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
               widget.feedItem.link +
               "CHANGED TO " +
               visiblePercentage.toString());
+          if (globals.enableAdvertisements && !this.countedForAds) {
+            globals.scrolledPostsBetweenAds += 1;
+            log("Scrolled " +
+                globals.scrolledPostsBetweenAds.toString() +
+                " posts...");
+            this.countedForAds = true;
+          }
         }
       },
       child: Padding(
@@ -285,9 +297,19 @@ class PostData extends StatefulWidget {
 }
 
 class _PostDataState extends State<PostData> {
+  Widget ShowAdsOrPost({post}) {
+    Widget? show;
+    if(globals.scrolledPostsBetweenAds >= globals.minimumPostsBetweenAds && globals.enableAdvertisements) {
+      globals.scrolledPostsBetweenAds = 0;
+      show = AdvertisementDesktop();
+    } else {
+      show = post;
+    }
+    return Padding(padding: EdgeInsets.only(top: 16), child: SizedBox(width: Device.width, height: 380, child: show,));
+  }
   @override
   Widget build(BuildContext context) {
-    return Column(
+    Widget post = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -392,6 +414,7 @@ class _PostDataState extends State<PostData> {
               ),
       ],
     );
+    return ShowAdsOrPost(post: post);
   }
 }
 

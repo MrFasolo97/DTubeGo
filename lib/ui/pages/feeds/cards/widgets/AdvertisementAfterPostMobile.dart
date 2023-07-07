@@ -1,13 +1,16 @@
+import 'dart:io';
+
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/cupertino.dart';
+
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 
-class Advertisement extends StatefulWidget {
-  Advertisement({
+class AdvertisementSmartphone extends StatefulWidget {
+  AdvertisementSmartphone({
     Key? key,
     required this.post,
     this.iframe = "<iframe data-aa='2232160' src='https://acceptable.a-ads.com/2232160' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>",
@@ -16,10 +19,10 @@ class Advertisement extends StatefulWidget {
   final Padding post;
 
   @override
-  _AdvertisementState createState() => _AdvertisementState();
+  _AdvertisementStateSmartphone createState() => _AdvertisementStateSmartphone();
 }
 
-class _AdvertisementState extends State<Advertisement> {
+class _AdvertisementStateSmartphone extends State<AdvertisementSmartphone> {
   @override
   Widget build(BuildContext context) {
     WebViewController web_controller = WebViewController();

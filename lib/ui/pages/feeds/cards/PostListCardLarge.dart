@@ -195,6 +195,16 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
         },
       ),
     );
+    Widget ShowAdsOrPost({post}) {
+      Widget? show;
+      if(globals.scrolledPostsBetweenAds >= globals.minimumPostsBetweenAds && globals.enableAdvertisements) {
+        globals.scrolledPostsBetweenAds = 0;
+        show = AdvertisementDesktop();
+      } else {
+        show = post;
+      }
+      return Padding(padding: EdgeInsets.only(top: 16), child: SizedBox(width: Device.width, height: 380, child: show,));
+    }
     return VisibilityDetector(
         key: Key('postlist-large' + widget.link),
         onVisibilityChanged: (visibilityInfo) {
@@ -221,11 +231,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
             }
           }
         },
-        child: (globals.scrolledPostsBetweenAds >=
-                    globals.minimumPostsBetweenAds &&
-                globals.enableAdvertisements && !disableAdvertisements)
-            ? Advertisement(post: post)
-            : post);
+        child: ShowAdsOrPost(post: post),);
   }
 }
 
