@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
+import 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'dart:io';
@@ -29,7 +30,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart';
+import 'package:dtube_go/lib/utils/hw_none.dart'
+  if(dart.lib.html) 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart'
+  if(dart.lib.io) 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 
 
 class PostListCardDesktop extends StatefulWidget {
@@ -300,7 +303,7 @@ class _PostDataState extends State<PostData> {
   Widget ShowAdsOrPost({post}) {
     Widget? show;
     if(globals.scrolledPostsBetweenAds >= globals.minimumPostsBetweenAds && globals.enableAdvertisements) {
-      show = AdvertisementDesktop();
+      show = Advertisement(post: post);
       globals.scrolledPostsBetweenAds = 0;
     } else {
       show = post;

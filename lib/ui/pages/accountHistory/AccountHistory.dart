@@ -265,8 +265,8 @@ class ActivityItem extends StatelessWidget {
                               username: txData.sender,
                               width: 30.w,
                               height: 10.h,
-                              mainStyle: Theme.of(context).textTheme.headline5!,
-                              subStyle: Theme.of(context).textTheme.bodyText1!)
+                              mainStyle: Theme.of(context).textTheme.headlineSmall!,
+                              subStyle: Theme.of(context).textTheme.bodyLarge!)
                         ],
                       ),
                       onTap: () {
@@ -277,7 +277,7 @@ class ActivityItem extends StatelessWidget {
                       width: 50.w,
                       child: Text(
                         friendlyDescription,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ),
                     InkWell(

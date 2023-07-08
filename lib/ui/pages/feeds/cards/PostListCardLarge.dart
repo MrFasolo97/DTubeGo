@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
+import 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'dart:io';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
@@ -26,8 +26,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:dtube_go/lib/utils/hw_none.dart' if(dart.lib.html) 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart'
+    if(dart.lib.io) 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 
-class PostListCardLarge extends StatefulWidget {
+ class PostListCardLarge extends StatefulWidget {
   PostListCardLarge(
       {Key? key,
       required this.blur,
@@ -146,6 +148,17 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
     super.dispose();
   }
 
+  Widget ShowAdsOrPost({post}) {
+    Widget? show;
+    if(globals.scrolledPostsBetweenAds >= globals.minimumPostsBetweenAds && globals.enableAdvertisements) {
+      globals.scrolledPostsBetweenAds = 0;
+      show = Advertisement(post: post);
+    } else {
+      show = post;
+    }
+    return show!;
+  }
+
   @override
   Widget build(BuildContext context) {
     Padding post = Padding(
@@ -195,16 +208,6 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
         },
       ),
     );
-    Widget ShowAdsOrPost({post}) {
-      Widget? show;
-      if(globals.scrolledPostsBetweenAds >= globals.minimumPostsBetweenAds && globals.enableAdvertisements) {
-        globals.scrolledPostsBetweenAds = 0;
-        show = AdvertisementDesktop();
-      } else {
-        show = post;
-      }
-      return Padding(padding: EdgeInsets.only(top: 16), child: SizedBox(width: Device.width, height: 380, child: show,));
-    }
     return VisibilityDetector(
         key: Key('postlist-large' + widget.link),
         onVisibilityChanged: (visibilityInfo) {

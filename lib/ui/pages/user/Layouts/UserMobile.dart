@@ -335,14 +335,14 @@ class _UserPageMobileState extends State<UserPageMobile> {
                                 mainStyle: user.name.length > 10
                                     ? Theme.of(context)
                                         .textTheme
-                                        .headline1!
+                                        .displayLarge!
                                         .copyWith(fontSize: 20)
                                     : Theme.of(context)
                                         .textTheme
-                                        .headline1!
+                                        .displayLarge!
                                         .copyWith(fontSize: 30),
                                 subStyle:
-                                    Theme.of(context).textTheme.bodyText1!,
+                                    Theme.of(context).textTheme.bodyLarge!,
                               )
                             : FadeIn(
                                 preferences: AnimationPreferences(
@@ -353,10 +353,10 @@ class _UserPageMobileState extends State<UserPageMobile> {
                                   height: 20.w,
                                   mainStyle: Theme.of(context)
                                       .textTheme
-                                      .headline1!
+                                      .displayLarge!
                                       .copyWith(fontSize: 30),
                                   subStyle:
-                                      Theme.of(context).textTheme.bodyText1!,
+                                      Theme.of(context).textTheme.bodyLarge!,
                                 )),
                       ),
                     ]),
