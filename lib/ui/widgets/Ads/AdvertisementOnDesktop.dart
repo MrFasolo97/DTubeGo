@@ -24,6 +24,7 @@ class _AdvertisementState extends State<Advertisement> {
     _controller = PlatformWebViewController(
       const PlatformWebViewControllerCreationParams(),
     )..loadHtmlString(widget.iframe);
+    super.initState();
   }
 
   @override

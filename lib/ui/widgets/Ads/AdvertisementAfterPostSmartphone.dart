@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/cupertino.dart';
 
@@ -28,8 +26,16 @@ class _AdvertisementState extends State<Advertisement> {
     WebViewController web_controller = WebViewController();
     web_controller.loadHtmlString(widget.iframe);
 
+    web_controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    web_controller.setNavigationDelegate(NavigationDelegate(
+      onNavigationRequest: (NavigationRequest request) {
+        launchUrlString(request.url, mode: LaunchMode.externalApplication);
+        return NavigationDecision.prevent;
+      }
+    ));
+
     Widget advertisement = WebViewWidget(controller: web_controller);
     globals.scrolledPostsBetweenAds = 0;
-    return Expanded(flex: 1, child: Column(children: [SizedBox(width: Device.width, height: 24.h, child: Column(children: [Padding(padding: EdgeInsets.all(0), child: SizedBox(child: advertisement, width: Device.width, height: 24.h,)), Expanded(child: Padding(padding: EdgeInsets.all(0), child: widget.post))]))]));
+    return Column(children: [SizedBox(width: Device.width, height: 24.h, child: Column(children: [Padding(padding: EdgeInsets.all(0), child: SizedBox(child: advertisement, width: Device.width, height: 24.h,)), Expanded(child: Padding(padding: EdgeInsets.all(0), child: widget.post))]))]);
   }
 }
