@@ -30,7 +30,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:dtube_go/lib/utils/hw_none.dart'
+import 'package:dtube_go/utils/System/hw_none.dart'
   if(dart.lib.html) 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart'
   if(dart.lib.io) 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 
