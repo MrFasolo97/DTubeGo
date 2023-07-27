@@ -1,3 +1,4 @@
+import 'package:dtube_go/ui/pages/settings/APINodeSelection.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
@@ -79,6 +80,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
   bool _showDisplayHints = false;
   bool _showSecurityHints = false;
   bool _showBehaviourHints = false;
+  bool _showAPINodeHints = false;
   bool _showInterestsHints = false;
 
   bool _showVotingWeightHints = false;
@@ -923,6 +925,43 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                           child: Column(
                             children: [
                               SizedBox(height: 16),
+                            DTubeFormCard(
+                                waitBeforeFadeIn: Duration(milliseconds: 200),
+                                avoidAnimation: _visitedTabs.contains(1) ||
+                                    globals.disableAnimations,
+                                childs: [
+                                  ShowHintIcon(
+                                    onPressed: () {
+                                      setState(() {
+                                        _showAPINodeHints =
+                                        !_showAPINodeHints;
+                                      });
+                                    },
+                                    alignment: Alignment.topRight,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 1.h),
+                                    child: Text("API Node:",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall),
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: APINodeSelection(),
+                                      ),
+                                    ],
+                                  ),
+                                  VisibilityHintText(
+                                      showHint: _showAPINodeHints,
+                                      hintText:
+                                      "Here you can chose the avalon API node to use to retrieve blockchain data and make transactions for this session, the default value is the automatically chosen API node."
+                                  ),
+                              ]),
                               DTubeFormCard(
                                 waitBeforeFadeIn: Duration(milliseconds: 200),
                                 avoidAnimation: _visitedTabs.contains(1) ||
@@ -1229,8 +1268,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                        ])
                         ),
                         // POSTING SETTINGS
                         SingleChildScrollView(
