@@ -14,10 +14,12 @@ class _APINodeSelectionState extends State<APINodeSelection> {
   List<DropdownMenuItem<String>> getItemsList() {
       List<DropdownMenuItem<String>> APINodes = [];
       for (String api in APINodeConfig.apiNodes) {
-        if(api != sec.getNode()) {
-          APINodes.add(DropdownMenuItem(child: new Text(api),
-            value: api,));
-        }
+        APINodes.add(
+            DropdownMenuItem(
+              child: new Text(api),
+              value: api,
+            )
+        );
       }
       return APINodes;
   }
