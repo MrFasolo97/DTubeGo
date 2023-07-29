@@ -1,5 +1,6 @@
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -26,13 +27,15 @@ class _AdvertisementState extends State<Advertisement> {
     WebViewController web_controller = WebViewController();
     web_controller.loadHtmlString(widget.iframe);
 
-    web_controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    web_controller.setNavigationDelegate(NavigationDelegate(
-      onNavigationRequest: (NavigationRequest request) {
-        launchUrlString(request.url, mode: LaunchMode.externalApplication);
-        return NavigationDecision.prevent;
-      }
-    ));
+    if (!kIsWeb) {
+      web_controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+      web_controller.setNavigationDelegate(NavigationDelegate(
+        onNavigationRequest: (NavigationRequest request) {
+          launchUrlString(request.url, mode: LaunchMode.externalApplication);
+          return NavigationDecision.prevent;
+        }
+      ));
+    }
 
     Widget advertisement = WebViewWidget(controller: web_controller);
     globals.scrolledPostsBetweenAds = 0;

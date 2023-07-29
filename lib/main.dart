@@ -1,4 +1,4 @@
-// @dart>=3.0
+// @dart=3.0
 import 'dart:io';
 
 import 'package:dtube_go/App.dart';
