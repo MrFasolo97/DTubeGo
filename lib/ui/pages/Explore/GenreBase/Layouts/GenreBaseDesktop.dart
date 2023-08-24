@@ -149,12 +149,12 @@ class _GenreSelectionState extends State<GenreSelection> {
               _showSelection ? "show genres" : "hide genres",
               style: Theme.of(context)
                   .textTheme
-                  .bodyText1!
+                  .bodyLarge!
                   .copyWith(color: globalBlue),
             )),
         widget.activatedGenres.length == 0
             ? Text("pick at least one genre",
-                style: Theme.of(context).textTheme.caption)
+                style: Theme.of(context).textTheme.bodySmall)
             : Container(
                 height: 0,
               ),
@@ -239,7 +239,7 @@ class GenreCard extends StatelessWidget {
                             size: iconSize,
                             color: activated ? globalRed : globalAlmostWhite)),
                     Text(currentName,
-                        style: Theme.of(context).textTheme.caption)
+                        style: Theme.of(context).textTheme.bodySmall)
                   ],
                 ),
               ],
