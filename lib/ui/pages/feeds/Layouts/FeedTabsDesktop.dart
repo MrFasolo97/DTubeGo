@@ -46,7 +46,7 @@ class FeedTabsDesktop extends StatelessWidget {
         TabBarWithPosition(
           tabIcons:
               globals.keyPermissions.isEmpty ? tabIconsUnsignedLogin : tabIcons,
-          iconSize: globalIconSizeMedium,
+          iconSize: globalIconSizeBig,
           tabController: tabController,
           alignment: Alignment.topCenter,
           padding: EdgeInsets.only(top: 0),

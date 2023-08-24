@@ -144,15 +144,18 @@ class BalanceOverviewDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: 245,
       child: Align(
         alignment: Alignment.centerRight,
-        child: Padding(
-          padding: EdgeInsets.only(right: 5),
+        child: Flex(
+            direction: Axis.horizontal,
+            children: [
+          Padding(
+          padding: EdgeInsets.only(right: 30),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              DTubeLogo(size: 20),
+              DTubeLogo(size: 40),
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: Text(shortDTC(state.dtcBalance),
@@ -161,7 +164,7 @@ class BalanceOverviewDesktop extends StatelessWidget {
               FaIcon(
                 FontAwesomeIcons.bolt,
                 color: globalAlmostWhite,
-                size: 20,
+                size: 40,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
@@ -170,7 +173,8 @@ class BalanceOverviewDesktop extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        )
+        ]),
       ),
     );
   }
