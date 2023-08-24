@@ -51,9 +51,8 @@ class _GenreFeedState extends State<GenreFeed> {
           if (snapshot.connectionState != ConnectionState.done) {
             return buildLoading(context);
           } else {
-            return Container(
-              height: 100.h,
-              child: Stack(
+            return
+              Stack(
                 children: [
                   BlocBuilder<FeedBloc, FeedState>(
                     builder: (context, state) {
@@ -72,7 +71,6 @@ class _GenreFeedState extends State<GenreFeed> {
                     },
                   ),
                 ],
-              ),
             );
           }
         });

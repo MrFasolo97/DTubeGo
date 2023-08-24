@@ -22,7 +22,6 @@ class GenreBaseDesktop extends StatefulWidget {
 class _GenreBaseDesktopState extends State<GenreBaseDesktop> {
   late FeedBloc postBloc;
   bool _showResults = false;
-
   late Future<String> _mainTagsFuture;
   List<FontAwesomeIcons> genreIcons = [];
   List<String> genreSubTagStrings = [];
@@ -82,32 +81,25 @@ class _GenreBaseDesktopState extends State<GenreBaseDesktop> {
               exploreTagsSnapshot.connectionState == ConnectionState.waiting) {
             return Container();
           }
-          return Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: Container(
-                height: 100.h,
-                width: 100.w,
-                child: Column(
-                  children: [
-                    Center(
-                      child: OverlayText(
-                        text: "Genre Explorer",
-                        sizeMultiply: 1.4,
-                        bold: true,
+          return
+                    Column(children: [
+                      Center(
+                        child: OverlayText(
+                          text: "Genre Explorer",
+                          sizeMultiply: 1.4,
+                          bold: true,
+                        ),
                       ),
-                    ),
-                    GenreSelection(
-                      activatedGenres: _activatedGenres,
-                      fetchResults: fetchResults,
-                      genreList: genreList,
-                      persistSelection: persistSelection,
-                    ),
-                    GenreFeed(),
+                      GenreSelection(
+                        activatedGenres: _activatedGenres,
+                        fetchResults: fetchResults,
+                        genreList: genreList,
+                        persistSelection: persistSelection,
+                      ),
+                      Flexible(
+                        fit: FlexFit.tight, child: GenreFeed())
 
-                    //       // Show GenreFeed
-                  ],
-                ),
-              ));
+                    ]);
         });
   }
 }
@@ -130,7 +122,6 @@ class GenreSelection extends StatefulWidget {
 
 class _GenreSelectionState extends State<GenreSelection> {
   ScrollController _scrollController = new ScrollController();
-
   bool _showSelection = false;
   @override
   Widget build(BuildContext context) {
@@ -142,6 +133,7 @@ class _GenreSelectionState extends State<GenreSelection> {
               if (widget.activatedGenres.length > 0) {
                 setState(() {
                   _showSelection = !_showSelection;
+
                 });
               }
             },
@@ -198,7 +190,7 @@ class _GenreSelectionState extends State<GenreSelection> {
                 ),
               )
             : Container(
-                height: 100,
+                height: 0,
               ),
       ],
     );

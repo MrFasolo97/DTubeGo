@@ -79,9 +79,8 @@ class _GenreFeedDesktopState extends State<GenreFeedDesktop> {
   Widget buildPostList(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 10),
-      child: Container(
-        height: 70.h,
-        child: FeedList(
+        child:
+          FeedList(
             feedType: "tagSearch",
             largeFormat: true,
             showAuthor: true,
