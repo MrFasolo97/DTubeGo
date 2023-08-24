@@ -156,7 +156,7 @@ class BalanceOverviewDesktop extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: Text(shortDTC(state.dtcBalance),
-                    style: Theme.of(context).textTheme.headline5),
+                    style: Theme.of(context).textTheme.headlineMedium),
               ),
               FaIcon(
                 FontAwesomeIcons.bolt,
@@ -166,7 +166,7 @@ class BalanceOverviewDesktop extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: Text(shortVP(state.vtBalance['v']!),
-                    style: Theme.of(context).textTheme.headline5),
+                    style: Theme.of(context).textTheme.headlineMedium),
               ),
             ],
           ),

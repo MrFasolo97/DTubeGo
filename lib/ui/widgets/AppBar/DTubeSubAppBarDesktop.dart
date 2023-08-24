@@ -23,7 +23,7 @@ AppBar dtubeSubAppBarDesktop(
                 padding: EdgeInsets.only(right: 60),
                 child: Text(
                   title,
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
               )
             : SizedBox(

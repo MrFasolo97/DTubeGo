@@ -105,12 +105,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                       child: Column(
                         children: [
                           Text("Hivesigner outdated",
-                              style: Theme.of(context).textTheme.headline4),
+                              style: Theme.of(context).textTheme.headlineMedium),
                           Padding(
                             padding: EdgeInsets.only(top: 1.h),
                             child: Text(
                                 "The authorization for your hive account is not valid anymore. This happens automatically after 7 days for security reasons. Please renew the authorization by clicking on the button below.",
-                                style: Theme.of(context).textTheme.bodyText1),
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ),
                           BlocProvider<HivesignerBloc>(
                             create: (BuildContext context) => HivesignerBloc(
@@ -227,7 +227,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                               size: globalIconSizeBig,
                             ),
                             Text('Search',
-                                style: Theme.of(context).textTheme.bodyText1),
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ],
                         ),
                         onTap: () {
@@ -243,7 +243,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 size: globalIconSizeBig,
                               ),
                               Text('Feed',
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ]),
                         onTap: () {
                           openFeedPage();
@@ -259,7 +259,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 size: globalIconSizeBig,
                               ),
                               Text('Explore',
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ]),
                         onTap: () {
                           openExplorePage();
@@ -277,7 +277,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                       'Upload',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1!
+                                          .bodyLarge!
                                           .copyWith(
                                               color: !globals.keyPermissions
                                                       .contains(4)
@@ -302,7 +302,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 size: globalIconSizeBig,
                               ),
                               Text('Moments',
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ]),
                         onTap: () {
                           openMomentsPage();
@@ -322,7 +322,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                     Text('Governance',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1),
+                                            .bodyLarge),
                                   ]),
                               onTap: () {
                                 openGovernancePage(context);
@@ -338,7 +338,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 size: globalIconSizeBig,
                               ),
                               Text('Settings',
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ]),
                         onTap: () {
                           openSettingsPage(context);
@@ -359,7 +359,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                     Text('Profile',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1),
+                                            .bodyLarge),
                                   ]),
                               onTap: () {
                                 openProfilePage(context);
@@ -376,7 +376,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 size: globalIconSizeBig,
                               ),
                               Text('About & FAQ',
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ]),
                         onTap: () {
                           openAboutDialog(context);
@@ -392,7 +392,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 size: globalIconSizeBig,
                               ),
                               Text('App on Android',
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ]),
                         onTap: () {
                           launchUrl(Uri.parse(
@@ -408,7 +408,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                 size: globalIconSizeBig,
                               ),
                               Text('App on iOS',
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ]),
                         onTap: () {
                           launchUrl(Uri.parse(
@@ -489,7 +489,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                                         "Join / Login",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6,
+                                            .titleLarge,
                                       )),
                                 )
                               : Row(

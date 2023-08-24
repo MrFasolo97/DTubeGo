@@ -87,7 +87,7 @@ class _TabBarWithPositionState extends State<TabBarWithPosition> {
                   tabs: tabs,
                   controller: widget.tabController,
 
-                  labelStyle: Theme.of(context).textTheme.bodyText1!,
+                  labelStyle: Theme.of(context).textTheme.bodyLarge!,
                   indicatorSize: TabBarIndicatorSize.tab,
                   labelPadding: EdgeInsets.only(right: 10),
                 ),
