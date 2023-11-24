@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget buildUserMenuSpeedDial(
     BuildContext context, User user, bool ownUser, UserBloc userBloc) {
@@ -49,35 +50,55 @@ Widget buildUserMenuSpeedDial(
           backgroundColor: Colors.transparent,
             // Start of temporary placeholder message ==>
             onTap: () {
-              showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    backgroundColor: globalBGColor,
-                    title: Text("Temporarily disabled"),
-                    content: Text("Account history functionality is temporarily disabled, please, in the mean time, use avalonblocks.com explorer instead."),
-                      actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: Text(
-                          'Ok',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      )
-                      ],
-                  ));
-            // end of temporary placeholder message <==
-            /*
-            // Temporary disable account history button, as it is bugged.
-            // Todo: fix and re-enable it, then remove above placeholder popup message.
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return BlocProvider<AccountHistoryBloc>(
-                  create: (context) => AccountHistoryBloc(
-                      repository: AccountHistoryRepositoryImpl()),
-                  child: AccountHistoryScreen(
-                    username: user.name,
-                  ));
-            }));
-            */
+              if (true) {
+                showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        AlertDialog(
+                          backgroundColor: globalBGColor,
+                          title: Text("Temporarily disabled"),
+                          content: Text(
+                              "Account history functionality is temporarily disabled, please, in the mean time, use avalonblocks.com explorer instead."),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => {
+                                launchUrl(Uri.parse("https://avalonblocks.com/#/@"+user.name), mode: LaunchMode.externalApplication),
+                                Navigator.pop(context, 'Ok')
+                              },
+                              child: Text(
+                                'Ok',
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .bodyLarge,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: Text(
+                                'Cancel',
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .bodyLarge,
+                              ),
+                            )
+                          ],
+                        ));
+              } else {
+                // end of temporary placeholder message <==
+                // Temporary disable account history button, as it is bugged.
+                // Todo: fix and re-enable it, then remove above placeholder popup message.
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return BlocProvider<AccountHistoryBloc>(
+                      create: (context) =>
+                          AccountHistoryBloc(
+                              repository: AccountHistoryRepositoryImpl()),
+                      child: AccountHistoryScreen(
+                        username: user.name,
+                      ));
+                }));
+              }
           }),
 
       SpeedDialChild(
@@ -105,35 +126,55 @@ Widget buildUserMenuSpeedDial(
           backgroundColor: Colors.transparent,
           onTap: () {
             // Start of temporary placeholder message ==>
-            showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  backgroundColor: globalBGColor,
-                  title: Text("Temporarily disabled"),
-                  content: Text("Account history functionality is temporarily disabled, please, in the mean time, use avalonblocks.com explorer instead."),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: Text(
-                        'Ok',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    )
-                  ],
-                ));
-            // end of temporary placeholder message <==
-            // Temporary disable account history button, as it is bugged.
-            // Todo: fix and re-enable it, then remove above placeholder popup message.
-            /*
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return BlocProvider<AccountHistoryBloc>(
-                  create: (context) => AccountHistoryBloc(
-                      repository: AccountHistoryRepositoryImpl()),
-                  child: AccountHistoryScreen(
-                    username: user.name,
-                  ));
-            }));
-            */
+            if(true) {
+              showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) =>
+                      AlertDialog(
+                        backgroundColor: globalBGColor,
+                        title: Text("Temporarily disabled"),
+                        content: Text(
+                            "Account history functionality is temporarily disabled, please, in the mean time, use avalonblocks.com explorer instead."),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => {
+                                launchUrl(Uri.parse("https://avalonblocks.com/#/@"+user.name), mode: LaunchMode.externalApplication),
+                                Navigator.pop(context, 'Ok')
+                              },
+                            child: Text(
+                              'Ok',
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .bodyLarge,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: Text(
+                              'Cancel',
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .bodyLarge,
+                            ),
+                          )
+                        ],
+                      ));
+              // end of temporary placeholder message <==
+              // Temporary disable account history button, as it is bugged.
+              // Todo: fix and re-enable it, then remove above placeholder popup message.
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return BlocProvider<AccountHistoryBloc>(
+                    create: (context) =>
+                        AccountHistoryBloc(
+                            repository: AccountHistoryRepositoryImpl()),
+                    child: AccountHistoryScreen(
+                      username: user.name,
+                    ));
+              }));
+            }
           }),
       SpeedDialChild(
           child: ShadowedIcon(
