@@ -31,11 +31,13 @@ class AvalonConfig {
   late bool allowRevotes;
   late String b58Alphabet;
   late int block0ts;
+  late int blockHashSerialization;
   late int blockTime;
   late int bwGrowth;
   late int bwMax;
   late int consensusRounds;
   late double ecoBaseRent;
+  late int ecoDvRentFactor;
   late int ecoBlocks;
   late int ecoClaimPrecision;
   late int ecoClaimTime;
@@ -68,8 +70,7 @@ class AvalonConfig {
   late int notifMaxMentions;
   late String originHash;
   late int randomBytesLength;
-  late int rewardPoolMin;
-  late int rewardPoolMult;
+  late int rewardPoolAmount;
   late double rewardPoolMaxShare;
   late int rewardPoolUsers;
   late int tagMaxLength;
@@ -100,6 +101,13 @@ class AvalonConfig {
   late int fundRequestDeadlineSeconds;
   late int fundRequestDeadlineExtSeconds;
   late int fundRequestReviewPeriodSeconds;
+
+  // master dao
+  late bool masterDao;
+  late List masterDaoTxs;
+  late int masterDaoTxExp;
+  late int txExpirationMax;
+
   AvalonConfig({
     required this.accountPriceBase,
     required this.accountPriceCharMult,
@@ -112,11 +120,13 @@ class AvalonConfig {
     required this.allowRevotes,
     required this.b58Alphabet,
     required this.block0ts,
+    required this.blockHashSerialization,
     required this.blockTime,
     required this.bwGrowth,
     required this.bwMax,
     required this.consensusRounds,
     required this.ecoBaseRent,
+    required this.ecoDvRentFactor,
     required this.ecoBlocks,
     required this.ecoClaimPrecision,
     required this.ecoClaimTime,
@@ -149,8 +159,6 @@ class AvalonConfig {
     required this.notifMaxMentions,
     required this.originHash,
     required this.randomBytesLength,
-    required this.rewardPoolMin,
-    required this.rewardPoolMult,
     required this.rewardPoolMaxShare,
     required this.rewardPoolUsers,
     required this.tagMaxLength,
@@ -181,6 +189,10 @@ class AvalonConfig {
     required this.fundRequestDeadlineSeconds,
     required this.fundRequestDeadlineExtSeconds,
     required this.fundRequestReviewPeriodSeconds,
+    required this.masterDao,
+    required this.masterDaoTxs,
+    required this.masterDaoTxExp,
+    required this.txExpirationMax,
   });
 
   AvalonConfig.fromJson(Map<String, dynamic> json) {
@@ -195,11 +207,13 @@ class AvalonConfig {
     allowRevotes = json['allowRevotes'];
     b58Alphabet = json['b58Alphabet'];
     block0ts = json['block0ts'];
+    blockHashSerialization = json['blockHashSerialization'];
     blockTime = json['blockTime'];
     bwGrowth = json['bwGrowth'];
     bwMax = json['bwMax'];
     consensusRounds = json['consensusRounds'];
     ecoBaseRent = json['ecoBaseRent'];
+    ecoDvRentFactor = json['ecoDvRentFactor'];
     ecoBlocks = json['ecoBlocks'];
     ecoClaimPrecision = json['ecoClaimPrecision'];
     ecoClaimTime = json['ecoClaimTime'];
@@ -232,8 +246,6 @@ class AvalonConfig {
     notifMaxMentions = json['notifMaxMentions'];
     originHash = json['originHash'];
     randomBytesLength = json['randomBytesLength'];
-    rewardPoolMin = json['rewardPoolMin'];
-    rewardPoolMult = json['rewardPoolMult'];
     rewardPoolMaxShare = json['rewardPoolMaxShare'];
     rewardPoolUsers = json['rewardPoolUsers'];
     tagMaxLength = json['tagMaxLength'];
@@ -264,6 +276,10 @@ class AvalonConfig {
     fundRequestDeadlineSeconds = json['fundRequestDeadlineSeconds'];
     fundRequestDeadlineExtSeconds = json['fundRequestDeadlineExtSeconds'];
     fundRequestReviewPeriodSeconds = json['fundRequestReviewPeriodSeconds'];
+    masterDao = json['masterDao'];
+    masterDaoTxs = json['masterDaoTxs'];
+    masterDaoTxExp = json['masterDaoTxExp'];
+    txExpirationMax = json['txExpirationMax'];
   }
 
   Map<String, dynamic> toJson() {
@@ -280,11 +296,13 @@ class AvalonConfig {
     data['allowRevotes'] = this.allowRevotes;
     data['b58Alphabet'] = this.b58Alphabet;
     data['block0ts'] = this.block0ts;
+    data['blockHashSerialization'] = this.blockHashSerialization;
     data['blockTime'] = this.blockTime;
     data['bwGrowth'] = this.bwGrowth;
     data['bwMax'] = this.bwMax;
     data['consensusRounds'] = this.consensusRounds;
     data['ecoBaseRent'] = this.ecoBaseRent;
+    data['ecoDvRentFactor'] = this.ecoDvRentFactor;
     data['ecoBlocks'] = this.ecoBlocks;
     data['ecoClaimPrecision'] = this.ecoClaimPrecision;
     data['ecoClaimTime'] = this.ecoClaimTime;
@@ -317,10 +335,7 @@ class AvalonConfig {
     data['notifMaxMentions'] = this.notifMaxMentions;
     data['originHash'] = this.originHash;
     data['randomBytesLength'] = this.randomBytesLength;
-    data['rewardPoolMin'] = this.rewardPoolMin;
-    data['rewardPoolMult'] = this.rewardPoolMult;
     data['rewardPoolMaxShare'] = this.rewardPoolMaxShare;
-    data['rewardPoolUsers'] = this.rewardPoolUsers;
     data['tagMaxLength'] = this.tagMaxLength;
     data['tagMaxPerContent'] = this.tagMaxPerContent;
     data['tippedVotePrecision'] = this.tippedVotePrecision;
@@ -352,6 +367,10 @@ class AvalonConfig {
     data['fundRequestDeadlineExtSeconds'] = this.fundRequestDeadlineExtSeconds;
     data['fundRequestReviewPeriodSeconds'] =
         this.fundRequestReviewPeriodSeconds;
+    data['masterDao'] = this.masterDao;
+    data['masterDaoTxs'] = this.masterDaoTxs;
+    data['masterDaoTxExp'] = this.masterDaoTxExp;
+    data['txExpirationMax'] = this.txExpirationMax;
     return data;
   }
 }
@@ -360,13 +379,19 @@ class TxLimits {
   late int i14;
   late int i15;
   late int i19;
+  late int i23;
+  late int i24;
+  late int i28;
 
-  TxLimits({required this.i14, required this.i15, required this.i19});
+  TxLimits({required this.i14, required this.i15, required this.i19, required this.i23, required this.i24, required this.i28});
 
   TxLimits.fromJson(Map<String, dynamic> json) {
     i14 = json['14'];
     i15 = json['15'];
     i19 = json['19'];
+    i23 = json['23'];
+    i24 = json['24'];
+    i28 = json['28'];
   }
 
   Map<String, dynamic> toJson() {
@@ -374,6 +399,9 @@ class TxLimits {
     data['14'] = this.i14;
     data['15'] = this.i15;
     data['19'] = this.i19;
+    data['23'] = this.i23;
+    data['24'] = this.i24;
+    data['28'] = this.i28;
     return data;
   }
 }

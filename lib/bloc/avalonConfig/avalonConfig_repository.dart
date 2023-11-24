@@ -34,7 +34,7 @@ class AvalonConfigRepositoryImpl implements AvalonConfigRepository {
     if (response.statusCode == 200) {
       var data = response.body;
       if (int.tryParse(data) != null) {
-        return int.tryParse(data)!;
+        return int.parse(data)!;
       } else {
         return 0;
       }
