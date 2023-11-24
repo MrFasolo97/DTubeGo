@@ -16,6 +16,6 @@ class UploadConfig {
   static String web3StorageGateway = "https://ipfs.io";
   static int maxUploadRetries = 2;
 
-  static String ipfsSnapUrl = 'https://snap1.d.tube/ipfs/';
+  static String ipfsSnapUrl = 'https://ipfs.io/ipfs/';
   static String ipfsSnapUploadUrl = 'https://snap1.d.tube';
 }
