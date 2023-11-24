@@ -62,9 +62,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
               await sec.getFixedDownvoteActivated(),
           sec.settingKey_FixedDownvoteWeight:
               await sec.getFixedDownvoteWeight(),
-          sec.settingKey_videoAutoPause: await sec.getVideoAutoPause(),
-          sec.settingKey_disableAnimations: await sec.getDisableAnimations(),
-          sec.settingKey_enableAdvertisements: await sec.getEnableAdvertisements()
         };
         globals.disableAnimations = await sec.getDisableAnimations() == "true";
         globals.enableAdvertisements = await sec.getEnableAdvertisements() == "true";
