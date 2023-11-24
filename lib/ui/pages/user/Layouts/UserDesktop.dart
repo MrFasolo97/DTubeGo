@@ -2,10 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/pages/feeds/lists/FeedList.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggested.dart';
 import 'package:dtube_go/ui/pages/user/Widgets/MenuButton.dart';
 import 'package:dtube_go/ui/pages/user/Widgets/TopBarCustomClipper.dart';
 import 'package:dtube_go/ui/pages/user/Widgets/TopBarCustomPainter.dart';
@@ -14,12 +11,10 @@ import 'package:dtube_go/ui/widgets/Suggestions/UserList.dart';
 import 'package:dtube_go/ui/pages/user/Widgets/MoreInfoButton/UsersMoreInfoButton.dart';
 import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayText.dart';
 import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannels.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:flutter/rendering.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -147,7 +142,7 @@ class _UserPageDesktopState extends State<UserPageDesktop> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("Uploads",
-                        style: Theme.of(context).textTheme.headline1),
+                        style: Theme.of(context).textTheme.displayLarge),
                   ),
                   BlocProvider<FeedBloc>(
                     create: (context) =>
@@ -201,7 +196,7 @@ class _UserPageDesktopState extends State<UserPageDesktop> {
                                   child: Text("Moments",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline1),
+                                          .displayLarge),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -360,14 +355,14 @@ class _UserPageDesktopState extends State<UserPageDesktop> {
                                 mainStyle: user.name.length > 10
                                     ? Theme.of(context)
                                         .textTheme
-                                        .headline1!
+                                        .displayLarge!
                                         .copyWith(fontSize: 30)
                                     : Theme.of(context)
                                         .textTheme
-                                        .headline1!
+                                        .displayLarge!
                                         .copyWith(fontSize: 40),
                                 subStyle:
-                                    Theme.of(context).textTheme.headline1!,
+                                    Theme.of(context).textTheme.displayLarge!,
                                 withShadow: true,
                               )
                             : FadeIn(
@@ -379,10 +374,10 @@ class _UserPageDesktopState extends State<UserPageDesktop> {
                                   height: 200,
                                   mainStyle: Theme.of(context)
                                       .textTheme
-                                      .headline1!
+                                      .displayLarge!
                                       .copyWith(fontSize: 50),
                                   subStyle:
-                                      Theme.of(context).textTheme.headline1!,
+                                      Theme.of(context).textTheme.displayLarge!,
                                   withShadow: true,
                                 )),
                       ),

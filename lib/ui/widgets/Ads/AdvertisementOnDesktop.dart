@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:webview_flutter_web/webview_flutter_web.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 
 class Advertisement extends StatefulWidget {

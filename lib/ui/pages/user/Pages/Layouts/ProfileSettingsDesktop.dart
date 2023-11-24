@@ -1,9 +1,3 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart' as dio;
-import 'package:file_picker/file_picker.dart';
-import 'package:mime/mime.dart';
-
 import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
@@ -14,12 +8,9 @@ import 'package:dtube_go/ui/pages/user/Widgets/ConnectYTChannelDialog.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:decorated_icon/decorated_icon.dart';
-import 'package:dtube_go/bloc/ThirdPartyUploader/ThirdPartyUploader_bloc.dart';
 import 'package:dtube_go/bloc/ThirdPartyUploader/ThirdPartyUploader_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_response_model.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
@@ -204,7 +195,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         "Basic data",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline3,
+                                            .displaySmall,
                                       ),
                                     ),
                                     DTubeFormCard(
@@ -215,7 +206,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _aboutController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -225,7 +216,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _locationController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -235,7 +226,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _websiteController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -250,7 +241,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         "Images",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline3,
+                                            .displaySmall,
                                       ),
                                     ),
                                     BlocProvider<ThirdPartyUploaderBloc>(
@@ -280,7 +271,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                                   TextFormField(
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1,
+                                                        .bodyLarge,
                                                     controller:
                                                         _avatarController,
                                                     cursorColor: Colors.red,
@@ -298,7 +289,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                                 TextFormField(
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1,
+                                                      .bodyLarge,
                                                   controller: _avatarController,
                                                   cursorColor: Colors.red,
                                                   decoration: new InputDecoration(
@@ -340,7 +331,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                                   TextFormField(
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1,
+                                                        .bodyLarge,
                                                     cursorColor: Colors.red,
                                                     controller:
                                                         _coverImageController,
@@ -359,7 +350,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                                 TextFormField(
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1,
+                                                      .bodyLarge,
                                                   controller:
                                                       _coverImageController,
                                                   cursorColor: Colors.red,
@@ -393,7 +384,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         "Custom Data",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline3,
+                                            .displaySmall,
                                       ),
                                     ),
                                     DTubeFormCard(
@@ -404,7 +395,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _displayNameController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -414,7 +405,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                         DropdownButtonFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           decoration: InputDecoration(
                                             labelText: 'Account Type',
                                           ),
@@ -438,7 +429,7 @@ class _ProfileSettingsDesktopState extends State<ProfileSettingsDesktop>
                                     Text(
                                       "Connected YT channels",
                                       style:
-                                          Theme.of(context).textTheme.headline3,
+                                          Theme.of(context).textTheme.displaySmall,
                                     ),
                                     DTubeFormCard(
                                         waitBeforeFadeIn:
@@ -705,7 +696,7 @@ class _UploadImageButtonState extends State<UploadImageButton> {
             child: Text("upload")),
         Text(
           "the file should be 10MB or less.",
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
               color: highlightSizeHint ? globalRed : globalAlmostWhite),
         )
       ],

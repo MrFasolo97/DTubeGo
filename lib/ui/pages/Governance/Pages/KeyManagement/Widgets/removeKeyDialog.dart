@@ -1,13 +1,6 @@
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:flutter/services.dart';
-
-import 'dart:async' show Future;
-
-import 'package:dtube_go/bloc/config/txTypes.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/services.dart';
 
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
@@ -57,7 +50,7 @@ class _RemoveKeyDialogState extends State<RemoveKeyDialog> {
                   padding: EdgeInsets.only(bottom: 5.h, left: 2.w, right: 2.w),
                   child: Text(
                     "Do you really want to delete this key?",
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -72,7 +65,7 @@ class _RemoveKeyDialogState extends State<RemoveKeyDialog> {
                     ),
                     child: Text(
                       "Yes",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

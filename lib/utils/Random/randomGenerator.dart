@@ -1,6 +1,5 @@
 import 'package:bs58/bs58.dart';
 
-import 'package:bs58check/bs58check.dart' as bs58check;
 import 'package:elliptic/elliptic.dart';
 import 'dart:math';
 import 'dart:developer' as dev;

@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/settings/settings_bloc.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';

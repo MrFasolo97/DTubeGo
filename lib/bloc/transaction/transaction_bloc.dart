@@ -1,12 +1,9 @@
 import 'dart:developer';
-import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:image_compression_flutter/image_compression_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:dtube_go/bloc/config/txTypes.dart';
 import 'package:dtube_go/bloc/hivesigner/hivesigner_bloc_full.dart';

@@ -1,24 +1,18 @@
-import 'dart:io';
-
 import 'package:dtube_go/bloc/hivesigner/hivesigner_bloc_full.dart';
 import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
 import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
 import 'package:dtube_go/ui/pages/upload/UploadForm/uploadForm.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class Wizard3rdPartyDesktop extends StatefulWidget {
@@ -144,7 +138,7 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
                                     child: Text("1. Source video",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline5),
+                                            .headlineSmall),
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -164,7 +158,7 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
                                             cursorColor: globalRed,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1),
+                                                .bodyLarge),
                                       ),
                                     ],
                                   ),

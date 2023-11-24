@@ -1,4 +1,3 @@
-import 'package:dtube_go/bloc/settings/settings_bloc.dart';
 import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/PinPadWidget.dart';
 
@@ -110,7 +109,7 @@ class _PinCodeDialogState extends State<PinCodeDialog> {
           onPressed: () => Navigator.pop(context, 'Cancel'),
           child: Text(
             'Cancel',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         ElevatedButton(
@@ -124,7 +123,7 @@ class _PinCodeDialogState extends State<PinCodeDialog> {
               : null,
           child: Text(
             'Save',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
       ],

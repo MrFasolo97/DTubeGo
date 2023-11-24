@@ -3,7 +3,6 @@ import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:dtube_go/ui/widgets/Suggestions/OtherUsersAvatar.dart';
 import 'package:flutter/material.dart';
 
 class UserListDesktop extends StatefulWidget {
@@ -44,7 +43,7 @@ class _UserListDesktopState extends State<UserListDesktop> {
               (widget.showCount
                   ? " (" + widget.userlist.length.toString() + ")"
                   : ""),
-          style: Theme.of(context).textTheme.headline5),
+          style: Theme.of(context).textTheme.headlineSmall),
       Container(
           height: 40.h,
           width: 20.w,
@@ -74,7 +73,7 @@ class _UserListDesktopState extends State<UserListDesktop> {
                     width: widget.avatarSize,
                     child: Center(
                       child: Text(widget.userlist[index],
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                           overflow: TextOverflow.ellipsis),
                     ),
                   )

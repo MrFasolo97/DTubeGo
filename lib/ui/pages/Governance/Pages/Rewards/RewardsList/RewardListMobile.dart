@@ -40,7 +40,7 @@ class _RewardsListMobileState extends State<RewardsListMobile> {
             return Center(
                 child: Text(
               "nothing here",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             ));
           } else {
             return ListView.builder(

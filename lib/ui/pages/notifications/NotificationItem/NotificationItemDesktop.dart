@@ -60,7 +60,7 @@ class NotificationItemTablet extends StatelessWidget {
                         width: 80,
                         child: Text(
                           sender,
-                          style: Theme.of(context).textTheme.caption,
+                          style: Theme.of(context).textTheme.bodySmall,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -145,13 +145,13 @@ class NotificationDetails extends StatelessWidget {
                 ':',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodyText1),
+            style: Theme.of(context).textTheme.bodyLarge),
         Container(
           width: 100,
           child: Text(friendlyDescription,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodyText1),
+              style: Theme.of(context).textTheme.bodyLarge),
         ),
       ],
     );

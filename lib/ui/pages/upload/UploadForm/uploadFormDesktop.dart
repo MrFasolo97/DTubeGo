@@ -1,9 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:dtube_go/res/Config/UploadConfigValues.dart';
 import 'package:dtube_go/res/Config/appConfigValues.dart';
 import 'package:dtube_go/ui/pages/upload/dialogs/HivePostCooldownDialog.dart';
-import 'package:dtube_go/ui/pages/upload/dialogs/UploadTermsDialog.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/UploadStartedDialog.dart';
 import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
 import 'package:flutter/services.dart';
@@ -18,11 +15,9 @@ import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'dart:io';
 import 'package:disk_space/disk_space.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
-import 'package:dtube_go/utils/System/imageCropper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -161,20 +156,20 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
             context: context,
             builder: (BuildContext context) => AlertDialog(
               title: Text('not enough free storage',
-                  style: Theme.of(context).textTheme.headline1),
+                  style: Theme.of(context).textTheme.displayLarge),
               content: Container(
                 height: MediaQuery.of(context).size.height / 5,
                 child: Column(
                   children: [
                     Text(
                         "In order to record a video with the app please make sure to have enough free internal storage on your device.",
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     SizedBox(
                       height: 2.h,
                     ),
                     Text(
                         "We have set the minimum required free space to ${AppConfig.minFreeSpaceRecordVideoInMB / 1000} GB internal storage.",
-                        style: Theme.of(context).textTheme.bodyText1)
+                        style: Theme.of(context).textTheme.bodyLarge)
                   ],
                 ),
               ),
@@ -325,13 +320,13 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                                       "Info: direct uploads could take some time to get pinned on the ipfs network. That means they need a few minutes to be playable after the initial upload.",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1),
+                                          .bodyLarge),
                                   InputChip(
                                     backgroundColor: globalRed,
                                     label: Text("upload",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline1),
+                                            .displayLarge),
                                     onPressed: _formIsFilled &&
                                             (stateUploadData
                                                         .thumbnailLocation !=
@@ -452,7 +447,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
               Column(
                 children: [
                   Text("1. Video file",
-                      style: Theme.of(context).textTheme.headline5),
+                      style: Theme.of(context).textTheme.headlineSmall),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -463,7 +458,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                             Icon(FontAwesomeIcons.solidFolderOpen),
                             SizedBox(width: 8),
                             Text(_video == null ? "pick file" : "change file",
-                                style: Theme.of(context).textTheme.bodyText1),
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ],
                         ),
                         onPressed: () {
@@ -480,7 +475,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                             SizedBox(width: 8),
                             Text(
                               _video == null ? "record" : "re-record",
-                              style: Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyLarge,
                               maxLines: 2,
                             ),
                           ],
@@ -525,7 +520,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                               label: Text(
                                 (showVideoPreview ? 'hide' : 'show') +
                                     " preview",
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               avatar: FaIcon(showVideoPreview
                                   ? FontAwesomeIcons.squareCheck
@@ -554,14 +549,14 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
       child: Column(
         children: [
           Text("2. Basic information",
-              style: Theme.of(context).textTheme.headline5),
+              style: Theme.of(context).textTheme.headlineSmall),
           TextFormField(
             cursorColor: globalRed,
             decoration: new InputDecoration(
               labelText: "Title",
-              labelStyle: Theme.of(context).textTheme.bodyText1,
+              labelStyle: Theme.of(context).textTheme.bodyLarge,
             ),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
             controller: _titleController,
             onChanged: (val) {
               checkIfFormIsFilled();
@@ -580,9 +575,9 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
             maxLines: 5,
             decoration: new InputDecoration(
               labelText: "Description",
-              labelStyle: Theme.of(context).textTheme.bodyText1,
+              labelStyle: Theme.of(context).textTheme.bodyLarge,
             ),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
             controller: _descController,
             onChanged: (val) {
               checkIfFormIsFilled();
@@ -608,9 +603,9 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                       cursorColor: globalRed,
                       decoration: new InputDecoration(
                         labelText: "Tag",
-                        labelStyle: Theme.of(context).textTheme.bodyText1,
+                        labelStyle: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                       controller: _tagController,
                       focusNode: _tagFocus,
                       keyboardType: TextInputType.name,
@@ -634,7 +629,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                 ChoiceChip(
                     selected: _tagController.text == "DTubeGo-Moments",
                     label: Text('add to moments',
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     labelStyle: TextStyle(color: globalAlmostWhite),
                     avatar: _tagController.value.text == "DTubeGo-Moments"
                         ? FaIcon(
@@ -675,7 +670,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
           children: [
             Column(
               children: [
-                Text("Thumbnail", style: Theme.of(context).textTheme.headline5),
+                Text("Thumbnail", style: Theme.of(context).textTheme.headlineSmall),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: InputChip(
@@ -684,7 +679,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                         stateUploadData.thumbnailLocation == ""
                             ? "pick a thumbnail"
                             : "change thumbnail",
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     onPressed: () {
                       //getImage();
                     },
@@ -717,7 +712,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
               ChoiceChip(
                   selected: stateUploadData.originalContent,
                   label: Text('original content',
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                   labelStyle: TextStyle(color: globalAlmostWhite),
                   avatar: stateUploadData.originalContent
                       ? FaIcon(
@@ -739,7 +734,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                 child: ChoiceChip(
                     selected: stateUploadData.nSFWContent,
                     label: Text('nsfw content',
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     labelStyle: TextStyle(color: globalAlmostWhite),
                     avatar: stateUploadData.nSFWContent
                         ? FaIcon(
@@ -759,7 +754,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
               ChoiceChip(
                   selected: stateUploadData.unlistVideo,
                   label: Text('unlist video',
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                   labelStyle: TextStyle(color: globalAlmostWhite),
                   avatar: stateUploadData.unlistVideo
                       ? FaIcon(
@@ -779,7 +774,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                   ? ChoiceChip(
                       selected: stateUploadData.crossPostToHive,
                       label: Text('cross-post to hive',
-                          style: Theme.of(context).textTheme.bodyText1),
+                          style: Theme.of(context).textTheme.bodyLarge),
                       labelStyle: TextStyle(color: globalAlmostWhite),
                       avatar: stateUploadData.crossPostToHive
                           ? FaIcon(
@@ -813,7 +808,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
           children: [
             Text(
               "bet in VP (initial selfvote):",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Container(
               width: 80.w,
@@ -843,13 +838,13 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
                               1000)
                           .toStringAsFixed(2) +
                       'K VP',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 2.w),
                   child: Text(
                     stateUploadData.vpPercent.toStringAsFixed(2) + '%',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ],
@@ -864,7 +859,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
           children: [
             Text(
               "Promote:",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Container(
               width: 80.w,
@@ -891,7 +886,7 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
               children: [
                 Text(
                   stateUploadData.burnDtc.roundToDouble().toString() + ' DTC',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 // TODO: calculate approx. VP of burn
               ],

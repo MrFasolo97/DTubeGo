@@ -106,79 +106,79 @@ final ThemeData dtubeDarkTheme = ThemeData(
     ),
   ),
   textTheme: TextTheme(
-    headline1: GoogleFonts.workSans(
+    displayLarge: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 25,
       fontWeight: FontWeight.w900,
       fontStyle: FontStyle.normal,
     ),
-    headline2: GoogleFonts.workSans(
+    displayMedium: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 23,
       fontWeight: FontWeight.w700,
       fontStyle: FontStyle.normal,
     ),
-    headline3: GoogleFonts.workSans(
+    displaySmall: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 21,
       fontWeight: FontWeight.w900,
       fontStyle: FontStyle.normal,
     ),
-    headline4: GoogleFonts.workSans(
+    headlineMedium: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 19,
       fontWeight: FontWeight.w700,
       fontStyle: FontStyle.normal,
     ),
-    headline5: GoogleFonts.workSans(
+    headlineSmall: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 17,
       fontWeight: FontWeight.w700,
       fontStyle: FontStyle.normal,
     ),
-    headline6: GoogleFonts.workSans(
+    titleLarge: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 15,
       fontWeight: FontWeight.w700,
       fontStyle: FontStyle.normal,
     ),
-    subtitle1: GoogleFonts.workSans(
+    titleMedium: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 15,
       fontWeight: FontWeight.w200,
       fontStyle: FontStyle.normal,
     ),
-    bodyText1: GoogleFonts.workSans(
+    bodyLarge: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 15,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    bodyText2: GoogleFonts.workSans(
+    bodyMedium: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 13,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    caption: GoogleFonts.workSans(
+    bodySmall: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 13,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    button: GoogleFonts.workSans(
+    labelLarge: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 15,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    subtitle2: GoogleFonts.workSans(
+    titleSmall: GoogleFonts.workSans(
       color: globalTextColor,
       fontSize: 13,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    overline: GoogleFonts.workSans(
+    labelSmall: GoogleFonts.workSans(
       decoration: TextDecoration.underline,
       color: globalTextColor,
       fontSize: 13,

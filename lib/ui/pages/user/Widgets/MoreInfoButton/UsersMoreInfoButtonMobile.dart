@@ -96,7 +96,7 @@ class UserMoreInfoButtonMobile extends StatelessWidget {
                                     Text("From: ",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6,
+                                            .titleLarge,
                                         textAlign: TextAlign.start),
                                     Container(
                                       width: 55.w,
@@ -104,7 +104,7 @@ class UserMoreInfoButtonMobile extends StatelessWidget {
                                         user.jsonString!.profile!.location!,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                         textAlign: TextAlign.start,
                                         maxLines: 5,
                                       ),
@@ -126,7 +126,7 @@ class UserMoreInfoButtonMobile extends StatelessWidget {
                                     Text("Website: ",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6,
+                                            .titleLarge,
                                         textAlign: TextAlign.start,
                                         maxLines: 1),
                                     Container(
@@ -152,7 +152,7 @@ class UserMoreInfoButtonMobile extends StatelessWidget {
                                     Text("about: ",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6,
+                                            .titleLarge,
                                         textAlign: TextAlign.start),
                                     Container(
                                       width: 55.w,
@@ -160,7 +160,7 @@ class UserMoreInfoButtonMobile extends StatelessWidget {
                                         user.jsonString!.profile!.about!,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                         textAlign: TextAlign.start,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 10,
@@ -181,7 +181,7 @@ class UserMoreInfoButtonMobile extends StatelessWidget {
                               ),
                               child: Text(
                                 "Thanks!",
-                                style: Theme.of(context).textTheme.headline4,
+                                style: Theme.of(context).textTheme.headlineMedium,
                                 textAlign: TextAlign.center,
                               ),
                             ),

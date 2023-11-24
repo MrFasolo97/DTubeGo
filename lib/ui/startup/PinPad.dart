@@ -228,7 +228,7 @@ class PinPadMobile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text("enter your pin",
-                  style: Theme.of(context).textTheme.headline5),
+                  style: Theme.of(context).textTheme.headlineSmall),
             ),
           ],
         ));
@@ -280,7 +280,7 @@ class PinPadDesktop extends StatelessWidget {
                 shakeDuration: Duration(milliseconds: 500),
                 child: Text(
                   _pinMessage,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
             ],

@@ -46,7 +46,7 @@ class _WalletPageState extends State<WalletPage>
                 child: InputChip(
                   isEnabled: globals.keyPermissions.contains(3),
                   label: Text("new transfer",
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.titleLarge),
                   backgroundColor: globalRed,
                   onPressed: () {
                     showDialog<String>(
@@ -91,7 +91,7 @@ class _WalletHistoryListState extends State<WalletHistoryList> {
       children: [
         Text(
           "Transfer History",
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ],
     );

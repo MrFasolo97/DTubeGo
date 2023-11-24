@@ -148,7 +148,7 @@ class _LoginWithCredentialsState extends State<LoginWithCredentials> {
                                     Text(widget.message!,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline2),
+                                            .displayMedium),
                                   ],
                                 ),
                                 widget.message == 'login failed'
@@ -206,7 +206,7 @@ class _LoginWithCredentialsState extends State<LoginWithCredentials> {
                                           "Sign in",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5,
+                                              .headlineSmall,
                                         ));
                                   });
                             }),

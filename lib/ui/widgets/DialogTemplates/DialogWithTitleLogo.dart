@@ -1,4 +1,3 @@
-import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogoDesktop.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogoMobile.dart';
 import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';

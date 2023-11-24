@@ -1,13 +1,10 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
 import 'package:dtube_go/bloc/dao/dao_response_model.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:dtube_go/ui/widgets/Inputs/OverlayInputs.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/Strings/shortBalanceStrings.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
@@ -100,7 +97,7 @@ class _FundingDialogState extends State<FundingDialog> {
                               child: Center(
                                 child: Text(
                                   "Funding",
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                 ),
                               ),
                             ),
@@ -110,7 +107,7 @@ class _FundingDialogState extends State<FundingDialog> {
                                 "The amount of DTube coins you use to fund will get locked and potentially sent to the beneficiary / creator of this fund request!\n\n" +
                                     "Only when the funding goal is not getting reached or the proposal does not get executed you will receive those funds back.\n\n" +
                                     "So only use funds you are willing to donate for supporting this proposal!",
-                                style: Theme.of(context).textTheme.bodyText1,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ),
                             Row(
@@ -155,7 +152,7 @@ class _FundingDialogState extends State<FundingDialog> {
                                                   " DTube",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline6),
+                                                  .titleLarge),
                                         ],
                                       ),
                                     ],
@@ -176,7 +173,7 @@ class _FundingDialogState extends State<FundingDialog> {
                                 child: Text(
                                   // widget.downvote ? "Flag now!" : "Send Vote",
                                   "Send Funds",
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                   textAlign: TextAlign.center,
                                 ),
                               ),

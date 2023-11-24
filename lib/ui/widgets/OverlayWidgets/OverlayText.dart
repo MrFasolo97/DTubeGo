@@ -27,11 +27,11 @@ class OverlayText extends StatelessWidget {
       maxLines: maxLines != null ? maxLines! : 1,
       overflow: overflow != null ? overflow! : TextOverflow.ellipsis,
       style: TextStyle(
-        fontSize: Theme.of(context).textTheme.bodyText1!.fontSize! *
+        fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize! *
             (sizeMultiply != null ? sizeMultiply! : 1),
         fontWeight: bold != null && bold == true
             ? FontWeight.bold
-            : Theme.of(context).textTheme.bodyText1!.fontWeight,
+            : Theme.of(context).textTheme.bodyLarge!.fontWeight,
         color: color != null ? color : globalAlmostWhite,
         shadows: [
           Shadow(color: Colors.black, offset: Offset(0, 0), blurRadius: 2),

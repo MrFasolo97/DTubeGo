@@ -10,7 +10,6 @@ import 'package:dtube_go/ui/startup/login/pages/SocialUserActionPopup.dart';
 import 'package:dtube_go/ui/startup/login/services/ressources.dart';
 import 'package:dtube_go/ui/startup/login/widgets/sign_in_button.dart';
 
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -205,7 +204,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                 "continue without login",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1,
+                                                    .bodyLarge,
                                               )),
                                         ),
                                       ],
@@ -242,7 +241,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                 child: Text("Welcome to DTube!",
                                     textAlign: TextAlign.center,
                                     style:
-                                        Theme.of(context).textTheme.headline2),
+                                        Theme.of(context).textTheme.displayMedium),
                               ),
                             ),
                             Padding(
@@ -253,7 +252,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                     "DTube is a video sharing platform operating on the Avalon blockchain with a world wide community and possibilities to cross-post to various other social block chains like hive and blurt!",
                                     textAlign: TextAlign.justify,
                                     style:
-                                        Theme.of(context).textTheme.bodyText1),
+                                        Theme.of(context).textTheme.bodyLarge),
                               ),
                             ),
                             Padding(
@@ -271,7 +270,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                         "read the Whitepaper",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1!
+                                            .bodyLarge!
                                             .copyWith(color: globalBlue),
                                       )),
                                   Padding(
@@ -292,7 +291,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                 "Join the DTube Discord",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .bodyText1!
+                                                    .bodyLarge!
                                                     .copyWith(
                                                         color: globalBlue),
                                               ),

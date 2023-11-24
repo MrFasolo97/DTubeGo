@@ -73,7 +73,7 @@ class _QRCodeDialogMobileState extends State<QRCodeDialogMobile> {
                     ),
                     child: Text(
                       "Thanks",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

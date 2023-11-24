@@ -187,20 +187,20 @@ class _MomentsUploadButtontate extends State<MomentsUploadButton> {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: Text('not enough free storage',
-              style: Theme.of(context).textTheme.headline1),
+              style: Theme.of(context).textTheme.displayLarge),
           content: Container(
             height: MediaQuery.of(context).size.height / 5,
             child: Column(
               children: [
                 Text(
                     "In order to record a video with the app please make sure to have enough free internal storage on your device.",
-                    style: Theme.of(context).textTheme.bodyText1),
+                    style: Theme.of(context).textTheme.bodyLarge),
                 SizedBox(
                   height: 18,
                 ),
                 Text(
                     "We have set the minimum required free space to ${AppConfig.minFreeSpaceRecordVideoInMB / 1000} GB internal storage.",
-                    style: Theme.of(context).textTheme.bodyText1)
+                    style: Theme.of(context).textTheme.bodyLarge)
               ],
             ),
           ),

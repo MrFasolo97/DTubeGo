@@ -104,7 +104,7 @@ class _CommentDialogDesktopState extends State<CommentDialogDesktop> {
                           ),
                           child: Text(
                             "Send Comment",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headlineMedium,
                             textAlign: TextAlign.center,
                           ),
                         ),

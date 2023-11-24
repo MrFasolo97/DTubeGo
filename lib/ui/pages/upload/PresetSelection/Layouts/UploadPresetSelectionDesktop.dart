@@ -1,6 +1,5 @@
 import 'package:dtube_go/res/Config/InitiativePresets.dart';
 import 'package:dtube_go/ui/pages/upload/UploaderMainPage.dart';
-import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
@@ -73,7 +72,7 @@ class _UploadPresetSelectionDesktopState
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text("Pick an Initiative reset",
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context).textTheme.displaySmall),
                   Container(
                     height: 150,
                     width: 80.w,
@@ -105,7 +104,7 @@ class _UploadPresetSelectionDesktopState
                   ),
                   Center(
                     child: Text("or continue with your preset",
-                        style: Theme.of(context).textTheme.headline3),
+                        style: Theme.of(context).textTheme.displaySmall),
                   ),
                   FutureBuilder(
                       future: _customPresetsLoaded,

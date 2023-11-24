@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';

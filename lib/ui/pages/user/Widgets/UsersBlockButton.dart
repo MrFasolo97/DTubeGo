@@ -75,11 +75,11 @@ class _UserBlockButtonState extends State<UserBlockButton> {
                                             Text("Flag / block",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headline4),
+                                                    .headlineMedium),
                                             Text(widget.user.name,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headline4),
+                                                    .headlineMedium),
                                             SizedBox(
                                               height: 2.h,
                                             ),
@@ -89,7 +89,7 @@ class _UserBlockButtonState extends State<UserBlockButton> {
                                                     "Flagging a user will result in a block of this users posts and comments for you.",
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1),
+                                                        .bodyLarge),
                                                 SizedBox(
                                                   height: 2.h,
                                                 ),
@@ -97,7 +97,7 @@ class _UserBlockButtonState extends State<UserBlockButton> {
                                                     "This can not be reverted!",
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1!
+                                                        .bodyLarge!
                                                         .copyWith(
                                                             color: globalRed)),
                                                 SizedBox(
@@ -126,7 +126,7 @@ class _UserBlockButtonState extends State<UserBlockButton> {
                                                 "OK block this user!",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headline4,
+                                                    .headlineMedium,
                                                 textAlign: TextAlign.center,
                                               ),
                                             ),

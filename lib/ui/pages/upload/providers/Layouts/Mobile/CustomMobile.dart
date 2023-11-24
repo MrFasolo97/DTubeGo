@@ -147,10 +147,10 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                 Align(
                   alignment: Alignment.center,
                   child: Text("1. Storage Data",
-                      style: Theme.of(context).textTheme.headline5),
+                      style: Theme.of(context).textTheme.headlineSmall),
                 ),
                 DropdownButtonFormField(
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   decoration: InputDecoration(
                     labelText: 'Storage Provider',
                   ),
@@ -178,14 +178,14 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                       onChanged: (val) {
                         checkSourceIsFilled();
                       },
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                 ),
                 Wrap(
                   children: [
                     ChoiceChip(
                         selected: _video240pActivated,
                         label: Text('240p',
-                            style: Theme.of(context).textTheme.bodyText1),
+                            style: Theme.of(context).textTheme.bodyLarge),
                         labelStyle: TextStyle(color: globalAlmostWhite),
                         avatar: _video240pActivated
                             ? FaIcon(
@@ -206,7 +206,7 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                     ChoiceChip(
                         selected: _video480pActivated,
                         label: Text('480p',
-                            style: Theme.of(context).textTheme.bodyText1),
+                            style: Theme.of(context).textTheme.bodyLarge),
                         labelStyle: TextStyle(color: globalAlmostWhite),
                         avatar: _video480pActivated
                             ? FaIcon(
@@ -227,7 +227,7 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                     ChoiceChip(
                         selected: _spriteActivated,
                         label: Text('sprite',
-                            style: Theme.of(context).textTheme.bodyText1),
+                            style: Theme.of(context).textTheme.bodyLarge),
                         labelStyle: TextStyle(color: globalAlmostWhite),
                         avatar: _spriteActivated
                             ? FaIcon(
@@ -248,7 +248,7 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                     ChoiceChip(
                         selected: _thumbnailActivated,
                         label: Text('thumbnail',
-                            style: Theme.of(context).textTheme.bodyText1),
+                            style: Theme.of(context).textTheme.bodyLarge),
                         labelStyle: TextStyle(color: globalAlmostWhite),
                         avatar: _thumbnailActivated
                             ? FaIcon(
@@ -276,7 +276,7 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                         decoration: new InputDecoration(labelText: "240p Hash"),
                         controller: _video240pHashController,
                         cursorColor: globalRed,
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ),
                 Visibility(
@@ -287,7 +287,7 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                         decoration: new InputDecoration(labelText: "480p Hash"),
                         controller: _video480pHashController,
                         cursorColor: globalRed,
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ),
                 Visibility(
@@ -299,7 +299,7 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                             new InputDecoration(labelText: "Sprite Hash"),
                         controller: _spriteHashController,
                         cursorColor: globalRed,
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ),
                 Visibility(
@@ -311,14 +311,14 @@ class _CustomWizardMobileState extends State<CustomWizardMobile> {
                             new InputDecoration(labelText: "Thumbnail URL"),
                         controller: _thumbnailUrlController,
                         cursorColor: globalRed,
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ),
                 Center(
                   child: InputChip(
                     backgroundColor: globalRed,
                     label: Text("next",
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                     isEnabled: _mandatoryFieldsFilled,
                     onPressed: () async {
                       setState(() {

@@ -103,7 +103,7 @@ class _CommentDialogMobileState extends State<CommentDialogMobile> {
                             ),
                             child: Text(
                               "Send Comment",
-                              style: Theme.of(context).textTheme.headline4,
+                              style: Theme.of(context).textTheme.headlineMedium,
                               textAlign: TextAlign.center,
                             ),
                           ),

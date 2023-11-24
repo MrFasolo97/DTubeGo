@@ -1,7 +1,4 @@
-import 'package:another_flushbar/flushbar.dart';
-import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
 import 'package:dtube_go/bloc/leaderboard/leaderboard_bloc_full.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/style/OpenableHyperlink.dart';
@@ -11,9 +8,7 @@ import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/players/VideoPlayerFromURL.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/material.dart';
@@ -73,7 +68,7 @@ class _LeaderCardState extends State<LeaderCard>
                       ),
                       Text(
                         widget.leaderItem.name!,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       )
                     ],
                   ),
@@ -84,7 +79,7 @@ class _LeaderCardState extends State<LeaderCard>
                             (widget.leaderItem.nodeAppr! / 100000)
                                 .toStringAsFixed(2) +
                             'K',
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 0.5.w),
@@ -106,7 +101,7 @@ class _LeaderCardState extends State<LeaderCard>
                               : widget.leaderItem.jsonString!.profile!.website!,
                           style: Theme.of(context)
                               .textTheme
-                              .caption!
+                              .bodySmall!
                               .copyWith(color: Colors.blue[300]),
                         )
                       : SizedBox(

@@ -252,9 +252,9 @@ class _VideoPlayerMomentsDesktopState extends State<VideoPlayerMomentsDesktop> {
                                 width: 50.w,
                                 height: 10.h,
                                 mainStyle:
-                                    Theme.of(context).textTheme.headline4!,
+                                    Theme.of(context).textTheme.headlineMedium!,
                                 subStyle:
-                                    Theme.of(context).textTheme.bodyText1!),
+                                    Theme.of(context).textTheme.bodyLarge!),
                           )
                         ],
                       ),

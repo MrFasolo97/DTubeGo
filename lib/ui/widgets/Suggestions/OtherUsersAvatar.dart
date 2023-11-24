@@ -1,5 +1,3 @@
-import 'package:responsive_sizer/responsive_sizer.dart';
-
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';

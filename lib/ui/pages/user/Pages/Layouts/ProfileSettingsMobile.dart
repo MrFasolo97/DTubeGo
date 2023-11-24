@@ -7,12 +7,9 @@ import 'package:dtube_go/ui/pages/user/Widgets/ConnectYTChannelDialog.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:decorated_icon/decorated_icon.dart';
-import 'package:dtube_go/bloc/ThirdPartyUploader/ThirdPartyUploader_bloc.dart';
 import 'package:dtube_go/bloc/ThirdPartyUploader/ThirdPartyUploader_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_response_model.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
@@ -199,7 +196,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         "Basic data",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline3,
+                                            .displaySmall,
                                       ),
                                     ),
                                     DTubeFormCard(
@@ -210,7 +207,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _aboutController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -220,7 +217,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _locationController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -230,7 +227,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _websiteController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -245,7 +242,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         "Images",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline3,
+                                            .displaySmall,
                                       ),
                                     ),
                                     BlocProvider<ThirdPartyUploaderBloc>(
@@ -275,7 +272,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                                   TextFormField(
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1,
+                                                        .bodyLarge,
                                                     controller:
                                                         _avatarController,
                                                     cursorColor: Colors.red,
@@ -293,7 +290,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                                 TextFormField(
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1,
+                                                      .bodyLarge,
                                                   controller: _avatarController,
                                                   cursorColor: Colors.red,
                                                   decoration: new InputDecoration(
@@ -335,7 +332,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                                   TextFormField(
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .bodyText1,
+                                                        .bodyLarge,
                                                     cursorColor: Colors.red,
                                                     controller:
                                                         _coverImageController,
@@ -354,7 +351,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                                 TextFormField(
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .bodyText1,
+                                                      .bodyLarge,
                                                   controller:
                                                       _coverImageController,
                                                   cursorColor: Colors.red,
@@ -388,7 +385,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         "Custom Data",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline3,
+                                            .displaySmall,
                                       ),
                                     ),
                                     DTubeFormCard(
@@ -399,7 +396,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         TextFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           controller: _displayNameController,
                                           cursorColor: Colors.red,
                                           decoration: new InputDecoration(
@@ -409,7 +406,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                         DropdownButtonFormField(
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                           decoration: InputDecoration(
                                             labelText: 'Account Type',
                                           ),
@@ -433,7 +430,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                     Text(
                                       "Connected YT channels",
                                       style:
-                                          Theme.of(context).textTheme.headline3,
+                                          Theme.of(context).textTheme.displaySmall,
                                     ),
                                     DTubeFormCard(
                                         waitBeforeFadeIn:

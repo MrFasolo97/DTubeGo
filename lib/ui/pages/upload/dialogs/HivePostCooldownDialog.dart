@@ -33,19 +33,19 @@ class _HivePostCooldownDetectedDialogState
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text("Please wait a bit!",
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center),
                 SizedBox(height: 2.h),
                 Text(
                     "You want to cross post to hive but you already have posted something within the last 5 minutes.",
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                         "Please wait ", // 5 min hive cooldown to expire and try it again.",
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                         textAlign: TextAlign.center),
                     CountDownTimer(
                       secondsRemaining: widget.cooldown,
@@ -56,20 +56,20 @@ class _HivePostCooldownDetectedDialogState
                       },
                       countDownTimerStyle: Theme.of(context)
                           .textTheme
-                          .bodyText1!
+                          .bodyLarge!
                           .copyWith(color: globalRed),
                     ),
                   ],
                 ),
                 Text("to expire and try it again.",
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center),
                 SizedBox(height: 3.h),
                 Text(
                     "This cooldown is a property coming from the hive blockchain. We just want to avoid upload errors when you crosspost.",
                     style: Theme.of(context)
                         .textTheme
-                        .headline6!
+                        .titleLarge!
                         .copyWith(color: globalRed),
                     textAlign: TextAlign.center),
                 SizedBox(height: 2.h),
@@ -84,7 +84,7 @@ class _HivePostCooldownDetectedDialogState
                       ),
                       child: Text(
                         "Okay thanks!",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       ),
                     ),

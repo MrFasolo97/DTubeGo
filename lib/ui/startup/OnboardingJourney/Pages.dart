@@ -1,8 +1,3 @@
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:flutter_animator/flutter_animator.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 
 class PageContent {
   String title;

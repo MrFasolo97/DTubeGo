@@ -41,7 +41,7 @@ class _RewardsListDesktopState extends State<RewardsListDesktop> {
             return Center(
                 child: Text(
               "There are no rewards in this list",
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ));
           } else {
             return MasonryGridView.count(

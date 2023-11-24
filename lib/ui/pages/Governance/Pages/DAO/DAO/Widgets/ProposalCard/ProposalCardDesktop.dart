@@ -83,7 +83,7 @@ class _ProposalCardDesktopState extends State<ProposalCardDesktop>
                   width: 200,
                   child: Text(
                     widget.daoItem.title!,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 ProposalStateChart(

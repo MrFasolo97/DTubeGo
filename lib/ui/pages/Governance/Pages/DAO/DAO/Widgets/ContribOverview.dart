@@ -42,7 +42,7 @@ class _ProposalContribOverviewState extends State<ProposalContribOverview> {
             children: [
               Text(
                 "Conribution Overview",
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Expanded(
                 child: SingleChildScrollView(
@@ -108,7 +108,7 @@ class _ProposalContribOverviewState extends State<ProposalContribOverview> {
                     ),
                     child: Text(
                       "Thanks",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

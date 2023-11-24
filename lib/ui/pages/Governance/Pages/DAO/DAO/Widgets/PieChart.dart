@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PiChart extends StatefulWidget {
   const PiChart(
@@ -74,7 +73,7 @@ class _DaoStateChartState extends State<PiChart> {
   List<PieChartSectionData> generateSections(int received, int goal,
       double radius, bool showLabels, String raisedLabel) {
     return List.generate(2, (i) {
-      final fontSize = Theme.of(context).textTheme.caption!.fontSize;
+      final fontSize = Theme.of(context).textTheme.bodySmall!.fontSize;
       // final radius = isTouched ? 40.0 : 30.0;
 
       switch (i) {

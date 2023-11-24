@@ -1,39 +1,26 @@
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/widgets/CollapsedDescription.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'dart:io';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/pages/post/widgets/VotingDialog/VotingDialog.dart';
 import 'package:dtube_go/ui/widgets/Comments/CommentDialog.dart';
-import 'package:dtube_go/ui/pages/post/widgets/VoteButtons.dart';
-import 'package:dtube_go/ui/widgets/Inputs/OverlayInputs.dart';
 import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/gifts/GiftDialog/GiftDialog.dart';
 import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
-import 'package:dtube_go/utils/Random/randomGenerator.dart';
 import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -474,7 +461,7 @@ class PostInfoDetailsRow extends StatelessWidget {
                   child: Text(
                     author,
                     //'@${width}',
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -500,7 +487,7 @@ class PostInfoDetailsRow extends StatelessWidget {
                     fadeInFromLeft: false,
                     tagName: tag,
                     width: width * 0.2,
-                    fontStyle: Theme.of(context).textTheme.caption),
+                    fontStyle: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ],
@@ -512,7 +499,7 @@ class PostInfoDetailsRow extends StatelessWidget {
               children: [
                 Text(
                   TimeAgo.timeInAgoTSShort(ts),
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 dur > 0
                     ? Text(
@@ -524,7 +511,7 @@ class PostInfoDetailsRow extends StatelessWidget {
                                 : (new Duration(seconds: dur).inHours)
                                         .toString() +
                                     ' h'),
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       )
                     : SizedBox(
                         width: 0,
@@ -537,7 +524,7 @@ class PostInfoDetailsRow extends StatelessWidget {
               children: [
                 Text(
                   (dist / 100).round().toString(),
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 5),
@@ -980,7 +967,7 @@ class TitleWidgetForRow extends StatelessWidget {
           title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
     );

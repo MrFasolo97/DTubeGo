@@ -76,7 +76,7 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Connect Youtube",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     )),
                 // Padding(
                 //     padding: const EdgeInsets.all(8.0),
@@ -88,12 +88,12 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "1. Enter the channel ID of the youtube channel you want to connect:",
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     decoration:
                         new InputDecoration(labelText: "YT Channel ID*"),
                     controller: _channelIdController,
@@ -108,7 +108,7 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                         child: Text("how to find my channel id?",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1!
+                                .bodyLarge!
                                 .copyWith(color: Colors.blue)),
                         onTap: () {
                           launchUrl(Uri.parse(
@@ -120,7 +120,7 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "2. copy the code below and paste it into the bio of the desired youtube channel:",
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -135,7 +135,7 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                             Text("code for channel bio:"),
                             Text(
                               _verificationCodeController.value.text,
-                              style: Theme.of(context).textTheme.caption,
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -159,7 +159,7 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "3. Click \"Check\" and after that \"Connect\"",
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     )),
                 BlocBuilder<ThirdPartyMetadataBloc, ThirdPartyMetadataState>(
                   builder: (context, state) {
@@ -177,12 +177,12 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                             children: [
                               Text(
                                 "this was not a channel id",
-                                style: Theme.of(context).textTheme.headline6,
+                                style: Theme.of(context).textTheme.titleLarge,
                                 textAlign: TextAlign.center,
                               ),
                               Text(
                                 "Try again!",
-                                style: Theme.of(context).textTheme.headline4,
+                                style: Theme.of(context).textTheme.headlineMedium,
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -213,7 +213,7 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                         ),
                         child: Text(
                           "Verifying ...",
-                          style: Theme.of(context).textTheme.headline4,
+                          style: Theme.of(context).textTheme.headlineMedium,
                           textAlign: TextAlign.center,
                         ),
                       );
@@ -234,12 +234,12 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                               children: [
                                 Text(
                                   "everything is fine",
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                   textAlign: TextAlign.center,
                                 ),
                                 Text(
                                   "Connect!",
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                   textAlign: TextAlign.center,
                                 ),
                               ],
@@ -275,12 +275,12 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                               children: [
                                 Text(
                                   "code not found",
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                   textAlign: TextAlign.center,
                                 ),
                                 Text(
                                   "Try again!",
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                   textAlign: TextAlign.center,
                                 ),
                               ],
@@ -319,12 +319,12 @@ class _ConnectYTChannelDialogState extends State<ConnectYTChannelDialog> {
                             children: [
                               Text(
                                 "click this first to",
-                                style: Theme.of(context).textTheme.headline6,
+                                style: Theme.of(context).textTheme.titleLarge,
                                 textAlign: TextAlign.center,
                               ),
                               Text(
                                 "Check!",
-                                style: Theme.of(context).textTheme.headline4,
+                                style: Theme.of(context).textTheme.headlineMedium,
                                 textAlign: TextAlign.center,
                               ),
                             ],

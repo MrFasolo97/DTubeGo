@@ -5,7 +5,6 @@ import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
 import 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'dart:io';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
@@ -17,7 +16,6 @@ import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:dtube_go/ui/widgets/gifts/GiftDialog/GiftDialog.dart';
 import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
 import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';

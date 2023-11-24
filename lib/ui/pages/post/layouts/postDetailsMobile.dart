@@ -1,5 +1,4 @@
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/ui/pages/post/postDetailPage.dart';
 
 import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
 import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
@@ -20,8 +19,6 @@ import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:image_compression_flutter/flutter_image_compress.dart';
-import 'package:quiver/async.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
@@ -29,14 +26,12 @@ import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 
-import 'dart:io' show Platform;
 
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 

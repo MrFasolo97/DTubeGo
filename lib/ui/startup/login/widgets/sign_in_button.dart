@@ -1,8 +1,6 @@
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:dtube_go/ui/startup/login/services/firebase_service.dart';
 import 'package:dtube_go/ui/startup/login/services/ressources.dart';
 import 'package:firebase_auth/firebase_auth.dart';

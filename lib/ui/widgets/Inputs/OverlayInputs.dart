@@ -20,7 +20,7 @@ class OverlayTextInput extends StatelessWidget {
       //key: UniqueKey(),
       autofocus: autoFocus,
       controller: textEditingController,
-      style: Theme.of(context).textTheme.headline5,
+      style: Theme.of(context).textTheme.headlineSmall,
       cursorColor: globalRed,
       maxLines: 4,
 
@@ -42,7 +42,7 @@ class OverlayTextInput extends StatelessWidget {
           ),
           labelText: label,
           floatingLabelBehavior: FloatingLabelBehavior.auto,
-          labelStyle: Theme.of(context).textTheme.bodyText1),
+          labelStyle: Theme.of(context).textTheme.bodyLarge),
     );
   }
 }
@@ -81,8 +81,8 @@ class OverlayNumberInput extends StatelessWidget {
             ),
           ),
           labelText: label,
-          labelStyle: Theme.of(context).textTheme.bodyText1),
-      style: Theme.of(context).textTheme.headline5,
+          labelStyle: Theme.of(context).textTheme.bodyLarge),
+      style: Theme.of(context).textTheme.headlineSmall,
       controller: textEditingController,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [

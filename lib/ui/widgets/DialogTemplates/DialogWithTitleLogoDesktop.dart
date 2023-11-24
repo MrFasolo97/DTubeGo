@@ -1,6 +1,5 @@
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PopUpDialogWithTitleLogoDesktop extends StatefulWidget {
   PopUpDialogWithTitleLogoDesktop(

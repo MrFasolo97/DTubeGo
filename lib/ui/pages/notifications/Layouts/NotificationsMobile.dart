@@ -3,7 +3,6 @@ import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarMobile.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:dtube_go/bloc/notification/notification_bloc_full.dart';
 import 'package:flutter/material.dart';
@@ -250,7 +249,7 @@ class _NotificationTabContainerState extends State<NotificationTabContainer>
     } else {
       return Center(
         child: Text("you dont have any notifications yet",
-            style: Theme.of(context).textTheme.headline5),
+            style: Theme.of(context).textTheme.headlineSmall),
       );
     }
   }

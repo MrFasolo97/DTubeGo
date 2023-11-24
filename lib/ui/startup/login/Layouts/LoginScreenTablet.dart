@@ -10,7 +10,6 @@ import 'package:dtube_go/ui/startup/login/pages/SocialUserActionPopup.dart';
 import 'package:dtube_go/ui/startup/login/services/ressources.dart';
 import 'package:dtube_go/ui/startup/login/widgets/sign_in_button.dart';
 
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -192,7 +191,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                           "continue without login",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         )),
                                   ),
                                 ],
@@ -222,7 +221,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                             child: Text(
                                 "DTube is a video sharing platform operating on the Avalon blockchain with a world wide community and possibilities to cross-post to various other social block chains like hive and blurt!",
                                 textAlign: TextAlign.justify,
-                                style: Theme.of(context).textTheme.bodyText1),
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ),
                         ),
                         Padding(
@@ -239,7 +238,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                     "read the whitepaper",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1!
+                                        .bodyLarge!
                                         .copyWith(color: globalBlue),
                                   )),
                               Padding(
@@ -260,7 +259,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                             "Join the DTube Discord",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1!
+                                                .bodyLarge!
                                                 .copyWith(color: globalBlue),
                                           ),
                                           FaIcon(

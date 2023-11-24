@@ -1,6 +1,5 @@
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
-import 'package:flutter_animator/flutter_animator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -47,21 +46,21 @@ class _CollapsedDescriptionState extends State<CollapsedDescription> {
                   children: [
                     Text(
                       widget.description,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                       softWrap: true,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       "...",
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     )
                   ],
                 ),
                 expanded: MarkdownBody(
                   data: widget.description,
                   styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context))
-                      .copyWith(p: Theme.of(context).textTheme.bodyText1!),
+                      .copyWith(p: Theme.of(context).textTheme.bodyLarge!),
                   onTapLink: (text, url, title) {
                     launchUrl(Uri.parse(url!));
                   },
@@ -77,7 +76,7 @@ class _CollapsedDescriptionState extends State<CollapsedDescription> {
                       ? InputChip(
                           label: Text(
                             "open proposal video",
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           avatar:
                               FaIcon(FontAwesomeIcons.arrowRightFromBracket),
@@ -100,7 +99,7 @@ class _CollapsedDescriptionState extends State<CollapsedDescription> {
                           ? InputChip(
                               label: Text(
                                 controller.expanded ? "collapse" : "read more",
-                                style: Theme.of(context).textTheme.bodyText2,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               onPressed: () {
                                 controller.toggle();
@@ -109,7 +108,7 @@ class _CollapsedDescriptionState extends State<CollapsedDescription> {
                           : InputChip(
                               label: Text(
                                 controller.expanded ? "collapse" : "read more",
-                                style: Theme.of(context).textTheme.bodyText2,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               onPressed: () {
                                 controller.toggle();

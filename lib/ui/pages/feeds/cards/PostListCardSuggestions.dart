@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
@@ -83,7 +82,7 @@ class _PostListCardSuggestionsState extends State<PostListCardSuggestions> {
                     width: widget.width,
                     child: Text(
                       widget.title,
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -93,7 +92,7 @@ class _PostListCardSuggestionsState extends State<PostListCardSuggestions> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text('@' + widget.author,
-                          style: Theme.of(context).textTheme.subtitle2),
+                          style: Theme.of(context).textTheme.titleSmall),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -106,13 +105,14 @@ class _PostListCardSuggestionsState extends State<PostListCardSuggestions> {
                                       : widget.duration
                                           .toString()
                                           .substring(0, 7)),
-                              style: Theme.of(context).textTheme.subtitle2),
+                              style: Theme.of(context).textTheme.bodySmall,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
                                 '${widget.dtcValue}',
-                                style: Theme.of(context).textTheme.bodyText2,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 1.w),

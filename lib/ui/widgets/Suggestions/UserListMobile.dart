@@ -2,7 +2,6 @@ import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:dtube_go/ui/widgets/Suggestions/OtherUsersAvatar.dart';
 import 'package:flutter/material.dart';
 
 class UserListMobile extends StatefulWidget {
@@ -40,7 +39,7 @@ class _UserListMobileState extends State<UserListMobile> {
               (widget.showCount
                   ? " (" + widget.userlist.length.toString() + ")"
                   : ""),
-          style: Theme.of(context).textTheme.headline5),
+          style: Theme.of(context).textTheme.headlineSmall),
       Padding(
         padding: EdgeInsets.only(top: 2.h, bottom: 2.h),
         child: Container(
@@ -71,7 +70,7 @@ class _UserListMobileState extends State<UserListMobile> {
                             width: widget.avatarSize,
                             child: Center(
                               child: Text(widget.userlist[index],
-                                  style: Theme.of(context).textTheme.bodyText2,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   overflow: TextOverflow.ellipsis),
                             ),
                           )

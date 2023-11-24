@@ -1,13 +1,8 @@
 import 'package:dtube_go/ui/startup/OnboardingJourney/Pages.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:path/path.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/ui/startup/OnboardingJourney/Pages.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
@@ -76,7 +71,7 @@ class _OnboardingJourneyState extends State<OnboardingJourney> {
                                 _textVisible
                                     ? walkThroughList[currentIndexPage].title
                                     : "",
-                                style: Theme.of(context).textTheme.headline1,
+                                style: Theme.of(context).textTheme.displayLarge,
                                 textAlign: TextAlign.center),
                             Padding(
                               padding: EdgeInsets.only(top: 4.h),
@@ -85,7 +80,7 @@ class _OnboardingJourneyState extends State<OnboardingJourney> {
                                       ? walkThroughList[currentIndexPage]
                                           .description
                                       : "",
-                                  style: Theme.of(context).textTheme.bodyText1,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   textAlign: TextAlign.center),
                             ),
                             currentIndexPage == walkThroughList.length - 1 &&
@@ -111,7 +106,7 @@ class _OnboardingJourneyState extends State<OnboardingJourney> {
                                             "Enter DTube",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1,
+                                                .bodyLarge,
                                           )
                                         ],
                                       ),
@@ -129,7 +124,7 @@ class _OnboardingJourneyState extends State<OnboardingJourney> {
                 top: 30,
                 child: InkWell(
                   child: Text('SKIP INTRO',
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                   onTap: () {
                     widget.journeyDoneCallback();
                   },

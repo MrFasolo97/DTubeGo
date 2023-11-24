@@ -82,7 +82,7 @@ class _ProposalCardState extends State<ProposalCard>
                   width: 60.w,
                   child: Text(
                     widget.daoItem.title!,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 ProposalStateChart(

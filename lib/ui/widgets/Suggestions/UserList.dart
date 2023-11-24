@@ -1,12 +1,7 @@
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/ui/widgets/Suggestions/UserListDesktop.dart';
 import 'package:dtube_go/ui/widgets/Suggestions/UserListMobile.dart';
 import 'package:dtube_go/ui/widgets/Suggestions/UserListTablet.dart';
 import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'package:dtube_go/ui/widgets/Suggestions/OtherUsersAvatar.dart';
 import 'package:flutter/material.dart';
 
 class UserList extends StatelessWidget {

@@ -1,7 +1,6 @@
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
 import 'package:dtube_go/ui/widgets/Inputs/OverlayInputs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +94,7 @@ class _GiftDialogDesktopState extends State<GiftDialogDesktop> {
                         ),
                         Text(
                           " DTC",
-                          style: Theme.of(context).textTheme.headline4,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ],
                     ),
@@ -123,7 +122,7 @@ class _GiftDialogDesktopState extends State<GiftDialogDesktop> {
                         ),
                         child: Text(
                           "Send Gift",
-                          style: Theme.of(context).textTheme.headline4,
+                          style: Theme.of(context).textTheme.headlineMedium,
                           textAlign: TextAlign.center,
                         ),
                       ),

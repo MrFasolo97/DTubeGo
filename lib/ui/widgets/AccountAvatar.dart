@@ -1,14 +1,12 @@
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayText.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:dtube_go/utils/Widgets/ShadowedText.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/style/OpenableHyperlink.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';

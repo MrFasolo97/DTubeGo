@@ -49,7 +49,7 @@ class _ProposalListMobileState extends State<ProposalListMobile> {
             return Center(
                 child: Text(
               "no proposals found.",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             ));
           } else {
             return ListView.builder(

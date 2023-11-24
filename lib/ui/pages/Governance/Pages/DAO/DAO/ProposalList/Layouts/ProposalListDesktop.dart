@@ -1,5 +1,4 @@
 import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/ProposalCard/ProposalCard.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/ProposalCard/ProposalCardDesktop.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +50,7 @@ class _ProposalListDesktopState extends State<ProposalListDesktop> {
             return Center(
                 child: Text(
               "no proposals found.",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             ));
           } else {
             return MasonryGridView.count(

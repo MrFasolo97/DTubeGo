@@ -23,7 +23,7 @@ AppBar dtubeSubAppBarMobile(
                 padding: EdgeInsets.only(right: 30),
                 child: Text(
                   title,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               )
             : SizedBox(

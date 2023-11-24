@@ -22,24 +22,24 @@ class UploadStartedDialog extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 7.h),
                 child: Text("Amazing!",
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center),
               ),
               SizedBox(height: 2.h),
               Text(
                   "Your new video is uploading right now and this could take some time...",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.center),
               Text(
                   "It is safe to browse DTube Go in the meantime. Go share some feedback and votes on other videos of the community.",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.center),
               SizedBox(height: 3.h),
               Text(
                   "Make sure to not close the app or lock your screen until the upload is finished!",
                   style: Theme.of(context)
                       .textTheme
-                      .headline6!
+                      .titleLarge!
                       .copyWith(color: globalRed),
                   textAlign: TextAlign.center),
               SizedBox(height: 2.h),
@@ -54,7 +54,7 @@ class UploadStartedDialog extends StatelessWidget {
                     ),
                     child: Text(
                       "Allright!",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

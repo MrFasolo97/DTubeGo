@@ -308,7 +308,7 @@ class CommentItem extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 2.w),
                     child: Text(comment.author,
-                        style: Theme.of(parentContext).textTheme.headline6),
+                        style: Theme.of(parentContext).textTheme.titleLarge),
                   ),
                   MultiBlocProvider(
                     providers: [
@@ -339,10 +339,10 @@ class CommentItem extends StatelessWidget {
                       ? comment.commentjson.description
                       : "author is blocked",
                   style: !blockedUsers.contains(comment.author)
-                      ? Theme.of(parentContext).textTheme.bodyText2
+                      ? Theme.of(parentContext).textTheme.bodyMedium
                       : Theme.of(parentContext)
                           .textTheme
-                          .bodyText2!
+                          .bodyMedium!
                           .copyWith(color: globalRed),
                 ),
               ),

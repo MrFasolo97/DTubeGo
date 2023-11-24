@@ -277,7 +277,7 @@ class VotingButtonRow extends StatelessWidget {
                   post.upvotes != null && post.upvotes!.isNotEmpty
                       ? (post.upvotes!.length).toString()
                       : '0',
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 avatar: Padding(
                   padding: const EdgeInsets.only(left: 4.0),
@@ -326,7 +326,7 @@ class VotingButtonRow extends StatelessWidget {
                   post.downvotes != null && post.downvotes!.isNotEmpty
                       ? (post.downvotes!.length).toString()
                       : '0',
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 avatar: Padding(
                   padding: const EdgeInsets.only(left: 4.0),
@@ -617,7 +617,7 @@ class _VotingSliderState extends State<VotingSlider> {
           ? Column(
               children: [
                 Text(widget.downvote ? "Downvote" : "Upvote",
-                    style: Theme.of(context).textTheme.headline6),
+                    style: Theme.of(context).textTheme.titleLarge),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -638,7 +638,7 @@ class _VotingSliderState extends State<VotingSlider> {
                                         "voting weight: ",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText2,
+                                            .bodyMedium,
                                       ),
                                       Text(
                                         (_vpValue.floor() *
@@ -647,7 +647,7 @@ class _VotingSliderState extends State<VotingSlider> {
                                             '%',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6,
+                                            .titleLarge,
                                       ),
                                     ],
                                   ),
@@ -683,14 +683,14 @@ class _VotingSliderState extends State<VotingSlider> {
                                               "vote tip: ",
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText2,
+                                                  .bodyMedium,
                                             ),
                                             Text(
                                               _tipValue.floor().toString() +
                                                   '%',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline6,
+                                                  .titleLarge,
                                             ),
                                           ],
                                         ),
@@ -992,7 +992,7 @@ class _VotingSliderStandaloneState extends State<VotingSliderStandalone> {
                                           "cancel",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         onPressed: () {
                                           widget.cancelCallback!();

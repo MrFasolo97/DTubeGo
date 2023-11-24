@@ -27,7 +27,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
             backgroundColor: Colors.green[800],
             label: Text(
               'voting phase',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ));
       } else {
         return InputChip(
@@ -36,7 +36,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
             onSelected: (bool) {},
             label: Text(
               'voting failed',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ));
       }
     }
@@ -49,7 +49,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
             onSelected: (bool) {},
             label: Text(
               'funding phase',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ));
       } else {
         return InputChip(
@@ -58,7 +58,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
             onSelected: (bool) {},
             label: Text(
               'funding failed',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ));
       }
     }
@@ -70,7 +70,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
             onSelected: (bool) {},
             label: Text(
               'in progress',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ));
       } else {
         if (widget.daoItem.status == 5) {
@@ -80,7 +80,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
               onSelected: (bool) {},
               label: Text(
                 'in review',
-                style: Theme.of(context).textTheme.caption,
+                style: Theme.of(context).textTheme.bodySmall,
               ));
         } else {
           return InputChip(
@@ -89,7 +89,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
               onSelected: (bool) {},
               label: Text(
                 'completed',
-                style: Theme.of(context).textTheme.caption,
+                style: Theme.of(context).textTheme.bodySmall,
               ));
         }
       }
@@ -101,7 +101,7 @@ class _ProposalStateChipState extends State<ProposalStateChip> {
           onSelected: (bool) {},
           label: Text(
             'expired',
-            style: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.bodySmall,
           ));
     }
     return Text("state unknown");

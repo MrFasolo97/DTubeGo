@@ -4,7 +4,6 @@ import 'package:dtube_go/ui/widgets/Inputs/OverlayInputs.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:dtube_go/utils/Strings/shortBalanceStrings.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
@@ -132,7 +131,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                               widget.downvote && widget.fixedDownvoteActivated
                                   ? "Flagging"
                                   : "Voting",
-                              style: Theme.of(context).textTheme.headline1,
+                              style: Theme.of(context).textTheme.displayLarge,
                             ),
                           ),
                           widget.downvote && widget.fixedDownvoteActivated
@@ -149,14 +148,14 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                                               " If the curation team agrees it will get removed from the whole platform.",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1),
+                                              .bodyLarge),
                                       Padding(
                                         padding: EdgeInsets.only(top: 1.h),
                                         child: Text(
                                           "You can not undo this action!",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline6!
+                                              .titleLarge!
                                               .copyWith(color: globalRed),
                                         ),
                                       )
@@ -178,7 +177,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                                                 Text("weight: ",
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline3),
+                                                        .displaySmall),
                                                 Text(
                                                     (_vpValue.floor() *
                                                                 (widget.downvote
@@ -188,7 +187,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                                                         '%',
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline3),
+                                                        .displaySmall),
                                               ],
                                             ),
                                             RotatedBox(
@@ -224,7 +223,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                                                     " VP",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .headline6),
+                                                    .titleLarge),
                                           ],
                                         ),
                                         widget.downvote
@@ -242,7 +241,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
-                                                                .headline3),
+                                                                .displaySmall),
                                                         Text(
                                                             _tipValue
                                                                     .floor()
@@ -251,7 +250,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
-                                                                .headline3),
+                                                                .displaySmall),
                                                       ],
                                                     ),
                                                     RotatedBox(
@@ -279,7 +278,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                                                     Text("",
                                                         style: Theme.of(context)
                                                             .textTheme
-                                                            .headline6),
+                                                            .titleLarge),
                                                   ],
                                                 ),
                                               ),
@@ -315,7 +314,7 @@ class _VotingDialogDesktopState extends State<VotingDialogDesktop> {
                               ),
                               child: Text(
                                 widget.downvote ? "Flag now!" : "Send Vote",
-                                style: Theme.of(context).textTheme.headline4,
+                                style: Theme.of(context).textTheme.headlineMedium,
                                 textAlign: TextAlign.center,
                               ),
                             ),

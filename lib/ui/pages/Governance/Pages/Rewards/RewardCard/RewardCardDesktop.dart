@@ -8,10 +8,8 @@ import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RewardCardDesktop extends StatefulWidget {
   RewardCardDesktop(
@@ -65,8 +63,8 @@ class _RewardCardDesktopState extends State<RewardCardDesktop>
                         username: widget.reward.author,
                         width: 100,
                         height: 50,
-                        mainStyle: Theme.of(context).textTheme.headline5!,
-                        subStyle: Theme.of(context).textTheme.bodyText1!,
+                        mainStyle: Theme.of(context).textTheme.headlineSmall!,
+                        subStyle: Theme.of(context).textTheme.bodyLarge!,
                       ),
                     )
                   ],
@@ -80,19 +78,19 @@ class _RewardCardDesktopState extends State<RewardCardDesktop>
                       children: [
                         Text(
                           "content:",
-                          style: Theme.of(context).textTheme.caption,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Text(
                           "spent:",
-                          style: Theme.of(context).textTheme.caption,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Text(
                           "voted on:",
-                          style: Theme.of(context).textTheme.caption,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Text(
                           "published on:",
-                          style: Theme.of(context).textTheme.caption,
+                          style: Theme.of(context).textTheme.bodySmall,
                         )
                       ],
                     ),
@@ -107,14 +105,14 @@ class _RewardCardDesktopState extends State<RewardCardDesktop>
                           child: Text(
                             widget.reward.author + '/' + widget.reward.link,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
                         Container(
                           width: 100,
                           child: Text(
                             (widget.reward.vt / 1000).toStringAsFixed(2) + 'K',
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -126,7 +124,7 @@ class _RewardCardDesktopState extends State<RewardCardDesktop>
                                 .toLocal()
                                 .toString()
                                 .substring(0, 16),
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -138,7 +136,7 @@ class _RewardCardDesktopState extends State<RewardCardDesktop>
                                 .toLocal()
                                 .toString()
                                 .substring(0, 16),
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -169,7 +167,7 @@ class _RewardCardDesktopState extends State<RewardCardDesktop>
                               Text(
                                 (widget.reward.claimable / 100)
                                     .toStringAsFixed(2),
-                                style: Theme.of(context).textTheme.headline5,
+                                style: Theme.of(context).textTheme.headlineSmall,
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 10),
@@ -186,7 +184,7 @@ class _RewardCardDesktopState extends State<RewardCardDesktop>
                                               widget.reward.claimed!)
                                           : TimeAgo.timeAgoClaimIn(
                                               widget.reward.ts)),
-                                  style: Theme.of(context).textTheme.headline5,
+                                  style: Theme.of(context).textTheme.headlineSmall,
                                 ),
                               ),
                             ],
@@ -248,7 +246,7 @@ class _ClaimRewardButtonState extends State<ClaimRewardButton> {
           children: [
             Text(
               'claimed ' + (widget.claimable / 100).toStringAsFixed(2),
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             Padding(
               padding: EdgeInsets.only(left: 10),
@@ -277,7 +275,7 @@ class _ClaimRewardButtonState extends State<ClaimRewardButton> {
               children: [
                 Text(
                   'claim ' + (widget.claimable / 100).toStringAsFixed(2),
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 10),

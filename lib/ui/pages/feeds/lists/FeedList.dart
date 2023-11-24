@@ -1,5 +1,4 @@
 import 'package:dtube_go/ui/pages/feeds/cards/PostListCardDesktop.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';

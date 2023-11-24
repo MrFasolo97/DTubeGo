@@ -36,7 +36,7 @@ class PresetCard extends StatelessWidget {
                           child: FaIcon(preset.icon,
                               size: iconSize, color: globalAlmostWhite)),
                       Text(preset.name,
-                          style: Theme.of(context).textTheme.caption)
+                          style: Theme.of(context).textTheme.bodySmall)
                     ],
                   ),
                 ],
@@ -81,7 +81,7 @@ class InitiativePresetCard extends StatelessWidget {
               onTapped: () {
                 onTapCallback();
               },
-              textStyle: Theme.of(context).textTheme.headline6!,
+              textStyle: Theme.of(context).textTheme.titleLarge!,
               width: 50.w,
             ),
             Align(

@@ -1,9 +1,7 @@
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:dtube_go/ui/widgets/Suggestions/OtherUsersAvatar.dart';
 import 'package:flutter/material.dart';
 
 class UserListTablet extends StatefulWidget {

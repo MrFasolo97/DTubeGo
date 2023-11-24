@@ -51,7 +51,7 @@ class NewsPageMobile extends StatelessWidget {
                 padding: EdgeInsets.only(left: 2.w),
                 child: Text(
                   "News",
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
             ],
@@ -72,7 +72,7 @@ class NewsPageMobile extends StatelessWidget {
                 avatar: FaIcon(FontAwesomeIcons.check),
                 label: Text(
                   "okay thanks!",
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 backgroundColor: globalRed,
                 onSelected: (value) async {
@@ -110,7 +110,7 @@ class NewsPageDesktop extends StatelessWidget {
                   padding: EdgeInsets.only(left: 20),
                   child: Text(
                     "News",
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.displayLarge,
                   ),
                 ),
               ],
@@ -119,7 +119,7 @@ class NewsPageDesktop extends StatelessWidget {
                 avatar: FaIcon(FontAwesomeIcons.check),
                 label: Text(
                   "okay thanks! Let me in",
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 backgroundColor: globalRed,
                 onSelected: (value) async {

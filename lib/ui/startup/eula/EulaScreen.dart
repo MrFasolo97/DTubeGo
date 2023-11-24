@@ -7,10 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/material.dart';
-import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
 class EULAScreen extends StatefulWidget {
@@ -95,7 +93,7 @@ class _EULAScreenState extends State<EULAScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text("End User License Agreement",
-                  style: Theme.of(context).textTheme.headline3),
+                  style: Theme.of(context).textTheme.displaySmall),
               new Container(
                 height: 70.h,
                 child:

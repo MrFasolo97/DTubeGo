@@ -128,7 +128,7 @@ class _Wizard3rdPartyMobileState extends State<Wizard3rdPartyMobile> {
                             Align(
                               alignment: Alignment.center,
                               child: Text("1. External URL",
-                                  style: Theme.of(context).textTheme.headline5),
+                                  style: Theme.of(context).textTheme.headlineSmall),
                             ),
                             Row(
                               children: [
@@ -146,7 +146,7 @@ class _Wizard3rdPartyMobileState extends State<Wizard3rdPartyMobile> {
                                       cursorColor: globalRed,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1),
+                                          .bodyLarge),
                                 ),
                               ],
                             ),

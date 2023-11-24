@@ -1,15 +1,11 @@
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:flutter/services.dart';
 
-import 'dart:async' show Future;
 
 import 'package:dtube_go/bloc/config/txTypes.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
+
 import 'package:dtube_go/utils/Random/randomGenerator.dart';
-import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/services.dart';
 
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
@@ -74,7 +70,7 @@ class _NewKeyDialogState extends State<NewKeyDialog> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     decoration:
                         new InputDecoration(labelText: "Key Name / Usage*"),
                     controller: _keyNameController,
@@ -100,7 +96,7 @@ class _NewKeyDialogState extends State<NewKeyDialog> {
                           txTypes[index]!.toString(),
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle2!
+                              .titleSmall!
                               .copyWith(fontSize: 10),
                         ),
                         selected: _selectedTxTypes.contains(index),
@@ -130,7 +126,7 @@ class _NewKeyDialogState extends State<NewKeyDialog> {
                             Text("public key:"),
                             Text(
                               _newPubController.value.text,
-                              style: Theme.of(context).textTheme.caption,
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 2.h),
@@ -138,7 +134,7 @@ class _NewKeyDialogState extends State<NewKeyDialog> {
                             ),
                             Text(
                               _newPrivController.value.text,
-                              style: Theme.of(context).textTheme.caption,
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],
                         ),
@@ -175,7 +171,7 @@ class _NewKeyDialogState extends State<NewKeyDialog> {
                     ),
                     child: Text(
                       "Create key",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

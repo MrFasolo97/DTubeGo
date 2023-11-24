@@ -1,4 +1,3 @@
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/hivesigner/hivesigner_bloc_full.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
@@ -58,7 +57,7 @@ class _HiveSignerFormState extends State<HiveSignerForm> {
           maxLines: 1,
           decoration: new InputDecoration(labelText: "hive username:"),
           controller: _usernameController,
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyLarge,
           onChanged: (val) {
             checkIfFormIsFilled();
           },
@@ -84,7 +83,7 @@ class _HiveSignerFormState extends State<HiveSignerForm> {
           ),
           label: Text(
             "hivesigner",
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           onPressed: () {
             BlocProvider.of<HivesignerBloc>(context).add(CheckAccessToken(

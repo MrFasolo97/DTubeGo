@@ -41,7 +41,7 @@ class _RewardsListTabletState extends State<RewardsListTablet> {
             return Center(
                 child: Text(
               "nothing here",
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             ));
           } else {
             return MasonryGridView.count(

@@ -122,7 +122,7 @@ class _ProposalVoteOverviewState extends State<ProposalVoteOverview> {
                     ),
                     child: Text(
                       "Thanks",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

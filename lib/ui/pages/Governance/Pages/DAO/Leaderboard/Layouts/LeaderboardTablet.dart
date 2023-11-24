@@ -1,5 +1,4 @@
 import 'package:dtube_go/bloc/leaderboard/leaderboard_bloc_full.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/Leaderboard/Widgets/LeaderCard.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/DAO/Leaderboard/Widgets/LeaderCardDesktop.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 

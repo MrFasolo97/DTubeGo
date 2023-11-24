@@ -72,7 +72,7 @@ class _KeyManagementMobileState extends State<KeyManagementMobile>
                 InputChip(
                   isEnabled: globals.keyPermissions.contains(10),
                   label: Text("new custom key",
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.titleLarge),
                   backgroundColor: globalRed,
                   onPressed: () {
                     showDialog<String>(
@@ -86,7 +86,7 @@ class _KeyManagementMobileState extends State<KeyManagementMobile>
                 InputChip(
                   isEnabled: globals.keyPermissions.contains(12),
                   label: Text("change master key",
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.titleLarge),
                   backgroundColor: globalRed,
                   onPressed: () {
                     showDialog<String>(
@@ -100,7 +100,7 @@ class _KeyManagementMobileState extends State<KeyManagementMobile>
             ),
             Text(
               "Custom Keys",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Expanded(
               // height: 20.h,
@@ -154,7 +154,7 @@ class _KeyManagementMobileState extends State<KeyManagementMobile>
                             width: 25.w,
                             child: Text(
                               "Name:",
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleLarge,
                             )),
                         Padding(
                           padding: EdgeInsets.only(left: 2.w),
@@ -162,7 +162,7 @@ class _KeyManagementMobileState extends State<KeyManagementMobile>
                             width: 60.w,
                             child: Text(
                               user.keys[pos].id,
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ),
                         ),
@@ -225,7 +225,7 @@ class _KeyManagementMobileState extends State<KeyManagementMobile>
                         txTypes[user.keys[pos].types[index]]!.toString(),
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle2!
+                            .titleSmall!
                             .copyWith(fontSize: 10),
                       ),
                     );

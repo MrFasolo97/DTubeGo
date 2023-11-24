@@ -103,7 +103,7 @@ class _UploadTermsDialogState extends State<UploadTermsDialog> {
                     ),
                     child: Text(
                       "Agree",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

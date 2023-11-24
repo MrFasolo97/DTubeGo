@@ -141,7 +141,7 @@ class _ReplyButtonState extends State<ReplyButton> {
                       autofocus: _replyPressed,
                       controller: _replyController,
                       cursorColor: globalRed,
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                 ),
                 BlocBuilder<UserBloc, UserState>(
                     bloc: _userBloc,

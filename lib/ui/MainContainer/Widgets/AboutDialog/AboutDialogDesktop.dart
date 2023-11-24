@@ -125,7 +125,7 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                   children: [
                     Text(
                       'Avalon Blockchain',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                       textAlign: TextAlign.center,
                     ),
                     Padding(
@@ -154,7 +154,7 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                       child: Row(
                         children: [
                           Text("DTube on ",
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: Theme.of(context).textTheme.bodyLarge),
                           FaIcon(FontAwesomeIcons.github, size: 20),
                         ],
                       ),
@@ -166,7 +166,7 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                       child: Row(
                         children: [
                           Text("Avalon on ",
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: Theme.of(context).textTheme.bodyLarge),
                           FaIcon(FontAwesomeIcons.github, size: 20),
                         ],
                       ),
@@ -205,7 +205,7 @@ class _AboutDialogDesktopState extends State<AboutDialogDesktop> {
                     ),
                     child: Text(
                       "Thanks",
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                   ),

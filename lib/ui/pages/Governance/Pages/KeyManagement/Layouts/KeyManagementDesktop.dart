@@ -1,4 +1,3 @@
-import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/Widgets/newKeyDialog.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/Widgets/newKeyDialogDesktop.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/Widgets/removeKeyDialog.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/Widgets/resetMasterKeyDialog.dart';
@@ -74,7 +73,7 @@ class _KeyManagementDesktopState extends State<KeyManagementDesktop>
                 InputChip(
                   isEnabled: globals.keyPermissions.contains(10),
                   label: Text("new custom key",
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.titleLarge),
                   backgroundColor: globalRed,
                   onPressed: () {
                     showDialog<String>(
@@ -88,7 +87,7 @@ class _KeyManagementDesktopState extends State<KeyManagementDesktop>
                 InputChip(
                   isEnabled: globals.keyPermissions.contains(12),
                   label: Text("change master key",
-                      style: Theme.of(context).textTheme.headline6),
+                      style: Theme.of(context).textTheme.titleLarge),
                   backgroundColor: globalRed,
                   onPressed: () {
                     showDialog<String>(
@@ -102,7 +101,7 @@ class _KeyManagementDesktopState extends State<KeyManagementDesktop>
             ),
             Text(
               "Custom Keys",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Expanded(
               // height: 20.h,
@@ -154,7 +153,7 @@ class _KeyManagementDesktopState extends State<KeyManagementDesktop>
                       children: [
                         Text(
                           "Name:",
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 2.w),
@@ -162,7 +161,7 @@ class _KeyManagementDesktopState extends State<KeyManagementDesktop>
                             width: 250,
                             child: Text(
                               user.keys[pos].id,
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ),
                         ),
@@ -225,7 +224,7 @@ class _KeyManagementDesktopState extends State<KeyManagementDesktop>
                         txTypes[user.keys[pos].types[index]]!.toString(),
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle2!
+                            .titleSmall!
                             .copyWith(fontSize: 10),
                       ),
                     );

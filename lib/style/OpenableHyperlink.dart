@@ -16,7 +16,7 @@ class OpenableHyperlink extends StatelessWidget {
         child: Text(
           alt != null ? alt! : url,
           overflow: TextOverflow.ellipsis,
-          style: style != null ? style : Theme.of(context).textTheme.overline,
+          style: style != null ? style : Theme.of(context).textTheme.labelSmall,
           maxLines: maxLines != null ? maxLines! : 3,
         ),
         onTap: () async {

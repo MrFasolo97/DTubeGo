@@ -1,5 +1,3 @@
-import 'package:auto_orientation/auto_orientation.dart';
-import 'package:dtube_go/ui/widgets/players/YTPlayerFullScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';

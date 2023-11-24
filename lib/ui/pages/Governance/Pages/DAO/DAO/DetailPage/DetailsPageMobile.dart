@@ -6,11 +6,9 @@ import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/StateChart.da
 import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/StateChip.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/VoteOverview.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/VotingDialog.dart';
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/players/VideoPlayerFromURL.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/bloc/transaction/transaction_bloc.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
@@ -25,10 +23,7 @@ import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
-import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
-import 'package:dtube_go/ui/pages/post/widgets/ReplyButton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ProposalDetailPageMobile extends StatefulWidget {
   final int proposalId;
@@ -147,7 +142,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
             padding: EdgeInsets.only(bottom: 2.h),
             child: Text(
               widget.daoItem.title!,
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
           widget.daoItem.url != ""
@@ -223,7 +218,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                               children: [
                                 Text(
                                   "Created by: ",
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 AccountNavigationChip(
                                     author: widget.daoItem.creator!,
@@ -242,7 +237,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                       Text("Benficiary: ",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline6),
+                                              .titleLarge),
                                       AccountNavigationChip(
                                           author: widget.daoItem.receiver!,
                                           size: 40.w),
@@ -298,7 +293,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                       1 // if voting open and fund request
                               ? "vote for it"
                               : "help to fund it",
-                          style: Theme.of(context).textTheme.headline3),
+                          style: Theme.of(context).textTheme.displaySmall),
                       onSelected: ((bool) {
                         showDialog<String>(
                           context: context,
@@ -402,7 +397,7 @@ class TitleWidget extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
     );
   }
@@ -479,14 +474,14 @@ class _VotesOverviewState extends State<VotesOverview> {
                                         _allVotes[index].u,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                       ),
                                       Text(
                                         TimeAgo.timeInAgoTSShort(
                                             _allVotes[index].ts),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText2,
+                                            .bodyMedium,
                                       ),
                                     ],
                                   ),
@@ -517,7 +512,7 @@ class _VotesOverviewState extends State<VotesOverview> {
                                               : "0"),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 5.w,
@@ -534,7 +529,7 @@ class _VotesOverviewState extends State<VotesOverview> {
                                           shortVP(_allVotes[index].vt),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 5.w,
@@ -572,7 +567,7 @@ class _VotesOverviewState extends State<VotesOverview> {
           },
           label: Text(
             'Close',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
       ],

@@ -80,7 +80,7 @@ class _TransferDialogState extends State<TransferDialog> {
           onPressed: () => Navigator.pop(context, 'Cancel'),
           child: Text(
             'Cancel',
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         TextButton(
@@ -99,7 +99,7 @@ class _TransferDialogState extends State<TransferDialog> {
           },
           child: Text(
             'Send',
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
       ],

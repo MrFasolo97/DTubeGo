@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedList.dart';
 import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
 import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggested.dart';
 import 'package:dtube_go/ui/pages/user/Widgets/MenuButton.dart';
@@ -18,7 +17,6 @@ import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:flutter/rendering.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

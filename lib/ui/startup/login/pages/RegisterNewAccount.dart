@@ -47,7 +47,7 @@ class _RegisterNewAccountState extends State<RegisterNewAccount> {
               Padding(
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text("1. Enter your desired username",
-                    style: Theme.of(context).textTheme.headline5),
+                    style: Theme.of(context).textTheme.headlineSmall),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class _RegisterNewAccountState extends State<RegisterNewAccount> {
                   Container(
                     width: 50.w,
                     child: TextField(
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                       controller: usernameController,
                       onChanged: (value) {
                         setState(() {
@@ -78,7 +78,7 @@ class _RegisterNewAccountState extends State<RegisterNewAccount> {
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Username',
-                          labelStyle: Theme.of(context).textTheme.bodyText1),
+                          labelStyle: Theme.of(context).textTheme.bodyLarge),
                     ),
                   ),
                   ValueListenableBuilder<TextEditingValue>(
@@ -124,32 +124,32 @@ class _RegisterNewAccountState extends State<RegisterNewAccount> {
                     Padding(
                       padding: EdgeInsets.only(top: 2.h),
                       child: Text("2. Keys",
-                          style: Theme.of(context).textTheme.headline5),
+                          style: Theme.of(context).textTheme.headlineSmall),
                     ),
                     Container(
                       width: 80.w,
                       child: TextField(
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                         cursorColor: globalRed,
                         readOnly: true,
                         controller: publicKeyController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Public Key',
-                            labelStyle: Theme.of(context).textTheme.bodyText1),
+                            labelStyle: Theme.of(context).textTheme.bodyLarge),
                       ),
                     ),
                     Container(
                       width: 80.w,
                       child: TextField(
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                         cursorColor: globalRed,
                         readOnly: true,
                         controller: privateKeyController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Private Key',
-                            labelStyle: Theme.of(context).textTheme.bodyText1),
+                            labelStyle: Theme.of(context).textTheme.bodyLarge),
                       ),
                     ),
                     Column(
@@ -160,7 +160,7 @@ class _RegisterNewAccountState extends State<RegisterNewAccount> {
                               "Now copy and save the keys secure. They can not get restored!",
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyText1!
+                                  .bodyLarge!
                                   .copyWith(color: globalRed),
                             )),
                         Container(
@@ -227,7 +227,7 @@ class _RegisterNewAccountState extends State<RegisterNewAccount> {
                                     child: Text(
                                       "Create account",
                                       style:
-                                          Theme.of(context).textTheme.headline5,
+                                          Theme.of(context).textTheme.headlineSmall,
                                     ));
                               });
                         }),

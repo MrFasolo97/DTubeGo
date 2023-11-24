@@ -400,7 +400,7 @@ class AllMomentsSeenWidget extends StatelessWidget {
         children: [
           Text(
             "Oops! You have seen all recent moments!",
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
 
           // FaIcon(FontAwesomeIcons.search, size: 20.w,),
@@ -410,7 +410,7 @@ class AllMomentsSeenWidget extends StatelessWidget {
               padding: EdgeInsets.only(top: 2.h),
               child: Text(
                 "Feel free to share a moment of your life with the community by tapping the \"create\" icon above!",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ),

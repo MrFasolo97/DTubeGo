@@ -1,7 +1,5 @@
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:dtube_go/style/ThemeData.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DTubeFormCard extends StatelessWidget {

@@ -94,7 +94,7 @@ class _GiftDialogMobileState extends State<GiftDialogMobile> {
                           ),
                           Text(
                             " DTC",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                         ],
                       ),
@@ -122,7 +122,7 @@ class _GiftDialogMobileState extends State<GiftDialogMobile> {
                           ),
                           child: Text(
                             "Send Gift",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headlineMedium,
                             textAlign: TextAlign.center,
                           ),
                         ),

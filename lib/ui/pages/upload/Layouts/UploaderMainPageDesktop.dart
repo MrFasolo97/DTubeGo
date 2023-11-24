@@ -9,7 +9,6 @@ import 'package:dtube_go/ui/pages/upload/providers/3rdparty.dart';
 import 'package:dtube_go/ui/pages/upload/providers/Custom.dart';
 import 'package:dtube_go/ui/pages/upload/providers/IpfsDTube.dart';
 import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
-import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

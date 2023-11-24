@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggested.dart';
 import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
 import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
 import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
@@ -15,29 +14,24 @@ import 'package:dtube_go/bloc/feed/feed_bloc.dart';
 import 'package:dtube_go/bloc/feed/feed_event.dart';
 import 'package:dtube_go/bloc/feed/feed_repository.dart';
 import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
 import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannels.dart';
 import 'package:dtube_go/ui/MainContainer/NavigationContainer.dart';
 import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
 import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import 'dart:io' show Platform;
 
 class PostDetailPageDesktop extends StatefulWidget {
   String link;

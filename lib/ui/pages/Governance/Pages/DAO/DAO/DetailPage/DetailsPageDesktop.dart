@@ -7,18 +7,14 @@ import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/StateChip.dar
 import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/VoteOverview.dart';
 import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/VotingDialog.dart';
 import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:dtube_go/ui/widgets/players/VideoPlayerFromURL.dart';
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/bloc/transaction/transaction_bloc.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
 import 'package:dtube_go/utils/Strings/shortBalanceStrings.dart';
-import 'package:flutter/foundation.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +23,7 @@ import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
-import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
-import 'package:dtube_go/ui/pages/post/widgets/ReplyButton.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ProposalDetailPageDesktop extends StatefulWidget {
   final int proposalId;
@@ -137,7 +130,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
               children: [
                 Text(
                   widget.daoItem.title!,
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 20),
@@ -170,7 +163,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                     TableCellVerticalAlignment.middle,
                                 child: Text(
                                   "Created by: ",
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                 ),
                               ),
                               Row(
@@ -195,7 +188,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                       child: Text("Benficiary: ",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline6),
+                                              .titleLarge),
                                     ),
                                     Container(
                                       width: 250,
@@ -226,11 +219,11 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                               children: [
                                 Text(
                                   "created:",
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                 ),
                                 Text(
                                   TimeAgo.timeInAgoTSShort(widget.daoItem.ts!),
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headlineMedium,
                                 ),
                               ],
                             ),
@@ -247,7 +240,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                             : "asks for:"),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline4,
+                                            .headlineMedium,
                                       ),
                                       Row(
                                         children: [
@@ -263,7 +256,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                                     .toString()),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline4,
+                                                .headlineMedium,
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(left: 10),
@@ -291,7 +284,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                         "received:",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline4,
+                                            .headlineMedium,
                                       ),
                                       Row(
                                         children: [
@@ -306,7 +299,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                                     .toString()),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline4,
+                                                .headlineMedium,
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(left: 10),
@@ -349,7 +342,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                       children: [
                         Text(
                           "Voting / Funding Overview",
-                          style: Theme.of(context).textTheme.headline3,
+                          style: Theme.of(context).textTheme.displaySmall,
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 30),
@@ -445,7 +438,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                       1 // if voting open and fund request
                               ? "vote for it"
                               : "help to fund it",
-                          style: Theme.of(context).textTheme.headline4),
+                          style: Theme.of(context).textTheme.headlineMedium),
                       onSelected: ((bool) {
                         showDialog<String>(
                           context: context,
@@ -500,7 +493,7 @@ class TitleWidget extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
     );
   }
@@ -577,14 +570,14 @@ class _VotesOverviewState extends State<VotesOverview> {
                                         _allVotes[index].u,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                       ),
                                       Text(
                                         TimeAgo.timeInAgoTSShort(
                                             _allVotes[index].ts),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText2,
+                                            .bodyMedium,
                                       ),
                                     ],
                                   ),
@@ -615,7 +608,7 @@ class _VotesOverviewState extends State<VotesOverview> {
                                               : "0"),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 5.w,
@@ -632,7 +625,7 @@ class _VotesOverviewState extends State<VotesOverview> {
                                           shortVP(_allVotes[index].vt),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 30,
@@ -670,7 +663,7 @@ class _VotesOverviewState extends State<VotesOverview> {
           },
           label: Text(
             'Close',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
       ],

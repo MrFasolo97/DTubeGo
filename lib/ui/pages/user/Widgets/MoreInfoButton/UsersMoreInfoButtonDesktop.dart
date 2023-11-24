@@ -3,12 +3,10 @@ import 'package:dtube_go/style/OpenableHyperlink.dart';
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
 import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayText.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:dtube_go/utils/Strings/shortBalanceStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class UserMoreInfoButtonDesktop extends StatelessWidget {
   UserMoreInfoButtonDesktop(
@@ -146,7 +144,7 @@ class UserMoreInfoButtonDesktop extends StatelessWidget {
                                 children: [
                                   Text("about: ",
                                       style:
-                                          Theme.of(context).textTheme.headline6,
+                                          Theme.of(context).textTheme.titleLarge,
                                       textAlign: TextAlign.start),
                                   Expanded(flex: 1, child: Container(
                                     width: 300,
@@ -175,7 +173,7 @@ class UserMoreInfoButtonDesktop extends StatelessWidget {
                             ),
                             child: Text(
                               "Thanks!",
-                              style: Theme.of(context).textTheme.headline4,
+                              style: Theme.of(context).textTheme.headlineMedium,
                               textAlign: TextAlign.center,
                             ),
                           ),

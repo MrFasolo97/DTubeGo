@@ -25,7 +25,7 @@ class TitleWidget extends StatelessWidget {
           width: width - 10 - chipWidth,
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.displaySmall,
             maxLines: 3,
           ),
         ),

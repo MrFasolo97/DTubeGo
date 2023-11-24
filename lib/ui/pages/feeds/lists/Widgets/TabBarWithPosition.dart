@@ -1,9 +1,6 @@
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TabBarWithPosition extends StatefulWidget {
   const TabBarWithPosition(

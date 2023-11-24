@@ -1,16 +1,8 @@
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardDesktop.dart';
 import 'package:dtube_go/ui/pages/feeds/cards/PostListCardSuggestions.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardLarge.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardNarrow.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
 import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';

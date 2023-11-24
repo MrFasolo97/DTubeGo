@@ -6,20 +6,14 @@ import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'dart:io';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/utils/Random/randomGenerator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -273,14 +267,14 @@ class PostInfoDetailsRow extends StatelessWidget {
       children: [
         Text(
           '@${author}',
-          style: Theme.of(context).textTheme.bodyText2,
+          style: Theme.of(context).textTheme.bodyMedium,
           overflow: TextOverflow.ellipsis,
         ),
         Row(
           children: [
             Text(
               publishDate,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
@@ -411,7 +405,7 @@ class TitleContainer extends StatelessWidget {
           title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
     );
