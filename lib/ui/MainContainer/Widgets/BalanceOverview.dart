@@ -3,7 +3,6 @@ import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayText.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:flutter/foundation.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'dart:async';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
@@ -155,7 +154,7 @@ class BalanceOverviewDesktop extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              DTubeLogo(size: 40),
+              DTubeLogo(size: 6.w),
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
                 child: Text(shortDTC(state.dtcBalance),
@@ -164,7 +163,7 @@ class BalanceOverviewDesktop extends StatelessWidget {
               FaIcon(
                 FontAwesomeIcons.bolt,
                 color: globalAlmostWhite,
-                size: 40,
+                size: 6.w,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
