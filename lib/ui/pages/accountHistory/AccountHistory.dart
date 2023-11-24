@@ -1,10 +1,10 @@
+import 'dart:developer' as dev;
 import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:dtube_go/bloc/accountHistory/accountHistory_bloc_full.dart';
 import 'package:dtube_go/bloc/config/txTypes.dart';
 import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
 import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -94,6 +94,7 @@ class _HistoryState extends State<History> {
             listener: (context, state) {
               if (state is AccountHistoryErrorState) {
                 BlocProvider.of<AccountHistoryBloc>(context).isFetching = false;
+                dev.log("Account history error!");
               }
               return;
             },
