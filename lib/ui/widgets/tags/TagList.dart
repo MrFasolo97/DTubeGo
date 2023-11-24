@@ -175,7 +175,7 @@ class TagListState extends State<TagList> {
               downvotesCount: searchResults[pos].downvotes!.length,
               dtcValue:
                   (searchResults[pos].dist / 100).round().toString() + " DTC",
-              duration: new Duration(
+              dur: new Duration(
                   seconds:
                       int.tryParse(searchResults[pos].jsonString!.dur) != null
                           ? int.parse(searchResults[pos].jsonString!.dur)

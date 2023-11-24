@@ -39,7 +39,7 @@ import 'package:dtube_go/utils/System/hw_none.dart' if(dart.lib.html) 'package:d
       required this.author,
       required this.link,
       required this.publishDate,
-      required this.duration,
+      required this.dur,
       required this.dtcValue,
       required this.showDTCValue,
       required this.videoUrl,
@@ -71,7 +71,7 @@ import 'package:dtube_go/utils/System/hw_none.dart' if(dart.lib.html) 'package:d
   final String author;
   final String link;
   final String publishDate;
-  final Duration duration;
+  final Duration dur;
   final String dtcValue;
   final bool showDTCValue;
   final String videoUrl;
@@ -405,14 +405,11 @@ class PostInfoDetailsRow extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: widget.width * 0.5,
-              child: Text(
+              Text(
                 '@${widget.author}',
                 style: Theme.of(context).textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
-            ),
             Row(
               children: [
                 Text(
@@ -421,15 +418,13 @@ class PostInfoDetailsRow extends StatelessWidget {
                 ),
                 Text(
                   ' - ' +
-                      (widget.duration.inHours == 0
-                          ? widget.duration.toString().substring(2, 7) + ' min'
-                          : widget.duration.toString().substring(0, 7) + ' h'),
+                      (widget.dur.inHours == 0
+                          ? widget.dur.toString().substring(2, 7) + ' min'
+                          : widget.dur.toString().substring(0, 7) + ' h'),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),
-          ],
-        ),
         Padding(
           padding: EdgeInsets.only(right: 0.w),
           child: Row(
@@ -452,8 +447,8 @@ class PostInfoDetailsRow extends StatelessWidget {
             ],
           ),
         ),
-      ],
-    );
+      ])
+  ]);
   }
 }
 

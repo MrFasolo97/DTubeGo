@@ -378,7 +378,7 @@ class _PostListCardState extends State<PostListCard>
             author: widget.author,
             link: widget.link,
             publishDate: widget.publishDate,
-            duration: widget.duration,
+            dur: widget.duration,
             dtcValue: widget.dtcValue,
             videoUrl: widget.videoUrl,
             videoSource: widget.videoSource,

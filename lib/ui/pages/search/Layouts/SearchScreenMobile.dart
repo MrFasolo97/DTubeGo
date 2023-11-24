@@ -1,4 +1,5 @@
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
+import 'package:dtube_go/ui/pages/search/ResultCards/UserResultCard/UserResultCardMobile.dart';
 import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarMobile.dart';
 import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
 import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
@@ -327,7 +328,7 @@ class SearchScreenMobileState extends State<SearchScreenMobile> {
             case "Users":
               if (!blockedUsers
                   .contains(searchResults.hits!.hits![pos].sSource!.name!)) {
-                return UserResultCard(
+                return UserResultCardMobile(
                   id: searchResults.hits!.hits![pos].sId,
                   name: searchResults.hits!.hits![pos].sSource!.name!,
                   dtcValue:
@@ -386,7 +387,7 @@ class SearchScreenMobileState extends State<SearchScreenMobile> {
                                 .round()
                                 .toString() +
                             " DTC",
-                    duration: new Duration(
+                    dur: new Duration(
                         seconds: int.tryParse(searchResults.hits!.hits![pos]
                                     .sSource!.jsonstring!.dur!) !=
                                 null
@@ -418,7 +419,7 @@ class SearchScreenMobileState extends State<SearchScreenMobile> {
                 );
               }
             default:
-              return UserResultCard(
+              return UserResultCardMobile(
                 id: searchResults.hits!.hits![pos].sId,
                 name: searchResults.hits!.hits![pos].sSource!.name!,
                 dtcValue:
@@ -472,7 +473,7 @@ class SearchScreenMobileState extends State<SearchScreenMobile> {
                       : 0,
                   dtcValue: (searchResults[pos].dist / 100).round().toString() +
                       " DTC",
-                  duration: new Duration(
+                  dur: new Duration(
                       seconds:
                           int.tryParse(searchResults[pos].jsonString!.dur) !=
                                   null

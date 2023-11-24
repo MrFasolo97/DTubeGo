@@ -239,7 +239,7 @@ class FeedListCarousel extends StatelessWidget {
                         author: feed[index].author,
                         link: feed[index].link,
                         publishDate: TimeAgo.timeInAgoTSShort(feed[index].ts),
-                        duration: new Duration(
+                        dur: new Duration(
                             seconds:
                                 int.tryParse(feed[index].jsonString!.dur) !=
                                         null
