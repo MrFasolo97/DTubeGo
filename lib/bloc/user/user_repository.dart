@@ -62,36 +62,42 @@ class UserRepositoryImpl implements UserRepository {
       "t": 0,
     };
 
-    int dtcBalance = 0;
+    int dtcBalance;
     var response = await http.get(Uri.parse(apiNode +
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      dtcBalance = data['balance'];
-      int vp = data['vt']['v'];
-      int vpTS = data['vt']['t'];
+      dtcBalance = data['balance'] != null ? data['balance'] : -1;
+      int vp = data['vt']['v'] != null ? data['vt']['v'] : -1;
+      int vpTS = data['vt']['t'] != null ? data['vt']['t'] : 0;
+      /*
       var configResponse =
           await http.get(Uri.parse(apiNode + APIUrlSchema.avalonConfig));
       if (configResponse.statusCode == 200) {
         var configData = json.decode(configResponse.body);
-        int vpGrowth = configData['vtGrowth'];
+        int vpGrowth = configData['vtGrowth'] != null ? configData['vtGrowth'] : 0;
+       */
+      int vpGrowth = 360000000; // Hardcoded: Todo fix and fetch from chain config ASAP!
         currentVT = growInt(vp, vpTS, (dtcBalance / vpGrowth), 0, 0);
+      /*
       } else {
+
         throw Exception();
       }
+      */
     }
     return currentVT;
   }
 
   Future<int> getDTC(String apiNode, String username, applicationUser) async {
-    int dtcBalance = 0;
+    int dtcBalance;
     var response = await http.get(Uri.parse(apiNode +
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
 
       User user = ApiResultModel.fromJson(data, applicationUser).user;
-      dtcBalance = user.balance;
+      dtcBalance = user.balance != null ? user.balance : -1;
     } else {
       throw Exception();
     }
