@@ -99,7 +99,7 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
     _momentUploading = false;
 
     widget.momentsController.pause();
-    _videoController = VideoPlayerController.network(widget.feedItem.videoUrl)
+    _videoController = VideoPlayerController.networkUrl(Uri.parse(widget.feedItem.videoUrl))
       ..initialize().then((_) {
         _videoController.play();
         widget.momentsController.play();

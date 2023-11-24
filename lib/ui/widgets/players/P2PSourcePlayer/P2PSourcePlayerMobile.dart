@@ -47,7 +47,7 @@ class _P2PSourcePlayerMobileState extends State<P2PSourcePlayerMobile> {
   late CustomVideoPlayerWebController _customVideoPlayerWebController;
   late ValueNotifier<bool> isPlaying;
   Future<void> initVideoPlayer() async {
-    videoPlayerController = VideoPlayerController.network(widget.videoUrl)
+    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
       ..initialize().then((value) => setState(() {}));
     _customVideoPlayerController = CustomVideoPlayerController(
       customVideoPlayerSettings: CustomVideoPlayerSettings(),
