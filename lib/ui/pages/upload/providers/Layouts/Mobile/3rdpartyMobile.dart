@@ -205,7 +205,7 @@ class _Wizard3rdPartyMobileState extends State<Wizard3rdPartyMobile> {
                                   .user.jsonString!.additionals!.ytchannels!
                                   .contains(secretConfig.encryptYTChannelId(
                                       stateuserdata.user,
-                                      state.metadata.channelId))*/) {
+                                      state.metadata.channelId))*/ || true) { // Disable YT check, until we find a proper way to authenticate users without a secret file being involved.
                             _uploadData = UploadData(
                                 link: "",
                                 title: state.metadata.title,
