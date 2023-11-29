@@ -1,5 +1,5 @@
-import 'package:dtube_go/bloc/transaction/transaction_response_model.dart';
-import 'package:dtube_go/bloc/user/user_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 

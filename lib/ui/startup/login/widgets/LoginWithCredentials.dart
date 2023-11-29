@@ -1,7 +1,7 @@
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/style/OpenableHyperlink.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/startup/login/pages/RegisterNewAccount.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/OpenableHyperlink.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/pages/RegisterNewAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';

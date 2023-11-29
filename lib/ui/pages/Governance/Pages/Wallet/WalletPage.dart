@@ -1,9 +1,9 @@
-import 'package:dtube_go/ui/pages/Governance/Pages/Wallet/transferDialog.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Wallet/transferDialog.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/system/customSnackbar.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

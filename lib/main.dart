@@ -1,13 +1,13 @@
 // @dart=3.0
 import 'dart:io';
 
-import 'package:dtube_go/App.dart';
+import 'package:ovh.fso.dtubego/App.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-// import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
+// import 'package:ovh.fso.dtubego/res/Config/secretConfigValues.dart' as secretConfig;
 
 const MaterialColor kPrimaryColor = const MaterialColor(
   0xFF223154,

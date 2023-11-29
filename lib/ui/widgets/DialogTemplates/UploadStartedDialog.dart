@@ -1,5 +1,5 @@
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

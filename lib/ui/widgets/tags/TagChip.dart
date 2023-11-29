@@ -1,8 +1,8 @@
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter_animator/flutter_animator.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/tags/TagList.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/tags/TagList.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

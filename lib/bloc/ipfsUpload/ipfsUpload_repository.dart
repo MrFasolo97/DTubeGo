@@ -3,7 +3,7 @@
 // - https://github.com/ngngardner/dart_ipfs_client
 
 import 'dart:io';
-import 'package:dtube_go/res/Config/UploadConfigValues.dart';
+import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
 import 'package:video_compress/video_compress.dart';
 import 'package:http/http.dart' as http;
 

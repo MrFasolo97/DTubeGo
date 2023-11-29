@@ -1,15 +1,15 @@
-import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/ContribOverview.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/StateChart.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/StateChip.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/Widgets/VoteOverview.dart';
+import 'package:ovh.fso.dtubego/bloc/dao/dao_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/DAO/Widgets/ContribOverview.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/DAO/Widgets/StateChart.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/DAO/Widgets/StateChip.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/DAO/Widgets/VoteOverview.dart';
 
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
-import 'package:dtube_go/ui/widgets/players/VideoPlayerFromURL.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/UnsortedCustomWidgets.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/players/VideoPlayerFromURL.dart';
+import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

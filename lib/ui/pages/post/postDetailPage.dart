@@ -1,16 +1,16 @@
-import 'package:dtube_go/ui/pages/post/layouts/postDetailsDesktop.dart';
-import 'package:dtube_go/ui/pages/post/layouts/postDetailsMobile.dart';
-import 'package:dtube_go/ui/pages/post/layouts/postDetailsTablet.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/layouts/postDetailsDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/layouts/postDetailsMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/layouts/postDetailsTablet.dart';
 
-import 'package:dtube_go/ui/MainContainer/NavigationContainer.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/NavigationContainer.dart';
 
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter/material.dart';
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostDetailPage extends StatefulWidget {

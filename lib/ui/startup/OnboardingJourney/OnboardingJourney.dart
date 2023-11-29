@@ -1,10 +1,10 @@
-import 'package:dtube_go/ui/startup/OnboardingJourney/Pages.dart';
+import 'package:ovh.fso.dtubego/ui/startup/OnboardingJourney/Pages.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:dtube_go/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter/material.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
 class OnboardingJourney extends StatefulWidget {
   OnboardingJourney({Key? key, required this.journeyDoneCallback})

@@ -1,8 +1,8 @@
 // dialog to show current app version and build
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

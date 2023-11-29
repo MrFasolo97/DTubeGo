@@ -1,18 +1,18 @@
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-//import 'package:dtube_go/res/loadRemoteConf.dart' as remoteConfig;
-//import 'package:dtube_go/res/Config/setupConfig.dart' as config;
+//import 'package:ovh.fso.dtubego/res/loadRemoteConf.dart' as remoteConfig;
+//import 'package:ovh.fso.dtubego/res/Config/setupConfig.dart' as config;
 
-import 'package:dtube_go/utils/Crypto/crypto_convert.dart';
+import 'package:ovh.fso.dtubego/utils/Crypto/crypto_convert.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-import 'package:dtube_go/bloc/auth/auth_event.dart';
-import 'package:dtube_go/bloc/auth/auth_state.dart';
-import 'package:dtube_go/bloc/auth/auth_repository.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_event.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_state.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_repository.dart';
 
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/utils/Avalon/discoverAPINode.dart';
+import 'package:ovh.fso.dtubego/utils/Avalon/discoverAPINode.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 

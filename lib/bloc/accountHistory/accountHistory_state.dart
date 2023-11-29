@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/accountHistory/accountHistory_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/accountHistory/accountHistory_response_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class AccountHistoryState extends Equatable {}

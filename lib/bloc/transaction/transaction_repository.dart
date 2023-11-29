@@ -1,7 +1,7 @@
 import 'dart:typed_data';
-import 'package:dtube_go/res/Config/APIUrlSchema.dart';
+import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:http/http.dart' as http;
-import 'package:dtube_go/bloc/transaction/transaction_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_response_model.dart';
 
 import 'package:hex/hex.dart';
 import 'dart:convert';

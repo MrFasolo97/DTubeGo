@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/accountHistory/accountHistory_event.dart';
-import 'package:dtube_go/bloc/accountHistory/accountHistory_state.dart';
-import 'package:dtube_go/bloc/accountHistory/accountHistory_response_model.dart';
-import 'package:dtube_go/bloc/accountHistory/accountHistory_repository.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/accountHistory/accountHistory_event.dart';
+import 'package:ovh.fso.dtubego/bloc/accountHistory/accountHistory_state.dart';
+import 'package:ovh.fso.dtubego/bloc/accountHistory/accountHistory_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/accountHistory/accountHistory_repository.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class AccountHistoryBloc
     extends Bloc<AccountHistoryEvent, AccountHistoryState> {

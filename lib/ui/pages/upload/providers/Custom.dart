@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/pages/upload/providers/Layouts/Desktop/CustomDesktop.dart';
-import 'package:dtube_go/ui/pages/upload/providers/Layouts/Mobile/CustomMobile.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/providers/Layouts/Desktop/CustomDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/providers/Layouts/Mobile/CustomMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class CustomWizard extends StatelessWidget {

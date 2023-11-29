@@ -1,7 +1,7 @@
-import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_event.dart';
-import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_repository.dart';
-import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_response_model.dart';
-import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_state.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdpartyloader/thirdpartyloader_event.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdpartyloader/thirdpartyloader_repository.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdpartyloader/thirdpartyloader_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdpartyloader/thirdpartyloader_state.dart';
 
 import 'package:bloc/bloc.dart';
 

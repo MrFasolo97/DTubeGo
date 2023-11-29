@@ -1,5 +1,5 @@
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 

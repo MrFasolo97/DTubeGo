@@ -1,8 +1,8 @@
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 
-import 'package:dtube_go/ui/widgets/gifts/GiftDialog/GiftDialog.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/gifts/GiftDialog/GiftDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

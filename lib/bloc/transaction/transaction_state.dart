@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/transaction/transaction_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_response_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TransactionState extends Equatable {}

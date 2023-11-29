@@ -1,7 +1,7 @@
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

@@ -1,5 +1,5 @@
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayerMobile.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayerWeb.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayerMobile.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayerWeb.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

@@ -1,13 +1,13 @@
 import 'dart:collection';
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/feed/feed_state.dart';
-import 'package:dtube_go/bloc/feed/feed_event.dart';
-import 'package:dtube_go/bloc/feed/feed_response_model.dart';
-import 'package:dtube_go/bloc/feed/feed_repository.dart';
-import 'package:dtube_go/res/Config/ExploreConfigValues.dart';
-import 'package:dtube_go/res/Config/appConfigValues.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/feed/feed_state.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_event.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_repository.dart';
+import 'package:ovh.fso.dtubego/res/Config/ExploreConfigValues.dart';
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
   FeedRepository repository;

@@ -1,4 +1,4 @@
-import 'package:dtube_go/res/Config/UploadConfigValues.dart';
+import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
 
 class ApiResultModel {
   late String status;

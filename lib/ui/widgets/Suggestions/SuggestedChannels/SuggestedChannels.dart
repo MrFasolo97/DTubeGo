@@ -1,6 +1,6 @@
-import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannelsDesktop.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannelsMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannelsDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannelsMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class SuggestedChannels extends StatelessWidget {

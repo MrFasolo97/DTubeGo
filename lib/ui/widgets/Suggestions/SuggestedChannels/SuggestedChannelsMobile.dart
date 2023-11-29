@@ -1,7 +1,7 @@
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/UserList.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/UserList.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

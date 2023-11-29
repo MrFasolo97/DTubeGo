@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/user/user_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class UserState extends Equatable {}

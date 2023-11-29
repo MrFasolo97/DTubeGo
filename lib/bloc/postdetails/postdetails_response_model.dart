@@ -1,5 +1,5 @@
-import 'package:dtube_go/res/Config/UploadConfigValues.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class ApiResultModel {
   late String status;

@@ -1,5 +1,5 @@
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

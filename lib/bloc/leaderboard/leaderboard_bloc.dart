@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/leaderboard/leaderboard_bloc_full.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/leaderboard/leaderboard_bloc_full.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
   LeaderboardRepository repository;

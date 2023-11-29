@@ -1,24 +1,24 @@
-import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/Widgets/newKeyDialog.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/Widgets/removeKeyDialog.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/Widgets/resetMasterKeyDialog.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/KeyManagement/Widgets/newKeyDialog.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/KeyManagement/Widgets/removeKeyDialog.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/KeyManagement/Widgets/resetMasterKeyDialog.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-export 'package:dtube_go/bloc/auth/auth_repository.dart';
+export 'package:ovh.fso.dtubego/bloc/auth/auth_repository.dart';
 
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
-import 'package:dtube_go/bloc/config/txTypes.dart';
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
-import 'package:dtube_go/utils/Crypto/crypto_convert.dart';
+import 'package:ovh.fso.dtubego/bloc/config/txTypes.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/UnsortedCustomWidgets.dart';
+import 'package:ovh.fso.dtubego/utils/Crypto/crypto_convert.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/widgets/system/customSnackbar.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

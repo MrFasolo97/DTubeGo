@@ -1,16 +1,16 @@
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_bloc_full.dart';
-import 'package:dtube_go/bloc/rewards/rewards_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
 
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/DAO.dart';
 
-import 'package:dtube_go/ui/pages/Governance/Pages/KeyManagement/KeyManagement.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/KeyManagement/KeyManagement.dart';
 
-import 'package:dtube_go/ui/pages/Governance/Pages/Rewards/RewardsPage.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/Wallet/WalletPage.dart';
-import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Rewards/RewardsPage.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Wallet/WalletPage.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

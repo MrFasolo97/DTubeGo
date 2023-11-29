@@ -1,36 +1,36 @@
 import 'dart:developer';
 
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
-import 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/widgets/ThumbPlayerWidgets.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/post/widgets/VotingDialog/VotingDialog.dart';
-import 'package:dtube_go/ui/widgets/Comments/CommentDialog.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/gifts/GiftDialog/GiftDialog.dart';
-import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VotingDialog/VotingDialog.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Comments/CommentDialog.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayIcon.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/gifts/GiftDialog/GiftDialog.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/tags/TagChip.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:dtube_go/utils/System/hw_none.dart'
-  if(dart.lib.html) 'package:dtube_go/ui/widgets/Ads/AdvertisementOnDesktop.dart'
-  if(dart.lib.io) 'package:dtube_go/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
+import 'package:ovh.fso.dtubego/utils/System/hw_none.dart'
+  if(dart.lib.html) 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementOnDesktop.dart'
+  if(dart.lib.io) 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 
 
 class PostListCardDesktop extends StatefulWidget {

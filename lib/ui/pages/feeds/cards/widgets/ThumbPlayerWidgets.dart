@@ -1,12 +1,12 @@
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
-import 'package:dtube_go/ui/widgets/players/YTplayerIframe.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/players/YTplayerIframe.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/utils/Random/randomGenerator.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/utils/Random/randomGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dtube_go/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 

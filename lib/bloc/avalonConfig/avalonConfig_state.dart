@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_response_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class AvalonConfigState extends Equatable {}

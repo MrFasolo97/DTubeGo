@@ -1,6 +1,6 @@
-import 'package:dtube_go/res/Config/appConfigValues.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/utils/Random/randomGenerator.dart';
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/utils/Random/randomGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

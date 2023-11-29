@@ -1,4 +1,4 @@
-import 'package:dtube_go/ui/pages/feeds/lists/FeedList.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedList.dart';
 
 import 'package:flutter/material.dart';
 

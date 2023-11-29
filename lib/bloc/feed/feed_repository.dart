@@ -1,9 +1,9 @@
-import 'package:dtube_go/res/Config/APIUrlSchema.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 abstract class FeedRepository {
   Future<List<FeedItem>> getMyFeed(String apiNode, String applicationUser,

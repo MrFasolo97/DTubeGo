@@ -1,7 +1,7 @@
-import 'package:dtube_go/res/Config/APINodesConfigValues.dart';
+import 'package:ovh.fso.dtubego/res/Config/APINodesConfigValues.dart';
 import 'package:flutter/material.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class APINodeSelection extends StatefulWidget {
 

@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:dtube_go/bloc/appstate/appstate_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/res/Config/UploadConfigValues.dart';
-import 'package:dtube_go/utils/Random/randomPermlink.dart';
-import 'package:dtube_go/bloc/web3storage/web3storage_event.dart';
-import 'package:dtube_go/bloc/web3storage/web3storage_state.dart';
-import 'package:dtube_go/bloc/web3storage/web3storage_repository.dart';
+import 'package:ovh.fso.dtubego/bloc/appstate/appstate_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/Random/randomPermlink.dart';
+import 'package:ovh.fso.dtubego/bloc/web3storage/web3storage_event.dart';
+import 'package:ovh.fso.dtubego/bloc/web3storage/web3storage_state.dart';
+import 'package:ovh.fso.dtubego/bloc/web3storage/web3storage_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_compress/video_compress.dart';
 

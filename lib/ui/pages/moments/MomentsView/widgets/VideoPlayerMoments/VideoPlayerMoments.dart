@@ -1,9 +1,9 @@
-import 'package:dtube_go/ui/pages/moments/MomentsView/widgets/VideoPlayerMoments/Layouts/VideoPlayerMomentsDesktop.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/widgets/VideoPlayerMoments/Layouts/VideoPlayerMomentsMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/controller/MomentsController.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/widgets/VideoPlayerMoments/Layouts/VideoPlayerMomentsDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/widgets/VideoPlayerMoments/Layouts/VideoPlayerMomentsMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/controller/MomentsController.dart';
 import 'package:flutter/material.dart';
 
 class VideoPlayerMoments extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:flutter/material.dart';
 
 class TabBarWithPosition extends StatefulWidget {

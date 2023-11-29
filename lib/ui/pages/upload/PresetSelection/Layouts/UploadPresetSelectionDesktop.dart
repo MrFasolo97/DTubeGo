@@ -1,8 +1,8 @@
-import 'package:dtube_go/res/Config/InitiativePresets.dart';
-import 'package:dtube_go/ui/pages/upload/UploaderMainPage.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
+import 'package:ovh.fso.dtubego/res/Config/InitiativePresets.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/UploaderMainPage.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

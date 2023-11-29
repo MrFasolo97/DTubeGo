@@ -1,4 +1,4 @@
-package dtube.go.app
+package ovh.fso.dtubego
 
 import io.flutter.embedding.android.FlutterActivity
 

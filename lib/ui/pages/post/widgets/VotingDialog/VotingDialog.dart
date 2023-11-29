@@ -1,8 +1,8 @@
-import 'package:dtube_go/ui/pages/post/widgets/VotingDialog/VotingDialogDesktop.dart';
-import 'package:dtube_go/ui/pages/post/widgets/VotingDialog/VotingDialogMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VotingDialog/VotingDialogDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VotingDialog/VotingDialogMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:flutter/material.dart';
 
 class VotingDialog extends StatelessWidget {

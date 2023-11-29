@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_event.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_repository.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_response_model.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_state.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_event.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_repository.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_state.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class PostBloc extends Bloc<PostEvent, PostState> {
   PostRepository repository;

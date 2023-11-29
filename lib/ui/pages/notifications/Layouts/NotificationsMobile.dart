@@ -1,10 +1,10 @@
-import 'package:dtube_go/ui/pages/notifications/NotificationItem/NotificationItemMobile.dart';
-import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarMobile.dart';
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
+import 'package:ovh.fso.dtubego/ui/pages/notifications/NotificationItem/NotificationItemMobile.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AppBar/DTubeSubAppBarMobile.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
-import 'package:dtube_go/bloc/notification/notification_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
+import 'package:ovh.fso.dtubego/bloc/notification/notification_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

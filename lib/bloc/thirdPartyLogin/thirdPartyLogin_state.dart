@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/thirdPartyLogin/thirdPartyLogin_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdPartyLogin/thirdPartyLogin_response_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ThirdPartyLoginState extends Equatable {}

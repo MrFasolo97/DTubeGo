@@ -1,17 +1,17 @@
 // import 'dart:ffi';
 
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/MomentsItem.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/MomentsView.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/controller/MomentsController.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/widgets/MomentsUpload.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/widgets/VideoPlayerMoments/VideoPlayerMoments.dart';
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/MomentsItem.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/MomentsView.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/controller/MomentsController.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/widgets/MomentsUpload.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/widgets/VideoPlayerMoments/VideoPlayerMoments.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

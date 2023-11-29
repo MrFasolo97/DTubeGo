@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:dtube_go/res/Config/UploadConfigValues.dart';
-import 'package:dtube_go/utils/Crypto/crypto_convert.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart';
+import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/Crypto/crypto_convert.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:dtube_go/bloc/transaction/sign_offchain_data.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/transaction/sign_offchain_data.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 //TODO: connect to local ipfs daemon:
 // - https://github.com/hanerx/ipfs-dart
@@ -15,7 +15,7 @@ import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:tus_client/tus_client.dart';
 import 'dart:io';
 import 'package:video_compress/video_compress.dart';
-// import 'package:dtube_go/res/Config/secretConfigValues.dart' as secret;
+// import 'package:ovh.fso.dtubego/res/Config/secretConfigValues.dart' as secret;
 
 abstract class Web3StorageRepository {
   Future<File> compressVideo(String localFilePath);

@@ -1,13 +1,13 @@
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/bloc/search/search_bloc_full.dart';
-import 'package:dtube_go/ui/MainContainer/Widgets/AboutDialog/AboutDialog.dart';
-import 'package:dtube_go/ui/pages/search/SearchScreen.dart';
-import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/search/search_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/Widgets/AboutDialog/AboutDialog.dart';
+import 'package:ovh.fso.dtubego/ui/pages/search/SearchScreen.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
 
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/settings/SettingsTabContainer.dart';
-import 'package:dtube_go/ui/pages/Governance/GovernanceTabContainer.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/settings/SettingsTabContainer.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/GovernanceTabContainer.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';

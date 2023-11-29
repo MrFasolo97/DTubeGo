@@ -1,12 +1,12 @@
-import 'package:dtube_go/bloc/rewards/rewards_bloc_full.dart';
-import 'package:dtube_go/ui/pages/post/postDetailPage.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/postDetailPage.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

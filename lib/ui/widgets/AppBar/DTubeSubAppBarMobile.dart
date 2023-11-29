@@ -1,5 +1,5 @@
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:flutter/material.dart';
 
 AppBar dtubeSubAppBarMobile(

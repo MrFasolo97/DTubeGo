@@ -1,5 +1,5 @@
-import 'package:dtube_go/ui/pages/post/widgets/VoteOverview/VoteOverview.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VoteOverview/VoteOverview.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../bloc/postdetails/postdetails_bloc_full.dart';

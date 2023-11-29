@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/widgets/Suggestions/UserListDesktop.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/UserListMobile.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/UserListTablet.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/UserListDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/UserListMobile.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/UserListTablet.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class UserList extends StatelessWidget {

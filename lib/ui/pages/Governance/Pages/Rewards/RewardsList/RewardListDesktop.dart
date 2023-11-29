@@ -1,6 +1,6 @@
-import 'package:dtube_go/bloc/rewards/rewards_bloc_full.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/Rewards/RewardCard/RewardCardDesktop.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Rewards/RewardCard/RewardCardDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

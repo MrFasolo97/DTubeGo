@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/pages/Governance/Pages/Rewards/RewardsList/RewardListDesktop.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/Rewards/RewardsList/RewardListMobile.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/Rewards/RewardsList/RewardListTablet.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Rewards/RewardsList/RewardListDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Rewards/RewardsList/RewardListMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Rewards/RewardsList/RewardListTablet.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class RewardList extends StatelessWidget {

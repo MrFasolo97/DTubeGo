@@ -1,18 +1,18 @@
-import 'package:dtube_go/res/Config/appConfigValues.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_bloc_full.dart';
-import 'package:dtube_go/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 
-import 'package:dtube_go/ui/startup/OnboardingJourney/OnboardingJourney.dart';
-import 'package:dtube_go/ui/startup/login/widgets/LoginWithCredentials.dart';
-import 'package:dtube_go/ui/startup/login/pages/SocialUserActionPopup.dart';
-import 'package:dtube_go/ui/startup/login/services/ressources.dart';
-import 'package:dtube_go/ui/startup/login/widgets/sign_in_button.dart';
+import 'package:ovh.fso.dtubego/ui/startup/OnboardingJourney/OnboardingJourney.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/widgets/LoginWithCredentials.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/pages/SocialUserActionPopup.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

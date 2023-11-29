@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/leaderboard/leaderboard_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/leaderboard/leaderboard_response_model.dart';
 
 import 'package:equatable/equatable.dart';
 

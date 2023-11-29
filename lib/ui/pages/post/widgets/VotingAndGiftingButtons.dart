@@ -1,11 +1,11 @@
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/post/widgets/VoteButtons.dart';
-import 'package:dtube_go/ui/widgets/gifts/GiftBoxWidget.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VoteButtons.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/gifts/GiftBoxWidget.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

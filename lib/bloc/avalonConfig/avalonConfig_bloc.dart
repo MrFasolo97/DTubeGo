@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_event.dart';
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_repository.dart';
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_response_model.dart';
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_state.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_event.dart';
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_repository.dart';
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_state.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class AvalonConfigBloc extends Bloc<AvalonConfigEvent, AvalonConfigState> {
   AvalonConfigRepository repository;

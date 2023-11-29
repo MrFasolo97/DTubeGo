@@ -1,6 +1,6 @@
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/InitiativeDialog.dart';
-import 'package:dtube_go/ui/widgets/Inputs/CustomChoiceCard.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Widgets/InitiativeDialog.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Inputs/CustomChoiceCard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

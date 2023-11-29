@@ -1,5 +1,5 @@
-import 'package:dtube_go/res/Config/UploadConfigValues.dart';
-import 'package:dtube_go/utils/Avalon/growInt.dart';
+import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/Avalon/growInt.dart';
 
 class SearchResults {
   late int took;

@@ -1,11 +1,11 @@
-import 'package:dtube_go/bloc/web3storage/web3storage_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/web3storage/web3storage_bloc_full.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:dtube_go/bloc/hivesigner/hivesigner_bloc.dart';
-import 'package:dtube_go/bloc/hivesigner/hivesigner_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
-import 'package:dtube_go/ui/pages/upload/UploadForm/uploadForm.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/hivesigner/hivesigner_bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/hivesigner/hivesigner_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/UploadForm/uploadForm.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

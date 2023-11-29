@@ -1,6 +1,6 @@
-import 'package:dtube_go/ui/pages/Explore/GenreFeed/Layouts/GenreFeedDesktop.dart';
-import 'package:dtube_go/ui/pages/Explore/GenreFeed/Layouts/GenreFeedMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Explore/GenreFeed/Layouts/GenreFeedDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Explore/GenreFeed/Layouts/GenreFeedMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 typedef Bool2VoidFunc = void Function(bool);

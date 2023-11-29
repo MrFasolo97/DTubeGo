@@ -1,6 +1,6 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 // import 'package:chewie/chewie.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';

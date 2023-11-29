@@ -1,7 +1,7 @@
-import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/PinPadWidget.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/PinPadWidget.dart';
 
-import 'package:dtube_go/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

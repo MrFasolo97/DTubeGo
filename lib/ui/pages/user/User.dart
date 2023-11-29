@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/pages/user/Layouts/UserDesktop.dart';
-import 'package:dtube_go/ui/pages/user/Layouts/UserMobile.dart';
-import 'package:dtube_go/ui/pages/user/Layouts/UserTablet.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Layouts/UserDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Layouts/UserMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Layouts/UserTablet.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 
 import 'package:flutter/material.dart';
 

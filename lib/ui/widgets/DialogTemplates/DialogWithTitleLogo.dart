@@ -1,6 +1,6 @@
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogoDesktop.dart';
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogoMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogoDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogoMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

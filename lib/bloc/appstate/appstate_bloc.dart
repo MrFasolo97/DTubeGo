@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/appstate/appstate_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/appstate/appstate_bloc_full.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 

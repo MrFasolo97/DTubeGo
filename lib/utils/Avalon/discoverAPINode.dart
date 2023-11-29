@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dtube_go/res/Config/APINodesConfigValues.dart';
+import 'package:ovh.fso.dtubego/res/Config/APINodesConfigValues.dart';
 import 'package:http/http.dart' as http;
 
 import 'dart:collection';

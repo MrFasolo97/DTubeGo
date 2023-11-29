@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/pages/upload/providers/Layouts/Desktop/3rdpartyDesktop.dart';
-import 'package:dtube_go/ui/pages/upload/providers/Layouts/Mobile/3rdpartyMobile.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/providers/Layouts/Desktop/3rdpartyDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/providers/Layouts/Mobile/3rdpartyMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class Wizard3rdParty extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/pages/upload/Layouts/UploaderMainPageDesktop.dart';
-import 'package:dtube_go/ui/pages/upload/Layouts/UploaderMainPageMobile.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/Layouts/UploaderMainPageDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/Layouts/UploaderMainPageMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class UploaderMainPage extends StatelessWidget {

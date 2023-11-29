@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 
-import 'package:dtube_go/ui/startup/login/services/ressources.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';

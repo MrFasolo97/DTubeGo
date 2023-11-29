@@ -1,8 +1,8 @@
-import 'package:dtube_go/ui/pages/user/Pages/Layouts/ProfileSettingsDesktop.dart';
-import 'package:dtube_go/ui/pages/user/Pages/Layouts/ProfileSettingsMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:dtube_go/bloc/user/user_bloc.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Pages/Layouts/ProfileSettingsDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Pages/Layouts/ProfileSettingsMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
 import 'package:flutter/material.dart';
 
 class ProfileSettingsContainer extends StatelessWidget {

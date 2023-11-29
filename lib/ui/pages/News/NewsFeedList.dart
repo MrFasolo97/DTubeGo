@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/pages/News/Layouts/NewsListDesktop.dart';
-import 'package:dtube_go/ui/pages/News/Layouts/NewsListMobile.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/News/Layouts/NewsListDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/News/Layouts/NewsListMobile.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 

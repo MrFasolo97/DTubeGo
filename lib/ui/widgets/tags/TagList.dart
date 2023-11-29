@@ -1,14 +1,14 @@
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardLarge.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/PostListCardLarge.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'dart:async';
-import 'package:dtube_go/bloc/search/search_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/bloc/search/search_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class TagList extends StatefulWidget {
   final String tagName;

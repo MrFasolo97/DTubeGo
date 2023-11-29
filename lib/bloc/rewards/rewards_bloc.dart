@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/rewards/rewards_bloc_full.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc_full.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class RewardsBloc extends Bloc<RewardsEvent, RewardsState> {
   RewardsRepository repository;

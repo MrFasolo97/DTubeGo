@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_bloc_full.dart';
-import 'package:dtube_go/bloc/search/search_response_model.dart';
-import 'package:dtube_go/res/Config/APIUrlSchema.dart';
+// import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/search/search_response_model.dart';
+import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:http/http.dart' as http;
 
 abstract class SearchRepository {

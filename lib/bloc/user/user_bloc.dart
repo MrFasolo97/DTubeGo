@@ -1,9 +1,9 @@
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/user/user_event.dart';
-import 'package:dtube_go/bloc/user/user_state.dart';
-import 'package:dtube_go/bloc/user/user_response_model.dart';
-import 'package:dtube_go/bloc/user/user_repository.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_event.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_state.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_repository.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 

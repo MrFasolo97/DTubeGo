@@ -1,11 +1,11 @@
-import 'package:dtube_go/bloc/notification/notification_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
+import 'package:ovh.fso.dtubego/bloc/notification/notification_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/UnsortedCustomWidgets.dart';
+import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/config/txTypes.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/bloc/config/txTypes.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';

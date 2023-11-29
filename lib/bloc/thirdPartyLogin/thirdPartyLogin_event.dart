@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ThirdPartyLoginEvent extends Equatable {}

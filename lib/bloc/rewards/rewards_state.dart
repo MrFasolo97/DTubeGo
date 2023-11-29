@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/rewards/rewards_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/rewards/rewards_response_model.dart';
 
 import 'package:equatable/equatable.dart';
 

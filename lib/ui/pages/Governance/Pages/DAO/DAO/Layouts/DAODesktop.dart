@@ -1,14 +1,14 @@
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_bloc_full.dart';
-import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
-import 'package:dtube_go/bloc/leaderboard/leaderboard_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/dao/dao_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/leaderboard/leaderboard_bloc_full.dart';
 
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/ProposalList/ProposalList.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/Leaderboard/Leaderboard.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/DAO/ProposalList/ProposalList.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/Leaderboard/Leaderboard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

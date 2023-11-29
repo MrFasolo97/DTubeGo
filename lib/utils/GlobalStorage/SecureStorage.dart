@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:dtube_go/res/Config/appConfigValues.dart';
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const authKey_usernameKey = 'USERNAME';

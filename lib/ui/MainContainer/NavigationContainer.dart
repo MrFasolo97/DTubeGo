@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/MainContainer/MainScaffolds/DesktopScaffold.dart';
-import 'package:dtube_go/ui/MainContainer/MainScaffolds/MobileScaffold.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/MainScaffolds/DesktopScaffold.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/MainScaffolds/MobileScaffold.dart';
 
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class NavigationContainer extends StatelessWidget {

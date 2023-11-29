@@ -3,11 +3,11 @@ import 'dart:typed_data';
 
 import 'package:bs58/bs58.dart';
 import 'package:crypto/crypto.dart';
-import 'package:dtube_go/utils/Crypto/crypto_convert.dart';
+import 'package:ovh.fso.dtubego/utils/Crypto/crypto_convert.dart';
 import 'package:ecdsa/ecdsa.dart';
 import 'package:elliptic/elliptic.dart';
 import 'package:hex/hex.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class SignData {
   String? username;

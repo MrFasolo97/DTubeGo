@@ -1,6 +1,6 @@
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/ui/pages/News/Widgets/NewsPostListCard.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/News/Widgets/NewsPostListCard.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
 import 'package:flutter/material.dart';
 
 class NewsListMobile extends StatelessWidget {

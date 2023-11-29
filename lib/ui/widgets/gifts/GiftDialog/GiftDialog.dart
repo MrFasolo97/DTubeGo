@@ -1,7 +1,7 @@
-import 'package:dtube_go/ui/widgets/gifts/GiftDialog/GiftDialogDesktop.dart';
-import 'package:dtube_go/ui/widgets/gifts/GiftDialog/GiftDialogMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/gifts/GiftDialog/GiftDialogDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/gifts/GiftDialog/GiftDialogMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:flutter/material.dart';
 
 class GiftDialog extends StatelessWidget {

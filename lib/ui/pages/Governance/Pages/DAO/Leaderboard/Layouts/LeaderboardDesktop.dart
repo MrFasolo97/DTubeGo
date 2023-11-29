@@ -1,10 +1,10 @@
-import 'package:dtube_go/bloc/leaderboard/leaderboard_bloc_full.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/Leaderboard/Widgets/LeaderCardDesktop.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/bloc/leaderboard/leaderboard_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/Leaderboard/Widgets/LeaderCardDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 
-import 'package:dtube_go/ui/widgets/system/customSnackbar.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

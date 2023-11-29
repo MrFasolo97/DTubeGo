@@ -1,11 +1,11 @@
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/pages/Governance/Pages/DAO/DAO/DetailPage/DetailsPage.dart';
-import 'package:dtube_go/ui/pages/post/postDetailPage.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/dao/dao_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/DAO/DAO/DetailPage/DetailsPage.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/postDetailPage.dart';
 
-import 'package:dtube_go/ui/pages/user/User.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/User.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

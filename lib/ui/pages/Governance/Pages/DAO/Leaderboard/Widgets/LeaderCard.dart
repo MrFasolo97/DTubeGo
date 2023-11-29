@@ -1,20 +1,20 @@
-import 'package:dtube_go/bloc/leaderboard/leaderboard_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/style/OpenableHyperlink.dart';
-import 'package:dtube_go/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/bloc/leaderboard/leaderboard_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/OpenableHyperlink.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
 
-import 'package:dtube_go/ui/widgets/UnsortedCustomWidgets.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/UnsortedCustomWidgets.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/ui/widgets/system/customSnackbar.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/customSnackbar.dart';
 
 class LeaderCard extends StatefulWidget {
   LeaderCard({

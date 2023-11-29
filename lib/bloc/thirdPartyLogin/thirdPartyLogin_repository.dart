@@ -1,8 +1,8 @@
-import 'package:dtube_go/utils/Crypto/crypto_convert.dart';
+import 'package:ovh.fso.dtubego/utils/Crypto/crypto_convert.dart';
 import 'package:encrypt/encrypt.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dtube_go/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
 
 // https://medium.com/codechai/when-firebase-meets-bloc-pattern-fb5c405597e0
 

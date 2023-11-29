@@ -1,9 +1,9 @@
-import 'package:dtube_go/res/Config/APIUrlSchema.dart';
-import 'package:dtube_go/res/Config/appConfigValues.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/bloc/user/user_response_model.dart';
-import 'package:dtube_go/utils/Avalon/growInt.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
+import 'package:ovh.fso.dtubego/utils/Avalon/growInt.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 // import 'package:base58check/base58.dart';

@@ -1,6 +1,6 @@
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Layouts/UploadPresetSelectionDesktop.dart';
-import 'package:dtube_go/ui/pages/upload/PresetSelection/Layouts/UploadPresetSelectionMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Layouts/UploadPresetSelectionDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/Layouts/UploadPresetSelectionMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class UploadPresetSelection extends StatelessWidget {

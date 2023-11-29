@@ -1,12 +1,12 @@
 import 'dart:developer' as dev;
-import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:dtube_go/bloc/accountHistory/accountHistory_bloc_full.dart';
-import 'package:dtube_go/bloc/config/txTypes.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
+import 'package:ovh.fso.dtubego/bloc/accountHistory/accountHistory_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/config/txTypes.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter/material.dart';
 
 class TransferDialog extends StatefulWidget {

@@ -1,11 +1,11 @@
-import 'package:dtube_go/ui/pages/feeds/Layouts/FeedTabsMobile.dart';
-import 'package:dtube_go/ui/pages/feeds/Layouts/FeedTabsDesktop.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/ui/pages/feeds/FeedViewBase.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/Layouts/FeedTabsMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/Layouts/FeedTabsDesktop.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/ui/pages/feeds/FeedViewBase.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

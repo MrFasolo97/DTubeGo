@@ -1,8 +1,8 @@
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-import 'package:dtube_go/ui/startup/login/services/firebase_service.dart';
-import 'package:dtube_go/ui/startup/login/services/ressources.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/services/firebase_service.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';

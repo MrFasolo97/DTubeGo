@@ -1,17 +1,17 @@
 import 'dart:developer';
 
-import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-// import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
+import 'package:ovh.fso.dtubego/bloc/thirdpartyloader/thirdpartyloader_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+// import 'package:ovh.fso.dtubego/res/Config/secretConfigValues.dart' as secretConfig;
 import 'package:flutter/services.dart';
 
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:dtube_go/utils/Random/randomGenerator.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
+import 'package:ovh.fso.dtubego/utils/Random/randomGenerator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';

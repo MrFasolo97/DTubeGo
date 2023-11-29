@@ -1,23 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggested.dart';
-import 'package:dtube_go/ui/pages/user/Widgets/MenuButton.dart';
-import 'package:dtube_go/ui/pages/user/Widgets/TopBarCustomClipper.dart';
-import 'package:dtube_go/ui/pages/user/Widgets/TopBarCustomPainter.dart';
-import 'package:dtube_go/ui/pages/user/Widgets/UsersBlockButton.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/UserList.dart';
-import 'package:dtube_go/ui/pages/user/Widgets/MoreInfoButton/UsersMoreInfoButton.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayText.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannels.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListCarousel.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListSuggested.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Widgets/MenuButton.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Widgets/TopBarCustomClipper.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Widgets/TopBarCustomPainter.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Widgets/UsersBlockButton.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/UserList.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Widgets/MoreInfoButton/UsersMoreInfoButton.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayText.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannels.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

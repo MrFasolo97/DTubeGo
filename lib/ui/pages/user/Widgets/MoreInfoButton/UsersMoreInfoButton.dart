@@ -1,7 +1,7 @@
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/pages/user/Widgets/MoreInfoButton/UsersMoreInfoButtonDesktop.dart';
-import 'package:dtube_go/ui/pages/user/Widgets/MoreInfoButton/UsersMoreInfoButtonMobile.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Widgets/MoreInfoButton/UsersMoreInfoButtonDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/Widgets/MoreInfoButton/UsersMoreInfoButtonMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/material.dart';
 
 class UserMoreInfoButton extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/dao/dao_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

@@ -1,6 +1,6 @@
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:dtube_go/utils/Widgets/QRCodeDialog/Layouts/QRCodeDialogDesktop.dart';
-import 'package:dtube_go/utils/Widgets/QRCodeDialog/Layouts/QRCodeDialogMobile.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/utils/Widgets/QRCodeDialog/Layouts/QRCodeDialogDesktop.dart';
+import 'package:ovh.fso.dtubego/utils/Widgets/QRCodeDialog/Layouts/QRCodeDialogMobile.dart';
 import 'package:flutter/material.dart';
 
 

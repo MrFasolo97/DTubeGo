@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dtube_go/bloc/dao/dao_bloc_full.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/dao/dao_bloc_full.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 class DaoBloc extends Bloc<DaoEvent, DaoState> {
   DaoRepository repository;

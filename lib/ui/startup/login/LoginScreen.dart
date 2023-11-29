@@ -1,15 +1,15 @@
-import 'package:dtube_go/ui/startup/login/Layouts/LoginScreenDesktop.dart';
-import 'package:dtube_go/ui/startup/login/Layouts/LoginScreenMobile.dart';
-import 'package:dtube_go/ui/startup/login/Layouts/LoginScreenTablet.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/avalonConfig/avalonConfig_bloc_full.dart';
-import 'package:dtube_go/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/Layouts/LoginScreenDesktop.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/Layouts/LoginScreenMobile.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/Layouts/LoginScreenTablet.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 
-import 'package:dtube_go/ui/startup/login/pages/SocialUserActionPopup.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/pages/SocialUserActionPopup.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:dtube_go/bloc/appstate/appstate_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/appstate/appstate_bloc_full.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class AppStateEvent extends Equatable {}

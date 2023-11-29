@@ -1,6 +1,6 @@
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/MomentsItem.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsView/controller/MomentsController.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/MomentsItem.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsView/controller/MomentsController.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'dart:async';
