@@ -100,14 +100,14 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
 
   Future<bool> showExitPopup() async {
     return await showDialog(
-          //show confirm dialogue
-          //the return value will be from "Yes" or "No" options
-          context: context,
-          builder: (context) => PopUpDialogWithTitleLogo(
-            showTitleWidget: true,
-            callbackOK: () {},
-            child: SingleChildScrollView(
-                child: Column(
+      //show confirm dialogue
+      //the return value will be from "Yes" or "No" options
+      context: context,
+      builder: (context) => PopUpDialogWithTitleLogo(
+        showTitleWidget: true,
+        callbackOK: () {},
+        child: SingleChildScrollView(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
@@ -121,34 +121,58 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                 ),
                 SizedBox(height: 2.h),
                 SizedBox(height: 2.h),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                 InkWell(
                     child: Container(
-                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                      padding: EdgeInsets.only(left: 4.w, top: 20.0, bottom: 20.0, right: 26.w),
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: globalRed,
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(20.0),
-                            bottomRight: Radius.circular(20.0)),
+                        )
                       ),
                       child: Text(
                         "Yes",
                         style: Theme.of(context).textTheme.headlineMedium,
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.right,
                       ),
                     ),
                     onTap: () {
                       Navigator.of(context).pop(true);
                     }),
-              ],
-            )),
-            titleWidget:
-                Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
-            titleWidgetPadding: 10.h,
-            titleWidgetSize: 20.w,
-          ),
-        ) ??
+                  InkWell(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0, left: 4.w, right: 2.w),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: globalRed,
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0)),
+                        ),
+                        child: Text(
+                          "Quit and save",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      onTap: () {
+                        saveSettings();
+                        Navigator.of(context).pop(true);
+                      }),
+              ])
+              ])
+        ),
+        titleWidget:
+        Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
+        titleWidgetPadding: 10.h,
+        titleWidgetSize: 20.w,
+      ),
+    ) ??
         false; //if showDialouge had returned null, then return false
   }
+
 
   Future<bool> showAdsPopup() async {
     return await showDialog(
@@ -316,65 +340,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                   child: GestureDetector(
                     child: FaIcon(FontAwesomeIcons.floppyDisk),
                     onTap: () async {
-                      Map<String, String> newSettings = {
-                        sec.settingKey_defaultVotingWeight:
-                            _defaultVote.toString(),
-                        sec.settingKey_defaultVotingWeightComments:
-                            _defaultVoteComments.toString(),
-                        sec.settingKey_defaultVotingTip: _defaultTip.toString(),
-                        sec.settingKey_defaultVotingTipComments:
-                            _defaultTipComments.toString(),
-                        sec.settingKey_showHidden: _showHidden,
-                        sec.settingKey_showNSFW: _showNsfw,
-                        sec.settingKey_templateTitle:
-                            _templateTitleController.value.text,
-                        sec.settingKey_templateBody:
-                            _templateBodyController.value.text,
-                        sec.settingKey_templateTag:
-                            _templateTagController.value.text,
-                        sec.settingKey_imageUploadService: _imageUploadProvider,
-                        sec.settingKey_DefaultUploadNSFW:
-                            _defaultUploadNSFW.toString(),
-                        sec.settingKey_DefaultUploadOC:
-                            _defaultUploadOC.toString(),
-                        sec.settingKey_DefaultUploadUnlist:
-                            _defaultUploadUnlist.toString(),
-                        sec.settingKey_DefaultUploadCrosspost:
-                            _defaultUploadCrossPost.toString(),
-                        sec.settingKey_DefaultMomentNSFW:
-                            _defaultMomentsNSFW.toString(),
-                        sec.settingKey_DefaultMomentOC:
-                            _defaultMomentsOC.toString(),
-                        sec.settingKey_DefaultMomentUnlist:
-                            _defaultMomentsUnlist.toString(),
-                        sec.settingKey_DefaultMomentCrosspost:
-                            _defaultMomentsCrossPost.toString(),
-                        sec.settingKey_DefaultUploadVotingWeigth:
-                            _defaultUploadVotingWeight.toString(),
-                        sec.settingKey_DefaultMomentVotingWeigth:
-                            _defaultMomentVotingWeight.toString(),
-                        sec.settingKey_momentTitle:
-                            _momentTitleController.value.text,
-                        sec.settingKey_momentBody:
-                            _momentBodyController.value.text,
-                        sec.settingKey_hiveSignerDefaultCommunity:
-                            _hiveDefaultCommunityController.value.text,
-                        sec.settingKey_hiveSignerDefaultTags:
-                            _hiveDefaultTags.join(","),
-                        sec.settingKey_FixedDownvoteActivated:
-                            _downvoteFixed.toString(),
-                        sec.settingKey_FixedDownvoteWeight:
-                            _downvoteFixedAmount.toString(),
-                        sec.settingKey_videoAutoPause:
-                            _videoAutoPause.toString(),
-                        sec.settingKey_disableAnimations:
-                            _disableAnimation.toString(),
-                        sec.settingKey_enableAdvertisements:
-                            _enableAdvertisements.toString()
-                      };
-
-                      _settingsBloc.add(PushSettingsEvent(
-                          newSettings: newSettings, context: context));
+                        saveSettings();
                     },
                   ),
                 ),
@@ -2177,6 +2143,68 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
         ),
       ),
     );
+  }
+
+  void saveSettings() {
+    Map<String, String> newSettings = {
+      sec.settingKey_defaultVotingWeight:
+      _defaultVote.toString(),
+      sec.settingKey_defaultVotingWeightComments:
+      _defaultVoteComments.toString(),
+      sec.settingKey_defaultVotingTip: _defaultTip.toString(),
+      sec.settingKey_defaultVotingTipComments:
+      _defaultTipComments.toString(),
+      sec.settingKey_showHidden: _showHidden,
+      sec.settingKey_showNSFW: _showNsfw,
+      sec.settingKey_templateTitle:
+      _templateTitleController.value.text,
+      sec.settingKey_templateBody:
+      _templateBodyController.value.text,
+      sec.settingKey_templateTag:
+      _templateTagController.value.text,
+      sec.settingKey_imageUploadService: _imageUploadProvider,
+      sec.settingKey_DefaultUploadNSFW:
+      _defaultUploadNSFW.toString(),
+      sec.settingKey_DefaultUploadOC:
+      _defaultUploadOC.toString(),
+      sec.settingKey_DefaultUploadUnlist:
+      _defaultUploadUnlist.toString(),
+      sec.settingKey_DefaultUploadCrosspost:
+      _defaultUploadCrossPost.toString(),
+      sec.settingKey_DefaultMomentNSFW:
+      _defaultMomentsNSFW.toString(),
+      sec.settingKey_DefaultMomentOC:
+      _defaultMomentsOC.toString(),
+      sec.settingKey_DefaultMomentUnlist:
+      _defaultMomentsUnlist.toString(),
+      sec.settingKey_DefaultMomentCrosspost:
+      _defaultMomentsCrossPost.toString(),
+      sec.settingKey_DefaultUploadVotingWeigth:
+      _defaultUploadVotingWeight.toString(),
+      sec.settingKey_DefaultMomentVotingWeigth:
+      _defaultMomentVotingWeight.toString(),
+      sec.settingKey_momentTitle:
+      _momentTitleController.value.text,
+      sec.settingKey_momentBody:
+      _momentBodyController.value.text,
+      sec.settingKey_hiveSignerDefaultCommunity:
+      _hiveDefaultCommunityController.value.text,
+      sec.settingKey_hiveSignerDefaultTags:
+      _hiveDefaultTags.join(","),
+      sec.settingKey_FixedDownvoteActivated:
+      _downvoteFixed.toString(),
+      sec.settingKey_FixedDownvoteWeight:
+      _downvoteFixedAmount.toString(),
+      sec.settingKey_videoAutoPause:
+      _videoAutoPause.toString(),
+      sec.settingKey_disableAnimations:
+      _disableAnimation.toString(),
+      sec.settingKey_enableAdvertisements:
+      _enableAdvertisements.toString()
+    };
+
+    _settingsBloc.add(PushSettingsEvent(
+        newSettings: newSettings, context: context));
   }
 }
 
