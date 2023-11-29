@@ -2,7 +2,7 @@ import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.
 import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_bloc_full.dart';
-import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
+// import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
 import 'package:dtube_go/ui/pages/user/Widgets/ConnectYTChannelDialog.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -84,7 +84,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        toolbarHeight: 28,
+        toolbarHeight: 4.h,
       ),
       resizeToAvoidBottomInset: true,
       body: Stack(
@@ -510,14 +510,14 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                                                       .length,
                                                   itemBuilder: (ctx, pos) {
                                                     return Text(pos.toString() +
-                                                        ': ' +
+                                                        ': '/* +
                                                         secretConfig.decryptYTChannelId(
                                                             _originalUserData,
                                                             _originalUserData
                                                                     .jsonString!
                                                                     .additionals!
                                                                     .ytchannels![
-                                                                pos]));
+                                                                pos])*/);
                                                   })
                                               : Container()
                                         ])
