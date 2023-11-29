@@ -57,7 +57,7 @@ class _EULAScreenState extends State<EULAScreen> {
     loadEulaAssets();
     if (kIsWeb) {
       widget.eulaAcceptedCallback();
-    } else {
+    } else if(globals.eulaRequired) {
       _controller.addListener(() {
         if (_controller.position.atEdge) {
           if (_controller.position.pixels == 0) {
@@ -81,6 +81,8 @@ class _EULAScreenState extends State<EULAScreen> {
           });
         }
       });
+    } else {
+      widget.eulaAcceptedCallback();
     }
     super.initState();
   }

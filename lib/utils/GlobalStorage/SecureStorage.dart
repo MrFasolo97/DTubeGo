@@ -1085,12 +1085,12 @@ Future<String> getLocalConfigString(String configKey) async {
   try {
     _setting = await _storage.read(key: configKey);
   } catch (e) {
-    _setting = "";
+    _setting = "0";
   }
-  if (_setting != null) {
+  if (_setting != null && _setting != "") {
     return _setting;
   } else {
-    return "";
+    return "0";
   }
 }
 
