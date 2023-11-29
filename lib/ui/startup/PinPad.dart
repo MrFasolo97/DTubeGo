@@ -52,7 +52,7 @@ class _PinPadScreenState extends State<PinPadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_termsAccepted) {
+    if (!_termsAccepted && globals.eulaRequired) {
       // if terms have changed or never have been accepted on this device
       return Scaffold(
         resizeToAvoidBottomInset: false,

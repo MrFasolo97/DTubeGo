@@ -15,7 +15,7 @@ import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:tus_client/tus_client.dart';
 import 'dart:io';
 import 'package:video_compress/video_compress.dart';
-import 'package:dtube_go/res/Config/secretConfigValues.dart' as secret;
+// import 'package:dtube_go/res/Config/secretConfigValues.dart' as secret;
 
 abstract class Web3StorageRepository {
   Future<File> compressVideo(String localFilePath);
@@ -81,7 +81,7 @@ class Web3StorageRepositoryImpl implements Web3StorageRepository {
 
   Future<String> uploadVideo(String localFilePath, Map<String, String> endpoint) async {
     Uri _url = Uri.parse(endpoint["tus"]! + '/upload');
-    String apiKeyHeader = secret.web3ApiKey;
+    String apiKeyHeader = ""; //secret.web3ApiKey;
     String _privKey = await sec.getPrivateKey();
     String pubKey = privToPub(_privKey);
     int ts = DateTime.now().millisecondsSinceEpoch;
@@ -189,7 +189,7 @@ class Web3StorageRepositoryImpl implements Web3StorageRepository {
     //String _url = endpoint;
     String _url = "https://api.imgur.com/3/upload";
 
-    String authHeader = "Client-ID " + secret.imgurClientID;
+    String authHeader = "Client-ID "; // + secret.imgurClientID;
 
     var dio = Dio();
     dio.options.headers["Authorization"] = authHeader;

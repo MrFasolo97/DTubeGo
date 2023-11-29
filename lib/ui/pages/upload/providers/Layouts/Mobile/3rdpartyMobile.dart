@@ -3,7 +3,7 @@ import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
 import 'package:dtube_go/bloc/thirdpartyloader/thirdpartyloader_bloc_full.dart';
 import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
 import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
+// import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/pages/upload/PresetSelection/Widgets/PresetCards.dart';
 import 'package:dtube_go/ui/pages/upload/UploadForm/uploadForm.dart';
@@ -200,12 +200,12 @@ class _Wizard3rdPartyMobileState extends State<Wizard3rdPartyMobile> {
                                   null &&
                               stateuserdata.user.jsonString!.additionals!
                                       .ytchannels !=
-                                  null &&
+                                  null /* &&
                               stateuserdata
                                   .user.jsonString!.additionals!.ytchannels!
                                   .contains(secretConfig.encryptYTChannelId(
                                       stateuserdata.user,
-                                      state.metadata.channelId))) {
+                                      state.metadata.channelId))*/) {
                             _uploadData = UploadData(
                                 link: "",
                                 title: state.metadata.title,

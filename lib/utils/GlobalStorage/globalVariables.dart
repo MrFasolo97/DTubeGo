@@ -7,3 +7,4 @@ bool mobileMode = true;
 bool enableAdvertisements = true;
 int scrolledPostsBetweenAds = 0;
 int minimumPostsBetweenAds = 12;
+bool eulaRequired = false;

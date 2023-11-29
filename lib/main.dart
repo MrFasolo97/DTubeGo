@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
+// import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
 
 const MaterialColor kPrimaryColor = const MaterialColor(
   0xFF223154,
@@ -30,6 +30,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (kIsWeb) {
+    /*
     await Firebase.initializeApp(
       options: FirebaseOptions(
           apiKey: secretConfig.fbWebApiKey,
@@ -40,6 +41,7 @@ void main() async {
           appId: secretConfig.fbWebAppId,
           measurementId: secretConfig.fbWebMeasurementId),
     );
+    */
   } else {
     if (Platform.isAndroid || Platform.isIOS) {
       ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');

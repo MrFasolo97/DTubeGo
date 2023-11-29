@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dtube_go/style/ThemeData.dart';
 import 'package:dtube_go/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
+import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
@@ -31,20 +32,22 @@ class _EULAScreenState extends State<EULAScreen> {
     if (kIsWeb) {
       log("web release");
     } else {
-      if (Platform.isAndroid) {
+      if (Platform.isAndroid && globals.eulaRequired) {
         final _loadedEulaAndroidData =
             await rootBundle.loadString('lib/res/mds/androidEULA.md');
 
         setState(() {
           _eulaTextAndroid = _loadedEulaAndroidData;
         });
-      } else if (Platform.isIOS) {
+      } else if (Platform.isIOS && globals.eulaRequired) {
         final _loadedEulaIOSData =
             await rootBundle.loadString('lib/res/mds/iOSEULA.md');
 
         setState(() {
           _eulaTextIOS = _loadedEulaIOSData;
         });
+      } else {
+        log("EULA not required.");
       }
     }
   }
