@@ -152,7 +152,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                               bottomRight: Radius.circular(20.0)),
                         ),
                         child: Text(
-                          "Quit and save",
+                          "Save",
                           style: Theme.of(context).textTheme.headlineMedium,
                           textAlign: TextAlign.left,
                         ),
