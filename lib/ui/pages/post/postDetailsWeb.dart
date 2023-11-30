@@ -1,37 +1,36 @@
 import 'dart:io';
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
-import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/feed/feed_bloc.dart';
-import 'package:dtube_go/bloc/feed/feed_event.dart';
-import 'package:dtube_go/bloc/feed/feed_repository.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/gifts/GiftBoxWidget.dart';
-import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
-import 'package:dtube_go/utils/Strings/shortBalanceStrings.dart';
-import 'package:flutter/foundation.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/DTubeCoinsChip.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/ShareAndCommentChiips.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_event.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_repository.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListCarousel.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannels.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayIcon.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/gifts/GiftBoxWidget.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/tags/TagChip.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/shortBalanceStrings.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
+import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
-import 'package:dtube_go/ui/pages/post/widgets/VoteButtons.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VoteButtons.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -89,9 +88,9 @@ class _WebPostDetailsState extends State<WebPostDetails> {
         params: YoutubePlayerParams(
             showControls: true,
             showFullscreenButton: true,
-      )
+      ), initialVideoId: ''
     );
-    _controller.onFullscreenChange = (event) {
+    _controller.onEnterFullscreen = () {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
@@ -104,7 +103,7 @@ class _WebPostDetailsState extends State<WebPostDetails> {
 
   @override
   void dispose() {
-    _controller.pauseVideo();
+    _controller.pause();
     _controller.close();
 
     super.dispose();
@@ -129,11 +128,11 @@ class _WebPostDetailsState extends State<WebPostDetails> {
             onVisibilityChanged: (visibilityInfo) {
               var visiblePercentage = visibilityInfo.visibleFraction * 100;
               if (visiblePercentage < 1) {
-                _controller.pauseVideo();
+                _controller.pause();
                 _videocontroller.pause();
               }
               if (visiblePercentage > 90) {
-                _controller.playVideo();
+                _controller.play();
                 _videocontroller.play();
               }
             },
@@ -180,7 +179,7 @@ class _WebPostDetailsState extends State<WebPostDetails> {
                                 ? player
                                 : ["ipfs", "sia"]
                                         .contains(widget.post.videoSource)
-                                    ? ChewiePlayer(
+                                    ? P2PSourcePlayer(
                                         videoUrl: widget.post.videoUrl!,
                                         autoplay:
                                             !(widget.directFocus != "none"),
