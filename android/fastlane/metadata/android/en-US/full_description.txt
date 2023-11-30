@@ -1,0 +1,12 @@
+<b>5 different feeds:</b>
+DTubeGo currently offers 5 different feeds aiming for different target audiences. Original Dtubers (Only content posted by verified accounts) New Feed (all the recently posted content) Following (Only content of accounts the user follows) Hot (Content ranked by the Avalon built in "Hot-Algorithm") Trending (Content ranked by the Avalon built in "Trending-Algorithm")
+<b>Genre explorer:</b>
+As alternative to the basic feeds, the user can filter by several main tags to explore the Avalon Blockchain based on the user's interests. This list will continue to grow over time.
+<b>Video details:</b>
+DtubeGo uses 2 different video players for videos stored on ipfs/sia and for videos stored on youtube. Of course the user can read the markdown description, comment, vote and tip the content from here as well.
+<b>User details:</b>
+Here you can see all posts made by the account, follow and tip the creator. Additionally, we have implemented a list of suggested users which is calculated by several factors. For example, tags used in the most recent videos compared with other content using those tags as well.
+<b>Leaderboard:</b>
+The leaderboard defines which node operating users are counting as block producers and earn rewards for their hosting.
+<b>Rewards:</b>
+The user can claim rewards of their blockchain interactions from within the app.
