@@ -31,7 +31,7 @@ class FeedList extends StatelessWidget {
   double? heightPerEntry;
   final bool enableNavigation;
   final ListOfString2VoidFunc?
-      itemSelectedCallback; // only used in landscape mode for now
+  itemSelectedCallback; // only used in landscape mode for now
   double? topPadding;
 
   final Bool2VoidFunc scrollCallback;
@@ -148,6 +148,7 @@ class FeedList extends StatelessWidget {
                               if (state.feedType == "tagSearch") {
                                 _feedItems.clear();
                               }
+<<<<<<< HEAD
                               if (_feedItems.isNotEmpty &&
                                   state.feed.isNotEmpty) {
                                 if (_feedItems.first.link ==
@@ -214,6 +215,49 @@ class FeedList extends StatelessWidget {
                 mobileBody: TopGradient(feedType: feedType),
                 tabletBody: Container(),
                 desktopBody: Container())
+=======
+                              BlocProvider
+                                  .of<FeedBloc>(context)
+                                  .isFetching =
+                              false;
+                            } else if (state is FeedErrorState) {
+                              return buildErrorUi(state.message);
+                            }
+                            if (globals.mobileMode) {
+                              return buildPostList(_feedItems, largeFormat,
+                                  true, context, feedType);
+                            } else {
+                              // return buildPostListWeb(_feedItems, largeFormat, true, context, feedType);
+                              return buildPostList(_feedItems, largeFormat,
+                                  true, context, feedType);
+                            }
+                          },
+                        ),
+                      );
+                    }
+                  }),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                height: feedType == "UserFeed" ? 0.h : 15.h,
+                width: 200.w,
+                decoration: BoxDecoration(
+                    color: globalAlmostWhite,
+                    gradient: LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                          Colors.black,
+                          Colors.black.withOpacity(0.0),
+                        ],
+                        stops: [
+                          0.0,
+                          1.0
+                        ])),
+              ),
+            ),
+>>>>>>> master
           ],
         ),
       ),
@@ -224,11 +268,11 @@ class FeedList extends StatelessWidget {
     return feedType == "UserFeed"
         ? SizedBox(height: 0, width: 0)
         : Center(
-            child: DtubeLogoPulseWithSubtitle(
-              subtitle: "loading feed..",
-              size: kIsWeb ? 10.w : 40.w,
-            ),
-          );
+      child: DtubeLogoPulseWithSubtitle(
+        subtitle: "loading feed..",
+        size: kIsWeb ? 10.w : 40.w,
+      ),
+    );
   }
 
   Widget buildErrorUi(String message) {
@@ -255,22 +299,26 @@ class FeedList extends StatelessWidget {
       controller: _scrollController
         ..addListener(() {
           if (_scrollController.offset >=
-                  _scrollController.position.maxScrollExtent &&
-              !BlocProvider.of<FeedBloc>(context).isFetching &&
+              _scrollController.position.maxScrollExtent &&
+              !BlocProvider
+                  .of<FeedBloc>(context)
+                  .isFetching &&
               feedType != "UserFeed" &&
               feedType != "NewUserMoments" &&
               feedType != "tagSearch") {
             BlocProvider.of<FeedBloc>(context)
               ..isFetching = true
               ..add(FetchFeedEvent(
-                  //feedType: widget.feedType,
+                //feedType: widget.feedType,
                   feedType: feedType,
                   fromAuthor: feed[feed.length - 1].author,
                   fromLink: feed[feed.length - 1].link));
           }
           if (_scrollController.offset <=
-                  _scrollController.position.minScrollExtent &&
-              !BlocProvider.of<FeedBloc>(context).isFetching &&
+              _scrollController.position.minScrollExtent &&
+              !BlocProvider
+                  .of<FeedBloc>(context)
+                  .isFetching &&
               feedType != "UserFeed" &&
               feedType != "NewUserMoments" &&
               feedType != "tagSearch") {
@@ -316,9 +364,9 @@ class FeedList extends StatelessWidget {
                   largeFormat: largeFormat,
                   showAuthor: showAuthor,
                   blur: (_nsfwMode == 'Blur' &&
-                              feed[pos].jsonString?.nsfw == 1) ||
-                          (_hiddenMode == 'Blur' &&
-                              feed[pos].summaryOfVotes < 0)
+                      feed[pos].jsonString?.nsfw == 1) ||
+                      (_hiddenMode == 'Blur' &&
+                          feed[pos].summaryOfVotes < 0)
                       ? true
                       : false,
                   title: feed[pos].jsonString!.title,
@@ -361,7 +409,7 @@ class FeedList extends StatelessWidget {
         } else {
           return Padding(
             padding:
-                EdgeInsets.only(top: pos == 0 ? topPaddingForFirstEntry! : 0.0),
+            EdgeInsets.only(top: pos == 0 ? topPaddingForFirstEntry! : 0.0),
             child: SizedBox(
               height: 0,
             ),
@@ -370,6 +418,7 @@ class FeedList extends StatelessWidget {
       },
     );
   }
+<<<<<<< HEAD
 
   Widget buildPostListDesktop(
       List<FeedItem> feed,
@@ -567,6 +616,8 @@ class TopGradient extends StatelessWidget {
       ),
     );
   }
+=======
+>>>>>>> master
 }
 
 class PostListCard extends StatefulWidget {

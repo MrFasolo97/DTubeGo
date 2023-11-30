@@ -18,9 +18,14 @@ class UploadPresetSelectionMobile extends StatefulWidget {
       _UploadPresetSelectionMobileState();
 }
 
+<<<<<<< HEAD:lib/ui/pages/upload/PresetSelection/Layouts/UploadPresetSelectionMobile.dart
 class _UploadPresetSelectionMobileState
     extends State<UploadPresetSelectionMobile> {
   List<int> _ativeCustomPresets = [0];
+=======
+class _UploadPresetSelectionState extends State<UploadPresetSelection> {
+  List<int> _activeCustomPresets = [0];
+>>>>>>> master:lib/ui/pages/upload/UploadPresetSelection.dart
   List<Preset> _initiativePresets = [];
   List<Preset> _customPresets = [];
   bool _presetSelected = false;
@@ -79,6 +84,7 @@ class _UploadPresetSelectionMobileState
                       height: 30.h,
                       width: 100.w,
                       color: globalBGColor,
+<<<<<<< HEAD:lib/ui/pages/upload/PresetSelection/Layouts/UploadPresetSelectionMobile.dart
                       child: MasonryGridView.count(
                         padding: EdgeInsets.only(
                           // bottom: 16.h,
@@ -105,6 +111,23 @@ class _UploadPresetSelectionMobileState
                         //     new StaggeredTile.fit(2),
                         mainAxisSpacing: 8.0,
                         crossAxisSpacing: 8.0,
+=======
+                      child: GridView.custom(
+                        gridDelegate: SliverQuiltedGridDelegate(
+                          crossAxisCount: 6,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          repeatPattern: QuiltedGridRepeatPattern.inverted,
+                          pattern: const [
+                            QuiltedGridTile(4, 4),
+                            QuiltedGridTile(2, 2),
+                            QuiltedGridTile(2, 2),
+                          ],
+                        ),
+                        childrenDelegate: SliverChildBuilderDelegate((context, index) {
+                          return Container();
+                        }),
+>>>>>>> master:lib/ui/pages/upload/UploadPresetSelection.dart
                       ),
                     ),
                     Container(
@@ -131,6 +154,7 @@ class _UploadPresetSelectionMobileState
                             height: 30.h,
                             width: 100.w,
                             color: globalBGColor,
+<<<<<<< HEAD:lib/ui/pages/upload/PresetSelection/Layouts/UploadPresetSelectionMobile.dart
                             child: MasonryGridView.count(
                               padding: EdgeInsets.only(
                                 bottom: 5.h,
@@ -160,6 +184,11 @@ class _UploadPresetSelectionMobileState
                               //     new StaggeredTile.fit(2),
                               mainAxisSpacing: 8.0,
                               crossAxisSpacing: 8.0,
+=======
+                            child: CustomScrollView(
+                              //shrinkWrap: true,
+                              // scrollDirection: Axis.vertical,
+>>>>>>> master:lib/ui/pages/upload/UploadPresetSelection.dart
                             ),
                           );
                         })

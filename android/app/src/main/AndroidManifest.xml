@@ -65,7 +65,10 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         -->
+=======
+>>>>>>> master
         <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true" android:launchMode="singleTop">
             <intent-filter android:label="flutter_web_auth">
                 <action android:name="android.intent.action.VIEW" />

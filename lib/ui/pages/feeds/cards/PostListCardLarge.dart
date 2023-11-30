@@ -130,14 +130,18 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
     _userBloc = BlocProvider.of<UserBloc>(context);
     _bpController = VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
-      initialVideoId: widget.videoUrl,
       params: YoutubePlayerParams(
+<<<<<<< HEAD
         useHybridComposition: false,
         autoPlay: true,
         desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
         privacyEnhanced: true,
         showControls: true,
         showFullscreenButton: true,
+=======
+          showControls: true,
+          showFullscreenButton: true,
+>>>>>>> master
       ),
     );
   }
@@ -161,6 +165,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     Padding post = Padding(
       padding: const EdgeInsets.all(8.0),
       child: PostData(
@@ -206,6 +211,73 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
             _showGiftInput = false;
           });
         },
+=======
+    return VisibilityDetector(
+      key: Key('postlist-large' + widget.link),
+      onVisibilityChanged: (visibilityInfo) {
+        var visiblePercentage = visibilityInfo.visibleFraction * 100;
+
+        if (visiblePercentage < 95 &&
+            !_showCommentInput &&
+            !_showGiftInput &&
+            !_showVotingBars) {
+          _ytController.pauseVideo();
+          _bpController.pause();
+          print("VISIBILITY OF " +
+              widget.author +
+              "/" +
+              widget.link +
+              "CHANGED TO " +
+              visiblePercentage.toString());
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: PostData(
+          width: widget.width,
+          thumbnailTapped: _thumbnailTapped,
+          widget: widget,
+          bpController: _bpController,
+          ytController: _ytController,
+          showVotingBars: _showVotingBars,
+          userBloc: _userBloc,
+          votingDirection: _votingDirection,
+          showCommentInput: _showCommentInput,
+          replyController: _replyController,
+          showGiftInput: _showGiftInput,
+          giftDTCController: _giftDTCController,
+          giftMemoController: _giftMemoController,
+          avatarSize: _avatarSize,
+          blur: widget.blur,
+          thumbUrl: widget.thumbnailUrl,
+          videoSource: widget.videoSource,
+          videoUrl: widget.videoUrl,
+          thumbnailTappedCallback: () {
+            setState(() {
+              if (widget.disableVideoPlayback == null ||
+                  !widget.disableVideoPlayback!) {
+                _thumbnailTapped = true;
+              }
+            });
+          },
+          votingOpenCallback: () {
+            setState(() {
+              _showVotingBars = false;
+            });
+          },
+          commentOpenCallback: () {
+            setState(() {
+              _showCommentInput = false;
+              _replyController.text = '';
+            });
+          },
+          giftOpenCallback: () {
+            setState(() {
+              _showGiftInput = false;
+            });
+          },
+        ),
+>>>>>>> master
       ),
     );
     return VisibilityDetector(
@@ -623,7 +695,7 @@ class PostInfoBaseRow extends StatelessWidget {
                                 onTap: () {
                                   if (widget.autoPauseVideoOnPopup) {
                                     videoController.pause();
-                                    ytController.pause();
+                                    ytController.pauseVideo();
                                   }
                                   commentOpenCallback();
 
@@ -644,14 +716,14 @@ class PostInfoBaseRow extends StatelessWidget {
                                         okCallback: () {
                                           commentCloseCallback();
                                           if (widget.autoPauseVideoOnPopup) {
-                                            ytController.play();
+                                            ytController.playVideo();
                                             videoController.play();
                                           }
                                         },
                                         cancelCallback: () {
                                           commentCloseCallback();
                                           if (widget.autoPauseVideoOnPopup) {
-                                            ytController.play();
+                                            ytController.playVideo();
                                             videoController.play();
                                           }
                                         },
@@ -681,7 +753,7 @@ class PostInfoBaseRow extends StatelessWidget {
                                   if (!widget.alreadyVoted) {
                                     if (widget.autoPauseVideoOnPopup) {
                                       videoController.pause();
-                                      ytController.pause();
+                                      ytController.pauseVideo();
                                     }
                                     votingOpenCallback();
                                     showDialog<String>(
@@ -721,14 +793,14 @@ class PostInfoBaseRow extends StatelessWidget {
                                           okCallback: () {
                                             votingCloseCallback();
                                             if (widget.autoPauseVideoOnPopup) {
-                                              ytController.play();
+                                              ytController.playVideo();
                                               videoController.play();
                                             }
                                           },
                                           cancelCallback: () {
                                             votingCloseCallback();
                                             if (widget.autoPauseVideoOnPopup) {
-                                              ytController.play();
+                                              ytController.playVideo();
                                               videoController.play();
                                             }
                                           },
@@ -761,7 +833,7 @@ class PostInfoBaseRow extends StatelessWidget {
                                     votingOpenCallback();
                                     if (widget.autoPauseVideoOnPopup) {
                                       videoController.pause();
-                                      ytController.pause();
+                                      ytController.pauseVideo();
                                     }
 
                                     showDialog<String>(
@@ -801,14 +873,14 @@ class PostInfoBaseRow extends StatelessWidget {
                                           okCallback: () {
                                             votingCloseCallback();
                                             if (widget.autoPauseVideoOnPopup) {
-                                              ytController.play();
+                                              ytController.playVideo();
                                               videoController.play();
                                             }
                                           },
                                           cancelCallback: () {
                                             votingCloseCallback();
                                             if (widget.autoPauseVideoOnPopup) {
-                                              ytController.play();
+                                              ytController.playVideo();
                                               videoController.play();
                                             }
                                           },
@@ -836,7 +908,7 @@ class PostInfoBaseRow extends StatelessWidget {
                                 onTap: () {
                                   if (widget.autoPauseVideoOnPopup) {
                                     videoController.pause();
-                                    ytController.pause();
+                                    ytController.pauseVideo();
                                   }
                                   showDialog<String>(
                                     context: context,
@@ -845,14 +917,14 @@ class PostInfoBaseRow extends StatelessWidget {
                                       okCallback: () {
                                         giftCloseCallback();
                                         if (widget.autoPauseVideoOnPopup) {
-                                          ytController.play();
+                                          ytController.playVideo();
                                           videoController.play();
                                         }
                                       },
                                       cancelCallback: () {
                                         giftCloseCallback();
                                         if (widget.autoPauseVideoOnPopup) {
-                                          ytController.play();
+                                          ytController.playVideo();
                                           videoController.play();
                                         }
                                       },

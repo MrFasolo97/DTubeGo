@@ -11,6 +11,7 @@ import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/foundation.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+<<<<<<< HEAD
 import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
@@ -20,6 +21,17 @@ import 'package:ovh.fso.dtubego/ui/widgets/PinPadWidget.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart';
 import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+=======
+import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
+import 'package:dtube_go/bloc/user/user_bloc_full.dart';
+import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:dtube_go/ui/MainContainer/NavigationContainer.dart';
+import 'package:dtube_go/ui/widgets/PinPadWidget.dart';
+import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart';
+import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
+import 'package:dtube_go/style/ThemeData.dart';
+>>>>>>> master
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,10 @@
 import 'package:auto_orientation/auto_orientation.dart';
+<<<<<<< HEAD
 //import 'package:overlay_dialog/overlay_dialog.dart';
+=======
+import 'package:overlay_dialog/overlay_dialog.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+>>>>>>> master
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -27,11 +32,18 @@ class _YoutubePlayerFullScreenPageState
   @override
   void initState() {
     _controller = YoutubePlayerController(
+<<<<<<< HEAD
       initialVideoId: '',
       params: YoutubePlayerParams(
           showControls: false,
           showFullscreenButton: true,
           ),
+=======
+      params: YoutubePlayerParams(
+          showControls: false,
+          showFullscreenButton: false,
+      ),
+>>>>>>> master
     );
     AutoOrientation.landscapeAutoMode();
     super.initState();
@@ -39,7 +51,7 @@ class _YoutubePlayerFullScreenPageState
 
   @override
   void dispose() {
-    _controller.pause();
+    _controller.pauseVideo();
     _controller.close();
     AutoOrientation.portraitAutoMode();
     super.dispose();
@@ -62,8 +74,14 @@ class _YoutubePlayerFullScreenPageState
               children: [
                 Align(
                   alignment: Alignment.topCenter,
+<<<<<<< HEAD
                   child: YoutubePlayer(
                       controller: _controller,
+=======
+                  child: YoutubePlayerControllerProvider(
+                    controller: _controller,
+                    child: YoutubePlayer(
+>>>>>>> master
                       aspectRatio: 16 / 9,
                     ),
                   ),

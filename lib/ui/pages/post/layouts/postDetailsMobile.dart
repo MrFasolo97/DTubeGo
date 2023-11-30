@@ -234,6 +234,22 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
     _userBloc.add(FetchAccountDataEvent(username: widget.post.author));
     _userBloc.add(FetchDTCVPEvent());
 
+<<<<<<< HEAD:lib/ui/pages/post/layouts/postDetailsMobile.dart
+=======
+    _controller = YoutubePlayerController(
+      params: YoutubePlayerParams(
+          showControls: true,
+          showFullscreenButton: true,
+      ),
+    );
+    _controller.onFullscreenChange = (event) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      print('Fullscreen changed');
+    };
+>>>>>>> master:lib/ui/pages/post/postDetailPageV2.dart
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
 
@@ -243,10 +259,16 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
 
   @override
   void dispose() {
+<<<<<<< HEAD:lib/ui/pages/post/layouts/postDetailsMobile.dart
     /*
     _controller.pause();
     _controller.dispose();
     */
+=======
+    _controller.pauseVideo();
+    _controller.close();
+
+>>>>>>> master:lib/ui/pages/post/postDetailPageV2.dart
     super.dispose();
   }
 

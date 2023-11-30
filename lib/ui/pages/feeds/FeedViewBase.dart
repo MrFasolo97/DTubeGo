@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedList.dart';
 
+=======
+import 'package:dtube_go/ui/pages/feeds/lists/FeedList.dart';
+import 'package:dtube_go/ui/pages/feeds/PostDetailPageInlineView.dart';
+import 'package:dtube_go/utils/Widgets/ResponsiveLayout.dart';
+>>>>>>> master
 import 'package:flutter/material.dart';
 
 typedef Bool2VoidFunc = void Function(bool);

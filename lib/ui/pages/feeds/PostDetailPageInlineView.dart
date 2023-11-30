@@ -141,8 +141,12 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
+<<<<<<< HEAD
     YoutubePlayerParams youtubePlayerParams = YoutubePlayerParams(autoPlay: true, useHybridComposition: true, showFullscreenButton: true);
     _ytController = YoutubePlayerController(initialVideoId: widget.post.videoUrl!, params: youtubePlayerParams);
+=======
+    _ytController = YoutubePlayerController();
+>>>>>>> master
   }
 
   @override

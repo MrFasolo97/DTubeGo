@@ -92,13 +92,16 @@ class _GenreBaseMobileState extends State<GenreBaseMobile> {
                     Container(
                         height: 100.h,
                         child: !_showResults
+<<<<<<< HEAD:lib/ui/pages/Explore/GenreBase/Layouts/GenreBaseMobile.dart
                             ? MasonryGridView.count(
+=======
+                            ? ListView.builder(
+>>>>>>> master:lib/ui/pages/Explore/GenreBase.dart
                                 padding: EdgeInsets.only(
                                   bottom: 16.h,
                                   top: 18.h,
                                 ),
                                 itemCount: genreList.length,
-                                crossAxisCount: 3,
                                 itemBuilder: (BuildContext context, int index) {
                                   return GenreCard(
                                       currentIndex: index,
@@ -117,12 +120,16 @@ class _GenreBaseMobileState extends State<GenreBaseMobile> {
                                         });
                                       });
                                 },
+<<<<<<< HEAD:lib/ui/pages/Explore/GenreBase/Layouts/GenreBaseMobile.dart
                                 // staggeredTileBuilder: (int index) =>
                                 //     new StaggeredTile.fit(1),
                                 mainAxisSpacing: 8.0,
                                 crossAxisSpacing: 8.0,
                               )
                             : Padding(
+=======
+                            ): Padding(
+>>>>>>> master:lib/ui/pages/Explore/GenreBase.dart
                                 padding: EdgeInsets.only(left: 2.w, right: 2.w),
                                 child: GenreFeed(),
                               )),
