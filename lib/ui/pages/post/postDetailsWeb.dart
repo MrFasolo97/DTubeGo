@@ -153,13 +153,13 @@ class _WebPostDetailsState extends State<WebPostDetails> {
                                   margin: EdgeInsets.all(5.0),
                                   child: globals.disableAnimations
                                       ? AccountNavigationChip(
-                                          author: widget.post.author)
+                                          author: widget.post.author, size: 250,)
                                       : SlideInDown(
                                           preferences: AnimationPreferences(
                                               offset:
                                                   Duration(milliseconds: 500)),
                                           child: AccountNavigationChip(
-                                              author: widget.post.author))),
+                                              author: widget.post.author, size: 250,))),
                               globals.disableAnimations
                                   ? TitleWidget(
                                       title: widget.post.jsonString!.title)
@@ -242,6 +242,7 @@ class _WebPostDetailsState extends State<WebPostDetails> {
                                     ? DtubeCoinsChip(
                                         dist: widget.post.dist,
                                         post: widget.post,
+                                        width: 20,
                                       )
                                     : BounceIn(
                                         preferences: AnimationPreferences(
@@ -252,6 +253,7 @@ class _WebPostDetailsState extends State<WebPostDetails> {
                                             child: DtubeCoinsChip(
                                               dist: widget.post.dist,
                                               post: widget.post,
+                                              width: 20,
                                             )),
                                       ),
                               ],
@@ -536,7 +538,7 @@ class TitleWidget extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
     );
   }
@@ -613,14 +615,14 @@ class _VotesOverviewState extends State<VotesOverview> {
                                         _allVotes[index].u,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText1,
+                                            .bodyLarge,
                                       ),
                                       Text(
                                         TimeAgo.timeInAgoTSShort(
                                             _allVotes[index].ts),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText2,
+                                            .bodyMedium,
                                       ),
                                     ],
                                   ),
@@ -651,7 +653,7 @@ class _VotesOverviewState extends State<VotesOverview> {
                                               : "0"),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 5.w,
@@ -668,7 +670,7 @@ class _VotesOverviewState extends State<VotesOverview> {
                                           shortVP(_allVotes[index].vt),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1,
+                                              .bodyLarge,
                                         ),
                                         Container(
                                           width: 5.w,
@@ -706,7 +708,7 @@ class _VotesOverviewState extends State<VotesOverview> {
           },
           label: Text(
             'Close',
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
       ],

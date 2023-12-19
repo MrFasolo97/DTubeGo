@@ -61,7 +61,7 @@ class _RegisterNewAccountState extends State<RegisterNewAccount> {
                         setState(() {
                           if (value.length < AppConfig.usernameMinLength) {
                             _usernameHint = "username needs " +
-                                (12 - value.length).toString() +
+                                (AppConfig.usernameMinLength - value.length).toString() +
                                 " more characters";
                           } else {
                             // TODO: check username available

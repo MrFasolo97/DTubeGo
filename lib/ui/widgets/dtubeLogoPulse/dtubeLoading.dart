@@ -161,7 +161,6 @@ class _DTubeLogoPulseWaveState extends State<DTubeLogoPulseWave>
 
   @override
   void initState() {
-    // TODO: implement initState
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
     _animationController.repeat(reverse: true);

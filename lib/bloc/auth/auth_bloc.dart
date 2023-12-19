@@ -26,19 +26,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       String _avalonApiNode = await sec.getNode();
       String? _applicationUser = await sec.getUsername();
       String? _privKey = await sec.getPrivateKey();
-      bool _onbordingJourneyDone = await sec.getOnbordingJourneyDone();
+      bool _onboardingJourneyDone = await sec.getOnbordingJourneyDone();
       bool _termsAccepted = await sec.getTermsAccepted();
 
       emit(SignInLoadingState());
       // commented out for debugging
       _avalonApiNode = await discoverAPINode();
       await sec.persistNode(_avalonApiNode);
+      if(_avalonApiNode == "") {
+        emit(ApiNodeOfflineState());
+        return;
+      }
       globals.currentApiNode = _avalonApiNode;
       globals.applicationUsername = _applicationUser;
       repository.fetchAndStoreVerifiedUsers();
 
       // if the app has never been opened before
-      if (!_onbordingJourneyDone) {
+      if (!_onboardingJourneyDone) {
         emit(NeverUsedTheAppBeforeState());
       } else {
         // if the app has been opened before
