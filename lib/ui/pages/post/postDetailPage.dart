@@ -59,7 +59,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

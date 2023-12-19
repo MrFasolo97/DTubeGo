@@ -84,7 +84,7 @@ class _StartUpState extends State<StartUp> {
             body: Center(
               child: DtubeLogoPulseWithSubtitle(
                 subtitle:
-                    "No API node can be reached. Check your internet connnection or contact us on discord...",
+                    "No API node can be reached. Check your internet connection or contact us on discord...",
                 size: _logoSize,
               ),
             ),

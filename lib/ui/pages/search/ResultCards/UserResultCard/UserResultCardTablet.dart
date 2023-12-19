@@ -32,7 +32,6 @@ class _UserResultCardTabletState extends State<UserResultCardTablet> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     userBloc.add(FetchAccountDataEvent(username: widget.name));
   }
