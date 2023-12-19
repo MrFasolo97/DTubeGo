@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
@@ -38,9 +41,27 @@ class _StartUpState extends State<StartUp> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  StatefulWidget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
+        () async {
+          var versions;
+          try {
+            versions = await jsonDecode((await Dio().get(
+                "https://raw.githubusercontent.com/MrFasolo97/DTubeGo/master/versions.json"))
+                .data) ?? {};
+        } catch(e) {
+            log(e.toString());
+            versions = {};
+        }
+          final packageInfo = await PackageInfo.fromPlatform();
+          if(versions[packageInfo.version] == null || versions[packageInfo.version].disabled == null || versions[packageInfo.version].disabled == false) {
+            log("Correctly using version "+packageInfo.version);
+          } else {
+            log("Exiting as this version is too old");
+            exit(0);
+          }
+        }();
         // if the user has been authenticated before using login credentials
         //// show Pinpad
         if (state is SignedInState) {
@@ -76,7 +97,6 @@ class _StartUpState extends State<StartUp> {
             showOnboardingJourney: true,
           );
         }
-
         if (state is ApiNodeOfflineState) {
           // as long as there are no informations from the authentication logic -> show loading animation
           return Scaffold(
