@@ -42,7 +42,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
     String _hardfork = await sec.getLocalConfigString(sec.settingKey_currentHF);
     setState(() {
       // override this to simulate another hardfork
-      _currentHF = int.tryParse(_hardfork) != null ? _hardfork : "0";
+      // _currentHF = int.tryParse(_hardfork) != null ? _hardfork : "0";
       // _currentHF = "6"; // example: setting current active hardfork to hf6
     });
   }
@@ -225,9 +225,6 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
   }
 
   void loggedInCallback(String socialUId, String socialProvider) async {
-    setState(() {
-      _uid = socialUId;
-    });
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => MultiBlocProvider(
