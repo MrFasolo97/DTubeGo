@@ -29,7 +29,7 @@ apply plugin: 'com.google.gms.google-services'
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
-   keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
 android {
@@ -40,19 +40,19 @@ android {
     }
 
     lintOptions {
-            disable 'InvalidPackage'
-            disable "Instantiatable"
-            checkReleaseBuilds false
-            abortOnError false
-        }
+        disable 'InvalidPackage'
+        disable "Instantiatable"
+        checkReleaseBuilds false
+        abortOnError false
+    }
 
     defaultConfig {
-        
         applicationId "ovh.fso.dtubego"
-        minSdkVersion 26
+        minSdkVersion 27
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
     signingConfigs {
         release {
@@ -63,6 +63,9 @@ android {
         }
     }
     buildTypes {
+        debug {
+
+        }
         release {
             //Enable the proguard
             minifyEnabled true
@@ -79,15 +82,16 @@ android {
     }
 }
 
-flutter {
-    source '../..'
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    if(providers.environmentVariable('flavor') == "google") {
+        implementation platform('com.google.firebase:firebase-bom:29.0.3')
+        implementation 'com.google.firebase:firebase-analytics'
+        implementation 'com.google.firebase:firebase-auth:19.3.2'
+    }
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    /*
-    implementation platform('com.google.firebase:firebase-bom:29.0.3')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
-    */
+flutter {
+    source '../..'
 }
