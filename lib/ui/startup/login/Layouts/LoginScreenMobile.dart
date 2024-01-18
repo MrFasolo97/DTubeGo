@@ -7,8 +7,8 @@ import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/startup/OnboardingJourney/OnboardingJourney.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/widgets/LoginWithCredentials.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/pages/SocialUserActionPopup.dart';
-import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
-import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
+//import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
+//import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
@@ -133,6 +133,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                                           alignment: WrapAlignment.center,
                                           spacing: 2.w,
                                           children: [
+                                            /*
                                             SignInButton(
                                               width: 10.w,
                                               faIcon: FaIcon(
@@ -150,7 +151,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                                               activated: true,
                                               loggedInCallback:
                                                   loggedInCallback,
-                                            ),/*
+                                            ),
                                             SignInButton(
                                               width: 10.w,
                                               faIcon: FaIcon(
@@ -159,7 +160,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                                               activated: true,
                                               loggedInCallback:
                                                   loggedInCallback,
-                                            ),*/
+                                            ),
                                             SignInButton(
                                               width: 10.w,
                                               faIcon: FaIcon(
@@ -169,6 +170,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                                               loggedInCallback:
                                                   loggedInCallback,
                                             ),
+                                             */
                                           ],
                                         )
                                       : Container(),

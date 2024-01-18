@@ -1,7 +1,7 @@
 import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+//import 'package:flutter/foundation.dart' show kIsWeb;
 
-import 'package:ovh.fso.dtubego/ui/startup/login/services/firebase_service.dart';
+//import 'package:ovh.fso.dtubego/ui/startup/login/services/firebase_service.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -11,7 +11,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SignInButton extends StatefulWidget {
   final FaIcon faIcon;
-  final LoginType loginType;
+  //final LoginType loginType;
   final bool activated;
   final Function loggedInCallback;
   final double width;
@@ -19,7 +19,7 @@ class SignInButton extends StatefulWidget {
   SignInButton(
       {Key? key,
       required this.faIcon,
-      required this.loginType,
+      //required this.loginType,
       required this.activated,
       required this.loggedInCallback,
       required this.width})
@@ -31,7 +31,7 @@ class SignInButton extends StatefulWidget {
 
 class _SignInButtonState extends State<SignInButton> {
   bool isLoading = false;
-  FirebaseService service = new FirebaseService();
+  //FirebaseService service = new FirebaseService();
   @override
   Widget build(BuildContext context) {
     return !isLoading
@@ -75,6 +75,7 @@ class _SignInButtonState extends State<SignInButton> {
     late String _provider;
     Resource? result = Resource(status: Status.Error);
     UserCredential? usercred;
+    /*
     try {
       switch (this.widget.loginType) {
         case LoginType.Google:
@@ -93,7 +94,6 @@ class _SignInButtonState extends State<SignInButton> {
           }
           _provider = "twitter";
           break;
-          /*
         case LoginType.Github:
           if (kIsWeb) {
             usercred = await service.signInWithGithubWeb();
@@ -103,7 +103,6 @@ class _SignInButtonState extends State<SignInButton> {
 
          _provider = "github";
           break;
-         */
         case LoginType.Facebook:
           service.signInWithFacebookMobile();
           _provider = "facebook";
@@ -119,5 +118,6 @@ class _SignInButtonState extends State<SignInButton> {
         showMessage(e);
       }
     }
+    */
   }
 }
