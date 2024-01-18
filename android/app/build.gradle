@@ -63,9 +63,10 @@ android {
         }
     }
     buildTypes {
-        debug {
 
+        debug {
         }
+
         release {
             //Enable the proguard
             minifyEnabled true
@@ -80,16 +81,24 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    flavorDimensions "app"
+    productFlavors {
+        Google {
+            dimension "app"
+            dependencies {
+                'com.google.firebase:firebase-bom:29.0.3'
+                'com.google.firebase:firebase-analytics'
+                'com.google.firebase:firebase-auth:19.3.2'
+            }
+        }
+        GoogleFree {
+            dimension "app"
+        }
+    }
 }
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
-    if(providers.environmentVariable('flavor') == "google") {
-        implementation platform('com.google.firebase:firebase-bom:29.0.3')
-        implementation 'com.google.firebase:firebase-analytics'
-        implementation 'com.google.firebase:firebase-auth:19.3.2'
-    }
 }
 
 flutter {

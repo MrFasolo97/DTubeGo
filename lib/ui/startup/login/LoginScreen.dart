@@ -1,5 +1,7 @@
+import 'package:flavor_getter/flavor_getter.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/Layouts/LoginScreenDesktop.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/Layouts/LoginScreenMobile.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/Layouts/LoginScreenMobile_GoogleFree.dart' as LoginFormMobile_GoogleFree;
 import 'package:ovh.fso.dtubego/ui/startup/login/Layouts/LoginScreenTablet.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
@@ -67,9 +69,10 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    var mobileBody = FlavorGetter().getFlavor().toString() == "googleFree" ? LoginFormMobile_GoogleFree.LoginFormMobile(showOnboardingJourney: widget.showOnboardingJourney) :
+      LoginFormMobile(showOnboardingJourney: widget.showOnboardingJourney);
     return ResponsiveLayout(
-      mobileBody:
-          LoginFormMobile(showOnboardingJourney: widget.showOnboardingJourney),
+      mobileBody: mobileBody,
       tabletBody:
           LoginFormTablet(showOnboardingJourney: widget.showOnboardingJourney),
       desktopBody:

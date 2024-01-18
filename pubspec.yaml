@@ -139,6 +139,7 @@ dependencies:
   webview_flutter: ^4.2.2
   webview_flutter_web: ^0.2.2+1
   csslib: 0.17.0
+  flavor_getter: ^0.0.2
 
 dev_dependencies:
   flutter_test:
