@@ -1,5 +1,3 @@
-import 'package:dtube_go/ui/pages/News/Layouts/NewsListDesktop.dart';
-import 'package:dtube_go/ui/pages/News/Layouts/NewsListMobile.dart';
 import 'package:dtube_go/ui/pages/News/NewsPostListCard.dart';
 import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
 import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
@@ -19,7 +17,6 @@ class NewsFeedList extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-<<<<<<< HEAD
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -70,22 +67,5 @@ class NewsFeedList extends StatelessWidget {
         );
       },
     );
-=======
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveLayout(
-        desktopBody: NewsListDesktop(
-            feed: newsList,
-            bigThumbnail: true,
-            context: context,
-            crossAxisCount: 4),
-        mobileBody: NewsListMobile(
-            feed: newsList, bigThumbnail: true, context: context),
-        tabletBody: NewsListDesktop(
-            feed: newsList,
-            bigThumbnail: true,
-            context: context,
-            crossAxisCount: 2));
->>>>>>> edcb13a (post details now rsposnive #2)
   }
 }
