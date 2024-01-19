@@ -1,15 +1,11 @@
-import 'package:dtube_go/ui/pages/feeds/FeedTabs.dart';
-import 'package:dtube_go/ui/pages/feeds/FeedTabsDesktop.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/feeds/FeedViewBase.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayText.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/Layouts/FeedTabsMobile.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/Layouts/FeedTabsDesktop.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/ui/pages/feeds/FeedViewBase.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,11 +19,18 @@ class FeedMainPage extends StatefulWidget {
 class _FeedMainPageState extends State<FeedMainPage>
     with SingleTickerProviderStateMixin {
   List<String> _tabNames = [
-    "Original DTubers",
-    "Fresh Videos",
-    "Follow Feed",
-    "Hot Videos",
-    "Trending Videos"
+    "Original",
+    "Fresh",
+    "Following",
+    "Hot",
+    "Trending"
+  ];
+  List<String> _tabNamesUnsignedLogin = [
+    "Original",
+    "Fresh",
+    // "Following",
+    "Hot",
+    "Trending"
   ];
   List<IconData> _tabIcons = [
     FontAwesomeIcons.circleCheck,
@@ -36,6 +39,15 @@ class _FeedMainPageState extends State<FeedMainPage>
     FontAwesomeIcons.fire,
     FontAwesomeIcons.chartLine,
   ];
+
+  List<IconData> _tabIconsUnsignedLogin = [
+    FontAwesomeIcons.circleCheck,
+    FontAwesomeIcons.rss,
+    // FontAwesomeIcons.userGroup,
+    FontAwesomeIcons.fire,
+    FontAwesomeIcons.chartLine,
+  ];
+
   late TabController _tabController;
   int _selectedIndex = 0;
   List<FilterTag> mockResults = [];
@@ -43,6 +55,7 @@ class _FeedMainPageState extends State<FeedMainPage>
   List<FilterTag> selectedMainTags = [];
   bool showTagFilter = false;
   FocusNode tagSearch = new FocusNode();
+
   late List<FeedViewBase> tabBarFeedItemList = [
     FeedViewBase(
         feedType: 'ODFeed',
@@ -70,67 +83,55 @@ class _FeedMainPageState extends State<FeedMainPage>
         showAuthor: false,
         scrollCallback: (bool) {}),
   ];
+
+  late List<FeedViewBase> tabBarFeedItemListUnsignedLogin = [
+    FeedViewBase(
+        feedType: 'ODFeed',
+        largeFormat: true,
+        showAuthor: false,
+        scrollCallback: (bool) {}),
+    FeedViewBase(
+        feedType: 'NewFeed',
+        largeFormat: true,
+        showAuthor: false,
+        scrollCallback: (bool) {}),
+    // FeedViewBase(
+    //     feedType: 'MyFeed',
+    //     largeFormat: true,
+    //     showAuthor: false,
+    //     scrollCallback: (bool) {}),
+    FeedViewBase(
+        feedType: 'HotFeed',
+        largeFormat: true,
+        showAuthor: false,
+        scrollCallback: (bool) {}),
+    FeedViewBase(
+        feedType: 'TrendingFeed',
+        largeFormat: true,
+        showAuthor: false,
+        scrollCallback: (bool) {}),
+  ];
+
   @override
   void initState() {
     if (globals.keyPermissions.isEmpty) {
       tabBarFeedItemList.removeAt(2); // remove MyFeed (followings) from tabs
-      //_tabNames.removeAt(2);
+      _tabNames.removeAt(2);
     }
 
-    _tabController =
-        new TabController(length: tabBarFeedItemList.length, vsync: this);
+    _tabController = new TabController(
+        length: globals.keyPermissions.isEmpty
+            ? tabBarFeedItemListUnsignedLogin.length
+            : tabBarFeedItemList.length,
+        vsync: this);
     _tabController.addListener(() {
       if (_tabController.index != _selectedIndex) {
         setState(() {
           _selectedIndex = _tabController.index;
         });
         print("Selected Index: " + _tabController.index.toString());
-        switch (_selectedIndex) {
-          case 0:
-            BlocProvider.of<FeedBloc>(context)
-              ..isFetching = true
-              ..add(FetchFeedEvent(feedType: "ODFeed"));
-            break;
-          case 1:
-            BlocProvider.of<FeedBloc>(context)
-              ..isFetching = true
-              ..add(FetchFeedEvent(feedType: "NewFeed"));
-            break;
 
-          case 2:
-            if (globals.keyPermissions.isEmpty) {
-              BlocProvider.of<FeedBloc>(context)
-                ..isFetching = true
-                ..add(FetchFeedEvent(feedType: "HotFeed"));
-            } else {
-              BlocProvider.of<FeedBloc>(context)
-                ..isFetching = true
-                ..add(FetchFeedEvent(feedType: "MyFeed"));
-            }
-            break;
-
-          case 3:
-            if (globals.keyPermissions.isEmpty) {
-              BlocProvider.of<FeedBloc>(context)
-                ..isFetching = true
-                ..add(FetchFeedEvent(feedType: "TrendingFeed"));
-            } else {
-              BlocProvider.of<FeedBloc>(context)
-                ..isFetching = true
-                ..add(FetchFeedEvent(feedType: "HotFeed"));
-            }
-            break;
-
-          case 4:
-            if (!globals.keyPermissions.isEmpty) {
-              BlocProvider.of<FeedBloc>(context)
-                ..isFetching = true
-                ..add(FetchFeedEvent(feedType: "TrendingFeed"));
-            }
-            break;
-
-          default:
-        }
+        loadFeedByIndex(_selectedIndex);
       }
     });
     BlocProvider.of<FeedBloc>(context)
@@ -139,6 +140,55 @@ class _FeedMainPageState extends State<FeedMainPage>
 
     getMainTagsFromStorage();
     super.initState();
+  }
+
+  void loadFeedByIndex(int index) {
+    switch (index) {
+      case 0:
+        BlocProvider.of<FeedBloc>(context)
+          ..isFetching = true
+          ..add(FetchFeedEvent(feedType: "ODFeed"));
+        break;
+      case 1:
+        BlocProvider.of<FeedBloc>(context)
+          ..isFetching = true
+          ..add(FetchFeedEvent(feedType: "NewFeed"));
+        break;
+
+      case 2:
+        if (globals.keyPermissions.isEmpty) {
+          BlocProvider.of<FeedBloc>(context)
+            ..isFetching = true
+            ..add(FetchFeedEvent(feedType: "HotFeed"));
+        } else {
+          BlocProvider.of<FeedBloc>(context)
+            ..isFetching = true
+            ..add(FetchFeedEvent(feedType: "MyFeed"));
+        }
+        break;
+
+      case 3:
+        if (globals.keyPermissions.isEmpty) {
+          BlocProvider.of<FeedBloc>(context)
+            ..isFetching = true
+            ..add(FetchFeedEvent(feedType: "TrendingFeed"));
+        } else {
+          BlocProvider.of<FeedBloc>(context)
+            ..isFetching = true
+            ..add(FetchFeedEvent(feedType: "HotFeed"));
+        }
+        break;
+
+      case 4:
+        if (globals.keyPermissions.isNotEmpty) {
+          BlocProvider.of<FeedBloc>(context)
+            ..isFetching = true
+            ..add(FetchFeedEvent(feedType: "TrendingFeed"));
+        }
+        break;
+
+      default:
+    }
   }
 
   void getMainTagsFromStorage() async {
@@ -154,186 +204,36 @@ class _FeedMainPageState extends State<FeedMainPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        //appBar: dtubeSubAppBar(true, "", context, null),
-        resizeToAvoidBottomInset: true,
-        body: ResponsiveLayout(
-          mobileBody: FeedTabs(
-              tabBarFeedItemList: tabBarFeedItemList,
-              tabController: _tabController,
-              tabIcons: _tabIcons,
-              tabNames: _tabNames,
-              selectedIndex: _selectedIndex),
-          tabletBody: FeedTabsDesktop(
-              tabBarFeedItemList: tabBarFeedItemList,
-              tabController: _tabController,
-              tabIcons: _tabIcons,
-              tabNames: _tabNames,
-              selectedIndex: _selectedIndex),
-          desktopBody: FeedTabsDesktop(
-              tabBarFeedItemList: tabBarFeedItemList,
-              tabController: _tabController,
-              tabIcons: _tabIcons,
-              tabNames: _tabNames,
-              selectedIndex: _selectedIndex),
-        ));
-  }
-}
-
-class TabBarWithPosition extends StatefulWidget {
-  const TabBarWithPosition(
-      {Key? key,
-      required this.tabIcons,
-      required this.iconSize,
-      required this.tabController,
-      required this.alignment,
-      required this.padding,
-      required this.menuSize,
-      required this.showLabels,
-      required this.tabNames})
-      : super(key: key);
-
-  final List<IconData> tabIcons;
-  final double iconSize;
-  final TabController tabController;
-  final Alignment alignment;
-  final EdgeInsets padding;
-  final double menuSize;
-  final bool showLabels;
-  final List<String> tabNames;
-
-  @override
-  State<TabBarWithPosition> createState() => _TabBarWithPositionState();
-}
-
-class _TabBarWithPositionState extends State<TabBarWithPosition> {
-  late List<Tab> tabs;
-
-  @override
-  void initState() {
-    tabs = [
-      Tab(
-        child: ShadowedIcon(
-            icon: widget.tabIcons[0],
-            color: globalAlmostWhite,
-            shadowColor: Colors.black,
-            size: widget.iconSize),
+    return ResponsiveLayout(
+      tabletBody: FeedTabsDesktop(
+        tabBarFeedItemList: tabBarFeedItemList,
+        tabBarFeedItemListUnsignedLogin: tabBarFeedItemListUnsignedLogin,
+        tabController: _tabController,
+        tabIcons: _tabIcons,
+        tabIconsUnsignedLogin: _tabIconsUnsignedLogin,
+        tabNames: _tabNames,
+        tabNamesUnsignedLogin: _tabNamesUnsignedLogin,
+        selectedIndex: _selectedIndex,
       ),
-      Tab(
-        child: ShadowedIcon(
-            icon: widget.tabIcons[1],
-            color: globalAlmostWhite,
-            shadowColor: Colors.black,
-            size: widget.iconSize),
+      mobileBody: FeedTabs(
+        tabBarFeedItemList: tabBarFeedItemList,
+        tabBarFeedItemListUnsignedLogin: tabBarFeedItemListUnsignedLogin,
+        tabController: _tabController,
+        tabIcons: _tabIcons,
+        tabIconsUnsignedLogin: _tabIconsUnsignedLogin,
+        tabNames: _tabNames,
+        tabNamesUnsignedLogin: _tabNamesUnsignedLogin,
+        selectedIndex: _selectedIndex,
       ),
-      Tab(
-        child: ShadowedIcon(
-            icon: widget.tabIcons[2],
-            color: globalAlmostWhite,
-            shadowColor: Colors.black,
-            size: widget.iconSize),
-      ),
-      Tab(
-        child: ShadowedIcon(
-            icon: widget.tabIcons[3],
-            color: globalAlmostWhite,
-            shadowColor: Colors.black,
-            size: widget.iconSize),
-      ),
-      Tab(
-        child: ShadowedIcon(
-            icon: widget.tabIcons[4],
-            color: globalAlmostWhite,
-            shadowColor: Colors.black,
-            size: widget.iconSize),
-      ),
-    ];
-    if (widget.showLabels) {
-      tabs = [
-        Tab(
-          text: widget.tabNames[0],
-          icon: ShadowedIcon(
-              icon: widget.tabIcons[0],
-              color: globalAlmostWhite,
-              shadowColor: Colors.black,
-              size: widget.iconSize),
-        ),
-        Tab(
-          text: widget.tabNames[1],
-          icon: ShadowedIcon(
-              icon: widget.tabIcons[1],
-              color: globalAlmostWhite,
-              shadowColor: Colors.black,
-              size: widget.iconSize),
-        ),
-        Tab(
-          text: widget.tabNames[2],
-          icon: FaIcon(widget.tabIcons[2],
-              color: globalAlmostWhite,
-              // shadowColor: Colors.black,
-              size: widget.iconSize),
-        ),
-        Tab(
-          text: widget.tabNames[3],
-          icon: ShadowedIcon(
-              icon: widget.tabIcons[3],
-              color: globalAlmostWhite,
-              shadowColor: Colors.black,
-              size: widget.iconSize),
-        ),
-        Tab(
-          text: widget.tabNames[4],
-          icon: ShadowedIcon(
-              icon: widget.tabIcons[4],
-              color: globalAlmostWhite,
-              shadowColor: Colors.black,
-              size: widget.iconSize),
-        ),
-      ];
-    }
-    if (globals.keyPermissions.isEmpty) {
-      tabs.removeAt(2);
-    }
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: widget.alignment,
-      child: Padding(
-        padding: widget.padding,
-        child: !widget.showLabels
-            ? Container(
-                width: widget.menuSize,
-                child: TabBar(
-                  unselectedLabelColor: globalAlmostWhite,
-                  labelColor: globalAlmostWhite,
-                  indicatorColor: globalAlmostWhite,
-                  tabs: tabs,
-                  controller: widget.tabController,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  labelPadding: EdgeInsets.zero,
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.only(top: 50.0),
-                child: Container(
-                  child: TabBar(
-                    // unselectedLabelColor: globalAlmostWhite,
-                    labelColor: globalAlmostWhite,
-                    indicatorColor: globalAlmostWhite,
-                    isScrollable: true,
-                    tabs: tabs,
-                    controller: widget.tabController,
-
-                    labelStyle: Theme.of(context).textTheme.bodyText1!,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    labelPadding: EdgeInsets.only(right: 10),
-                  ),
-                ),
-              ),
-      ),
+      desktopBody: FeedTabsDesktop(
+          tabBarFeedItemList: tabBarFeedItemList,
+          tabBarFeedItemListUnsignedLogin: tabBarFeedItemListUnsignedLogin,
+          tabController: _tabController,
+          tabIcons: _tabIcons,
+          tabIconsUnsignedLogin: _tabIconsUnsignedLogin,
+          tabNames: _tabNames,
+          tabNamesUnsignedLogin: _tabNamesUnsignedLogin,
+          selectedIndex: _selectedIndex),
     );
   }
 }

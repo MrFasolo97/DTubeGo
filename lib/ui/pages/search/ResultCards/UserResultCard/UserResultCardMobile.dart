@@ -32,6 +32,7 @@ class _UserResultCardMobileState extends State<UserResultCardMobile> {
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     userBloc.add(FetchAccountDataEvent(username: widget.name));
   }

@@ -1,18 +1,17 @@
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardDesktop.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/PostListCardDesktop.dart';
 
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardLarge.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardNarrow.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/PostListCardLarge.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/PostListCardNarrow.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -37,6 +36,8 @@ class FeedList extends StatelessWidget {
 
   final Bool2VoidFunc scrollCallback;
   late YoutubePlayerController _youtubePlayerController;
+  final int tabletCrossAxisCount;
+  final int desktopCrossAxisCount;
 
   FeedList({
     required this.feedType,
@@ -52,6 +53,11 @@ class FeedList extends StatelessWidget {
     required this.enableNavigation,
     this.itemSelectedCallback,
     this.topPadding,
+    required this.tabletCrossAxisCount,
+    required this.desktopCrossAxisCount,
+    this.showBorder,
+    this.disablePlayback,
+    this.hideSpeedDial,
     Key? key,
   }) : super(key: key);
 
@@ -70,6 +76,9 @@ class FeedList extends StatelessWidget {
   String? _fixedDownvoteWeight;
 
   bool? _autoPauseVideoOnPopup;
+  bool? showBorder;
+  bool? disablePlayback;
+  bool? hideSpeedDial;
 
   Future<bool> getSettings() async {
     _hiddenMode = await sec.getShowHidden();
@@ -108,84 +117,99 @@ class FeedList extends StatelessWidget {
     return Center(
       child: Container(
         height: 110.h,
-        width: 100.w,
+        width: width,
+        color: showBorder != null && showBorder!
+            ? globalBlue.withOpacity(0.5)
+            : Colors.transparent,
+        // decoration: BoxDecoration(
+        //     border: Border.all(
+        //         color: showBorder != null && showBorder!
+        //             ? globalBlue
+        //             : Colors.transparent)),
         child: Stack(
+          alignment: Alignment.topCenter,
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  left: sidepadding != null ? sidepadding! : 0.0,
-                  right: sidepadding != null ? sidepadding! : 0.0,
-                  top: topPadding!),
-              child: FutureBuilder<bool>(
-                  future: getSettings(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
-                      return buildLoading(context);
-                    } else {
-                      return Container(
-                        height: 90.h + topPaddingForFirstEntry!,
-                        width: 100.w,
-                        child: BlocBuilder<FeedBloc, FeedState>(
-                          builder: (context, state) {
-                            if (state is FeedInitialState ||
-                                state is FeedLoadingState &&
-                                    _feedItems.isEmpty) {
-                              return buildLoading(context);
-                            } else if (state is FeedLoadedState) {
-                              if (state.feedType == feedType) {
-                                if (state.feedType == "tagSearch") {
-                                  _feedItems.clear();
-                                }
-                                if (_feedItems.isNotEmpty) {
-                                  if (_feedItems.first.link ==
-                                      state.feed.first.link) {
-                                    _feedItems.clear();
-                                  } else {
-                                    _feedItems.removeLast();
-                                  }
-                                }
-                                _feedItems.addAll(state.feed);
+            FutureBuilder<bool>(
+                future: getSettings(),
+                builder: (_, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return buildLoading(context);
+                  } else {
+                    return Container(
+                      height: 90.h + topPaddingForFirstEntry!,
+                      width: MediaQuery.of(context).size.width,
+                      child: BlocBuilder<FeedBloc, FeedState>(
+                        builder: (context, state) {
+                          if (state is FeedInitialState ||
+                              state is FeedLoadingState && _feedItems.isEmpty) {
+                            return buildLoading(context);
+                          } else if (state is FeedLoadedState) {
+                            if (state.feedType == feedType) {
+                              if (state.feedType == "tagSearch") {
+                                _feedItems.clear();
                               }
-                              BlocProvider.of<FeedBloc>(context).isFetching =
-                                  false;
-                            } else if (state is FeedErrorState) {
-                              return buildErrorUi(state.message);
+                              if (_feedItems.isNotEmpty &&
+                                  state.feed.isNotEmpty) {
+                                if (_feedItems.first.link ==
+                                    state.feed.first.link) {
+                                  _feedItems.clear();
+                                } else {
+                                  _feedItems.removeLast();
+                                }
+                              }
+                              _feedItems.addAll(state.feed);
                             }
-                            return ResponsiveLayout(
-                                mobileBody: buildPostListNarrow(
+                            BlocProvider.of<FeedBloc>(context).isFetching =
+                                false;
+                          } else if (state is FeedErrorState) {
+                            return buildErrorUi(state.message);
+                          }
+                          return ResponsiveLayout(
+                              mobileBody: buildPostListNarrow(
+                                _feedItems,
+                                largeFormat,
+                                true,
+                                context,
+                                feedType,
+                              ),
+                              tabletBody: buildPostListTablet(
                                   _feedItems,
                                   largeFormat,
                                   true,
                                   context,
                                   feedType,
-                                ),
-                                tabletBody: buildPostListWide(
-                                    _feedItems,
-                                    largeFormat,
-                                    true,
-                                    context,
-                                    feedType,
-                                    false),
-                                desktopBody: buildPostListWide(
-                                    _feedItems,
-                                    largeFormat,
-                                    true,
-                                    context,
-                                    feedType,
-                                    true));
-                            // if (globals.mobileMode) {
-                            //   return buildPostList(_feedItems, largeFormat,
-                            //       true, context, feedType);
-                            // } else {
-                            //   return buildPostListWeb(_feedItems, largeFormat,
-                            //       true, context, feedType);
-                            // }
-                          },
-                        ),
-                      );
-                    }
-                  }),
-            ),
+                                  tabletCrossAxisCount,
+                                  disablePlayback != null && disablePlayback!
+                                      ? true
+                                      : false,
+                                  hideSpeedDial != null && hideSpeedDial!
+                                      ? true
+                                      : false),
+                              desktopBody: buildPostListDesktop(
+                                  _feedItems,
+                                  largeFormat,
+                                  true,
+                                  context,
+                                  feedType,
+                                  desktopCrossAxisCount,
+                                  disablePlayback != null && disablePlayback!
+                                      ? true
+                                      : false,
+                                  hideSpeedDial != null && hideSpeedDial!
+                                      ? true
+                                      : false));
+                          // if (globals.mobileMode) {
+                          //   return buildPostList(_feedItems, largeFormat,
+                          //       true, context, feedType);
+                          // } else {
+                          //   return buildPostListWeb(_feedItems, largeFormat,
+                          //       true, context, feedType);
+                          // }
+                        },
+                      ),
+                    );
+                  }
+                }),
             ResponsiveLayout(
                 mobileBody: TopGradient(feedType: feedType),
                 tabletBody: Container(),
@@ -234,6 +258,7 @@ class FeedList extends StatelessWidget {
                   _scrollController.position.maxScrollExtent &&
               !BlocProvider.of<FeedBloc>(context).isFetching &&
               feedType != "UserFeed" &&
+              feedType != "NewUserMoments" &&
               feedType != "tagSearch") {
             BlocProvider.of<FeedBloc>(context)
               ..isFetching = true
@@ -247,6 +272,7 @@ class FeedList extends StatelessWidget {
                   _scrollController.position.minScrollExtent &&
               !BlocProvider.of<FeedBloc>(context).isFetching &&
               feedType != "UserFeed" &&
+              feedType != "NewUserMoments" &&
               feedType != "tagSearch") {
             BlocProvider.of<FeedBloc>(context)
               ..isFetching = true
@@ -284,6 +310,7 @@ class FeedList extends StatelessWidget {
                         ? bottompadding!
                         : 2.0),
                 child: PostListCard(
+                  showDTCValue: true,
                   width: 100.w,
                   heightPerEntry: heightPerEntry!,
                   largeFormat: largeFormat,
@@ -344,9 +371,16 @@ class FeedList extends StatelessWidget {
     );
   }
 
-  Widget buildPostListWide(List<FeedItem> feed, bool bigThumbnail,
-      bool showAuthor, BuildContext context, String gpostType, bool desktop) {
-    if (feed.length < 20) {
+  Widget buildPostListDesktop(
+      List<FeedItem> feed,
+      bool bigThumbnail,
+      bool showAuthor,
+      BuildContext context,
+      String gpostType,
+      int desktopCrossAxisCount,
+      bool disablePlayback,
+      bool hideSpeedDial) {
+    if (feed.length > 0 && feed.length < 20) {
       BlocProvider.of<FeedBloc>(context)
         ..isFetching = true
         ..add(FetchFeedEvent(
@@ -355,13 +389,94 @@ class FeedList extends StatelessWidget {
             fromAuthor: feed[feed.length - 1].author,
             fromLink: feed[feed.length - 1].link));
     }
-    return Padding(
-      padding: const EdgeInsets.only(top: 30.0),
+    return MasonryGridView.count(
+      key: new PageStorageKey(gpostType + 'listview'),
+      addAutomaticKeepAlives: true,
+      crossAxisCount: desktopCrossAxisCount,
+      itemCount: feed.length,
+      padding: EdgeInsets.zero,
+      controller: _scrollController
+        ..addListener(() {
+          if (_scrollController.offset >=
+                  _scrollController.position.maxScrollExtent &&
+              !BlocProvider.of<FeedBloc>(context).isFetching &&
+              feedType != "UserFeed" &&
+              feedType != "NewUserMoments" &&
+              feedType != "tagSearch") {
+            BlocProvider.of<FeedBloc>(context)
+              ..isFetching = true
+              ..add(FetchFeedEvent(
+                  //feedType: widget.feedType,
+                  feedType: feedType,
+                  fromAuthor: feed[feed.length - 1].author,
+                  fromLink: feed[feed.length - 1].link));
+          }
+          if (_scrollController.offset <=
+                  _scrollController.position.minScrollExtent &&
+              !BlocProvider.of<FeedBloc>(context).isFetching &&
+              feedType != "UserFeed" &&
+              feedType != "NewUserMoments" &&
+              feedType != "tagSearch") {
+            BlocProvider.of<FeedBloc>(context)
+              ..isFetching = true
+              ..add(FetchFeedEvent(
+                //feedType: widget.feedType,
+                feedType: feedType,
+              ));
+          }
+        }),
+      itemBuilder: (BuildContext _, int pos) => PostListCardDesktop(
+        blur: (_nsfwMode == 'Blur' && feed[pos].jsonString?.nsfw == 1) ||
+                (_hiddenMode == 'Blur' && feed[pos].summaryOfVotes < 0)
+            ? true
+            : false,
+        defaultCommentVotingWeight: _defaultCommentVotingWeight!,
+        defaultPostVotingWeight: _defaultPostVotingWeight!,
+        defaultPostVotingTip: _defaultPostVotingTip!,
+        fixedDownvoteActivated: _fixedDownvoteActivated!,
+        fixedDownvoteWeight: _fixedDownvoteWeight!,
+        autoPauseVideoOnPopup: _autoPauseVideoOnPopup!,
+        feedItem: feed[pos],
+        crossAxisCount: desktopCrossAxisCount,
+        width: MediaQuery.of(context).size.width * 0.2,
+        deactivatePlayback: disablePlayback,
+        hideSpeedDial: hideSpeedDial,
+      ),
+
+      //staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
+      mainAxisSpacing: 4.0,
+      crossAxisSpacing: 4.0,
+    );
+
+    //Text(pos.toString())
+  }
+
+  Widget buildPostListTablet(
+      List<FeedItem> feed,
+      bool bigThumbnail,
+      bool showAuthor,
+      BuildContext context,
+      String gpostType,
+      int tabletCrossAxisCount,
+      bool disablePlayback,
+      bool hideSpeedDial) {
+    if (feed.length > 0 && feed.length < 20) {
+      BlocProvider.of<FeedBloc>(context)
+        ..isFetching = true
+        ..add(FetchFeedEvent(
+            //feedType: widget.feedType,
+            feedType: feedType,
+            fromAuthor: feed[feed.length - 1].author,
+            fromLink: feed[feed.length - 1].link));
+    }
+    return Scrollbar(
+      thumbVisibility: true,
+      controller: _scrollController,
       child: MasonryGridView.count(
         // padding: EdgeInsets.only(top: 19.h),
         key: new PageStorageKey(gpostType + 'listview'),
         addAutomaticKeepAlives: true,
-        crossAxisCount: desktop ? 4 : 2,
+        crossAxisCount: tabletCrossAxisCount,
         itemCount: feed.length,
         controller: _scrollController
           ..addListener(() {
@@ -369,6 +484,7 @@ class FeedList extends StatelessWidget {
                     _scrollController.position.maxScrollExtent &&
                 !BlocProvider.of<FeedBloc>(context).isFetching &&
                 feedType != "UserFeed" &&
+                feedType != "NewUserMoments" &&
                 feedType != "tagSearch") {
               BlocProvider.of<FeedBloc>(context)
                 ..isFetching = true
@@ -382,6 +498,7 @@ class FeedList extends StatelessWidget {
                     _scrollController.position.minScrollExtent &&
                 !BlocProvider.of<FeedBloc>(context).isFetching &&
                 feedType != "UserFeed" &&
+                feedType != "NewUserMoments" &&
                 feedType != "tagSearch") {
               BlocProvider.of<FeedBloc>(context)
                 ..isFetching = true
@@ -392,17 +509,22 @@ class FeedList extends StatelessWidget {
             }
           }),
         itemBuilder: (BuildContext context, int pos) => PostListCardDesktop(
-            blur: (_nsfwMode == 'Blur' && feed[pos].jsonString?.nsfw == 1) ||
-                    (_hiddenMode == 'Blur' && feed[pos].summaryOfVotes < 0)
-                ? true
-                : false,
-            defaultCommentVotingWeight: _defaultCommentVotingWeight!,
-            defaultPostVotingWeight: _defaultPostVotingWeight!,
-            defaultPostVotingTip: _defaultPostVotingTip!,
-            fixedDownvoteActivated: _fixedDownvoteActivated!,
-            fixedDownvoteWeight: _fixedDownvoteWeight!,
-            autoPauseVideoOnPopup: _autoPauseVideoOnPopup!,
-            feedItem: feed[pos]),
+          blur: (_nsfwMode == 'Blur' && feed[pos].jsonString?.nsfw == 1) ||
+                  (_hiddenMode == 'Blur' && feed[pos].summaryOfVotes < 0)
+              ? true
+              : false,
+          defaultCommentVotingWeight: _defaultCommentVotingWeight!,
+          defaultPostVotingWeight: _defaultPostVotingWeight!,
+          defaultPostVotingTip: _defaultPostVotingTip!,
+          fixedDownvoteActivated: _fixedDownvoteActivated!,
+          fixedDownvoteWeight: _fixedDownvoteWeight!,
+          autoPauseVideoOnPopup: _autoPauseVideoOnPopup!,
+          feedItem: feed[pos],
+          crossAxisCount: tabletCrossAxisCount,
+          width: MediaQuery.of(context).size.width * 0.5,
+          deactivatePlayback: disablePlayback,
+          hideSpeedDial: hideSpeedDial,
+        ),
 
         //staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
         mainAxisSpacing: 4.0,
@@ -459,6 +581,7 @@ class PostListCard extends StatefulWidget {
   final String publishDate;
   final Duration duration;
   final String dtcValue;
+  final bool showDTCValue;
   final String videoUrl;
   final String videoSource;
   final bool alreadyVoted;
@@ -496,6 +619,7 @@ class PostListCard extends StatefulWidget {
     required this.publishDate,
     required this.duration,
     required this.dtcValue,
+    required this.showDTCValue,
     required this.videoUrl,
     required this.videoSource,
     required this.alreadyVoted,
@@ -534,6 +658,8 @@ class _PostListCardState extends State<PostListCard>
         create: (BuildContext context) =>
             UserBloc(repository: UserRepositoryImpl()),
         child: PostListCardLarge(
+          showDTCValue: true,
+          width: 90.w,
           blur: widget.blur,
           thumbnailUrl: widget.thumbnailUrl,
           title: widget.title,
@@ -541,7 +667,7 @@ class _PostListCardState extends State<PostListCard>
           author: widget.author,
           link: widget.link,
           publishDate: widget.publishDate,
-          duration: widget.duration,
+          dur: widget.duration,
           dtcValue: widget.dtcValue,
           videoUrl: widget.videoUrl,
           videoSource: widget.videoSource,
@@ -561,11 +687,10 @@ class _PostListCardState extends State<PostListCard>
         ),
       );
     } else {
-      return
           // Padding(
           //   padding: EdgeInsets.only(left: 5.w),
           //   child:
-          PostListCardNarrow(
+      return PostListCardNarrow(
         // width: widget.width * 0.85,
         width: widget.width,
         height: widget.heightPerEntry,
@@ -578,13 +703,13 @@ class _PostListCardState extends State<PostListCard>
         publishDate: widget.publishDate,
         duration: widget.duration,
         dtcValue: widget.dtcValue,
+        showDTCValue: widget.showDTCValue,
         indexOfList: widget.indexOfList,
         enableNavigation: widget.enableNavigation,
         itemSelectedCallback: widget.itemSelectedCallback,
         userPage: widget.feedType == "UserFeed",
         //),
       );
-      SizedBox(height: 0);
     }
   }
 }

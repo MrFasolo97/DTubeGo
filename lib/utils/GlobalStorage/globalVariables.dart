@@ -6,5 +6,5 @@ String currentApiNode = "unknown";
 bool mobileMode = true;
 bool enableAdvertisements = true;
 int scrolledPostsBetweenAds = 0;
-int minimumPostsBetweenAds = 8;
+int minimumPostsBetweenAds = 12;
 bool eulaRequired = false;

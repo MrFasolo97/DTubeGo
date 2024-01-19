@@ -1,7 +1,6 @@
 import 'package:ovh.fso.dtubego/ui/pages/settings/APINodeSelection.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart'
-    as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -101,189 +100,168 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
 
   Future<bool> showExitPopup() async {
     return await showDialog(
-          //show confirm dialogue
-          //the return value will be from "Yes" or "No" options
-          context: context,
-          builder: (context) => PopUpDialogWithTitleLogo(
-            showTitleWidget: true,
-            callbackOK: () {},
-            child: SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
+      //show confirm dialogue
+      //the return value will be from "Yes" or "No" options
+      context: context,
+      builder: (context) => PopUpDialogWithTitleLogo(
+        showTitleWidget: true,
+        callbackOK: () {},
+        child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      'Do you really want to leave the settings without saving?',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.center),
+                ),
+                SizedBox(height: 2.h),
+                SizedBox(height: 2.h),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                        'Do you really want to leave the settings without saving?',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                        textAlign: TextAlign.center),
-                  ),
-                  SizedBox(height: 2.h),
-                  SizedBox(height: 2.h),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                            child: InkWell(
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      left: 4.w, top: 20.0, bottom: 20.0),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: globalRed,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(20.0),
-                                      )),
-                                  child: Text(
-                                    "Yes",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium,
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ),
-                                onTap: () {
-                                  Navigator.of(context).pop(true);
-                                })),
-                        SizedBox(width: 2.w),
-                        Expanded(
-                          child: InkWell(
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    top: 20.0, bottom: 20.0, right: 2.w),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: globalRed,
-                                  borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(20.0)),
-                                ),
-                                child: Text(
-                                  "Save",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium,
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                              onTap: () {
-                                saveSettings();
-                                Navigator.of(context).pop(true);
-                              }),
+                InkWell(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 4.w, top: 20.0, bottom: 20.0, right: 26.w),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: globalRed,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20.0),
                         )
-                      ])
-                ])),
-            titleWidget:
-                Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
-            titleWidgetPadding: 10.h,
-            titleWidgetSize: 20.w,
-          ),
-        ) ??
+                      ),
+                      child: Text(
+                        "Yes",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop(true);
+                    }),
+                  InkWell(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0, left: 4.w, right: 2.w),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: globalRed,
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0)),
+                        ),
+                        child: Text(
+                          "Save",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      onTap: () {
+                        saveSettings();
+                        Navigator.of(context).pop(true);
+                      }),
+              ])
+              ])
+        ),
+        titleWidget:
+        Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
+        titleWidgetPadding: 10.h,
+        titleWidgetSize: 20.w,
+      ),
+    ) ??
         false; //if showDialouge had returned null, then return false
   }
 
+
   Future<bool> showAdsPopup() async {
     return await showDialog(
-          //show confirm dialogue
-          //the return value will be from "Yes" or "No" options
-          context: context,
-          builder: (context) => PopUpDialogWithTitleLogo(
-            showTitleWidget: true,
-            callbackOK: () {},
-            child: SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                        'Those anonymous ads are supporting economically the DTubeGo development and DTube ecosystem. Are you sure to disable them?',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                        textAlign: TextAlign.center),
-                  ),
-                  SizedBox(height: 2.h),
-                  SizedBox(height: 2.h),
-                  Flex(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    direction: Axis.horizontal,
-                    clipBehavior: Clip.hardEdge,
-                    children: [
-                      InkWell(
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(
-                                top: 20.0,
-                                bottom: 20.0,
-                                right: 22.w,
-                                left: 9.w),
-                            decoration: BoxDecoration(
-                              color: globalRed,
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20.0)),
-                            ),
-                            child: Text(
-                              "Yes",
-                              style: Theme.of(context).textTheme.headlineMedium,
-                              textAlign: TextAlign.right,
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).pop(true);
-                          }),
-                      InkWell(
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(
-                                top: 20.0,
-                                bottom: 20.0,
-                                left: 22.w,
-                                right: 9.w),
-                            decoration: BoxDecoration(
-                              color: globalRed,
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(20.0)),
-                            ),
-                            child: Text(
-                              "No",
-                              style: Theme.of(context).textTheme.headlineMedium,
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).pop(false);
-                          }),
-                    ],
-                  )
-                ])),
-            titleWidget:
-                Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
-            titleWidgetPadding: 10.h,
-            titleWidgetSize: 20.w,
-          ),
-        ) ??
+      //show confirm dialogue
+      //the return value will be from "Yes" or "No" options
+      context: context,
+      builder: (context) => PopUpDialogWithTitleLogo(
+        showTitleWidget: true,
+        callbackOK: () {},
+        child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      'Those anonymous ads are supporting economically the DTubeGo development and DTube ecosystem. Are you sure to disable them?',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.center),
+                ),
+                SizedBox(height: 2.h),
+                SizedBox(height: 2.h),
+                Flex(mainAxisAlignment: MainAxisAlignment.spaceBetween, direction: Axis.horizontal, clipBehavior: Clip.hardEdge, children: [InkWell(
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 22.w, left: 9.w),
+                      decoration: BoxDecoration(
+                        color: globalRed,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20.0)),
+                      ),
+                      child: Text(
+                        "Yes",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop(true);
+                    }),
+                InkWell(
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0, left: 22.w, right: 9.w),
+                      decoration: BoxDecoration(
+                        color: globalRed,
+                        borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(20.0)),
+                      ),
+                      child: Text(
+                        "No",
+                        style: Theme.of(context).textTheme.headlineMedium,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop(false);
+                    }),
+              ],
+            )])),
+        titleWidget:
+        Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
+        titleWidgetPadding: 10.h,
+        titleWidgetSize: 20.w,
+      ),
+    ) ??
         false; //if showDialouge had returned null, then return false
   }
 
   Future<bool> showAdsThankYouPopup() async {
     return await showDialog(
-          //show confirm dialogue
-          //the return value will be from "Yes" or "No" options
-          context: context,
-          builder: (context) => PopUpDialogWithTitleLogo(
-            showTitleWidget: true,
-            callbackOK: () {},
-            child: SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
+      //show confirm dialogue
+      //the return value will be from "Yes" or "No" options
+      context: context,
+      builder: (context) => PopUpDialogWithTitleLogo(
+        showTitleWidget: true,
+        callbackOK: () {},
+        child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Thank you for your support!',
+                    child: Text(
+                        'Thank you for your support!',
                         style: Theme.of(context).textTheme.headlineSmall,
                         textAlign: TextAlign.center),
                   ),
@@ -292,13 +270,13 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                   InkWell(
                       child: Container(
                         alignment: Alignment.center,
-                        padding: EdgeInsets.only(
-                            top: 20.0, bottom: 20.0, right: 22.w, left: 10.w),
+                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0, right: 22.w, left: 10.w),
                         decoration: BoxDecoration(
                           color: globalRed,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(20.0),
-                              bottomRight: Radius.circular(20.0)),
+                              bottomRight: Radius.circular(20.0)
+                          ),
                         ),
                         child: Text(
                           "Ok",
@@ -308,14 +286,13 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                       ),
                       onTap: () {
                         Navigator.of(context).pop(true);
-                      })
-                ])),
-            titleWidget:
-                Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
-            titleWidgetPadding: 10.h,
-            titleWidgetSize: 20.w,
-          ),
-        ) ??
+                      })])),
+        titleWidget:
+        Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
+        titleWidgetPadding: 10.h,
+        titleWidgetSize: 20.w,
+      ),
+    ) ??
         false; //if showDialouge had returned null, then return false
   }
 
@@ -363,7 +340,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                   child: GestureDetector(
                     child: FaIcon(FontAwesomeIcons.floppyDisk),
                     onTap: () async {
-                      saveSettings();
+                        saveSettings();
                     },
                   ),
                 ),
@@ -850,7 +827,7 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                       Switch(
                                         value: _enableAdvertisements,
                                         onChanged: (value) async {
-                                          if (value) {
+                                          if(value) {
                                             await showAdsThankYouPopup();
                                             setState(() {
                                               _enableAdvertisements = value;
@@ -911,339 +888,354 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
 
                         // AVALON SETTINGS
                         SingleChildScrollView(
-                            child: Column(children: [
-                          SizedBox(height: 16),
-                          DTubeFormCard(
-                              waitBeforeFadeIn: Duration(milliseconds: 200),
-                              avoidAnimation: _visitedTabs.contains(1) ||
-                                  globals.disableAnimations,
-                              childs: [
-                                ShowHintIcon(
-                                  onPressed: () {
-                                    setState(() {
-                                      _showAPINodeHints = !_showAPINodeHints;
-                                    });
-                                  },
-                                  alignment: Alignment.topRight,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 1.h),
-                                  child: Text("API Node:",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
+                          child: Column(
+                            children: [
+                              SizedBox(height: 16),
+                            DTubeFormCard(
+                                waitBeforeFadeIn: Duration(milliseconds: 200),
+                                avoidAnimation: _visitedTabs.contains(1) ||
+                                    globals.disableAnimations,
+                                childs: [
+                                  ShowHintIcon(
+                                    onPressed: () {
+                                      setState(() {
+                                        _showAPINodeHints =
+                                        !_showAPINodeHints;
+                                      });
+                                    },
+                                    alignment: Alignment.topRight,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 1.h),
+                                    child: Text("API Node:",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall),
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: APINodeSelection(),
-                                    ),
-                                  ],
-                                ),
-                                VisibilityHintText(
-                                    showHint: _showAPINodeHints,
-                                    hintText:
-                                        "Here you can chose the avalon API node to use to retrieve blockchain data and make transactions for this session, the default value is the automatically chosen API node."),
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: APINodeSelection(),
+                                      ),
+                                    ],
+                                  ),
+                                  VisibilityHintText(
+                                      showHint: _showAPINodeHints,
+                                      hintText:
+                                      "Here you can chose the avalon API node to use to retrieve blockchain data and make transactions for this session, the default value is the automatically chosen API node."
+                                  ),
                               ]),
-                          DTubeFormCard(
-                            waitBeforeFadeIn: Duration(milliseconds: 200),
-                            avoidAnimation: _visitedTabs.contains(1) ||
-                                globals.disableAnimations,
-                            childs: [
-                              Stack(children: [
-                                ShowHintIcon(
-                                  onPressed: () {
-                                    setState(() {
-                                      _showVotingWeightHints =
-                                          !_showVotingWeightHints;
-                                    });
-                                  },
-                                  alignment: Alignment.topRight,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 1.h),
-                                  child: Text("Voting weight",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall),
-                                ),
-                              ]),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text("default voting weight (posts):",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge)),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Slider(
-                                      min: 1.0,
-                                      max: 100.0,
-                                      value: _defaultVote,
-                                      label:
-                                          _defaultVote.floor().toString() + "%",
-                                      divisions: 20,
-                                      inactiveColor: globalBlue,
-                                      activeColor: globalRed,
-                                      onChanged: (dynamic value) {
+                              DTubeFormCard(
+                                waitBeforeFadeIn: Duration(milliseconds: 200),
+                                avoidAnimation: _visitedTabs.contains(1) ||
+                                    globals.disableAnimations,
+                                childs: [
+                                  Stack(children: [
+                                    ShowHintIcon(
+                                      onPressed: () {
                                         setState(() {
-                                          _defaultVote = value;
-                                          //  widget.justSaved = false;
+                                          _showVotingWeightHints =
+                                              !_showVotingWeightHints;
                                         });
                                       },
+                                      alignment: Alignment.topRight,
                                     ),
-                                  ),
-                                  Text(
-                                    _defaultVote.floor().toString() + "%",
-                                    style: TextStyle(fontSize: 18),
-                                  )
-                                ],
-                              ),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                      "default voting weight (comments):",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge)),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Slider(
-                                      min: 0.0,
-                                      max: 100.0,
-                                      value: _defaultVoteComments,
-                                      label: _defaultVoteComments
-                                              .floor()
-                                              .toString() +
-                                          "%",
-                                      divisions: 20,
-                                      inactiveColor: globalBlue,
-                                      activeColor: globalRed,
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _defaultVoteComments = value;
-                                          //  widget.justSaved = false;
-                                        });
-                                      },
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 1.h),
+                                      child: Text("Voting weight",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall),
                                     ),
-                                  ),
-                                  Text(
-                                    _defaultVoteComments.floor().toString() +
-                                        "%",
-                                    style: TextStyle(fontSize: 18),
-                                  )
-                                ],
-                              ),
-                              VisibilityHintText(
-                                showHint: _showVotingWeightHints,
-                                hintText:
-                                    "Those settings set the default setting of the vote sliders. The voting weight defines how much of your VP you want to spend for the vote.",
-                              ),
-                            ],
-                          ),
-                          DTubeFormCard(
-                            waitBeforeFadeIn: Duration(milliseconds: 400),
-                            avoidAnimation: _visitedTabs.contains(1) ||
-                                globals.disableAnimations,
-                            childs: [
-                              Stack(children: [
-                                ShowHintIcon(
-                                  onPressed: () {
-                                    setState(() {
-                                      _showVotingTipHints =
-                                          !_showVotingTipHints;
-                                    });
-                                  },
-                                  alignment: Alignment.topRight,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 1.h),
-                                  child: Text("Vote tipping",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall),
-                                ),
-                              ]),
-                              Text("default voting tip (posts):",
-                                  style: Theme.of(context).textTheme.bodyLarge),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Slider(
-                                      min: 0.0,
-                                      max: 100.0,
-                                      value: _defaultTip,
-                                      label:
-                                          _defaultTip.floor().toString() + "%",
-                                      divisions: 20,
-                                      inactiveColor: globalBlue,
-                                      activeColor: globalRed,
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _defaultTip = value;
-                                          // widget.justSaved = false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  Text(
-                                    _defaultTip.floor().toString() + "%",
-                                    style: TextStyle(fontSize: 18),
-                                  )
-                                ],
-                              ),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text("default voting tip (comments):",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge)),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Slider(
-                                      min: 0.0,
-                                      max: 100.0,
-                                      value: _defaultTipComments,
-                                      label: _defaultTipComments
-                                              .floor()
-                                              .toString() +
-                                          "%",
-                                      divisions: 20,
-                                      inactiveColor: globalBlue,
-                                      activeColor: globalRed,
-                                      onChanged: (dynamic value) {
-                                        setState(() {
-                                          _defaultTipComments = value;
-                                          // widget.justSaved = false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  Text(
-                                    _defaultTipComments.floor().toString() +
-                                        "%",
-                                    style: TextStyle(fontSize: 18),
-                                  )
-                                ],
-                              ),
-                              VisibilityHintText(
-                                showHint: _showVotingTipHints,
-                                hintText:
-                                    "Those settings set the default setting of the tipping sliders. Every vote can generate DTC for you as curation rewards. By tipping you give away x % of those rewards to the content creator you are voting on.",
-                              ),
-                            ],
-                          ),
-                          DTubeFormCard(
-                            waitBeforeFadeIn: Duration(milliseconds: 400),
-                            avoidAnimation: _visitedTabs.contains(1) ||
-                                globals.disableAnimations,
-                            childs: [
-                              Stack(children: [
-                                ShowHintIcon(
-                                  onPressed: () {
-                                    setState(() {
-                                      _showDefaultDownvoteHints =
-                                          !_showDefaultDownvoteHints;
-                                    });
-                                  },
-                                  alignment: Alignment.topRight,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 1.h),
-                                  child: Text("Downvotes",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall),
-                                ),
-                              ]),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                      value: _downvoteFixed,
-                                      onChanged: (bool) {
-                                        setState(() {
-                                          _downvoteFixed = !_downvoteFixed;
-                                        });
-                                      }),
-                                  Text("downvote with a FIXED weight",
-                                      style:
-                                          Theme.of(context).textTheme.bodyLarge)
-                                ],
-                              ),
-                              _downvoteFixed
-                                  ? Column(
-                                      children: [
-                                        Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                                "default downvote weight:",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge)),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child: Slider(
-                                                min: 0.1,
-                                                max: 100.0,
-                                                value: _downvoteFixedAmount,
-                                                label: _downvoteFixedAmount
-                                                        .floor()
-                                                        .toString() +
-                                                    "%",
-                                                divisions: 20,
-                                                inactiveColor: globalBlue,
-                                                activeColor: globalRed,
-                                                onChanged: (dynamic value) {
-                                                  setState(() {
-                                                    _downvoteFixedAmount =
-                                                        value;
-                                                    // widget.justSaved = false;
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                            Text(
-                                              _downvoteFixedAmount
-                                                      .floor()
-                                                      .toString() +
+                                  ]),
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                          "default voting weight (posts):",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge)),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Slider(
+                                          min: 1.0,
+                                          max: 100.0,
+                                          value: _defaultVote,
+                                          label:
+                                              _defaultVote.floor().toString() +
                                                   "%",
-                                              style: TextStyle(fontSize: 18),
-                                            )
-                                          ],
+                                          divisions: 20,
+                                          inactiveColor: globalBlue,
+                                          activeColor: globalRed,
+                                          onChanged: (dynamic value) {
+                                            setState(() {
+                                              _defaultVote = value;
+                                              //  widget.justSaved = false;
+                                            });
+                                          },
                                         ),
-                                      ],
-                                    )
-                                  : Container(),
-                              VisibilityHintText(
-                                showHint: _showDefaultDownvoteHints,
-                                hintText:
-                                    "If you activate the fixed downvote setting you will not be able to set the downvote weight anymore. This setting does not affect the user experience inside of the app. All downvoted posts will get hidden automatically for you. ",
+                                      ),
+                                      Text(
+                                        _defaultVote.floor().toString() + "%",
+                                        style: TextStyle(fontSize: 18),
+                                      )
+                                    ],
+                                  ),
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                          "default voting weight (comments):",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge)),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Slider(
+                                          min: 0.0,
+                                          max: 100.0,
+                                          value: _defaultVoteComments,
+                                          label: _defaultVoteComments
+                                                  .floor()
+                                                  .toString() +
+                                              "%",
+                                          divisions: 20,
+                                          inactiveColor: globalBlue,
+                                          activeColor: globalRed,
+                                          onChanged: (dynamic value) {
+                                            setState(() {
+                                              _defaultVoteComments = value;
+                                              //  widget.justSaved = false;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      Text(
+                                        _defaultVoteComments
+                                                .floor()
+                                                .toString() +
+                                            "%",
+                                        style: TextStyle(fontSize: 18),
+                                      )
+                                    ],
+                                  ),
+                                  VisibilityHintText(
+                                    showHint: _showVotingWeightHints,
+                                    hintText:
+                                        "Those settings set the default setting of the vote sliders. The voting weight defines how much of your VP you want to spend for the vote.",
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ])),
+                              DTubeFormCard(
+                                waitBeforeFadeIn: Duration(milliseconds: 400),
+                                avoidAnimation: _visitedTabs.contains(1) ||
+                                    globals.disableAnimations,
+                                childs: [
+                                  Stack(children: [
+                                    ShowHintIcon(
+                                      onPressed: () {
+                                        setState(() {
+                                          _showVotingTipHints =
+                                              !_showVotingTipHints;
+                                        });
+                                      },
+                                      alignment: Alignment.topRight,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 1.h),
+                                      child: Text("Vote tipping",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall),
+                                    ),
+                                  ]),
+                                  Text("default voting tip (posts):",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Slider(
+                                          min: 0.0,
+                                          max: 100.0,
+                                          value: _defaultTip,
+                                          label:
+                                              _defaultTip.floor().toString() +
+                                                  "%",
+                                          divisions: 20,
+                                          inactiveColor: globalBlue,
+                                          activeColor: globalRed,
+                                          onChanged: (dynamic value) {
+                                            setState(() {
+                                              _defaultTip = value;
+                                              // widget.justSaved = false;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      Text(
+                                        _defaultTip.floor().toString() + "%",
+                                        style: TextStyle(fontSize: 18),
+                                      )
+                                    ],
+                                  ),
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                          "default voting tip (comments):",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge)),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Slider(
+                                          min: 0.0,
+                                          max: 100.0,
+                                          value: _defaultTipComments,
+                                          label: _defaultTipComments
+                                                  .floor()
+                                                  .toString() +
+                                              "%",
+                                          divisions: 20,
+                                          inactiveColor: globalBlue,
+                                          activeColor: globalRed,
+                                          onChanged: (dynamic value) {
+                                            setState(() {
+                                              _defaultTipComments = value;
+                                              // widget.justSaved = false;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      Text(
+                                        _defaultTipComments.floor().toString() +
+                                            "%",
+                                        style: TextStyle(fontSize: 18),
+                                      )
+                                    ],
+                                  ),
+                                  VisibilityHintText(
+                                    showHint: _showVotingTipHints,
+                                    hintText:
+                                        "Those settings set the default setting of the tipping sliders. Every vote can generate DTC for you as curation rewards. By tipping you give away x % of those rewards to the content creator you are voting on.",
+                                  ),
+                                ],
+                              ),
+                              DTubeFormCard(
+                                waitBeforeFadeIn: Duration(milliseconds: 400),
+                                avoidAnimation: _visitedTabs.contains(1) ||
+                                    globals.disableAnimations,
+                                childs: [
+                                  Stack(children: [
+                                    ShowHintIcon(
+                                      onPressed: () {
+                                        setState(() {
+                                          _showDefaultDownvoteHints =
+                                              !_showDefaultDownvoteHints;
+                                        });
+                                      },
+                                      alignment: Alignment.topRight,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 1.h),
+                                      child: Text("Downvotes",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall),
+                                    ),
+                                  ]),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                          value: _downvoteFixed,
+                                          onChanged: (bool) {
+                                            setState(() {
+                                              _downvoteFixed = !_downvoteFixed;
+                                            });
+                                          }),
+                                      Text("downvote with a FIXED weight",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge)
+                                    ],
+                                  ),
+                                  _downvoteFixed
+                                      ? Column(
+                                          children: [
+                                            Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                    "default downvote weight:",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyLarge)),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Slider(
+                                                    min: 0.1,
+                                                    max: 100.0,
+                                                    value: _downvoteFixedAmount,
+                                                    label: _downvoteFixedAmount
+                                                            .floor()
+                                                            .toString() +
+                                                        "%",
+                                                    divisions: 20,
+                                                    inactiveColor: globalBlue,
+                                                    activeColor: globalRed,
+                                                    onChanged: (dynamic value) {
+                                                      setState(() {
+                                                        _downvoteFixedAmount =
+                                                            value;
+                                                        // widget.justSaved = false;
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                                Text(
+                                                  _downvoteFixedAmount
+                                                          .floor()
+                                                          .toString() +
+                                                      "%",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      : Container(),
+                                  VisibilityHintText(
+                                    showHint: _showDefaultDownvoteHints,
+                                    hintText:
+                                        "If you activate the fixed downvote setting you will not be able to set the downvote weight anymore. This setting does not affect the user experience inside of the app. All downvoted posts will get hidden automatically for you. ",
+                                  ),
+                                ],
+                              ),
+                        ])
+                        ),
                         // POSTING SETTINGS
                         SingleChildScrollView(
                           child: Column(
@@ -1415,104 +1407,110 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextFieldTags(
-                                                initialTags: _hiveDefaultTags,
-                                                textFieldStyler:
-                                                    TextFieldStyler(
-                                                  //These are properties you can tweek for customization
+                                                  initialTags: _hiveDefaultTags,
+                                                  textFieldStyler:
+                                                      TextFieldStyler(
+                                                    //These are properties you can tweek for customization
 
-                                                  // bool textFieldFilled = false,
-                                                  // Icon icon,
-                                                  helperText: _hiveDefaultTags
-                                                          .length
-                                                          .toString() +
-                                                      ' tags (hit space to add tag)\n' +
+                                                    // bool textFieldFilled = false,
+                                                    // Icon icon,
+                                                    helperText: _hiveDefaultTags
+                                                            .length
+                                                            .toString() +
+                                                        ' tags (hit space to add tag)\n' +
+                                                        _hiveDefaultTags
+                                                            .join("\n"),
+                                                    // TextStyle helperStyle,
+                                                    hintText: '',
+                                                    textStyle: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyLarge,
+                                                    // TextStyle hintStyle,
+                                                    // EdgeInsets contentPadding,
+                                                    // Color textFieldFilledColor,
+                                                    // bool isDense = true,
+                                                    // bool textFieldEnabled = true,
+                                                    // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
+                                                    // OutlineInputBorder textFieldFocusedBorder,
+                                                    // OutlineInputBorder textFieldDisabledBorder,
+                                                    // OutlineInputBorder textFieldEnabledBorder
+                                                  ),
+                                                  tagsStyler: TagsStyler(
+                                                    //These are properties you can tweek for customization
+
+                                                    // showHashtag = false,
+                                                    // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
+                                                    // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
+                                                    tagDecoration:
+                                                        BoxDecoration(
+                                                            shape: BoxShape
+                                                                .rectangle,
+                                                            borderRadius:
+                                                                new BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  10.0),
+                                                            ),
+                                                            color: globalRed),
+                                                    tagTextStyle:
+                                                        Theme.of(context)
+                                                            .textTheme
+                                                            .bodyLarge,
+                                                    tagCancelIcon: Icon(
+                                                        Icons.cancel,
+                                                        size: 4.w,
+                                                        color:
+                                                            globalAlmostWhite),
+                                                  ),
+                                                  onTag: (tag) {
+                                                    setState(() {
+                                                      _hiveDefaultTags.add(tag);
+                                                    });
+                                                  },
+                                                  onDelete: (tag) {
+                                                    setState(() {
                                                       _hiveDefaultTags
-                                                          .join("\n"),
-                                                  // TextStyle helperStyle,
-                                                  hintText: '',
-                                                  textStyle: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge,
-                                                  // TextStyle hintStyle,
-                                                  // EdgeInsets contentPadding,
-                                                  // Color textFieldFilledColor,
-                                                  // bool isDense = true,
-                                                  // bool textFieldEnabled = true,
-                                                  // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
-                                                  // OutlineInputBorder textFieldFocusedBorder,
-                                                  // OutlineInputBorder textFieldDisabledBorder,
-                                                  // OutlineInputBorder textFieldEnabledBorder
-                                                ),
-                                                tagsStyler: TagsStyler(
-                                                  //These are properties you can tweek for customization
+                                                          .remove(tag);
+                                                    });
+                                                  },
+                                                  textSeparators: const [
+                                                    ' ',
+                                                    ','
+                                                  ],
+                                                  validator: (tag) {
+                                                    if (_hiveDefaultTags
+                                                            .length ==
+                                                        8) {
+                                                      return "max 8 tags allowed";
+                                                    }
+                                                    if (!RegExp(r'^[a-z]+$')
+                                                        .hasMatch(tag)) {
+                                                      return "only alhabetic characters allowed";
+                                                    }
+                                                    if (_hiveDefaultTags
+                                                        .contains(tag)) {
+                                                      return "tag is already in the list";
+                                                    }
+                                                    if (tag.toLowerCase() ==
+                                                        "dtube") {
+                                                      return "dtube is as default in the list";
+                                                    }
+                                                    return null;
+                                                  },
 
-                                                  // showHashtag = false,
-                                                  // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
-                                                  // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
-                                                  tagDecoration: BoxDecoration(
-                                                      shape: BoxShape.rectangle,
-                                                      borderRadius:
-                                                          new BorderRadius.all(
-                                                        Radius.circular(10.0),
-                                                      ),
-                                                      color: globalRed),
-                                                  tagTextStyle:
-                                                      Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge,
-                                                  tagCancelIcon: Icon(
-                                                      Icons.cancel,
-                                                      size: 4.w,
-                                                      color: globalAlmostWhite),
-                                                ),
-                                                onTag: (tag) {
-                                                  setState(() {
-                                                    _hiveDefaultTags.add(tag);
-                                                  });
-                                                },
-                                                onDelete: (tag) {
-                                                  setState(() {
-                                                    _hiveDefaultTags
-                                                        .remove(tag);
-                                                  });
-                                                },
-                                                textSeparators: const [
-                                                  ' ',
-                                                  ','
-                                                ],
-                                                validator: (tag) {
-                                                  if (_hiveDefaultTags.length ==
-                                                      8) {
-                                                    return "max 8 tags allowed";
-                                                  }
-                                                  if (!RegExp(r'^[a-z]+$')
-                                                      .hasMatch(tag)) {
-                                                    return "only alhabetic characters allowed";
-                                                  }
-                                                  if (_hiveDefaultTags
-                                                      .contains(tag)) {
-                                                    return "tag is already in the list";
-                                                  }
-                                                  if (tag.toLowerCase() ==
-                                                      "dtube") {
-                                                    return "dtube is as default in the list";
-                                                  }
-                                                  return null;
-                                                },
-
-                                                // TextFormField(
-                                                //   controller:
-                                                //       _hiveDefaultTagsController,
-                                                //   cursorColor: globalRed,
-                                                //   decoration: new InputDecoration(
-                                                //       labelText:
-                                                //           "hive tags (space-separated):"),
-                                                //   maxLines: 1,
-                                                //   style: Theme.of(context)
-                                                //       .textTheme
-                                                //       .bodyText1,
-                                                // ),
-                                              ),
+                                                    // TextFormField(
+                                                    //   controller:
+                                                    //       _hiveDefaultTagsController,
+                                                    //   cursorColor: globalRed,
+                                                    //   decoration: new InputDecoration(
+                                                    //       labelText:
+                                                    //           "hive tags (space-separated):"),
+                                                    //   maxLines: 1,
+                                                    //   style: Theme.of(context)
+                                                    //       .textTheme
+                                                    //       .bodyText1,
+                                                    // ),
+                                                  ),
                                             )
                                           ],
                                         ),
@@ -2149,44 +2147,64 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
 
   void saveSettings() {
     Map<String, String> newSettings = {
-      sec.settingKey_defaultVotingWeight: _defaultVote.toString(),
+      sec.settingKey_defaultVotingWeight:
+      _defaultVote.toString(),
       sec.settingKey_defaultVotingWeightComments:
-          _defaultVoteComments.toString(),
+      _defaultVoteComments.toString(),
       sec.settingKey_defaultVotingTip: _defaultTip.toString(),
-      sec.settingKey_defaultVotingTipComments: _defaultTipComments.toString(),
+      sec.settingKey_defaultVotingTipComments:
+      _defaultTipComments.toString(),
       sec.settingKey_showHidden: _showHidden,
       sec.settingKey_showNSFW: _showNsfw,
-      sec.settingKey_templateTitle: _templateTitleController.value.text,
-      sec.settingKey_templateBody: _templateBodyController.value.text,
-      sec.settingKey_templateTag: _templateTagController.value.text,
+      sec.settingKey_templateTitle:
+      _templateTitleController.value.text,
+      sec.settingKey_templateBody:
+      _templateBodyController.value.text,
+      sec.settingKey_templateTag:
+      _templateTagController.value.text,
       sec.settingKey_imageUploadService: _imageUploadProvider,
-      sec.settingKey_DefaultUploadNSFW: _defaultUploadNSFW.toString(),
-      sec.settingKey_DefaultUploadOC: _defaultUploadOC.toString(),
-      sec.settingKey_DefaultUploadUnlist: _defaultUploadUnlist.toString(),
-      sec.settingKey_DefaultUploadCrosspost: _defaultUploadCrossPost.toString(),
-      sec.settingKey_DefaultMomentNSFW: _defaultMomentsNSFW.toString(),
-      sec.settingKey_DefaultMomentOC: _defaultMomentsOC.toString(),
-      sec.settingKey_DefaultMomentUnlist: _defaultMomentsUnlist.toString(),
+      sec.settingKey_DefaultUploadNSFW:
+      _defaultUploadNSFW.toString(),
+      sec.settingKey_DefaultUploadOC:
+      _defaultUploadOC.toString(),
+      sec.settingKey_DefaultUploadUnlist:
+      _defaultUploadUnlist.toString(),
+      sec.settingKey_DefaultUploadCrosspost:
+      _defaultUploadCrossPost.toString(),
+      sec.settingKey_DefaultMomentNSFW:
+      _defaultMomentsNSFW.toString(),
+      sec.settingKey_DefaultMomentOC:
+      _defaultMomentsOC.toString(),
+      sec.settingKey_DefaultMomentUnlist:
+      _defaultMomentsUnlist.toString(),
       sec.settingKey_DefaultMomentCrosspost:
-          _defaultMomentsCrossPost.toString(),
+      _defaultMomentsCrossPost.toString(),
       sec.settingKey_DefaultUploadVotingWeigth:
-          _defaultUploadVotingWeight.toString(),
+      _defaultUploadVotingWeight.toString(),
       sec.settingKey_DefaultMomentVotingWeigth:
-          _defaultMomentVotingWeight.toString(),
-      sec.settingKey_momentTitle: _momentTitleController.value.text,
-      sec.settingKey_momentBody: _momentBodyController.value.text,
+      _defaultMomentVotingWeight.toString(),
+      sec.settingKey_momentTitle:
+      _momentTitleController.value.text,
+      sec.settingKey_momentBody:
+      _momentBodyController.value.text,
       sec.settingKey_hiveSignerDefaultCommunity:
-          _hiveDefaultCommunityController.value.text,
-      sec.settingKey_hiveSignerDefaultTags: _hiveDefaultTags.join(","),
-      sec.settingKey_FixedDownvoteActivated: _downvoteFixed.toString(),
-      sec.settingKey_FixedDownvoteWeight: _downvoteFixedAmount.toString(),
-      sec.settingKey_videoAutoPause: _videoAutoPause.toString(),
-      sec.settingKey_disableAnimations: _disableAnimation.toString(),
-      sec.settingKey_enableAdvertisements: _enableAdvertisements.toString()
+      _hiveDefaultCommunityController.value.text,
+      sec.settingKey_hiveSignerDefaultTags:
+      _hiveDefaultTags.join(","),
+      sec.settingKey_FixedDownvoteActivated:
+      _downvoteFixed.toString(),
+      sec.settingKey_FixedDownvoteWeight:
+      _downvoteFixedAmount.toString(),
+      sec.settingKey_videoAutoPause:
+      _videoAutoPause.toString(),
+      sec.settingKey_disableAnimations:
+      _disableAnimation.toString(),
+      sec.settingKey_enableAdvertisements:
+      _enableAdvertisements.toString()
     };
 
-    _settingsBloc
-        .add(PushSettingsEvent(newSettings: newSettings, context: context));
+    _settingsBloc.add(PushSettingsEvent(
+        newSettings: newSettings, context: context));
   }
 }
 

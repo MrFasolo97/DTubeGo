@@ -1,31 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_animator/animation/animation_preferences.dart';
-import 'package:flutter_animator/widgets/bouncing_entrances/bounce_in.dart';
-import 'package:flutter_animator/widgets/fading_entrances/fade_in.dart';
-import 'package:flutter_animator/widgets/fading_entrances/fade_in_down.dart';
-import 'package:flutter_animator/widgets/fading_entrances/fade_in_left.dart';
-import 'package:flutter_animator/widgets/fading_entrances/fade_in_right.dart';
-import 'package:flutter_animator/widgets/fading_entrances/fade_in_up.dart';
-import 'package:flutter_animator/widgets/sliding_entrances/slide_in_down.dart';
-import 'package:flutter_animator/widgets/sliding_entrances/slide_in_left.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
-import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart';
 
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/Comments.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/DTubeCoinsChip.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/ShareAndCommentChiips.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/players/YTplayerIframe.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
@@ -38,8 +16,23 @@ import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListCarousel.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/Suggestions/SuggestedChannels/SuggestedChannels.dart';
 import 'package:ovh.fso.dtubego/ui/MainContainer/NavigationContainer.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/tags/TagChip.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_animator/flutter_animator.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter/material.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
+
+
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class PostDetailPageMobile extends StatefulWidget {
@@ -49,11 +42,15 @@ class PostDetailPageMobile extends StatefulWidget {
   String directFocus;
   VoidCallback? onPop;
 
+  Function? onFullscreenChange;
+
+
   PostDetailPageMobile(
       {required this.link,
       required this.author,
       required this.recentlyUploaded,
       required this.directFocus,
+        this.onFullscreenChange,
       this.onPop,
       });
 
@@ -273,13 +270,13 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
                               margin: EdgeInsets.all(5.0),
                               child: globals.disableAnimations
                                   ? AccountNavigationChip(
-                                      author: widget.post.author, size: 40.w)
+                                      author: widget.post.author, size: 230)
                                   : SlideInDown(
                                       preferences: AnimationPreferences(
                                           offset: Duration(milliseconds: 500)),
                                       child: AccountNavigationChip(
                                           author: widget.post.author,
-                                          size: 40.w),
+                                          size: 230),
                                     ),
                             ),
                             globals.disableAnimations

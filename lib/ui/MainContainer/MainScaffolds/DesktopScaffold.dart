@@ -1,32 +1,38 @@
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/bloc/hivesigner/hivesigner_bloc_full.dart';
-import 'package:dtube_go/ui/pages/News/NewsPage.dart';
-import 'package:dtube_go/ui/pages/settings/HiveSignerForm.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/ui/pages/Explore/GenreBase.dart';
-import 'package:dtube_go/ui/pages/upload/UploadPresetSelection.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/appstate/appstate_bloc_full.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsTabContainer.dart';
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/hivesigner/hivesigner_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/search/search_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/Widgets/AboutDialog/AboutDialog.dart';
+import 'package:ovh.fso.dtubego/ui/pages/News/NewsPage.dart';
+import 'package:ovh.fso.dtubego/ui/pages/search/SearchScreen.dart';
+import 'package:ovh.fso.dtubego/ui/pages/settings/HiveSignerForm.dart';
+import 'package:ovh.fso.dtubego/ui/pages/settings/SettingsTabContainer.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/GovernanceTabContainer.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/ui/pages/Explore/GenreBase/GenreBase.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/UploadPresetSelection.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/appstate/appstate_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsTabContainer.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/notification/notification_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/MainContainer/Widgets/BalanceOverview.dart';
-import 'package:dtube_go/ui/MainContainer/Widgets/MenuButton.dart';
-import 'package:dtube_go/ui/pages/feeds/FeedTabContainer.dart';
-import 'package:dtube_go/ui/pages/notifications/NotificationButton.dart';
-import 'package:dtube_go/ui/pages/user/User.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/ui/widgets/system/customSnackbar.dart';
+import 'package:ovh.fso.dtubego/bloc/notification/notification_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/Widgets/BalanceOverview.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/FeedTabContainer.dart';
+import 'package:ovh.fso.dtubego/ui/pages/notifications/NotificationButton.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/User.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DesktopScaffold extends StatefulWidget {
   DesktopScaffold({Key? key}) : super(key: key);
@@ -44,98 +50,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   int _currentIndex = 0;
   bool _firstTimeLogin = false;
 
-  // list of navigation buttons
-  List<BottomNavigationBarItem> navBarItems = [
-    BottomNavigationBarItem(
-      label: 'Feeds',
-      icon: Center(
-        child: new BorderedIcon(
-          icon: FontAwesomeIcons.alignJustify,
-          color: globalAlmostWhite,
-          borderColor: Colors.black,
-          size: globalIconSizeBig,
-        ),
-      ),
-    ),
-    BottomNavigationBarItem(
-      label: 'Explore',
-      icon: Center(
-        child: new BorderedIcon(
-          icon: FontAwesomeIcons.earthAfrica,
-          color: globalAlmostWhite,
-          borderColor: Colors.black,
-          size: globalIconSizeBig,
-        ),
-      ),
-    ),
-    BottomNavigationBarItem(
-      label: 'Create',
-      icon: Center(
-        child: BlocBuilder<AppStateBloc, AppState>(builder: (context, state) {
-          if (state is UploadStartedState) {
-            return DTubeLogoPulseWave(
-                size: globalIconSizeBig, progressPercent: 10);
-          } else if (state is UploadProcessingState) {
-            return DTubeLogoPulseWave(
-                size: globalIconSizeBig,
-                progressPercent: state.progressPercent);
-          } else if (state is UploadFinishedState) {
-            return Center(
-              child: new BorderedIcon(
-                icon: FontAwesomeIcons.check,
-                color: Colors.green,
-                borderColor: Colors.black,
-                size: globalIconSizeBig,
-              ),
-            );
-          } else if (state is UploadFailedState) {
-            return Center(
-              child: new BorderedIcon(
-                icon: FontAwesomeIcons.xmark,
-                color: globalRed,
-                borderColor: Colors.black,
-                size: globalIconSizeBig,
-              ),
-            );
-          } else {
-            return Center(
-              child: new BorderedIcon(
-                icon: FontAwesomeIcons.plus,
-                color: globals.keyPermissions.contains(4)
-                    ? globalAlmostWhite
-                    : Colors.grey,
-                borderColor: Colors.black,
-                size: globalIconSizeBig,
-              ),
-            );
-          }
-        }),
-      ),
-    ),
-    BottomNavigationBarItem(
-      label: 'Moments',
-      icon: Center(
-        child: new BorderedIcon(
-          icon: FontAwesomeIcons.podcast,
-          color: globalAlmostWhite,
-          borderColor: Colors.black,
-          size: globalIconSizeBig,
-        ),
-      ),
-    ),
-    BottomNavigationBarItem(
-      label: 'Profile',
-      icon: globals.keyPermissions.isEmpty
-          ? FaIcon(FontAwesomeIcons.userSecret)
-          : AccountIconBase(
-              avatarSize: globalIconSizeBig + 2.w,
-              showVerified: false,
-              username: "you",
-              showBorder: true,
-            ),
-    ),
-  ];
-
+  //
   PageController pageController = PageController(
     initialPage: 0,
     keepPage: true,
@@ -145,64 +60,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     setState(() {
       _currentIndex = 0;
     });
-  }
-
-  Future<bool> showExitPopup() async {
-    return await showDialog(
-          //show confirm dialogue
-          //the return value will be from "Yes" or "No" options
-          context: context,
-          builder: (context) => PopUpDialogWithTitleLogo(
-            showTitleWidget: true,
-            callbackOK: () {},
-            child: SingleChildScrollView(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Do you really want to exit DTube Go?',
-                      style: Theme.of(context).textTheme.headline5,
-                      textAlign: TextAlign.center),
-                ),
-                SizedBox(height: 2.h),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      'If you have an upload running in the background it will get lost if you close the app.',
-                      style: Theme.of(context).textTheme.bodyText1,
-                      textAlign: TextAlign.center),
-                ),
-                SizedBox(height: 2.h),
-                InkWell(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                      decoration: BoxDecoration(
-                        color: globalRed,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20.0),
-                            bottomRight: Radius.circular(20.0)),
-                      ),
-                      child: Text(
-                        "Yes",
-                        style: Theme.of(context).textTheme.headline4,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).pop(true);
-                    }),
-              ],
-            )),
-            titleWidget:
-                Center(child: FaIcon(FontAwesomeIcons.doorOpen, size: 18.w)),
-            titleWidgetPadding: 10.h,
-            titleWidgetSize: 20.w,
-          ),
-        ) ??
-        false; //if showDialouge had returned null, then return false
   }
 
   void isFirstLogin() async {
@@ -246,12 +103,12 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                       child: Column(
                         children: [
                           Text("Hivesigner outdated",
-                              style: Theme.of(context).textTheme.headline4),
+                              style: Theme.of(context).textTheme.headlineMedium),
                           Padding(
                             padding: EdgeInsets.only(top: 1.h),
                             child: Text(
                                 "The authorization for your hive account is not valid anymore. This happens automatically after 7 days for security reasons. Please renew the authorization by clicking on the button below.",
-                                style: Theme.of(context).textTheme.bodyText1),
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ),
                           BlocProvider<HivesignerBloc>(
                             create: (BuildContext context) => HivesignerBloc(
@@ -320,250 +177,632 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: showExitPopup, //call function on back button press
-        child: BlocBuilder<FeedBloc, FeedState>(
-            bloc: _newsFeedBloc,
-            builder: (context, state) {
-              if (state is FeedLoadingState) {
-                return NewsScreenLoading(crossAxisCount: 4);
-              }
+    return BlocBuilder<FeedBloc, FeedState>(
+        bloc: _newsFeedBloc,
+        builder: (context, state) {
+          if (state is FeedLoadingState) {
+            return NewsScreenLoading(crossAxisCount: 4);
+          }
 
-              if (state is FeedLoadedState) {
-                if (state.feed.isNotEmpty && !exitNewsScreen) {
-                  return NewsScreen(
-                    newsFeed: state.feed,
-                    okCallback: () async {
-                      await sec.persistCurrenNewsTS();
-                      setState(() {
-                        exitNewsScreen = true;
-                      });
-                    },
-                  );
-                }
+          if (state is FeedLoadedState) {
+            if (state.feed.isNotEmpty && !exitNewsScreen) {
+              return NewsScreen(
+                newsFeed: state.feed,
+                okCallback: () async {
+                  await sec.persistCurrenNewsTS();
+                  setState(() {
+                    exitNewsScreen = true;
+                  });
+                },
+              );
+            }
 
-                if (state.feed.isEmpty || exitNewsScreen) {
-                  return Scaffold(
-                    extendBodyBehindAppBar: true,
-                    extendBody: true,
-                    resizeToAvoidBottomInset: false,
-                    appBar: AppBar(
-                      shadowColor: Colors.transparent,
-                      backgroundColor: Color(0x00ffffff),
-                      automaticallyImplyLeading: false,
-                      elevation: 0,
-                      titleSpacing: 0,
-                      flexibleSpace: Container(
-                        width: 100.w,
-                        color: Colors.red,
-                        child: Row(
+            if (state.feed.isEmpty || exitNewsScreen) {
+              return Scaffold(
+                extendBodyBehindAppBar: true,
+                extendBody: true,
+                resizeToAvoidBottomInset: false,
+                drawer: Drawer(
+                  elevation: 1,
+                  width: 200,
+                  child: ListView(
+                    // Important: Remove any padding from the ListView.
+                    padding: EdgeInsets.zero,
+                    children: [
+                      DrawerHeader(
+                        decoration: BoxDecoration(
+                          color: globalBGColor,
+                        ),
+                        child: Image.asset('assets/images/dtube_logo_white.png',
+                            width: 30),
+                      ),
+                      ListTile(
+                        title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("test"),
-                            BottomNavigationBar(
-                              type: BottomNavigationBarType.fixed,
-                              showUnselectedLabels: false,
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              items: navBarItems,
-                              selectedItemColor: globalAlmostWhite,
-
-                              // iconSize: globalIconSizeBig,
-                              currentIndex: _currentIndex,
-                              onTap: (index) {
-                                setState(() {
-                                  // if the user navigated to the moments page
-                                  if (index == 3) {
-                                    // reset moments page and set play = true
-
-                                    _screens.removeAt(3);
-
-                                    _screens.insert(
-                                      3,
-                                      new MultiBlocProvider(
-                                          providers: [
-                                            BlocProvider(
-                                                create: (context) => FeedBloc(
-                                                    repository:
-                                                        FeedRepositoryImpl())),
-                                          ],
-                                          child: MomentsPage(
-                                            key: UniqueKey(),
-                                            play: true,
-                                          )),
-                                      //  index = index;
-                                    );
-                                  } else {
-                                    // if the key allows to upload OR it is not the posting screen
-                                    if (globals.keyPermissions.contains(4) ||
-                                        index != 2) {
-                                      // if the user navigated to any other screen than the moments page
-                                      // reset moments page and set play = false
-                                      _screens.removeAt(3);
-
-                                      _screens.insert(
-                                          3,
-                                          MomentsPage(
-                                            key: UniqueKey(),
-                                            play: false,
-                                          ));
-                                    }
-                                  }
-                                  // if pressed menu button is at the upload button position
-                                  if (index == 2) {
-                                    if (globals.keyPermissions.contains(4)) {
-                                      // if there is a current background upload running
-                                      //  show snackbar and do not navigate to the upload screen
-                                      if (BlocProvider.of<AppStateBloc>(context)
-                                              .state is UploadStartedState ||
-                                          BlocProvider.of<AppStateBloc>(context)
-                                              .state is UploadProcessingState) {
-                                        showCustomFlushbarOnError(
-                                            "please wait until upload is finished",
-                                            context);
-                                      }
-                                      // if the most recent background upload task is finished
-                                      // reset UploadState and navigate to the upload screen
-                                      if (BlocProvider.of<AppStateBloc>(context)
-                                              .state is UploadFinishedState ||
-                                          BlocProvider.of<AppStateBloc>(context)
-                                              .state is UploadFailedState) {
-                                        BlocProvider.of<AppStateBloc>(context)
-                                            .add(UploadStateChangedEvent(
-                                                uploadState:
-                                                    UploadInitialState()));
-                                        _screens.removeAt(2);
-                                        _screens.insert(
-                                            2,
-                                            new
-                                            //UploaderMainPage(
-                                            //callback: uploaderCallback,
-                                            UploadPresetSelection(
-                                              uploaderCallback:
-                                                  uploaderCallback,
-                                              key: UniqueKey(),
-                                            ));
-                                        _currentIndex = index;
-                                      }
-                                      // if there is no background upload task running or recently finished
-                                      if (BlocProvider.of<AppStateBloc>(context)
-                                          .state is UploadInitialState) {
-                                        // navigate to the uploader screen
-                                        // if the user navigated to the uploader screen
-                                        // reset uploader page
-                                        _screens.removeAt(2);
-                                        _screens.insert(
-                                            2,
-                                            new
-                                            //UploaderMainPage(
-                                            //callback: uploaderCallback,
-                                            UploadPresetSelection(
-                                              uploaderCallback:
-                                                  uploaderCallback,
-                                              key: UniqueKey(),
-                                            ));
-
-                                        _currentIndex = index;
-                                      }
-                                    } else {
-                                      showCustomFlushbarOnError(
-                                          "you need to be signed in to upload content",
-                                          context);
-                                    }
-                                  } else {
-                                    if (index == 4) {
-                                      // if the selected page is the profile page
-                                      if (globals.keyPermissions.isEmpty) {
-                                        showCustomFlushbarOnError(
-                                            "you need to be signed in to access your profile",
-                                            context);
-                                      } else {
-                                        _screens.removeAt(4);
-                                        _screens.insert(
-                                          4,
-                                          BlocProvider(
-                                            create: (context) => UserBloc(
-                                                repository:
-                                                    UserRepositoryImpl()),
-                                            child: UserPage(
-                                              ownUserpage: true,
-                                              //key: UniqueKey(),
-                                            ),
-                                          ),
-                                        );
-                                        _currentIndex = index;
-                                      }
-                                    } else {
-                                      _currentIndex = index;
-                                    }
-                                  }
-                                });
-                              },
+                            FaIcon(
+                              FontAwesomeIcons.magnifyingGlass,
+                              size: globalIconSizeBig,
                             ),
-                            globals.keyPermissions.isEmpty
-                                ? Padding(
-                                    padding: EdgeInsets.only(right: 2.w),
-                                    child: ElevatedButton(
-                                        onPressed: () async {
-                                          BlocProvider.of<AuthBloc>(context)
-                                              .add(SignOutEvent(
-                                                  context: context));
-                                          //do stuff
-                                        },
-                                        child: Text(
-                                          "Join / Login",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6,
-                                        )),
-                                  )
-                                : Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      GestureDetector(
-                                          child: BalanceOverviewBase(),
-                                          onTap: () {
-                                            BlocProvider.of<UserBloc>(context)
-                                                .add(FetchDTCVPEvent());
-                                          }),
-                                      BlocProvider<NotificationBloc>(
-                                        create: (context) => NotificationBloc(
-                                            repository:
-                                                NotificationRepositoryImpl()),
-                                        child: NotificationButton(
-                                            iconSize: globalIconSizeMedium),
-                                      ),
-                                      buildMainMenuSpeedDial(context)
-                                    ],
-                                  ),
+                            Text('Search',
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ],
                         ),
+                        onTap: () {
+                          openSearchScreen(context);
+                        },
                       ),
-                    ),
-                    body:
-                        // show global snack bar to notify the user about transactions
-                        BlocListener<TransactionBloc, TransactionState>(
-                            bloc: BlocProvider.of<TransactionBloc>(context),
-                            listener: (context, state) {
-                              if (state is TransactionSent) {
-                                showCustomFlushbarOnSuccess(state, context);
-                              }
-                              if (state is TransactionError) {
-                                showCustomFlushbarOnError(
-                                    state.message, context);
-                              }
-                            },
-                            child:
-                                // show all pages as indexedStack to keep the state of every screen
-                                IndexedStack(
-                              children: _screens,
-                              index: _currentIndex,
-                            )),
-                  );
-                }
-              }
+                      ListTile(
+                        title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.alignJustify,
+                                size: globalIconSizeBig,
+                              ),
+                              Text('Feed',
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ]),
+                        onTap: () {
+                          openFeedPage();
+                          Navigator.pop(context);
+                        },
+                      ),
+                      ListTile(
+                        title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.earthAfrica,
+                                size: globalIconSizeBig,
+                              ),
+                              Text('Explore',
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ]),
+                        onTap: () {
+                          openExplorePage();
+                          Navigator.pop(context);
+                        },
+                      ),
+                      globals.keyPermissions.isNotEmpty
+                          ? ListTile(
+                              title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    UploadButton(iconSize: globalIconSizeBig),
+                                    Text(
+                                      'Upload',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
+                                              color: !globals.keyPermissions
+                                                      .contains(4)
+                                                  ? Colors.grey
+                                                  : globalAlmostWhite),
+                                    ),
+                                  ]),
+                              onTap: () {
+                                if (globals.keyPermissions.contains(4)) {
+                                  openUploadPage(context);
+                                }
+                                Navigator.pop(context);
+                              },
+                            )
+                          : Container(),
+                      ListTile(
+                        title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.podcast,
+                                size: globalIconSizeBig,
+                              ),
+                              Text('Moments',
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ]),
+                        onTap: () {
+                          openMomentsPage();
+                          Navigator.pop(context);
+                        },
+                      ),
+                      globals.keyPermissions.isNotEmpty
+                          ? ListTile(
+                              title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.hotel,
+                                      size: globalIconSizeBig,
+                                    ),
+                                    Text('Governance',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge),
+                                  ]),
+                              onTap: () {
+                                openGovernancePage(context);
+                              },
+                            )
+                          : Container(),
+                      ListTile(
+                        title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.gears,
+                                size: globalIconSizeBig,
+                              ),
+                              Text('Settings',
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ]),
+                        onTap: () {
+                          openSettingsPage(context);
+                        },
+                      ),
+                      globals.keyPermissions.isNotEmpty
+                          ? ListTile(
+                              title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AccountIconBase(
+                                      avatarSize: globalIconSizeBig,
+                                      showVerified: false,
+                                      username: "you",
+                                      showBorder: false,
+                                    ),
+                                    Text('Profile',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge),
+                                  ]),
+                              onTap: () {
+                                openProfilePage(context);
+                                Navigator.pop(context);
+                              },
+                            )
+                          : Container(),
+                      ListTile(
+                        title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.question,
+                                size: globalIconSizeBig,
+                              ),
+                              Text('About & FAQ',
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ]),
+                        onTap: () {
+                          openAboutDialog(context);
+                        },
+                      ),
+                      SizedBox(height: 100),
+                      ListTile(
+                        title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.android,
+                                size: globalIconSizeBig,
+                              ),
+                              Text('App on Android',
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ]),
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              "https://github.com/MrFasolo97/DTubeGo/releases"));
+                        },
+                      ),
+                      ListTile(
+                        title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.apple,
+                                size: globalIconSizeBig,
+                              ),
+                              Text('App on iOS',
+                                  style: Theme.of(context).textTheme.bodyLarge),
+                            ]),
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              "https://testflight.apple.com/join/C1RKgxlM"));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                appBar: AppBar(
+                  shadowColor: Colors.transparent,
+                  backgroundColor: Colors.transparent,
+                  //automaticallyImplyLeading: false,
+                  elevation: 1,
+                  titleSpacing: 0,
 
-              return NewsScreenLoading(crossAxisCount: 4);
-            }));
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      globals.keyPermissions.isNotEmpty
+                          ? Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: InkWell(
+                                    child: UploadButton(iconSize: 24),
+                                    onTap: () {
+                                      openUploadPage(context);
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: InkWell(
+                                    child: FaIcon(
+                                      FontAwesomeIcons.hotel,
+                                      color: globalAlmostWhite,
+                                    ),
+                                    onTap: () {
+                                      openGovernancePage(context);
+                                    },
+                                  ),
+                                ),
+                                globals.keyPermissions.isNotEmpty
+                                    ? Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: InkWell(
+                                          child: AccountIconBase(
+                                            avatarSize: globalIconSizeBig,
+                                            showVerified: false,
+                                            username: "you",
+                                            showBorder: false,
+                                          ),
+                                          onTap: () {
+                                            openProfilePage(context);
+                                          },
+                                        ),
+                                      )
+                                    : Container()
+                              ],
+                            )
+                          : SizedBox(
+                              width: 0,
+                            ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          globals.keyPermissions.isEmpty
+                              ? Padding(
+                                  padding: EdgeInsets.only(right: 20),
+                                  child: ElevatedButton(
+                                      onPressed: () async {
+                                        BlocProvider.of<AuthBloc>(context).add(
+                                            SignOutEvent(context: context));
+                                        //do stuff
+                                      },
+                                      child: Text(
+                                        "Join / Login",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                      )),
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    GestureDetector(
+                                        child: BalanceOverviewBase(),
+                                        onTap: () {
+                                          BlocProvider.of<UserBloc>(context)
+                                              .add(FetchDTCVPEvent());
+                                        }),
+                                    BlocProvider<NotificationBloc>(
+                                      create: (context) => NotificationBloc(
+                                          repository:
+                                              NotificationRepositoryImpl()),
+                                      child: NotificationButton(iconSize: 24),
+                                    ),
+                                  ],
+                                ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 20),
+                            child: IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.magnifyingGlass,
+                                color: globalAlmostWhite,
+                              ),
+                              onPressed: () {
+                                openSearchScreen(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                body:
+                    // show global snack bar to notify the user about transactions
+                    BlocListener<TransactionBloc, TransactionState>(
+                        bloc: BlocProvider.of<TransactionBloc>(context),
+                        listener: (context, state) {
+                          if (state is TransactionSent) {
+                            showCustomFlushbarOnSuccess(state, context);
+                          }
+                          if (state is TransactionError) {
+                            showCustomFlushbarOnError(state.message, context);
+                          }
+                        },
+                        child:
+                            // show all pages as indexedStack to keep the state of every screen
+                            Padding(
+                          padding: EdgeInsets.only(top: 60),
+                          child: IndexedStack(
+                            children: _screens,
+                            index: _currentIndex,
+                          ),
+                        )),
+              );
+            }
+          }
+
+          return NewsScreenLoading(crossAxisCount: 4);
+        });
+  }
+
+  void openFeedPage() {
+    _screens.removeAt(3);
+
+    _screens.insert(
+        3,
+        MomentsPage(
+          key: UniqueKey(),
+          play: false,
+        ));
+    setState(() {
+      _currentIndex = 0;
+    });
+  }
+
+  void openExplorePage() {
+    _screens.removeAt(3);
+
+    _screens.insert(
+        3,
+        MomentsPage(
+          key: UniqueKey(),
+          play: false,
+        ));
+
+    setState(() {
+      _currentIndex = 1;
+    });
+  }
+
+  void openAboutDialog(BuildContext context) {
+    _screens.removeAt(3);
+
+    _screens.insert(
+        3,
+        MomentsPage(
+          key: UniqueKey(),
+          play: false,
+        ));
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AboutAppDialog();
+        });
+  }
+
+  void openProfilePage(BuildContext context) {
+    if (globals.keyPermissions.isEmpty) {
+      showCustomFlushbarOnError(
+          "you need to be signed in to access your profile", context);
+    } else {
+      _screens.removeAt(3);
+
+      _screens.insert(
+          3,
+          MomentsPage(
+            key: UniqueKey(),
+            play: false,
+          ));
+      _screens.removeAt(4);
+      _screens.insert(
+        4,
+        BlocProvider(
+          create: (context) => UserBloc(repository: UserRepositoryImpl()),
+          child: UserPage(
+            ownUserpage: true,
+            //key: UniqueKey(),
+          ),
+        ),
+      );
+      setState(() {
+        _currentIndex = 4;
+      });
+    }
+  }
+
+  void openSettingsPage(BuildContext context) {
+    _screens.removeAt(3);
+
+    _screens.insert(
+        3,
+        MomentsPage(
+          key: UniqueKey(),
+          play: false,
+        ));
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return BlocProvider<SettingsBloc>(
+          create: (context) => SettingsBloc(), child: SettingsTabContainer());
+    }));
+  }
+
+  void openGovernancePage(BuildContext context) {
+    if (globals.keyPermissions.isNotEmpty) {
+      _screens.removeAt(3);
+
+      _screens.insert(
+          3,
+          MomentsPage(
+            key: UniqueKey(),
+            play: false,
+          ));
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return GovernanceMainPage();
+      }));
+    }
+  }
+
+  void openMomentsPage() {
+    _screens.removeAt(3);
+
+    _screens.insert(
+      3,
+      new MultiBlocProvider(
+          providers: [
+            BlocProvider(
+                create: (context) =>
+                    FeedBloc(repository: FeedRepositoryImpl())),
+          ],
+          child: MomentsPage(
+            key: UniqueKey(),
+            play: true,
+          )),
+    );
+    setState(() {
+      _currentIndex = 3;
+    });
+  }
+
+  void openUploadPage(BuildContext context) {
+    _screens.removeAt(3);
+
+    _screens.insert(
+        3,
+        MomentsPage(
+          key: UniqueKey(),
+          play: false,
+        ));
+    if (globals.keyPermissions.contains(4)) {
+      // if there is a current background upload running
+      //  show snackbar and do not navigate to the upload screen
+      if (BlocProvider.of<AppStateBloc>(context).state is UploadStartedState ||
+          BlocProvider.of<AppStateBloc>(context).state
+              is UploadProcessingState) {
+        showCustomFlushbarOnError(
+            "please wait until upload is finished", context);
+      }
+      // if the most recent background upload task is finished
+      // reset UploadState and navigate to the upload screen
+      if (BlocProvider.of<AppStateBloc>(context).state is UploadFinishedState ||
+          BlocProvider.of<AppStateBloc>(context).state is UploadFailedState) {
+        BlocProvider.of<AppStateBloc>(context)
+            .add(UploadStateChangedEvent(uploadState: UploadInitialState()));
+        _screens.removeAt(2);
+        _screens.insert(
+            2,
+            new
+            //UploaderMainPage(
+            //callback: uploaderCallback,
+            UploadPresetSelection(
+              uploaderCallback: uploaderCallback,
+              key: UniqueKey(),
+            ));
+      }
+      // if there is no background upload task running or recently finished
+      if (BlocProvider.of<AppStateBloc>(context).state is UploadInitialState) {
+        // navigate to the uploader screen
+        // if the user navigated to the uploader screen
+        // reset uploader page
+        _screens.removeAt(2);
+        _screens.insert(
+            2,
+            new
+            //UploaderMainPage(
+            //callback: uploaderCallback,
+            UploadPresetSelection(
+              uploaderCallback: uploaderCallback,
+              key: UniqueKey(),
+            ));
+      }
+      setState(() {
+        _currentIndex = 2;
+      });
+    } else {
+      showCustomFlushbarOnError(
+          "you need to be signed in to upload content", context);
+    }
+  }
+
+  void openSearchScreen(BuildContext context) {
+    _screens.removeAt(3);
+
+    _screens.insert(
+        3,
+        MomentsPage(
+          key: UniqueKey(),
+          play: false,
+        ));
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return MultiBlocProvider(providers: [
+        BlocProvider<SearchBloc>(
+            create: (context) =>
+                SearchBloc(repository: SearchRepositoryImpl())),
+        BlocProvider(
+            create: (context) => FeedBloc(repository: FeedRepositoryImpl())),
+      ], child: SearchScreen());
+    }));
+  }
+}
+
+class UploadButton extends StatelessWidget {
+  UploadButton({Key? key, required this.iconSize}) : super(key: key);
+
+  double iconSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AppStateBloc, AppState>(builder: (context, state) {
+      if (state is UploadStartedState) {
+        return DTubeLogoPulseWave(size: globalIconSizeBig, progressPercent: 10);
+      } else if (state is UploadProcessingState) {
+        return DTubeLogoPulseWave(
+            size: globalIconSizeBig, progressPercent: state.progressPercent);
+      } else if (state is UploadFinishedState) {
+        return Center(
+          child: new BorderedIcon(
+              icon: FontAwesomeIcons.check,
+              color: Colors.green,
+              borderColor: Colors.black,
+              size: iconSize),
+        );
+      } else if (state is UploadFailedState) {
+        return Center(
+          child: new BorderedIcon(
+            icon: FontAwesomeIcons.xmark,
+            color: globalRed,
+            borderColor: Colors.black,
+            size: iconSize,
+          ),
+        );
+      } else {
+        return Center(
+          child: new BorderedIcon(
+            icon: FontAwesomeIcons.arrowUpFromBracket,
+            color: globals.keyPermissions.contains(4)
+                ? globalAlmostWhite
+                : Colors.grey,
+            borderColor: Colors.black,
+            size: iconSize,
+          ),
+        );
+      }
+    });
   }
 }

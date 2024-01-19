@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/PostListCardSuggestions.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -7,24 +6,6 @@ import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
 import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
-=======
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardDesktop.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardSuggestions.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/utils/Layout/ResponsiveLayout.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardLarge.dart';
-import 'package:dtube_go/ui/pages/feeds/cards/PostListCardNarrow.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
->>>>>>> adf1cbc (post details responsive)
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -44,10 +25,7 @@ class FeedListSuggestedPosts extends StatelessWidget {
     required this.feedType,
     required this.scrollCallback,
     required this.width,
-<<<<<<< HEAD
     required this.clickedCallback,
-=======
->>>>>>> adf1cbc (post details responsive)
     Key? key,
   }) : super(key: key);
 
@@ -66,10 +44,7 @@ class FeedListSuggestedPosts extends StatelessWidget {
   String? _fixedDownvoteWeight;
 
   bool? _autoPauseVideoOnPopup;
-<<<<<<< HEAD
   VoidCallback clickedCallback;
-=======
->>>>>>> adf1cbc (post details responsive)
 
   Future<bool> getSettings() async {
     _hiddenMode = await sec.getShowHidden();
@@ -222,10 +197,7 @@ class FeedListSuggestedPosts extends StatelessWidget {
                   fixedDownvoteWeight: _fixedDownvoteWeight,
                   parentContext: context,
                   autoPauseVideoOnPopup: _autoPauseVideoOnPopup,
-<<<<<<< HEAD
                   clickedCallback: clickedCallback,
-=======
->>>>>>> adf1cbc (post details responsive)
                 ),
                 //Text(pos.toString())
               );
@@ -272,7 +244,6 @@ class PostListCard extends StatefulWidget {
   final bool? autoPauseVideoOnPopup;
 
   final BuildContext parentContext;
-<<<<<<< HEAD
   final VoidCallback clickedCallback;
 
   PostListCard(
@@ -306,39 +277,6 @@ class PostListCard extends StatefulWidget {
       required this.autoPauseVideoOnPopup,
       required this.clickedCallback})
       : super(key: key);
-=======
-
-  PostListCard({
-    Key? key,
-    required this.blur,
-    required this.thumbnailUrl,
-    required this.title,
-    required this.description,
-    required this.author,
-    required this.link,
-    required this.publishDate,
-    required this.duration,
-    required this.dtcValue,
-    required this.videoUrl,
-    required this.videoSource,
-    required this.alreadyVoted,
-    required this.alreadyVotedDirection,
-    required this.upvotesCount,
-    required this.downvotesCount,
-    required this.indexOfList,
-    required this.mainTag,
-    required this.oc,
-    required this.width,
-    required this.feedType,
-    this.defaultCommentVotingWeight,
-    this.defaultPostVotingWeight,
-    this.defaultPostVotingTip,
-    required this.fixedDownvoteActivated,
-    required this.fixedDownvoteWeight,
-    required this.parentContext,
-    required this.autoPauseVideoOnPopup,
-  }) : super(key: key);
->>>>>>> adf1cbc (post details responsive)
 
   @override
   State<PostListCard> createState() => _PostListCardState();
@@ -362,10 +300,7 @@ class _PostListCardState extends State<PostListCard>
       duration: widget.duration,
       dtcValue: widget.dtcValue,
       indexOfList: widget.indexOfList,
-<<<<<<< HEAD
       clickedCallback: widget.clickedCallback,
-=======
->>>>>>> adf1cbc (post details responsive)
 
       //),
     );

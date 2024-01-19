@@ -72,7 +72,7 @@ class AvalonConfig {
   late int randomBytesLength;
   late int rewardPoolAmount;
   late double rewardPoolMaxShare;
-  //late int rewardPoolUsers;
+  late int rewardPoolUsers;
   late int tagMaxLength;
   late int tagMaxPerContent;
   late int tippedVotePrecision;
@@ -160,7 +160,7 @@ class AvalonConfig {
     required this.originHash,
     required this.randomBytesLength,
     required this.rewardPoolMaxShare,
-    //required this.rewardPoolUsers,
+    required this.rewardPoolUsers,
     required this.tagMaxLength,
     required this.tagMaxPerContent,
     required this.tippedVotePrecision,
@@ -247,14 +247,14 @@ class AvalonConfig {
     originHash = json['originHash'];
     randomBytesLength = json['randomBytesLength'];
     rewardPoolMaxShare = json['rewardPoolMaxShare'];
-    // rewardPoolUsers = json['rewardPoolUsers'];
+    rewardPoolUsers = json['rewardPoolUsers'];
     tagMaxLength = json['tagMaxLength'];
     tagMaxPerContent = json['tagMaxPerContent'];
     tippedVotePrecision = json['tippedVotePrecision'];
     //tmpForceTs = json['tmpForceTs'];
     txExpirationTime = json['txExpirationTime'];
     txLimits = TxLimits.fromJson(json['txLimits']);
-    vtGrowth = json['vtGrowth'] ?? 0;
+    vtGrowth = json['vtGrowth'];
     vtPerBurn = json['vtPerBurn'];
     playlistLinkMin = json['playlistLinkMin'];
     playlistLinkMax = json['playlistLinkMax'];

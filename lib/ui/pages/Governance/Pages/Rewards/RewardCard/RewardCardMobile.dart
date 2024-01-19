@@ -1,29 +1,28 @@
-import 'package:dtube_go/bloc/rewards/rewards_bloc_full.dart';
-import 'package:dtube_go/ui/pages/post/postDetailPage.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:dtube_go/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
-import 'package:dtube_go/utils/Strings/friendlyTimestamp.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/postDetailPage.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class RewardsCard extends StatefulWidget {
-  RewardsCard({Key? key, required this.reward, required this.parentWidget})
+class RewardCardMobile extends StatefulWidget {
+  RewardCardMobile({Key? key, required this.reward, required this.parentWidget})
       : super(key: key);
 
   final Reward reward;
   final Widget parentWidget;
 
   @override
-  _RewardsCardState createState() => _RewardsCardState();
+  _RewardCardMobileState createState() => _RewardCardMobileState();
 }
 
-class _RewardsCardState extends State<RewardsCard>
+class _RewardCardMobileState extends State<RewardCardMobile>
     with AutomaticKeepAliveClientMixin {
   double widthLabel = 25.w;
   @override
@@ -64,8 +63,8 @@ class _RewardsCardState extends State<RewardsCard>
                         username: widget.reward.author,
                         width: 40.w,
                         height: 10.h,
-                        mainStyle: Theme.of(context).textTheme.headline4!,
-                        subStyle: Theme.of(context).textTheme.bodyText1!,
+                        mainStyle: Theme.of(context).textTheme.headlineMedium!,
+                        subStyle: Theme.of(context).textTheme.bodyLarge!,
                       ),
                     )
                   ],
@@ -76,14 +75,14 @@ class _RewardsCardState extends State<RewardsCard>
                         width: widthLabel,
                         child: Text(
                           "content:",
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         )),
                     Container(
                         width: 30.w,
                         child: Text(
                           widget.reward.author + '/' + widget.reward.link,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         )),
                   ],
                 ),
@@ -93,11 +92,11 @@ class _RewardsCardState extends State<RewardsCard>
                         width: widthLabel,
                         child: Text(
                           "spent:",
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         )),
                     Text(
                       (widget.reward.vt / 1000).toStringAsFixed(2) + 'K',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -107,14 +106,14 @@ class _RewardsCardState extends State<RewardsCard>
                         width: widthLabel,
                         child: Text(
                           "voted on:",
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         )),
                     Text(
                       DateTime.fromMillisecondsSinceEpoch(widget.reward.ts)
                           .toLocal()
                           .toString()
                           .substring(0, 16),
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -124,7 +123,7 @@ class _RewardsCardState extends State<RewardsCard>
                         width: widthLabel,
                         child: Text(
                           "published on:",
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         )),
                     Text(
                       DateTime.fromMillisecondsSinceEpoch(
@@ -132,7 +131,7 @@ class _RewardsCardState extends State<RewardsCard>
                           .toLocal()
                           .toString()
                           .substring(0, 16),
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -151,7 +150,7 @@ class _RewardsCardState extends State<RewardsCard>
                             Text(
                               (widget.reward.claimable / 100)
                                   .toStringAsFixed(2),
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 1.w),
@@ -161,11 +160,11 @@ class _RewardsCardState extends State<RewardsCard>
                         ),
                         Text(
                           "claimed",
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         Text(
                           TimeAgo.timeInAgoTS(widget.reward.claimed!),
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     )
@@ -193,7 +192,7 @@ class _RewardsCardState extends State<RewardsCard>
                                 Text(
                                   (widget.reward.claimable / 100)
                                       .toStringAsFixed(2),
-                                  style: Theme.of(context).textTheme.headline6,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(left: 1.w),
@@ -203,11 +202,11 @@ class _RewardsCardState extends State<RewardsCard>
                             ),
                             Text(
                               'claimable ',
-                              style: Theme.of(context).textTheme.bodyText2,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             Text(
                               TimeAgo.timeAgoClaimIn(widget.reward.ts),
-                              style: Theme.of(context).textTheme.bodyText2,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
                         ),
@@ -268,14 +267,14 @@ class _ClaimRewardButtonState extends State<ClaimRewardButton> {
           children: [
             Text(
               'claimed',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   (widget.claimable / 100).toStringAsFixed(2),
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 1.w),
@@ -307,14 +306,14 @@ class _ClaimRewardButtonState extends State<ClaimRewardButton> {
                 children: [
                   Text(
                     'claim',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         (widget.claimable / 100).toStringAsFixed(2),
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 1.w),
