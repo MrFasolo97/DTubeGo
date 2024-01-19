@@ -1,28 +1,28 @@
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ovh.fso.dtubego/style/ThemeData.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
+import 'package:dtube_go/style/ThemeData.dart';
+import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:dtube_go/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 typedef ListOfString2VoidFunc = void Function(List<String>);
 
 class PostListCardSuggestions extends StatefulWidget {
-  const PostListCardSuggestions(
-      {Key? key,
-      required this.blur,
-      required this.thumbnailUrl,
-      required this.title,
-      required this.description,
-      required this.author,
-      required this.link,
-      required this.publishDate,
-      required this.duration,
-      required this.dtcValue,
-      required this.indexOfList,
-      required this.width,
-      required this.clickedCallback})
-      : super(key: key);
+  const PostListCardSuggestions({
+    Key? key,
+    required this.blur,
+    required this.thumbnailUrl,
+    required this.title,
+    required this.description,
+    required this.author,
+    required this.link,
+    required this.publishDate,
+    required this.duration,
+    required this.dtcValue,
+    required this.indexOfList,
+    required this.width,
+  }) : super(key: key);
 
   final bool blur;
   final String thumbnailUrl;
@@ -35,7 +35,6 @@ class PostListCardSuggestions extends StatefulWidget {
   final String dtcValue;
   final int indexOfList;
   final double width;
-  final VoidCallback clickedCallback;
 
   @override
   _PostListCardSuggestionsState createState() =>
@@ -52,7 +51,6 @@ class _PostListCardSuggestionsState extends State<PostListCardSuggestions> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        widget.clickedCallback();
         navigateToPostDetailPage(
             context, widget.author, widget.link, "none", false, () {});
       },
@@ -82,7 +80,7 @@ class _PostListCardSuggestionsState extends State<PostListCardSuggestions> {
                     width: widget.width,
                     child: Text(
                       widget.title,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyText2,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -92,7 +90,7 @@ class _PostListCardSuggestionsState extends State<PostListCardSuggestions> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text('@' + widget.author,
-                          style: Theme.of(context).textTheme.titleSmall),
+                          style: Theme.of(context).textTheme.subtitle2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -105,14 +103,13 @@ class _PostListCardSuggestionsState extends State<PostListCardSuggestions> {
                                       : widget.duration
                                           .toString()
                                           .substring(0, 7)),
-                              style: Theme.of(context).textTheme.bodySmall,
-                          ),
+                              style: Theme.of(context).textTheme.subtitle2),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
                                 '${widget.dtcValue}',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyText2,
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 1.w),

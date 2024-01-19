@@ -1,15 +1,11 @@
 import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
-import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
-import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/thirdPartyLogin/thirdPartyLogin_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 
 import 'package:ovh.fso.dtubego/ui/startup/OnboardingJourney/OnboardingJourney.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/widgets/LoginWithCredentials.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/pages/SocialUserActionPopup.dart';
-
 
 
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -41,15 +37,12 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
   late AuthBloc _loginBloc;
   bool _loginWithCredentialsVisible = false;
 
-  bool _authIsLoading = false;
-  String _uid = "";
-  late String _currentHF = "0";
 
   void getCurrentHF() async {
     String _hardfork = await sec.getLocalConfigString(sec.settingKey_currentHF);
     setState(() {
       // override this to simulate another hardfork
-      _currentHF = int.tryParse(_hardfork) != null ? _hardfork : "0";
+      // _currentHF = int.tryParse(_hardfork) != null ? _hardfork : "0";
       // _currentHF = "6"; // example: setting current active hardfork to hf6
     });
   }
@@ -130,52 +123,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                               width: 80.w,
                               child: Column(
                                 children: [
-                                  int.parse(_currentHF) >= 6
-                                      ? Wrap(
-                                          alignment: WrapAlignment.center,
-                                          spacing: 2.w,
-                                          children: [
-
-                                            SignInButton(
-                                              width: 10.w,
-                                              faIcon: FaIcon(
-                                                  FontAwesomeIcons.google),
-                                              loginType: LoginType.Google,
-                                              activated: true,
-                                              loggedInCallback:
-                                                  loggedInCallback,
-                                            ),
-                                            SignInButton(
-                                              width: 10.w,
-                                              faIcon: FaIcon(
-                                                  FontAwesomeIcons.facebook),
-                                              loginType: LoginType.Facebook,
-                                              activated: true,
-                                              loggedInCallback:
-                                                  loggedInCallback,
-                                            ),/*
-                                            SignInButton(
-                                              width: 10.w,
-                                              faIcon: FaIcon(
-                                                  FontAwesomeIcons.github),
-                                              loginType: LoginType.Github,
-                                              activated: true,
-                                              loggedInCallback:
-                                                  loggedInCallback,
-                                            ),
-                                            */
-                                            SignInButton(
-                                              width: 10.w,
-                                              faIcon: FaIcon(
-                                                  FontAwesomeIcons.twitter),
-                                              loginType: LoginType.Twitter,
-                                              activated: true,
-                                              loggedInCallback:
-                                                  loggedInCallback,
-                                            ),
-                                          ],
-                                        )
-                                      : Container(),
+                                  Container(),
                                   Padding(
                                     padding: EdgeInsets.only(top: 1.h),
                                     child: InputChip(
@@ -277,19 +225,10 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
   }
 
   void loggedInCallback(String socialUId, String socialProvider) async {
-    setState(() {
-      _uid = socialUId;
-    });
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => MultiBlocProvider(
                 providers: [
-                  BlocProvider<ThirdPartyLoginBloc>(
-                      create: (context) => ThirdPartyLoginBloc(
-                          repository: ThirdPartyLoginRepositoryImpl())
-                        ..add(TryThirdPartyLoginEvent(
-                            socialUId: socialUId,
-                            socialProvider: socialProvider))),
                   BlocProvider<AvalonConfigBloc>(
                       create: (context) => AvalonConfigBloc(
                           repository: AvalonConfigRepositoryImpl())),

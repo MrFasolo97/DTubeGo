@@ -1,13 +1,13 @@
 import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-import 'package:ovh.fso.dtubego/ui/startup/login/services/firebase_service.dart';
-import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/services/firebase_service.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInButton extends StatefulWidget {
   final FaIcon faIcon;
@@ -93,7 +93,7 @@ class _SignInButtonState extends State<SignInButton> {
           }
           _provider = "twitter";
           break;
-          /*
+      /*
         case LoginType.Github:
           if (kIsWeb) {
             usercred = await service.signInWithGithubWeb();
@@ -103,7 +103,7 @@ class _SignInButtonState extends State<SignInButton> {
 
          _provider = "github";
           break;
-         */
+       */
         case LoginType.Facebook:
           service.signInWithFacebookMobile();
           _provider = "facebook";
@@ -119,5 +119,6 @@ class _SignInButtonState extends State<SignInButton> {
         showMessage(e);
       }
     }
+
   }
 }

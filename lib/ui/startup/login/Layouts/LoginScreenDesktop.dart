@@ -7,8 +7,8 @@ import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/startup/OnboardingJourney/OnboardingJourney.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/widgets/LoginWithCredentials.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/pages/SocialUserActionPopup.dart';
-import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
-import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
+//import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
+//import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
 
 import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
@@ -145,7 +145,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                 alignment: WrapAlignment.center,
                                                 spacing: 5,
                                                 runSpacing: 5,
-                                                children: [
+                                                children: [ /*
                                                   SignInButton(
                                                     width: 100,
                                                     faIcon: FaIcon(
@@ -166,7 +166,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                     activated: true,
                                                     loggedInCallback:
                                                         loggedInCallback,
-                                                  ),/*
+                                                  ),
                                                   SignInButton(
                                                     width: 100,
                                                     faIcon: FaIcon(
@@ -176,7 +176,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                     activated: true,
                                                     loggedInCallback:
                                                         loggedInCallback,
-                                                  ),*/
+                                                  ),
                                                   SignInButton(
                                                     width: 100,
                                                     faIcon: FaIcon(
@@ -188,6 +188,7 @@ class _LoginFormDesktopState extends State<LoginFormDesktop> {
                                                     loggedInCallback:
                                                         loggedInCallback,
                                                   ),
+                                                  */
                                                 ],
                                               )
                                             : Container(),

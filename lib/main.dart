@@ -1,13 +1,14 @@
-// @dart=3.0
+// @dart=2.9
+//
 import 'dart:io';
-
-import 'package:ovh.fso.dtubego/App.dart';
+import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:dtube_go/App.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-// import 'package:ovh.fso.dtubego/res/Config/secretConfigValues.dart' as secretConfig;
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
 
 const MaterialColor kPrimaryColor = const MaterialColor(
   0xFF223154,
@@ -26,11 +27,11 @@ const MaterialColor kPrimaryColor = const MaterialColor(
 );
 
 void main() async {
+  sec.deleteAllSettings();
+
   // deactivate landscape mode
   WidgetsFlutterBinding.ensureInitialized();
-
   if (kIsWeb) {
-    /*
     await Firebase.initializeApp(
       options: FirebaseOptions(
           apiKey: secretConfig.fbWebApiKey,
@@ -41,11 +42,8 @@ void main() async {
           appId: secretConfig.fbWebAppId,
           measurementId: secretConfig.fbWebMeasurementId),
     );
-    */
   } else {
     if (Platform.isAndroid || Platform.isIOS) {
-      ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-      SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
       await Firebase.initializeApp();
     }
   }
@@ -54,7 +52,7 @@ void main() async {
 
   /////////////
   runApp(
-    // embedding MyApp into a Phoenix widget to be able to restart the app from within the app itself
+    // embedding MyApp into a Pheonix widget to be able to restart the app from within the app itself
     // used for saving the global settings to reinitialize everything based on those settings
     Phoenix(
       child: App(),

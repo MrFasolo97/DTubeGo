@@ -1,9 +1,8 @@
-import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
-import 'package:ovh.fso.dtubego/style/ThemeData.dart';
-import 'package:ovh.fso.dtubego/ui/pages/News/NewsFeedList.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:ovh.fso.dtubego/utils/Layout/ResponsiveLayout.dart';
+import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
+import 'package:dtube_go/style/ThemeData.dart';
+import 'package:dtube_go/ui/pages/News/NewsFeedList.dart';
+import 'package:dtube_go/ui/widgets/dtubeLogoPulse/DTubeLogo.dart';
+import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -13,26 +12,6 @@ class NewsScreen extends StatelessWidget {
       : super(key: key);
   List<FeedItem> newsFeed;
   VoidCallback okCallback;
-
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveLayout(
-      mobileBody: NewsPageMobile(newsFeed: newsFeed, okCallback: okCallback),
-      desktopBody: NewsPageDesktop(newsFeed: newsFeed, okCallback: okCallback),
-      tabletBody: NewsPageDesktop(newsFeed: newsFeed, okCallback: okCallback),
-    );
-  }
-}
-
-class NewsPageMobile extends StatelessWidget {
-  const NewsPageMobile({
-    Key? key,
-    required this.newsFeed,
-    required this.okCallback,
-  }) : super(key: key);
-
-  final List<FeedItem> newsFeed;
-  final VoidCallback okCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +30,7 @@ class NewsPageMobile extends StatelessWidget {
                 padding: EdgeInsets.only(left: 2.w),
                 child: Text(
                   "News",
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
             ],
@@ -59,81 +38,30 @@ class NewsPageMobile extends StatelessWidget {
         ),
         body: //buildPostList
 
-            Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Container(
-            height: 75.h,
-            child: NewsFeedList(
-              newsList: newsFeed,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 5.h),
-            child: InputChip(
-                avatar: FaIcon(FontAwesomeIcons.check),
-                label: Text(
-                  "okay thanks!",
-                  style: Theme.of(context).textTheme.headlineMedium,
+            Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+              Container(
+                height: 80.h,
+                width: 100.w,
+                child: NewsFeedList(
+                  newsList: newsFeed,
                 ),
-                backgroundColor: globalRed,
-                onSelected: (value) async {
-                  okCallback();
-                }),
-          ),
-        ]));
-  }
-}
-
-class NewsPageDesktop extends StatelessWidget {
-  const NewsPageDesktop({
-    Key? key,
-    required this.newsFeed,
-    required this.okCallback,
-  }) : super(key: key);
-
-  final List<FeedItem> newsFeed;
-  final VoidCallback okCallback;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                DTubeLogo(size: 50),
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "News",
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                ),
-              ],
-            ),
-            InputChip(
-                avatar: FaIcon(FontAwesomeIcons.check),
-                label: Text(
-                  "okay thanks! Let me in",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                backgroundColor: globalRed,
-                onSelected: (value) async {
-                  okCallback();
-                }),
-          ],
-        ),
-      ),
-      Expanded(
-        child: NewsFeedList(
-          newsList: newsFeed,
-        ),
-      ),
-    ]));
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 1.h),
+                child: InputChip(
+                    avatar: FaIcon(FontAwesomeIcons.check),
+                    label: Text(
+                      "okay thanks!",
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    backgroundColor: globalRed,
+                    onSelected: (value) async {
+                      okCallback();
+                    }),
+              ),
+            ]));
   }
 }
 
