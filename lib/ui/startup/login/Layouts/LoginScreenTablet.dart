@@ -23,7 +23,7 @@ class LoginFormTablet extends StatefulWidget {
   final String? username;
   final bool showOnboardingJourney;
 
-  bool googleFree = (appFlavor != null && appFlavor!.toLowerCase() == "googlefree");
+  bool googleFree = (appFlavor != null && appFlavor == "GoogleFree");
 
   LoginFormTablet({
     Key? key,
