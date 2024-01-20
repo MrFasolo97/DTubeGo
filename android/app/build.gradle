@@ -93,6 +93,7 @@ android {
         }
         GoogleFree {
             dimension "app"
+            applicationIdSuffix ".googleFree"
         }
     }
 }

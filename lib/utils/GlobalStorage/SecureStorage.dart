@@ -58,7 +58,6 @@ const settingKey_videoAutoPause = "VAPAUSE";
 const settingKey_disableAnimations = "NOANIMS";
 const settingKey_enableAdvertisements = "ADVERTISEMENTS";
 
-
 const settingKey_imageUploadService = "IMGUS";
 
 const settingKey_ExploreTags = "EXPTAGS";
@@ -1085,12 +1084,12 @@ Future<String> getLocalConfigString(String configKey) async {
   try {
     _setting = await _storage.read(key: configKey);
   } catch (e) {
-    _setting = "0";
+    _setting = "";
   }
   if (_setting != null && _setting != "") {
     return _setting;
   } else {
-    return "0";
+    return "";
   }
 }
 

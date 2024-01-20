@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_bloc_full.dart';
@@ -7,8 +8,8 @@ import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/startup/OnboardingJourney/OnboardingJourney.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/widgets/LoginWithCredentials.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/pages/SocialUserActionPopup.dart';
-//import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
-//import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
+import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
 
 import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
@@ -22,12 +23,14 @@ class LoginFormTablet extends StatefulWidget {
   final String? username;
   final bool showOnboardingJourney;
 
-  LoginFormTablet(
-      {Key? key,
-      this.message,
-      this.username,
-      required this.showOnboardingJourney})
-      : super(key: key);
+  bool googleFree = (appFlavor != null && appFlavor == "googleFree");
+
+  LoginFormTablet({
+    Key? key,
+    this.message,
+    this.username,
+    required this.showOnboardingJourney,
+  }) : super(key: key);
 
   @override
   _LoginFormTabletState createState() => _LoginFormTabletState();
@@ -56,9 +59,8 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
     _journeyDone = !widget.showOnboardingJourney;
 
     _loginBloc = BlocProvider.of<AuthBloc>(context);
-    super.initState();
-
     getCurrentHF();
+    super.initState();
   }
 
   void journeyDoneCallback() async {
@@ -133,12 +135,13 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                               width: 350,
                               child: Column(
                                 children: [
-                                  int.parse(_currentHF) >= 6
+                                  (int.parse(_currentHF) >= 6 &&
+                                          widget.googleFree == false)
                                       ? Wrap(
                                           alignment: WrapAlignment.center,
                                           spacing: 5,
                                           runSpacing: 5,
-                                          children: [ /*
+                                          children: [
                                             SignInButton(
                                               width: 100,
                                               faIcon: FaIcon(
@@ -157,6 +160,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                               loggedInCallback:
                                                   loggedInCallback,
                                             ),
+                                            /*
                                             SignInButton(
                                               width: 100,
                                               faIcon: FaIcon(
@@ -165,7 +169,7 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                               activated: true,
                                               loggedInCallback:
                                                   loggedInCallback,
-                                            ),
+                                            ),*/
                                             SignInButton(
                                               width: 100,
                                               faIcon: FaIcon(
@@ -175,7 +179,6 @@ class _LoginFormTabletState extends State<LoginFormTablet> {
                                               loggedInCallback:
                                                   loggedInCallback,
                                             ),
-                                            */
                                           ],
                                         )
                                       : Container(),

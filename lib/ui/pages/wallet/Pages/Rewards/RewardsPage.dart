@@ -4,6 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc.dart';
 import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/rewards/rewards_event.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Rewards/RewardCard/RewardCardMobile.dart';
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
@@ -151,7 +152,7 @@ class _RewardsListState extends State<RewardsList> {
                     'rewards' + widget.rewardsState + 'listview'),
                 itemCount: _rewards.length,
                 itemBuilder: (ctx, pos) {
-                  return RewardsCard(
+                  return RewardCardMobile(
                     reward: _rewards[pos],
                     parentWidget: this.widget,
                   );

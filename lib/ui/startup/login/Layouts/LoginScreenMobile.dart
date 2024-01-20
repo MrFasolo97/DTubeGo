@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/widgets/sign_in_button.dart';
@@ -9,8 +10,6 @@ import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/startup/OnboardingJourney/OnboardingJourney.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/widgets/LoginWithCredentials.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/pages/SocialUserActionPopup.dart';
-
-
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
@@ -25,12 +24,13 @@ class LoginFormMobile extends StatefulWidget {
   final String? username;
   final bool showOnboardingJourney;
 
-  LoginFormMobile(
-      {Key? key,
-      this.message,
-      this.username,
-      required this.showOnboardingJourney})
-      : super(key: key);
+  bool googleFree = (appFlavor != null && appFlavor == "googleFree");
+  LoginFormMobile({
+    Key? key,
+    this.message,
+    this.username,
+    required this.showOnboardingJourney,
+  }) : super(key: key);
 
   @override
   _LoginFormMobileState createState() => _LoginFormMobileState();
@@ -43,13 +43,12 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
 
   bool _authIsLoading = false;
   String _uid = "";
-  late String _currentHF = "0";
-
+  late String _currentHF = "6";
   void getCurrentHF() async {
     String _hardfork = await sec.getLocalConfigString(sec.settingKey_currentHF);
     setState(() {
       // override this to simulate another hardfork
-      _currentHF = int.tryParse(_hardfork) != null ? _hardfork : "0";
+      _currentHF = int.tryParse(_hardfork) != null ? _hardfork : "6";
       // _currentHF = "6"; // example: setting current active hardfork to hf6
     });
   }
@@ -57,11 +56,9 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
   @override
   void initState() {
     _journeyDone = !widget.showOnboardingJourney;
-
+    getCurrentHF();
     _loginBloc = BlocProvider.of<AuthBloc>(context);
     super.initState();
-
-    getCurrentHF();
   }
 
   void journeyDoneCallback() async {
@@ -75,85 +72,86 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: globalBlue,
-      body: Stack(
-        children: [
-          Center(
-            child: SingleChildScrollView(
-              child: Container(
-                height: 95.h,
-                width: 95.w,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 5.h),
-                      child: Image.asset('assets/images/dtube_logo_white.png',
-                          width: 30.w),
-                    ),
-                    Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _loginWithCredentialsVisible =
-                                  !_loginWithCredentialsVisible;
-                            });
-                          },
-                          child: Container(
-                            width: 45.w,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                _loginWithCredentialsVisible
-                                    ? Padding(
-                                        padding: EdgeInsets.only(right: 2.w),
-                                        child:
-                                            FaIcon(FontAwesomeIcons.arrowLeft),
-                                      )
-                                    : Image.asset(
-                                        'assets/images/dtube_logo_white.png',
-                                        width: 7.w),
-                                Text(_loginWithCredentialsVisible
-                                    ? "back"
-                                    : "Credentials")
-                              ],
+        backgroundColor: globalBlue,
+        body: Stack(
+          children: [
+            Center(
+              child: SingleChildScrollView(
+                child: Container(
+                  height: 95.h,
+                  width: 95.w,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 5.h),
+                        child: Image.asset('assets/images/dtube_logo_white.png',
+                            width: 30.w),
+                      ),
+                      Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _loginWithCredentialsVisible =
+                                    !_loginWithCredentialsVisible;
+                              });
+                            },
+                            child: Container(
+                              width: 45.w,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _loginWithCredentialsVisible
+                                      ? Padding(
+                                          padding: EdgeInsets.only(right: 2.w),
+                                          child: FaIcon(
+                                              FontAwesomeIcons.arrowLeft),
+                                        )
+                                      : Image.asset(
+                                          'assets/images/dtube_logo_white.png',
+                                          width: 7.w),
+                                  Text(_loginWithCredentialsVisible
+                                      ? "back"
+                                      : "Credentials")
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        // Social Providers
-                        Padding(
-                          padding: EdgeInsets.only(top: 1.h),
-                          child: Visibility(
-                            visible: !_loginWithCredentialsVisible,
-                            child: Container(
-                              width: 80.w,
-                              child: Column(
-                                children: [
-                                  int.parse(_currentHF) >= 6
-                                      ? Wrap(
-                                          alignment: WrapAlignment.center,
-                                          spacing: 2.w,
-                                          children: [
-
-                                            SignInButton(
-                                              width: 10.w,
-                                              faIcon: FaIcon(
-                                                  FontAwesomeIcons.google),
-                                              loginType: LoginType.Google,
-                                              activated: true,
-                                              loggedInCallback:
-                                                  loggedInCallback,
-                                            ),
-                                            SignInButton(
-                                              width: 10.w,
-                                              faIcon: FaIcon(
-                                                  FontAwesomeIcons.facebook),
-                                              loginType: LoginType.Facebook,
-                                              activated: true,
-                                              loggedInCallback:
-                                                  loggedInCallback,
-                                            ),/*
+                          // Social Providers
+                          Padding(
+                            padding: EdgeInsets.only(top: 1.h),
+                            child: Visibility(
+                              visible: !_loginWithCredentialsVisible,
+                              child: Container(
+                                width: 80.w,
+                                child: Column(
+                                  children: [
+                                    (int.parse(_currentHF) >= 6 &&
+                                            widget.googleFree == false)
+                                        ? Wrap(
+                                            alignment: WrapAlignment.center,
+                                            spacing: 2.w,
+                                            children: [
+                                              SignInButton(
+                                                width: 10.w,
+                                                faIcon: FaIcon(
+                                                    FontAwesomeIcons.google),
+                                                loginType: LoginType.Google,
+                                                activated: true,
+                                                loggedInCallback:
+                                                    loggedInCallback,
+                                              ),
+                                              SignInButton(
+                                                width: 10.w,
+                                                faIcon: FaIcon(
+                                                    FontAwesomeIcons.facebook),
+                                                loginType: LoginType.Facebook,
+                                                activated: true,
+                                                loggedInCallback:
+                                                    loggedInCallback,
+                                              ),
+                                              /*
                                             SignInButton(
                                               width: 10.w,
                                               faIcon: FaIcon(
@@ -164,116 +162,118 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                                                   loggedInCallback,
                                             ),
                                             */
-                                            SignInButton(
-                                              width: 10.w,
-                                              faIcon: FaIcon(
-                                                  FontAwesomeIcons.twitter),
-                                              loginType: LoginType.Twitter,
-                                              activated: true,
-                                              loggedInCallback:
-                                                  loggedInCallback,
-                                            ),
-                                          ],
-                                        )
-                                      : Container(),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 1.h),
-                                    child: InputChip(
-                                        backgroundColor: Colors.green.shade700,
-                                        onPressed: () {
-                                          _loginBloc.add(StartBrowseOnlyMode());
-                                        },
-                                        label: Text(
-                                          "continue without login",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge,
-                                        )),
-                                  ),
-                                ],
+                                              SignInButton(
+                                                width: 10.w,
+                                                faIcon: FaIcon(
+                                                    FontAwesomeIcons.twitter),
+                                                loginType: LoginType.Twitter,
+                                                activated: true,
+                                                loggedInCallback:
+                                                    loggedInCallback,
+                                              ),
+                                            ],
+                                          )
+                                        : Container(),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 1.h),
+                                      child: InputChip(
+                                          backgroundColor:
+                                              Colors.green.shade700,
+                                          onPressed: () {
+                                            _loginBloc
+                                                .add(StartBrowseOnlyMode());
+                                          },
+                                          label: Text(
+                                            "continue without login",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Visibility(
-                          visible: _loginWithCredentialsVisible,
-                          child: LoginWithCredentials(
-                            username: widget.username,
-                            message: widget.message,
-                            width: 80.w,
+                          Visibility(
+                            visible: _loginWithCredentialsVisible,
+                            child: LoginWithCredentials(
+                              username: widget.username,
+                              message: widget.message,
+                              width: 80.w,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 2.h),
-                          child: Text("You want to know more about DTube?",
-                              style: Theme.of(context).textTheme.bodyLarge),
-                        ),
-                        Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InputChip(
-                                backgroundColor: globalAlmostWhite,
-                                onPressed: () {
-                                  launchUrl(Uri.parse(AppConfig.readmoreUrl));
-                                },
-                                label: Text(
-                                  "read the Whitepaper",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(color: globalBlue),
-                                )),
-                            Padding(
-                              padding: EdgeInsets.only(top: 1.h),
-                              child: InputChip(
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 2.h),
+                            child: Text("You want to know more about DTube?",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ),
+                          Column(
+                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InputChip(
                                   backgroundColor: globalAlmostWhite,
                                   onPressed: () {
-                                    launchUrl(Uri.parse(AppConfig.discordUrl));
+                                    launchUrl(Uri.parse(AppConfig.readmoreUrl));
                                   },
-                                  label: Container(
-                                    width: 50.w,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          "Join DTube's Discord",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .copyWith(color: globalBlue),
-                                        ),
-                                        FaIcon(
-                                          FontAwesomeIcons.discord,
-                                          color: globalBGColor,
-                                        )
-                                      ],
-                                    ),
+                                  label: Text(
+                                    "read the Whitepaper",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(color: globalBlue),
                                   )),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                              Padding(
+                                padding: EdgeInsets.only(top: 1.h),
+                                child: InputChip(
+                                    backgroundColor: globalAlmostWhite,
+                                    onPressed: () {
+                                      launchUrl(
+                                          Uri.parse(AppConfig.discordUrl));
+                                    },
+                                    label: Container(
+                                      width: 50.w,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            "Join DTube's Discord",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge!
+                                                .copyWith(color: globalBlue),
+                                          ),
+                                          FaIcon(
+                                            FontAwesomeIcons.discord,
+                                            color: globalBGColor,
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          // onboarding Journey
-          Visibility(
-            child: OnboardingJourney(
-              journeyDoneCallback: journeyDoneCallback,
+            // onboarding Journey
+            Visibility(
+              child: OnboardingJourney(
+                journeyDoneCallback: journeyDoneCallback,
+              ),
+              visible: !_journeyDone,
             ),
-            visible: !_journeyDone,
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
   }
 
   void loggedInCallback(String socialUId, String socialProvider) async {
