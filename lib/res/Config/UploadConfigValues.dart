@@ -5,10 +5,7 @@ class UploadConfig {
   static String ipfsUploadUrl = "https://ipfs.d.tube/ipfs/";
 
   static List<String> btfsUploadEndpoints = [
-    "https://1.btfsu.d.tube",
-    "https://2.btfsu.d.tube",
-    "https://3.btfsu.d.tube",
-    "https://4.btfsu.d.tube"
+    "https://upload.dtube.fso.ovh:5003"
   ];
 
   static List<Map<String, String>> web3StorageEndpoints = [{"api": "https://upload.dtube.fso.ovh:5082",
