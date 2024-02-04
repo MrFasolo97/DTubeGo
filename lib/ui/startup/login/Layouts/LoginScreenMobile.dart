@@ -24,7 +24,7 @@ class LoginFormMobile extends StatefulWidget {
   final String? username;
   final bool showOnboardingJourney;
 
-  bool googleFree = (appFlavor != null && appFlavor == "GoogleFree");
+  bool googleFree = (appFlavor != null && appFlavor!.toLowerCase() == "googlefree");
 
   LoginFormMobile({
     Key? key,

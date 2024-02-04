@@ -1,6 +1,7 @@
 // @dart=3.0
 import 'dart:io';
 
+import 'package:flavor_getter/flavor_getter.dart';
 import 'package:ovh.fso.dtubego/App.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +47,9 @@ void main() async {
     if (Platform.isAndroid || Platform.isIOS) {
       ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
       SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
-      await Firebase.initializeApp();
+      if(FlavorGetter().getFlavor().toString().toLowerCase() != "googlefree") {
+        await Firebase.initializeApp();
+      }
     }
   }
   SystemChrome.setPreferredOrientations(
