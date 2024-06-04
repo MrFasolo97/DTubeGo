@@ -53,16 +53,12 @@ final ThemeData dtubeDarkTheme = ThemeData(
   dividerColor: Color(0x1fffffff),
   highlightColor: Color(0x40cccccc),
   splashColor: Color(0x40cccccc),
-  selectedRowColor: Color(0xfff5f5f5),
   unselectedWidgetColor: globalTextColor,
   disabledColor: Color(0x4dffffff),
-  toggleableActiveColor: Color(0xffef192f),
   secondaryHeaderColor: Color(0xff616161),
-  backgroundColor: Color(0xff616161),
   dialogBackgroundColor: Color(0xff424242),
   indicatorColor: Color(0xff64ffda),
   hintColor: Color(0x80ffffff),
-  errorColor: Color(0xffd32f2f),
   // appBarTheme: AppBarTheme(backgroundColor: globalBGColor, elevation: 0),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -368,5 +364,39 @@ final ThemeData dtubeDarkTheme = ThemeData(
       style: BorderStyle.none,
     ),
     borderRadius: BorderRadius.all(Radius.circular(0.0)),
-  )),
+  )), checkboxTheme: CheckboxThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ return null;
+ }),
+ ), radioTheme: RadioThemeData(
+ fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ return null;
+ }),
+ ), switchTheme: SwitchThemeData(
+ thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ return null;
+ }),
+ trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+ if (states.contains(MaterialState.disabled)) { return null; }
+ if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ return null;
+ }),
+ ), colorScheme: ColorScheme.fromSwatch(primarySwatch: MaterialColor(4280361249, {
+    50: Color(0xfff2f2f2),
+    100: Color(0xffe6e6e6),
+    200: Color(0xffcccccc),
+    300: Color(0xffb3b3b3),
+    400: Color(0xff999999),
+    500: Color(0xff808080),
+    600: Color(0xff666666),
+    700: Color(0xff4d4d4d),
+    800: Color(0xff333333),
+    900: Color(0xff191919)
+  })).copyWith(error: Color(0xffd32f2f)).copyWith(background: Color(0xff616161)),
 );

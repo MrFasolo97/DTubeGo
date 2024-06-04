@@ -164,7 +164,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text('Do you really want to exit DTube Go?',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.titleSmall,
                       textAlign: TextAlign.center),
                 ),
                 SizedBox(height: 2.h),
@@ -172,7 +172,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                       'If you have an upload running in the background it will get lost if you close the app.',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center),
                 ),
                 SizedBox(height: 2.h),
@@ -187,7 +187,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                       ),
                       child: Text(
                         "Yes",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.titleSmall,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -246,12 +246,12 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                       child: Column(
                         children: [
                           Text("Hivesigner outdated",
-                              style: Theme.of(context).textTheme.headline4),
+                              style: Theme.of(context).textTheme.titleSmall),
                           Padding(
                             padding: EdgeInsets.only(top: 1.h),
                             child: Text(
                                 "The authorization for your hive account is not valid anymore. This happens automatically after 7 days for security reasons. Please renew the authorization by clicking on the button below.",
-                                style: Theme.of(context).textTheme.bodyText1),
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ),
                           BlocProvider<HivesignerBloc>(
                             create: (BuildContext context) => HivesignerBloc(
@@ -369,7 +369,7 @@ class _TabletScaffoldState extends State<TabletScaffold> {
                                     child: Text(
                                       "Join / Login",
                                       style:
-                                          Theme.of(context).textTheme.headline6,
+                                          Theme.of(context).textTheme.titleSmall,
                                     )),
                               )
                             : Row(

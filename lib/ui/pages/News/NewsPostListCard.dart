@@ -318,21 +318,21 @@ class PostInfoDetailsRow extends StatelessWidget {
       children: [
         Text(
           '@${widget.author}',
-          style: Theme.of(context).textTheme.bodyText2,
+          style: Theme.of(context).textTheme.bodyMedium,
           overflow: TextOverflow.ellipsis,
         ),
         Row(
           children: [
             Text(
               '${widget.publishDate}',
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
               ' - ' +
                   (widget.duration.inHours == 0
                       ? widget.duration.toString().substring(2, 7) + ' min'
                       : widget.duration.toString().substring(0, 7) + ' h'),
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
@@ -438,7 +438,7 @@ class TitleWidgetForRow extends StatelessWidget {
           widget.title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ),
     );

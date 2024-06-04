@@ -153,7 +153,7 @@ class _PostDetailPageTabletState extends State<PostDetailPageTablet> {
 
                   return Center(
                       child: Text("this post got flagged by you!",
-                          style: Theme.of(context).textTheme.headline4));
+                          style: Theme.of(context).textTheme.titleSmall));
                 }
               } else {
                 return Center(
@@ -590,7 +590,7 @@ class TitleWidget extends StatelessWidget {
           width: width * 0.7,
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.titleMedium,
             maxLines: 3,
           ),
         ),
