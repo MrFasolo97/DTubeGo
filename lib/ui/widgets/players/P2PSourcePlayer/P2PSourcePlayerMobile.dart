@@ -4,6 +4,7 @@ import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 class P2PSourcePlayerMobile extends StatefulWidget {
   final String videoUrl;
@@ -47,13 +48,8 @@ class _P2PSourcePlayerMobileState extends State<P2PSourcePlayerMobile> {
   late CustomVideoPlayerWebController _customVideoPlayerWebController;
   late ValueNotifier<bool> isPlaying;
   Future<void> initVideoPlayer() async {
-    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
+    videoPlayerController = VideoPlayerController.contentUri(Uri.parse(widget.videoUrl))
       ..initialize().then((value) => setState(() {}));
-    _customVideoPlayerController = CustomVideoPlayerController(
-      customVideoPlayerSettings: CustomVideoPlayerSettings(),
-      context: context,
-      videoPlayerController: videoPlayerController,
-    );
     _customVideoPlayerWebController = CustomVideoPlayerWebController(
       webVideoPlayerSettings: CustomVideoPlayerWebSettings(autoplay: true, src: widget.videoUrl, aspectRatio:
       aspectRatio > 0.0 ? aspectRatio : 16 / 11)
