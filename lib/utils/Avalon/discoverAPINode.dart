@@ -6,9 +6,14 @@ import 'package:http/http.dart' as http;
 
 import 'dart:collection';
 
+import 'package:ovh.fso.dtubego/utils/Avalon/getAPINodesList.dart';
+
 // Automatic node discovery based on their response time to request /count
 Future<String> discoverAPINode() async {
-  var _nodes = APINodeConfig.apiNodes;
+  var _nodes = await getAPINodesList();
+  if (_nodes.length < 1) {
+    _nodes = APINodeConfig.apiNodes;
+  }
   int _retries = 0;
   //if we are using experimental features aka not merged PRs then this will get executed
   if (APINodeConfig.useDevNodes) {
@@ -25,7 +30,8 @@ Future<String> discoverAPINode() async {
         _retries + 1; // every retry of the node list will increase the timeout
     // check response time of each node
     for (var node in _nodes) {
-      if (_ApiNodesOnError.containsKey(node) && _nodes.length > _ApiNodesOnError.length) {
+      if (_ApiNodesOnError.containsKey(node) &&
+          _nodes.length > _ApiNodesOnError.length) {
         continue;
       } else if (_nodes.length == _ApiNodesOnError.length) {
         break;
@@ -45,35 +51,35 @@ Future<String> discoverAPINode() async {
           log(node + ": " + response.statusCode.toString());
           _ApiNodesOnError[node] = -1;
         } else if (response.statusCode == 200) {
-          var _afterRequestMicroSeconds = DateTime
-              .now()
-              .microsecondsSinceEpoch;
+          var _afterRequestMicroSeconds = DateTime.now().microsecondsSinceEpoch;
           log(_afterRequestMicroSeconds.toString());
           // node responded
           // save responsetime to list
           int? count = await json.decode(await response.body)['count'] as int;
           await count;
-          if(count<=0) {
+          if (count <= 0) {
             _ApiNodesOnError[node] = -1;
           } else {
             _nodeResponses[node] =
                 _afterRequestMicroSeconds - _beforeRequestMicroSeconds;
           }
-        } else if(response.statusCode == 408 && _nodeResponses.length > 0) {
+        } else if (response.statusCode == 408 && _nodeResponses.length > 0) {
           _ApiNodesOnError[node] = -1;
         }
       } catch (e) {
-          print(e);
-          _ApiNodesOnError[node] = -1;
+        print(e);
+        _ApiNodesOnError[node] = -1;
       }
       if (_retries > 20) {
         break;
       }
     }
-  } while (_nodeResponses.length ==
-      0 && _nodes.length > _ApiNodesOnError.length); // as long as no node responded in specified timeout
+  } while (_nodeResponses.length == 0 &&
+      _nodes.length >
+          _ApiNodesOnError
+              .length); // as long as no node responded in specified timeout
 // sort all responses by their response time
-  if(_ApiNodesOnError.isNotEmpty) {
+  if (_ApiNodesOnError.isNotEmpty) {
     log("Nodes on error: " + _ApiNodesOnError.keys.toString());
   }
   _sortedApiNodesByResponseTime = SplayTreeMap.from(_nodeResponses,

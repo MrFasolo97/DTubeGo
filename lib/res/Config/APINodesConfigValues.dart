@@ -14,6 +14,7 @@ class APINodeConfig {
   static List<String> apiNodes = [
     // common api nodes
     'https://avalon.d.tube',
+    'https://avalon.luminade.fun',
     // 'https://dtube.club/mainnetapi',
     'https://api.avalonblocks.com',
     'https://dtube.fso.ovh'
