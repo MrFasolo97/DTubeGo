@@ -33,8 +33,6 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 33
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -49,7 +47,8 @@ android {
     defaultConfig {
         applicationId "ovh.fso.dtubego"
         minSdkVersion 27
-        targetSdkVersion 33
+        targetSdkVersion 34
+        compileSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
