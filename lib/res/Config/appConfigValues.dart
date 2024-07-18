@@ -1,7 +1,7 @@
 // list of global static application configurations
 class AppConfig {
   static String defaultWebsiteURL =
-      "https://d.tube"; // used for generating links for sharing
+      "https://dtube.app"; // used for generating links for sharing
 
 // verified url schemes
   static String originalDtuberListUrl = "https://dtube.fso.ovh/oc/creators";
@@ -14,11 +14,11 @@ class AppConfig {
 // urls for login screen
   static String signUpUrl = "https://signup.dtube.fso.ovh";
   static String readmoreUrl = "https://token.d.tube";
-  static String discordUrl = "https://discord.gg/dtube";
+  static String discordUrl = "https://discord.gg/QsBnrwqsSV";
   static String faqUrl = "https://d.tube/#!/wiki/faq/README";
   static String gitDTubeGoUrl = "https://github.com/MrFasolo97/DTubeGo";
   static String gitAvalonUrl = "https://github.com/dtube/avalon";
-  static String gitDtubeUrl = "https://github.com/dtube/dtube";
+  static String gitDtubeUrl = "https://github.com/dtubego/dtube";
 
   // activate/deactivate first user journey
   static bool faqStartup = true; // show on first startup
