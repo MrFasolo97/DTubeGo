@@ -1,14 +1,14 @@
-// @dart=2.9
+// @dart=3.0
 //
 import 'dart:io';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/App.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/App.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:dtube_go/res/Config/secretConfigValues.dart' as secretConfig;
+// import 'package:ovh.fso.dtubego/res/Config/secretConfigValues.dart' as secretConfig;
 
 const MaterialColor kPrimaryColor = const MaterialColor(
   0xFF223154,
@@ -31,6 +31,7 @@ void main() async {
 
   // deactivate landscape mode
   WidgetsFlutterBinding.ensureInitialized();
+  /*
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: FirebaseOptions(
@@ -47,6 +48,7 @@ void main() async {
       await Firebase.initializeApp();
     }
   }
+   */
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
