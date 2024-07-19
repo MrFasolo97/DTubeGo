@@ -153,13 +153,13 @@ class _WebPostDetailsState extends State<WebPostDetails> {
                                   margin: EdgeInsets.all(5.0),
                                   child: globals.disableAnimations
                                       ? AccountNavigationChip(
-                                          author: widget.post.author, size: 250,)
+                                          author: widget.post.author)
                                       : SlideInDown(
                                           preferences: AnimationPreferences(
                                               offset:
                                                   Duration(milliseconds: 500)),
                                           child: AccountNavigationChip(
-                                              author: widget.post.author, size: 250,))),
+                                              author: widget.post.author))),
                               globals.disableAnimations
                                   ? TitleWidget(
                                       title: widget.post.jsonString!.title)
@@ -242,7 +242,6 @@ class _WebPostDetailsState extends State<WebPostDetails> {
                                     ? DtubeCoinsChip(
                                         dist: widget.post.dist,
                                         post: widget.post,
-                                        width: 20,
                                       )
                                     : BounceIn(
                                         preferences: AnimationPreferences(
@@ -253,7 +252,6 @@ class _WebPostDetailsState extends State<WebPostDetails> {
                                             child: DtubeCoinsChip(
                                               dist: widget.post.dist,
                                               post: widget.post,
-                                              width: 20,
                                             )),
                                       ),
                               ],

@@ -1,29 +1,29 @@
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/bloc/hivesigner/hivesigner_bloc_full.dart';
-import 'package:dtube_go/ui/pages/News/NewsPage.dart';
-import 'package:dtube_go/ui/pages/settings/HiveSignerForm.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/ui/pages/Explore/GenreBase.dart';
-import 'package:dtube_go/ui/pages/upload/UploadPresetSelection.dart';
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/appstate/appstate_bloc_full.dart';
-import 'package:dtube_go/bloc/feed/feed_bloc_full.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/moments/MomentsTabContainer.dart';
-import 'package:dtube_go/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:dtube_go/ui/widgets/OverlayWidgets/OverlayIcon.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/hivesigner/hivesigner_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/Explore/GenreBase/GenreBase.dart';
+import 'package:ovh.fso.dtubego/ui/pages/News/NewsPage.dart';
+import 'package:ovh.fso.dtubego/ui/pages/settings/HiveSignerForm.dart';
+import 'package:ovh.fso.dtubego/ui/pages/upload/PresetSelection/UploadPresetSelection.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/appstate/appstate_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/moments/MomentsTabContainer.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayIcon.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:dtube_go/bloc/notification/notification_bloc_full.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:dtube_go/ui/MainContainer/Widgets/BalanceOverview.dart';
-import 'package:dtube_go/ui/MainContainer/Widgets/MenuButton.dart';
-import 'package:dtube_go/ui/pages/feeds/FeedTabContainer.dart';
-import 'package:dtube_go/ui/pages/notifications/NotificationButton.dart';
-import 'package:dtube_go/ui/pages/user/User.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/ui/widgets/system/customSnackbar.dart';
+import 'package:ovh.fso.dtubego/bloc/notification/notification_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/Widgets/BalanceOverview.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/Widgets/MenuButton.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/FeedTabContainer.dart';
+import 'package:ovh.fso.dtubego/ui/pages/notifications/NotificationButton.dart';
+import 'package:ovh.fso.dtubego/ui/pages/user/User.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/system/customSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -164,7 +164,7 @@ class _NavigationContainerWebState extends State<NavigationContainerWeb> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text('Do you really want to exit DTube Go?',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                       textAlign: TextAlign.center),
                 ),
                 SizedBox(height: 2.h),
@@ -172,7 +172,7 @@ class _NavigationContainerWebState extends State<NavigationContainerWeb> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                       'If you have an upload running in the background it will get lost if you close the app.',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center),
                 ),
                 SizedBox(height: 2.h),
@@ -187,7 +187,7 @@ class _NavigationContainerWebState extends State<NavigationContainerWeb> {
                       ),
                       child: Text(
                         "Yes",
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -246,12 +246,12 @@ class _NavigationContainerWebState extends State<NavigationContainerWeb> {
                       child: Column(
                         children: [
                           Text("Hivesigner outdated",
-                              style: Theme.of(context).textTheme.headline4),
+                              style: Theme.of(context).textTheme.headlineMedium),
                           Padding(
                             padding: EdgeInsets.only(top: 1.h),
                             child: Text(
                                 "The authorization for your hive account is not valid anymore. This happens automatically after 7 days for security reasons. Please renew the authorization by clicking on the button below.",
-                                style: Theme.of(context).textTheme.bodyText1),
+                                style: Theme.of(context).textTheme.bodyLarge),
                           ),
                           BlocProvider<HivesignerBloc>(
                             create: (BuildContext context) => HivesignerBloc(
@@ -509,7 +509,7 @@ class _NavigationContainerWebState extends State<NavigationContainerWeb> {
                                         "Join / Login",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline6,
+                                            .titleLarge,
                                       )),
                                 )
                               : Row(

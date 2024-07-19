@@ -377,7 +377,6 @@ class _PostDetailsState extends State<PostDetails> {
                                             ? DtubeCoinsChip(
                                                 dist: widget.post.dist,
                                                 post: widget.post,
-                                                width: 20,
                                               )
                                             : BounceIn(
                                                 preferences:
@@ -388,7 +387,6 @@ class _PostDetailsState extends State<PostDetails> {
                                                 child: DtubeCoinsChip(
                                                   dist: widget.post.dist,
                                                   post: widget.post,
-                                                  width: 20,
                                                 ),
                                               ),
                                       ],
@@ -563,10 +561,6 @@ class _PostDetailsState extends State<PostDetails> {
                               alignment: Alignment.topCenter,
                               child: FeedListSuggestedPosts(
                                 feedType: 'SuggestedPosts',
-                                clickedCallback: () {
-                                  _controller.pause();
-                                  _videocontroller.pause();
-                                },
                                 width: suggestedSize * 0.9,
                                 scrollCallback: (bool) {},
                               ),
