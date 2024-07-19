@@ -127,9 +127,6 @@ class _StartUpState extends State<StartUp> {
                         ]))),
                 context: context);
           }
-        }();
-        () async {
-          var packageInfo = await PackageInfo.fromPlatform();
           if (versions[packageInfo.version] == null ||
               versions[packageInfo.version]["unsupported"] == null ||
               versions[packageInfo.version]["unsupported"] == false) {
