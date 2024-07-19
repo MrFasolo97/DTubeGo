@@ -14,7 +14,7 @@ import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'dart:io';
-import 'package:disk_space_2/disk_space_2.dart';
+import 'package:disk_space/disk_space.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
