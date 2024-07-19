@@ -1,14 +1,13 @@
 // @dart=3.0
 //
 import 'dart:io';
-import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:ovh.fso.dtubego/App.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-// import 'package:ovh.fso.dtubego/res/Config/secretConfigValues.dart' as secretConfig;
+
+import 'App.dart';
 
 const MaterialColor kPrimaryColor = const MaterialColor(
   0xFF223154,
@@ -27,7 +26,7 @@ const MaterialColor kPrimaryColor = const MaterialColor(
 );
 
 void main() async {
-  sec.deleteAllSettings();
+  //sec.deleteAllSettings();
 
   // deactivate landscape mode
   WidgetsFlutterBinding.ensureInitialized();
