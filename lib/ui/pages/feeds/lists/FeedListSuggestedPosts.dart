@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc.dart';
 import 'package:ovh.fso.dtubego/bloc/feed/feed_response_model.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_state.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_repository.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/PostListCardSuggestions.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 typedef Bool2VoidFunc = void Function(bool);
 typedef ListOfString2VoidFunc = void Function(List<String>);
@@ -187,11 +196,7 @@ class FeedListSuggestedPosts extends StatelessWidget {
                   fixedDownvoteActivated: _fixedDownvoteActivated,
                   fixedDownvoteWeight: _fixedDownvoteWeight,
                   parentContext: context,
-                  autoPauseVideoOnPopup: _autoPauseVideoOnPopup,
-<<<<<<< HEAD
-                  clickedCallback: clickedCallback,
-=======
->>>>>>> adf1cbc (post details responsive)
+                  autoPauseVideoOnPopup: _autoPauseVideoOnPopup, clickedCallback: () {  },
                 ),
                 //Text(pos.toString())
               );

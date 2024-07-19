@@ -74,7 +74,7 @@ class _FeedMainPageState extends State<FeedMainPage>
   void initState() {
     if (globals.keyPermissions.isEmpty) {
       tabBarFeedItemList.removeAt(2); // remove MyFeed (followings) from tabs
-      //_tabNames.removeAt(2);
+      _tabNames.removeAt(2);
     }
 
     _tabController =
@@ -327,7 +327,7 @@ class _TabBarWithPositionState extends State<TabBarWithPosition> {
                     tabs: tabs,
                     controller: widget.tabController,
 
-                    labelStyle: Theme.of(context).textTheme.bodyText1!,
+                    labelStyle: Theme.of(context).textTheme.bodyLarge!,
                     indicatorSize: TabBarIndicatorSize.tab,
                     labelPadding: EdgeInsets.only(right: 10),
                   ),
