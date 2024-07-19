@@ -1,3 +1,4 @@
+import 'package:ovh.fso.dtubego/bloc/dmca/dmcaList.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
@@ -11,7 +12,7 @@ import 'package:ovh.fso.dtubego/ui/pages/post/widgets/ReplyButton.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VoteButtons.dart';
 
 import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
-
+import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -79,34 +80,36 @@ class CommentContainer extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: state.post.comments!.length,
                           padding: EdgeInsets.zero,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Column(
-                            children: [
-                              CommentDisplay(
-                                avatarSize: avatarSize,
-                                entry: state.post.comments![index],
-                                defaultVoteWeight: defaultVoteWeightComments,
-                                // currentVT: currentVT,
-                                parentAuthor: state.post.author,
-                                parentLink: state.post.link,
-                                defaultVoteTip: defaultVoteTipComments,
-                                parentContext: context,
-                                blockedUsers: blockedUsers.split(","),
-                                fixedDownvoteActivated: fixedDownvoteActivated,
-                                fixedDownvoteWeight: fixedDownvoteWeight,
-                                postBloc: new PostBloc(
-                                    repository: PostRepositoryImpl()),
-                                txBloc: txBloc,
-                                shrinkButtons: shrinkButtons,
-                              ),
-                            ],
-                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return isUserLinkDmcaBanned(state.post.author, state.post.link) == false ? Column(
+                              children: [
+
+                                CommentDisplay(
+                                  avatarSize: avatarSize,
+                                  entry: state.post.comments![index],
+                                  defaultVoteWeight: defaultVoteWeightComments,
+                                  // currentVT: currentVT,
+                                  parentAuthor: state.post.author,
+                                  parentLink: state.post.link,
+                                  defaultVoteTip: defaultVoteTipComments,
+                                  parentContext: context,
+                                  blockedUsers: blockedUsers.split(","),
+                                  fixedDownvoteActivated: fixedDownvoteActivated,
+                                  fixedDownvoteWeight: fixedDownvoteWeight,
+                                  postBloc: new PostBloc(
+                                      repository: PostRepositoryImpl()),
+                                  txBloc: txBloc,
+                                  shrinkButtons: shrinkButtons,
+                                ),
+                              ],
+                            ) : SizedBox(height: 0);}
                         ),
                       ),
                     ),
                   ],
-                ));
-          }
+                )
+              );
+            }
           return Center(
             child: DtubeLogoPulseWithSubtitle(
               subtitle: "loading comments...",

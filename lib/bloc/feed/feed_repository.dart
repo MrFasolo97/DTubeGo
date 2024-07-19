@@ -1,6 +1,7 @@
 import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/dmca/dmcaList.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
@@ -233,7 +234,7 @@ class FeedRepositoryImpl implements FeedRepository {
       List<FeedItem> feed = [];
       for (var f in _preFilterFeed) {
         // check if creator is blocked from applicationUser
-        if (!_blockedUsers.contains(f.author)) {
+        if (!_blockedUsers.contains(f.author) && isUserLinkDmcaBanned(f.author, f.link) != false) {
           // go through downvotes and check if one is from the applicationuser
           if (f.downvotes != null && f.downvotes!.length > 0) {
             bool downvotedByAppUser = false;
@@ -325,7 +326,8 @@ class FeedRepositoryImpl implements FeedRepository {
 
       for (var f in _preFilterFeed) {
         // check if creator is blocked from applicationUser
-        if (!_blockedUsers.contains(f.author)) {
+        bool isUserDmcaed = await isUserLinkDmcaBanned(f.author, f.link);
+        if (!_blockedUsers.contains(f.author) && !isUserDmcaed) {
           // go through downvotes and check if one is from the applicationuser
           if (f.downvotes != null && f.downvotes!.length > 0) {
             bool downvotedByAppUser = false;
