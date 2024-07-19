@@ -33,12 +33,11 @@ class TitleWidget extends StatelessWidget {
           child: globals.disableAnimations
               ? AccountNavigationChip(
                   author: author,
-                  size: chipWidth,
                 )
               : SlideInDown(
                   preferences:
                       AnimationPreferences(offset: Duration(milliseconds: 500)),
-                  child: AccountNavigationChip(author: author, size: chipWidth),
+                  child: AccountNavigationChip(author: author),
                 ),
         ),
       ],
