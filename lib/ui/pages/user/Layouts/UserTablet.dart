@@ -363,7 +363,6 @@ class _UserPageTabletState extends State<UserPageTablet> {
                                         .copyWith(fontSize: 40),
                                 subStyle:
                                     Theme.of(context).textTheme.displayLarge!,
-                                withShadow: true,
                               )
                             : FadeIn(
                                 preferences: AnimationPreferences(
@@ -378,7 +377,6 @@ class _UserPageTabletState extends State<UserPageTablet> {
                                       .copyWith(fontSize: 50),
                                   subStyle:
                                       Theme.of(context).textTheme.displayLarge!,
-                                  withShadow: true,
                                 )),
                       ),
                     ]),
