@@ -15,6 +15,9 @@ class APIUrlSchema {
   static String accountFeedWithTSFilterUrlFirst = "/blog/##USERNAME";
   static String accountFeedUrlMore = "/blog/##USERNAME/##AUTHORNAME/##LINK";
   static String notificationFeedUrl = "/notifications/##USERNAME";
+  static String avatarUrl = "/image/avatar/##USERNAME";
+  static String dmcaListUrl = 'https://raw.githubusercontent.com/dtubego/dmca/master/dmca.json';
+  static String dmcaCheckUrl = 'https://dmca.dtube.fso.ovh/v/##USERNAME/##LINK';
 
   // rewards and history url schemes
   static String rewardsUrl = "/votes/##REWARDSTATE/##USERNAME/0";
@@ -40,7 +43,7 @@ class APIUrlSchema {
 
   // search url schemes
   static String searchAccountsUrl =
-      "https://search.d.tube/avalon.accounts/_search?q=name:*##SEARCHSTRING*&size=50&sort=balance:desc";
+      "https://search.dtube.fso.ovh/avalon.accounts/_search?q=name:*##SEARCHSTRING*&size=50&sort=balance:desc";
   static String searchPostsUrl =
-      "https://search.d.tube/avalon.contents/_search?default_operator=OR&q=json.title:*##SEARCHSTRING*+author:*##SEARCHSTRING*+json.desc:*##SEARCHSTRING*&size=50&sort=ts:desc";
+      "https://search.dtube.fso.ovh/avalon.contents/_search?default_operator=OR&q=json.title:*##SEARCHSTRING*+author:*##SEARCHSTRING*+json.desc:*##SEARCHSTRING*&size=50&sort=ts:desc";
 }
