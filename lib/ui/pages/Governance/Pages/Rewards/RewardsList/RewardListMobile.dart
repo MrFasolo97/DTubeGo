@@ -53,7 +53,7 @@ class _RewardsListMobileState extends State<RewardsListMobile> {
                 itemCount: _rewards.length,
                 itemBuilder: (ctx, pos) {
                   return Center(
-                    child: RewardCardMobile(
+                    child: RewardsCard(
                       reward: _rewards[pos],
                       parentWidget: this.widget,
                     ),

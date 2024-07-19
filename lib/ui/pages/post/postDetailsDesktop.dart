@@ -1,36 +1,35 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggested.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
-import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
-import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
-import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
-import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/feed/feed_bloc.dart';
-import 'package:dtube_go/bloc/feed/feed_event.dart';
-import 'package:dtube_go/bloc/feed/feed_repository.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels.dart';
-import 'package:dtube_go/ui/MainContainer/NavigationContainer.dart';
-import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListSuggested.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/Comments.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/DTubeCoinsChip.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/ShareAndCommentChiips.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_event.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_repository.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListCarousel.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/NavigationContainer.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/tags/TagChip.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -154,7 +153,7 @@ class _PostDetailPageDesktopState extends State<PostDetailPageDesktop> {
 
                   return Center(
                       child: Text("this post got flagged by you!",
-                          style: Theme.of(context).textTheme.headline4));
+                          style: Theme.of(context).textTheme.headlineMedium));
                 }
               } else {
                 return Center(
@@ -311,7 +310,7 @@ class _PostDetailsState extends State<PostDetails> {
                                     ? player
                                     : ["ipfs", "sia"]
                                             .contains(widget.post.videoSource)
-                                        ? ChewiePlayer(
+                                        ? P2PSourcePlayer(
                                             videoUrl: widget.post.videoUrl!,
                                             autoplay:
                                                 !(widget.directFocus != "none"),
@@ -388,7 +387,6 @@ class _PostDetailsState extends State<PostDetails> {
                                           ? DtubeCoinsChip(
                                               dist: widget.post.dist,
                                               post: widget.post,
-                                              width: 2.w,
                                             )
                                           : BounceIn(
                                               preferences: AnimationPreferences(
@@ -397,7 +395,6 @@ class _PostDetailsState extends State<PostDetails> {
                                               child: DtubeCoinsChip(
                                                 dist: widget.post.dist,
                                                 post: widget.post,
-                                                width: 2.w,
                                               ),
                                             ),
                                     ],
@@ -588,7 +585,7 @@ class TitleWidget extends StatelessWidget {
           width: width * 0.7,
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.displaySmall,
             maxLines: 3,
           ),
         ),
@@ -596,12 +593,11 @@ class TitleWidget extends StatelessWidget {
           child: globals.disableAnimations
               ? AccountNavigationChip(
                   author: author,
-                  size: width * 0.2,
                 )
               : SlideInDown(
                   preferences:
                       AnimationPreferences(offset: Duration(milliseconds: 500)),
-                  child: AccountNavigationChip(author: author, size: 20.w),
+                  child: AccountNavigationChip(author: author),
                 ),
         ),
       ],

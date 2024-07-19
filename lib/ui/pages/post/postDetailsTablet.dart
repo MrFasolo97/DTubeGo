@@ -1,36 +1,34 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dtube_go/bloc/transaction/transaction_bloc_full.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggested.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
-import 'package:dtube_go/ui/pages/post/widgets/Comments.dart';
-import 'package:dtube_go/ui/pages/post/widgets/DTubeCoinsChip.dart';
-import 'package:dtube_go/ui/pages/post/widgets/ShareAndCommentChiips.dart';
-import 'package:dtube_go/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
-import 'package:dtube_go/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:dtube_go/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:dtube_go/bloc/feed/feed_bloc.dart';
-import 'package:dtube_go/bloc/feed/feed_event.dart';
-import 'package:dtube_go/bloc/feed/feed_repository.dart';
-import 'package:dtube_go/style/ThemeData.dart';
-import 'package:dtube_go/ui/pages/feeds/lists/FeedListCarousel.dart';
-import 'package:dtube_go/ui/widgets/Suggestions/SuggestedChannels.dart';
-import 'package:dtube_go/ui/MainContainer/NavigationContainer.dart';
-import 'package:dtube_go/ui/widgets/tags/TagChip.dart';
+import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
+import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/Comments.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/DTubeCoinsChip.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/ShareAndCommentChiips.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VotingAndGiftingButtons.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/players/P2PSourcePlayer/P2PSourcePlayer.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
+import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_event.dart';
+import 'package:ovh.fso.dtubego/bloc/feed/feed_repository.dart';
+import 'package:ovh.fso.dtubego/style/ThemeData.dart';
+import 'package:ovh.fso.dtubego/ui/MainContainer/NavigationContainer.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/tags/TagChip.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+
+import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:dtube_go/bloc/auth/auth_bloc_full.dart';
-import 'package:dtube_go/bloc/settings/settings_bloc_full.dart';
-import 'package:dtube_go/bloc/user/user_bloc_full.dart';
-import 'package:dtube_go/bloc/postdetails/postdetails_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
+import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dtube_go/ui/widgets/players/P2PSourcePlayer.dart';
-import 'package:dtube_go/ui/widgets/AccountAvatar.dart';
-import 'package:dtube_go/ui/pages/post/widgets/CollapsedDescription.dart';
-import 'package:dtube_go/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
+import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart';
+import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -46,10 +44,10 @@ class PostDetailPageTablet extends StatefulWidget {
 
   PostDetailPageTablet(
       {required this.link,
-      required this.author,
-      required this.recentlyUploaded,
-      required this.directFocus,
-      this.onPop});
+        required this.author,
+        required this.recentlyUploaded,
+        required this.directFocus,
+        this.onPop});
 
   @override
   _PostDetailPageTabletState createState() => _PostDetailPageTabletState();
@@ -65,16 +63,16 @@ class _PostDetailPageTabletState extends State<PostDetailPageTablet> {
           context,
           MaterialPageRoute(
               builder: (context) => MultiBlocProvider(providers: [
-                    BlocProvider<UserBloc>(
-                      create: (BuildContext context) =>
-                          UserBloc(repository: UserRepositoryImpl()),
-                    ),
-                    BlocProvider<AuthBloc>(
-                      create: (BuildContext context) =>
-                          AuthBloc(repository: AuthRepositoryImpl()),
-                    ),
-                  ], child: NavigationContainer())),
-          (route) => false);
+                BlocProvider<UserBloc>(
+                  create: (BuildContext context) =>
+                      UserBloc(repository: UserRepositoryImpl()),
+                ),
+                BlocProvider<AuthBloc>(
+                  create: (BuildContext context) =>
+                      AuthBloc(repository: AuthRepositoryImpl()),
+                ),
+              ], child: NavigationContainer())),
+              (route) => false);
     } else {
       Navigator.pop(context);
     }
@@ -93,16 +91,16 @@ class _PostDetailPageTabletState extends State<PostDetailPageTablet> {
       providers: [
         BlocProvider<PostBloc>(
           create: (BuildContext context) =>
-              PostBloc(repository: PostRepositoryImpl())
-                ..add(FetchPostEvent(
-                    widget.author, widget.link, "PageDetailsPageV2.dart 1")),
+          PostBloc(repository: PostRepositoryImpl())
+            ..add(FetchPostEvent(
+                widget.author, widget.link, "PageDetailsPageV2.dart 1")),
         ),
         BlocProvider<UserBloc>(
             create: (BuildContext context) =>
                 UserBloc(repository: UserRepositoryImpl())),
         BlocProvider<SettingsBloc>(
           create: (BuildContext context) =>
-              SettingsBloc()..add(FetchSettingsEvent()),
+          SettingsBloc()..add(FetchSettingsEvent()),
         ),
       ],
       // child: WillPopScope(
@@ -126,10 +124,10 @@ class _PostDetailPageTabletState extends State<PostDetailPageTablet> {
             appBar: kIsWeb
                 ? null
                 : AppBar(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    toolbarHeight: 28,
-                  ),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              toolbarHeight: 28,
+            ),
             body: BlocBuilder<PostBloc, PostState>(builder: (context, state) {
               if (state is PostLoadingState) {
                 return Center(
@@ -146,7 +144,7 @@ class _PostDetailPageTabletState extends State<PostDetailPageTablet> {
                     child: PostDetails(
                       post: state.post,
                       directFocus:
-                          reloadCount <= 1 ? widget.directFocus : "none",
+                      reloadCount <= 1 ? widget.directFocus : "none",
                     ),
                   );
                 } else {
@@ -154,7 +152,7 @@ class _PostDetailPageTabletState extends State<PostDetailPageTablet> {
 
                   return Center(
                       child: Text("this post got flagged by you!",
-                          style: Theme.of(context).textTheme.headline4));
+                          style: Theme.of(context).textTheme.headlineMedium));
                 }
               } else {
                 return Center(
@@ -166,8 +164,8 @@ class _PostDetailPageTabletState extends State<PostDetailPageTablet> {
               }
             }),
           )
-          //)
-          ),
+        //)
+      ),
     );
   }
 }
@@ -201,7 +199,7 @@ class _PostDetailsState extends State<PostDetails> {
   String blockedUsers = "";
   late PostBloc postBloc = new PostBloc(repository: PostRepositoryImpl());
   late TransactionBloc txBloc =
-      new TransactionBloc(repository: TransactionRepositoryImpl());
+  new TransactionBloc(repository: TransactionRepositoryImpl());
 
   double suggestedSize = 250;
 
@@ -282,19 +280,19 @@ class _PostDetailsState extends State<PostDetails> {
                               alignment: Alignment.centerLeft,
                               child: globals.disableAnimations
                                   ? TitleWidget(
-                                      title: widget.post.jsonString!.title,
-                                      author: widget.post.author,
-                                      width: 100.w - suggestedSize,
-                                    )
+                                title: widget.post.jsonString!.title,
+                                author: widget.post.author,
+                                width: 100.w - suggestedSize,
+                              )
                                   : FadeInLeft(
-                                      preferences: AnimationPreferences(
-                                          offset: Duration(milliseconds: 700),
-                                          duration: Duration(seconds: 1)),
-                                      child: TitleWidget(
-                                          title: widget.post.jsonString!.title,
-                                          author: widget.post.author,
-                                          width: 100.w - suggestedSize),
-                                    ),
+                                preferences: AnimationPreferences(
+                                    offset: Duration(milliseconds: 700),
+                                    duration: Duration(seconds: 1)),
+                                child: TitleWidget(
+                                    title: widget.post.jsonString!.title,
+                                    author: widget.post.author,
+                                    width: 100.w - suggestedSize),
+                              ),
                             ),
                           ),
                         ],
@@ -310,23 +308,23 @@ class _PostDetailsState extends State<PostDetails> {
                                 widget.post.videoSource == "youtube"
                                     ? player
                                     : ["ipfs", "sia"]
-                                            .contains(widget.post.videoSource)
-                                        ? ChewiePlayer(
-                                            videoUrl: widget.post.videoUrl!,
-                                            autoplay:
-                                                !(widget.directFocus != "none"),
-                                            looping: false,
-                                            localFile: false,
-                                            controls: true,
-                                            usedAsPreview: false,
-                                            allowFullscreen: true,
-                                            portraitVideoPadding: 5.w,
-                                            videocontroller: _videocontroller,
-                                            placeholderWidth: 100.w,
-                                            placeholderSize: 40.w,
-                                          )
-                                        : CachedNetworkImage(
-                                            imageUrl: widget.post.thumbUrl!),
+                                    .contains(widget.post.videoSource)
+                                    ? P2PSourcePlayer(
+                                  videoUrl: widget.post.videoUrl!,
+                                  autoplay:
+                                  !(widget.directFocus != "none"),
+                                  looping: false,
+                                  localFile: false,
+                                  controls: true,
+                                  usedAsPreview: false,
+                                  allowFullscreen: true,
+                                  portraitVideoPadding: 5.w,
+                                  videocontroller: _videocontroller,
+                                  placeholderWidth: 100.w,
+                                  placeholderSize: 40.w,
+                                )
+                                    : CachedNetworkImage(
+                                    imageUrl: widget.post.thumbUrl!),
 
                                 SizedBox(
                                   height: 2.h,
@@ -334,123 +332,121 @@ class _PostDetailsState extends State<PostDetails> {
                                 FadeIn(
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       widget.post.tags.length > 0
                                           ? Row(
-                                              children: [
-                                                widget.post.jsonString!.oc == 1
-                                                    ? SizedBox(
-                                                        width:
-                                                            globalIconSizeMedium,
-                                                        child: FaIcon(
-                                                            FontAwesomeIcons
-                                                                .award,
-                                                            size:
-                                                                globalIconSizeMedium))
-                                                    : SizedBox(width: 0),
-                                                Container(
-                                                  width:
-                                                      (100.w - suggestedSize) *
-                                                          0.6,
-                                                  height: 5.h,
-                                                  child: ListView.builder(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      itemCount: widget
-                                                          .post.tags.length,
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        return Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 8.0),
-                                                          child: TagChip(
-                                                              waitBeforeFadeIn:
-                                                                  Duration(
-                                                                      seconds:
-                                                                          1),
-                                                              fadeInFromLeft:
-                                                                  true,
-                                                              width: 10.w,
-                                                              tagName: widget
-                                                                  .post
-                                                                  .tags[index]
-                                                                  .toString()),
-                                                        );
-                                                      }),
-                                                ),
-                                              ],
-                                            )
+                                        children: [
+                                          widget.post.jsonString!.oc == 1
+                                              ? SizedBox(
+                                              width:
+                                              globalIconSizeMedium,
+                                              child: FaIcon(
+                                                  FontAwesomeIcons
+                                                      .award,
+                                                  size:
+                                                  globalIconSizeMedium))
+                                              : SizedBox(width: 0),
+                                          Container(
+                                            width:
+                                            (100.w - suggestedSize) *
+                                                0.6,
+                                            height: 5.h,
+                                            child: ListView.builder(
+                                                scrollDirection:
+                                                Axis.horizontal,
+                                                itemCount: widget
+                                                    .post.tags.length,
+                                                itemBuilder:
+                                                    (context, index) {
+                                                  return Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        right: 8.0),
+                                                    child: TagChip(
+                                                        waitBeforeFadeIn:
+                                                        Duration(
+                                                            seconds:
+                                                            1),
+                                                        fadeInFromLeft:
+                                                        true,
+                                                        width: 10.w,
+                                                        tagName: widget
+                                                            .post
+                                                            .tags[index]
+                                                            .toString()),
+                                                  );
+                                                }),
+                                          ),
+                                        ],
+                                      )
                                           : SizedBox(height: 0),
                                       globals.disableAnimations
                                           ? DtubeCoinsChip(
-                                              dist: widget.post.dist,
-                                              post: widget.post,
-                                              width: 2.w,
-                                            )
+                                        dist: widget.post.dist,
+                                        post: widget.post,
+                                      )
                                           : BounceIn(
-                                              preferences: AnimationPreferences(
-                                                  offset: Duration(
-                                                      milliseconds: 1200)),
-                                              child: DtubeCoinsChip(
-                                                dist: widget.post.dist,
-                                                post: widget.post,
-                                                width: 2.w,
-                                              ),
-                                            ),
+                                        preferences: AnimationPreferences(
+                                            offset: Duration(
+                                                milliseconds: 1200)),
+                                        child: DtubeCoinsChip(
+                                          dist: widget.post.dist,
+                                          post: widget.post,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
                                 globals.disableAnimations
                                     ? VotingAndGiftBButtons(
-                                        author: widget.post.author,
-                                        link: widget.post.link,
-                                      )
+                                  author: widget.post.author,
+                                  link: widget.post.link,
+                                )
                                     : FadeInRight(
-                                        preferences: AnimationPreferences(
-                                            offset:
-                                                Duration(milliseconds: 200)),
-                                        child: VotingAndGiftBButtons(
-                                          author: widget.post.author,
-                                          link: widget.post.link,
-                                        )),
+                                    preferences: AnimationPreferences(
+                                        offset:
+                                        Duration(milliseconds: 200)),
+                                    child: VotingAndGiftBButtons(
+                                      author: widget.post.author,
+                                      link: widget.post.link,
+                                    )),
                                 globals.disableAnimations
                                     ? CollapsedDescription(
-                                        startCollapsed: false,
-                                        description:
-                                            widget.post.jsonString!.desc != null
-                                                ? widget.post.jsonString!.desc!
-                                                : "")
+                                    startCollapsed: false,
+                                    description:
+                                    widget.post.jsonString!.desc != null
+                                        ? widget.post.jsonString!.desc!
+                                        : "")
                                     : FadeInDown(
-                                        child: CollapsedDescription(
-                                            startCollapsed: false,
-                                            description: widget.post.jsonString!
-                                                        .desc !=
-                                                    null
-                                                ? widget.post.jsonString!.desc!
-                                                : ""),
-                                      ),
+                                  child: CollapsedDescription(
+                                      startCollapsed: false,
+                                      description: widget.post.jsonString!
+                                          .desc !=
+                                          null
+                                          ? widget.post.jsonString!.desc!
+                                          : ""),
+                                ),
                                 globals.disableAnimations
                                     ? ShareAndCommentChips(
-                                        author: widget.post.author,
-                                        link: widget.post.link,
-                                        directFocus: widget.directFocus,
-                                        defaultVoteWeightComments:
-                                            _defaultVoteWeightComments,
-                                        postBloc: postBloc,
-                                        txBloc: txBloc)
+                                    author: widget.post.author,
+                                    link: widget.post.link,
+                                    directFocus: widget.directFocus,
+                                    defaultVoteWeightComments:
+                                    _defaultVoteWeightComments,
+                                    postBloc: postBloc,
+                                    txBloc: txBloc)
                                     : FadeInUp(
-                                        child: ShareAndCommentChips(
-                                            author: widget.post.author,
-                                            link: widget.post.link,
-                                            directFocus: widget.directFocus,
-                                            defaultVoteWeightComments:
-                                                _defaultVoteWeightComments,
-                                            postBloc: postBloc,
-                                            txBloc: txBloc),
-                                      ),
+                                  child: ShareAndCommentChips(
+                                      author: widget.post.author,
+                                      link: widget.post.link,
+                                      directFocus: widget.directFocus,
+                                      defaultVoteWeightComments:
+                                      _defaultVoteWeightComments,
+                                      postBloc: postBloc,
+                                      txBloc: txBloc),
+                                ),
                                 SizedBox(height: 16),
                                 MultiBlocProvider(
                                     providers: [
@@ -460,80 +456,80 @@ class _PostDetailsState extends State<PostDetails> {
                                           create: (BuildContext context) =>
                                               UserBloc(
                                                   repository:
-                                                      UserRepositoryImpl())),
+                                                  UserRepositoryImpl())),
                                     ],
                                     child: widget.post.comments != null &&
-                                            widget.post.comments!.length > 0
+                                        widget.post.comments!.length > 0
                                         ? globals.disableAnimations
-                                            ? CommentContainer(
-                                                shrinkButtons: false,
-                                                avatarSize: 3.w,
-                                                height: (14.h *
-                                                            (widget.post.comments == null
-                                                                ? 1
-                                                                : widget
-                                                                    .post
-                                                                    .comments!
-                                                                    .length)) >
-                                                        42.h
-                                                    ? 42.h
-                                                    : 14.h *
-                                                        (widget.post.comments ==
-                                                                null
-                                                            ? 1
-                                                            : widget.post.comments!
-                                                                .length),
-                                                defaultVoteWeightComments:
-                                                    _defaultVoteWeightComments,
-                                                defaultVoteTipComments:
-                                                    _defaultVoteTipComments,
-                                                blockedUsers: blockedUsers,
-                                                fixedDownvoteActivated:
-                                                    _fixedDownvoteActivated,
-                                                fixedDownvoteWeight:
-                                                    _fixedDownvoteWeight,
-                                                postBloc: postBloc
-                                                  ..add(FetchPostEvent(
-                                                      widget.post.author,
-                                                      widget.post.link,
-                                                      "PageDetailsPageV2.dart 2")),
-                                                txBloc: txBloc)
-                                            : SlideInLeft(
-                                                child: CommentContainer(
-                                                    shrinkButtons: false,
-                                                    height: (14.h *
-                                                                (widget.post.comments ==
-                                                                        null
-                                                                    ? 1
-                                                                    : widget
-                                                                        .post.comments!.length)) >
-                                                            42.h
-                                                        ? 42.h
-                                                        : 14.h *
-                                                            (widget.post.comments ==
-                                                                    null
-                                                                ? 1
-                                                                : widget
-                                                                    .post
-                                                                    .comments!
-                                                                    .length),
-                                                    avatarSize: 3.w,
-                                                    defaultVoteWeightComments:
-                                                        _defaultVoteWeightComments,
-                                                    defaultVoteTipComments:
-                                                        _defaultVoteTipComments,
-                                                    blockedUsers: blockedUsers,
-                                                    fixedDownvoteActivated:
-                                                        _fixedDownvoteActivated,
-                                                    fixedDownvoteWeight:
-                                                        _fixedDownvoteWeight,
-                                                    postBloc: postBloc
-                                                      ..add(FetchPostEvent(
-                                                          widget.post.author,
-                                                          widget.post.link,
-                                                          "PageDetailsPageV2.dart 3")),
-                                                    txBloc: txBloc),
-                                              )
+                                        ? CommentContainer(
+                                        shrinkButtons: false,
+                                        avatarSize: 3.w,
+                                        height: (14.h *
+                                            (widget.post.comments == null
+                                                ? 1
+                                                : widget
+                                                .post
+                                                .comments!
+                                                .length)) >
+                                            42.h
+                                            ? 42.h
+                                            : 14.h *
+                                            (widget.post.comments ==
+                                                null
+                                                ? 1
+                                                : widget.post.comments!
+                                                .length),
+                                        defaultVoteWeightComments:
+                                        _defaultVoteWeightComments,
+                                        defaultVoteTipComments:
+                                        _defaultVoteTipComments,
+                                        blockedUsers: blockedUsers,
+                                        fixedDownvoteActivated:
+                                        _fixedDownvoteActivated,
+                                        fixedDownvoteWeight:
+                                        _fixedDownvoteWeight,
+                                        postBloc: postBloc
+                                          ..add(FetchPostEvent(
+                                              widget.post.author,
+                                              widget.post.link,
+                                              "PageDetailsPageV2.dart 2")),
+                                        txBloc: txBloc)
+                                        : SlideInLeft(
+                                      child: CommentContainer(
+                                          shrinkButtons: false,
+                                          height: (14.h *
+                                              (widget.post.comments ==
+                                                  null
+                                                  ? 1
+                                                  : widget
+                                                  .post.comments!.length)) >
+                                              42.h
+                                              ? 42.h
+                                              : 14.h *
+                                              (widget.post.comments ==
+                                                  null
+                                                  ? 1
+                                                  : widget
+                                                  .post
+                                                  .comments!
+                                                  .length),
+                                          avatarSize: 3.w,
+                                          defaultVoteWeightComments:
+                                          _defaultVoteWeightComments,
+                                          defaultVoteTipComments:
+                                          _defaultVoteTipComments,
+                                          blockedUsers: blockedUsers,
+                                          fixedDownvoteActivated:
+                                          _fixedDownvoteActivated,
+                                          fixedDownvoteWeight:
+                                          _fixedDownvoteWeight,
+                                          postBloc: postBloc
+                                            ..add(FetchPostEvent(
+                                                widget.post.author,
+                                                widget.post.link,
+                                                "PageDetailsPageV2.dart 3")),
+                                          txBloc: txBloc),
+                                    )
                                         : SizedBox(height: 0)),
 
                                 SizedBox(height: 200)
@@ -542,10 +538,10 @@ class _PostDetailsState extends State<PostDetails> {
                           ),
                           BlocProvider<FeedBloc>(
                             create: (context) =>
-                                FeedBloc(repository: FeedRepositoryImpl())
-                                  ..add(FetchSuggestedPostsForPost(
-                                      currentUsername: widget.post.author,
-                                      tags: widget.post.tags)),
+                            FeedBloc(repository: FeedRepositoryImpl())
+                              ..add(FetchSuggestedPostsForPost(
+                                  currentUsername: widget.post.author,
+                                  tags: widget.post.tags)),
                             child: Align(
                               alignment: Alignment.topCenter,
                               child: FeedListSuggestedPosts(
@@ -570,9 +566,9 @@ class _PostDetailsState extends State<PostDetails> {
 class TitleWidget extends StatelessWidget {
   const TitleWidget(
       {Key? key,
-      required this.title,
-      required this.author,
-      required this.width})
+        required this.title,
+        required this.author,
+        required this.width})
       : super(key: key);
 
   final String title;
@@ -588,21 +584,20 @@ class TitleWidget extends StatelessWidget {
           width: width * 0.7,
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.displaySmall,
             maxLines: 3,
           ),
         ),
         Container(
           child: globals.disableAnimations
               ? AccountNavigationChip(
-                  author: author,
-                  size: width * 0.2,
-                )
+            author: author,
+          )
               : SlideInDown(
-                  preferences:
-                      AnimationPreferences(offset: Duration(milliseconds: 500)),
-                  child: AccountNavigationChip(author: author, size: 20.w),
-                ),
+            preferences:
+            AnimationPreferences(offset: Duration(milliseconds: 500)),
+            child: AccountNavigationChip(author: author),
+          ),
         ),
       ],
     );
