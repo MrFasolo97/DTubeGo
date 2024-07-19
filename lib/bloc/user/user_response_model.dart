@@ -83,8 +83,8 @@ class User {
         json['json'] != null ? new JsonString.fromJson(json['json']) : null;
     approves =
         json['approves'] != null ? json['approves'].cast<String>() : null;
-    nodeAppr = json['node_appr'];
-    pubLeader = json['pub_leader'];
+    nodeAppr = json['node_appr'] != null ? json['node_appr'] : null;
+    pubLeader = json['pub_leader'] != null ? json['pub_leader'] : null;
     if (followers != null && followers!.contains(currentUser)) {
       alreadyFollowing = true;
     } else {
@@ -197,7 +197,9 @@ class JsonString {
 
   JsonString.fromJson(Map<String, dynamic> json) {
     node = json['node'] != null ? new Node.fromJson(json['node']) : null;
-    profile = new Profile.fromJson(json['profile']);
+    if (json['profile'] != null) {
+      profile = new Profile.fromJson(json['profile']);
+    }
     additionals = json['additionals'] != null
         ? new Additionals.fromJson(json['additionals'])
         : null;

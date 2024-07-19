@@ -16,7 +16,7 @@ class DaoRepositoryImpl implements DaoRepository {
         APIUrlSchema.daoUrl
             .replaceAll("##STATUS", daoStatus)
             .replaceAll("##TYPE", daoType)));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 304) {
       var data = json.decode(response.body);
 
       List<DAOItem> daoList = ApiResultModel.fromJson(data).daoList;

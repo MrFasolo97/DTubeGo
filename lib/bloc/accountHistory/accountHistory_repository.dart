@@ -17,7 +17,7 @@ class AccountHistoryRepositoryImpl implements AccountHistoryRepository {
         APIUrlSchema.accountHistoryFeedUrl
             .replaceAll("##USERNAME", applicationUser)
             .replaceAll("##FROMBLOC", fromBloc.toString())));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 304) {
       var data = json.decode(response.body);
       // filter here for specific accountHistory types
       List<AvalonAccountHistoryItem> historyItems =

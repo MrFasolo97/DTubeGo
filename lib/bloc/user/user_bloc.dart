@@ -28,7 +28,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         emit(UserLoadedState(user: _user, verified: _verified));
       } catch (e) {
-        emit(UserErrorState(message: e.toString()));
+        emit(UserErrorState(message: e.toString()+'#1'));
       }
     });
 
@@ -39,16 +39,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         User user = await repository.getAccountData(
             _avalonApiNode, _applicationUser, _applicationUser);
-        bool _verified =
-            await repository.getAccountVerificationOffline(_applicationUser);
-
+        bool _verified = await repository.getAccountVerificationOffline(_applicationUser);
         if (user.jsonString?.additionals?.blocking != null) {
           await sec.persistBlockedUsers(
               user.jsonString!.additionals!.blocking!.join(","));
         }
+
         emit(UserLoadedState(user: user, verified: _verified));
       } catch (e) {
-        emit(UserErrorState(message: e.toString()));
+        emit(UserErrorState(message: e.toString() + '#2'));
       }
     });
 
@@ -65,7 +64,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(
             UserDTCVPLoadedState(dtcBalance: dtcBalance, vtBalance: vtBalance));
       } catch (e) {
-        emit(UserErrorState(message: e.toString()));
+        emit(UserErrorState(message: e.toString()+'#3'));
       }
     });
   }

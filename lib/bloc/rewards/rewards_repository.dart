@@ -16,7 +16,7 @@ class RewardRepositoryImpl implements RewardsRepository {
         APIUrlSchema.rewardsUrl
             .replaceAll("##USERNAME", applicationUser)
             .replaceAll("##REWARDSTATE", rewardState)));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 304) {
       var data = json.decode(response.body);
 
       List<Reward> rewardList = ApiResultModel.fromJson(data).rewardList;

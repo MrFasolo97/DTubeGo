@@ -62,7 +62,7 @@ class AuthRepositoryImpl implements AuthRepository {
       // username unknown
       _keyIsValid = false;
     } else {
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 304) {
         var data = json.decode(response.body);
         Auth authInformation = ApiResultModel.fromJson(data).auth;
         if (pub.toString() == authInformation.pub) {
@@ -115,7 +115,7 @@ class AuthRepositoryImpl implements AuthRepository {
       // username unknown
       return [];
     } else {
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 304) {
         var data = json.decode(response.body);
         Auth authInformation = ApiResultModel.fromJson(data).auth;
         List<int> _txTypes = [];
@@ -139,7 +139,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   void fetchAndStoreVerifiedUsers() async {
     var response = await http.get(Uri.parse(AppConfig.originalDtuberListUrl));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 304) {
       var data = json.decode(response.body);
 
       globals.verifiedUsers = List.from(data);

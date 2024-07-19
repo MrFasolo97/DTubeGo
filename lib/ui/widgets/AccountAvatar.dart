@@ -1,7 +1,9 @@
+import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
-
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayText.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart';
 import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -12,6 +14,8 @@ import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:developer' as dev;
+
 
 class AvatarErrorPlaceholder extends StatelessWidget {
   const AvatarErrorPlaceholder({
@@ -146,100 +150,93 @@ class _AccountIconState extends State<AccountIcon> {
                 children: [
                   widget.showBorder
                       ? CircleAvatar(
-                          backgroundColor: globalAlmostWhite,
-                          maxRadius: (widget.avatarSize / 2) + 0.5.w,
-                          child: state.user.jsonString != null &&
-                                  state.user.jsonString?.profile != null &&
-                                  state.user.jsonString?.profile?.avatar != ""
-                              ? CachedNetworkImage(
-                                  imageUrl: state
+                      backgroundColor: globalAlmostWhite,
+                      maxRadius: (widget.avatarSize / 2) + 0.5.w,
+                      child: CachedNetworkImage(
+                        imageUrl: globals.currentApiNode + APIUrlSchema.avatarUrl.replaceFirst(
+                            "##USERNAME", state.user.name) /* state
                                       .user.jsonString!.profile!.avatar!
-                                      .replaceAll("http:", "https:"),
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    width: widget.avatarSize - 1.w,
-                                    height: widget.avatarSize - 1.w,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
-                                  placeholder: (context, url) => Container(
-                                      width: widget.avatarSize,
-                                      height: widget.avatarSize,
-                                      child: AvatarLoadingPlaceholder(
-                                          size: widget.avatarSize)),
-                                  errorWidget: (context, url, error) =>
-                                      Container(
-                                          width: widget.avatarSize,
-                                          height: widget.avatarSize,
-                                          child: AvatarLoadingPlaceholder(
-                                              size: widget.avatarSize)),
-                                )
-                              : AvatarLoadingPlaceholder(
-                                  size: widget.avatarSize,
-                                ),
-                        )
-                      : state.user.jsonString != null &&
-                              state.user.jsonString?.profile != null &&
-                              state.user.jsonString?.profile?.avatar != ""
-                          ? CachedNetworkImage(
-                              imageUrl: state.user.jsonString!.profile!.avatar!
-                                  .replaceAll("http:", "https:"),
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
+                                      .replaceAll("http:", "https:")
+                                      */,
+                        imageBuilder: (context, imageProvider) =>
+                            Container(
+                              width: widget.avatarSize - 1.w,
+                              height: widget.avatarSize - 1.w,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                        placeholder: (context, url) =>
+                            Container(
                                 width: widget.avatarSize,
                                 height: widget.avatarSize,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: imageProvider, fit: BoxFit.cover),
-                                ),
-                              ),
-                              placeholder: (context, url) => Container(
-                                  width: widget.avatarSize,
-                                  height: widget.avatarSize,
-                                  child: AvatarLoadingPlaceholder(
-                                      size: widget.avatarSize)),
-                              errorWidget: (context, url, error) => Container(
-                                  width: widget.avatarSize,
-                                  height: widget.avatarSize,
-                                  child: AvatarLoadingPlaceholder(
-                                      size: widget.avatarSize)),
-                            )
-                          : AvatarLoadingPlaceholder(
-                              size: widget.avatarSize,
-                            ),
+                                child: AvatarLoadingPlaceholder(
+                                    size: widget.avatarSize)),
+                        errorWidget: (context, url, error) =>
+                            Container(
+                                width: widget.avatarSize,
+                                height: widget.avatarSize,
+                                child: AvatarLoadingPlaceholder(
+                                    size: widget.avatarSize)),
+                      )
+                  )
+                      : CachedNetworkImage(
+                    imageUrl: globals.currentApiNode + APIUrlSchema.avatarUrl.replaceFirst(
+                        "##USERNAME", state.user.name),
+                    imageBuilder: (context, imageProvider) =>
+                        Container(
+                          width: widget.avatarSize,
+                          height: widget.avatarSize,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ),
+                        ),
+                    placeholder: (context, url) =>
+                        Container(
+                            width: widget.avatarSize,
+                            height: widget.avatarSize,
+                            child: AvatarLoadingPlaceholder(
+                                size: widget.avatarSize)),
+                    errorWidget: (context, url, error) =>
+                        Container(
+                            width: widget.avatarSize,
+                            height: widget.avatarSize,
+                            child: AvatarLoadingPlaceholder(
+                                size: widget.avatarSize)),
+                  ),
                   state.verified && widget.showVerified
                       ? globals.disableAnimations
-                          ? Align(
-                              alignment: Alignment.bottomRight,
-                              child: CircleAvatar(
-                                  maxRadius: widget.avatarSize / 8,
-                                  backgroundColor: globalRed,
-                                  child: FaIcon(
-                                    FontAwesomeIcons.check,
-                                    color: globalAlmostWhite,
-                                    size: widget.avatarSize / 8,
-                                  )),
-                            )
-                          : BounceIn(
-                              preferences: AnimationPreferences(
-                                  offset: Duration(milliseconds: 1000)),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: CircleAvatar(
-                                    maxRadius: widget.avatarSize / 8,
-                                    backgroundColor: globalRed,
-                                    child: FaIcon(
-                                      FontAwesomeIcons.check,
-                                      color: globalAlmostWhite,
-                                      size: widget.avatarSize / 8,
-                                    )),
-                              ),
-                            )
+                      ? Align(
+                    alignment: Alignment.bottomRight,
+                    child: CircleAvatar(
+                        maxRadius: widget.avatarSize / 8,
+                        backgroundColor: globalRed,
+                        child: FaIcon(
+                          FontAwesomeIcons.check,
+                          color: globalAlmostWhite,
+                          size: widget.avatarSize / 8,
+                        )),
+                  )
+                      : BounceIn(
+                    preferences: AnimationPreferences(
+                        offset: Duration(milliseconds: 1000)),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: CircleAvatar(
+                          maxRadius: widget.avatarSize / 8,
+                          backgroundColor: globalRed,
+                          child: FaIcon(
+                            FontAwesomeIcons.check,
+                            color: globalAlmostWhite,
+                            size: widget.avatarSize / 8,
+                          )),
+                    ),
+                  )
                       : SizedBox(height: 0),
                 ],
               ),
@@ -351,8 +348,8 @@ class AccountNavigationChip extends StatelessWidget {
               username: author,
               width: 25.w,
               height: 5.h,
-              mainStyle: Theme.of(context).textTheme.headline6!,
-              subStyle: Theme.of(context).textTheme.bodyText1!,
+              mainStyle: Theme.of(context).textTheme.titleLarge!,
+              subStyle: Theme.of(context).textTheme.bodyLarge!,
             ),
           ],
         ),

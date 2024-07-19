@@ -5,6 +5,7 @@ import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as glo
 import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
 import 'package:ovh.fso.dtubego/utils/Avalon/growInt.dart';
 import 'package:http/http.dart' as http;
+import 'dart:developer' as dev;
 import 'dart:convert';
 // import 'package:base58check/base58.dart';
 
@@ -30,24 +31,25 @@ class UserRepositoryImpl implements UserRepository {
     }
     var response = await http.get(Uri.parse(apiNode +
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-
-      User user = ApiResultModel.fromJson(data, applicationUser).user;
+    if (isStatusCodeAcceptable(response.statusCode)) {
+      var data = await json.decode(response.body);
+      User user = await ApiResultModel
+          .fromJson(data, applicationUser)
+          .user;
       return user;
     } else {
-      throw Exception();
+      throw Exception('Wrong status code!');
     }
   }
 
   Future<bool> getAccountVerificationOnline(String username) async {
     var response = await http.get(Uri.parse(
         AppConfig.originalDtuberCheckUrl.replaceAll("##USERNAME", username)));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 304) {
       bool data = json.decode(response.body);
       return data;
     } else {
-      throw Exception();
+      throw Exception('Wrong status code!');
     }
   }
 
@@ -65,26 +67,22 @@ class UserRepositoryImpl implements UserRepository {
     int dtcBalance;
     var response = await http.get(Uri.parse(apiNode +
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 304) {
       var data = json.decode(response.body);
       dtcBalance = data['balance'] != null ? data['balance'] : -1;
       int vp = data['vt']['v'] != null ? data['vt']['v'] : -1;
       int vpTS = data['vt']['t'] != null ? data['vt']['t'] : 0;
-      /*
+
       var configResponse =
           await http.get(Uri.parse(apiNode + APIUrlSchema.avalonConfig));
-      if (configResponse.statusCode == 200) {
+      if (configResponse.statusCode == 200 || configResponse.statusCode == 304) {
         var configData = json.decode(configResponse.body);
         int vpGrowth = configData['vtGrowth'] != null ? configData['vtGrowth'] : 0;
-       */
-      int vpGrowth = 360000000; // Hardcoded: Todo fix and fetch from chain config ASAP!
         currentVT = growInt(vp, vpTS, (dtcBalance / vpGrowth), 0, 0);
-      /*
       } else {
 
-        throw Exception();
+        throw Exception('Wrong status code!');
       }
-      */
     }
     return currentVT;
   }
@@ -93,13 +91,13 @@ class UserRepositoryImpl implements UserRepository {
     int dtcBalance;
     var response = await http.get(Uri.parse(apiNode +
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 304) {
       var data = json.decode(response.body);
 
       User user = ApiResultModel.fromJson(data, applicationUser).user;
       dtcBalance = user.balance != null ? user.balance : -1;
     } else {
-      throw Exception();
+      throw Exception('Wrong status code!');
     }
 
     return dtcBalance;

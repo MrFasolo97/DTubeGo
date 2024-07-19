@@ -11,6 +11,7 @@ import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:bloc/bloc.dart';
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 import 'package:ovh.fso.dtubego/utils/Random/randomPermlink.dart';
 
 class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
@@ -42,7 +43,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         data: data,
       );
 
-      if (response.statusCode == 200) {
+      if (isStatusCodeAcceptable(response.statusCode)) {
         var uploadedUrl = response.data['data']['link'];
         // var uploadedUrl = "";
 
@@ -74,7 +75,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         data: data,
       );
 
-      if (response.statusCode == 200) {
+      if (isStatusCodeAcceptable(response.statusCode)) {
         var uploadedUrl = response.data['data']['link'];
 
         return uploadedUrl;
