@@ -170,8 +170,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   AccountNavigationChip(
-                                      author: widget.daoItem.creator!,
-                                      size: 250),
+                                      author: widget.daoItem.creator!,),
                                   SizedBox(
                                     width: 0,
                                   ),
@@ -193,8 +192,7 @@ class _MobileDaoDetailsState extends State<MobileDaoDetails> {
                                     Container(
                                       width: 250,
                                       child: AccountNavigationChip(
-                                          author: widget.daoItem.receiver!,
-                                          size: 250),
+                                          author: widget.daoItem.receiver!,),
                                     ),
                                   ])
                                 : TableRow(children: [
