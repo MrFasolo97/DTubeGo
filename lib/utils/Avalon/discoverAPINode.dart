@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:ovh.fso.dtubego/res/Config/APINodesConfigValues.dart';
 import 'package:http/http.dart' as http;
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 
 import 'dart:collection';
 
@@ -43,7 +44,7 @@ Future<String> discoverAPINode() async {
         if (response.statusCode >= 400 && response.statusCode != 408) {
           log(node + ": " + response.statusCode.toString());
           _apiNodesOnError[node] = -1;
-        } else if (response.statusCode == 200) {
+        } else if (isStatusCodeAcceptable(response.statusCode)) {
           var _afterRequestMicroSeconds = DateTime
               .now()
               .microsecondsSinceEpoch;
