@@ -4,7 +4,7 @@ name: ovh.fso.dtubego
 description: Client to interact with the avalon blockchain
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.7.4+112
+version: 1.8.0+113
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -141,7 +141,13 @@ dependencies:
   csslib: 0.17.0
   flavor_getter: ^0.0.2
   disk_space_2: ^1.0.8
+  archive: ^3.6.1
 
+  webview_flutter_platform_interface: any
+  markdown: any
+  rxdart: any
+  collection: any
+  bloc: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
