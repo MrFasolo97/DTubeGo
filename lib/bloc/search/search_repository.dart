@@ -17,7 +17,8 @@ class SearchRepositoryImpl implements SearchRepository {
       String searchEntity, String apiNode, String currentUser) async {
     // int vpGrowth = 360000000; // Hardcoded: Todo fix and fetch from chain config ASAP!
     SearchResults results;
-    var configResponse = await http.get(Uri.parse(apiNode + APIUrlSchema.avalonConfig));
+    var configResponse = await http.get(
+        Uri.parse(apiNode + APIUrlSchema.avalonConfig));
     if (isStatusCodeAcceptable(configResponse.statusCode)) {
       var configData = await json.decode(configResponse.body);
 
@@ -25,29 +26,30 @@ class SearchRepositoryImpl implements SearchRepository {
           .fromJson(configData)
           .conf;
       int vpGrowth = conf.vtGrowth;
-    String _searchURL = "";
-    switch (searchEntity) {
-      case "Users":
-        _searchURL = APIUrlSchema.searchAccountsUrl
-            .replaceAll('##SEARCHSTRING', searchQuery);
-        break;
-      case "Posts":
-        _searchURL = APIUrlSchema.searchPostsUrl
-            .replaceAll('##SEARCHSTRING', searchQuery);
-        break;
-      default:
+      String _searchURL = "";
+      switch (searchEntity) {
+        case "Users":
+          _searchURL = APIUrlSchema.searchAccountsUrl
+              .replaceAll('##SEARCHSTRING', searchQuery);
+          break;
+        case "Posts":
+          _searchURL = APIUrlSchema.searchPostsUrl
+              .replaceAll('##SEARCHSTRING', searchQuery);
+          break;
+        default:
+      }
+      var response = await http.get(Uri.parse(_searchURL));
+      if (isStatusCodeAcceptable(response.statusCode)) {
+        // var data = json.decode(response.data);
+        var data = await json.decode(response.body);
+        dev.log(data.toString());
+        results = SearchResults.fromJson(data, vpGrowth, currentUser);
+        return results;
+        // filter here for specfic notification types
+      } else {
+        throw Exception();
+      }
     }
-    var response = await http.get(Uri.parse(_searchURL));
-    if (isStatusCodeAcceptable(response.statusCode)) {
-      // var data = json.decode(response.data);
-      var data = await json.decode(response.body);
-      dev.log(data.toString());
-      results = SearchResults.fromJson(data, vpGrowth, currentUser);
-      return results;
-      // filter here for specfic notification types
-    } else {
-      throw Exception();
-    }
+    throw Exception();
   }
-  throw Exception();
 }
