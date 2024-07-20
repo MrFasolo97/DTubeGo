@@ -148,8 +148,9 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
 
                   return Column(
                     children: [
-                      Align(
-                        child: Container(
+                      Flex(
+                        direction: Axis.vertical,
+                        children: [Container(
                           width: 80.w,
                           child: TabBar(
                             unselectedLabelColor: Colors.grey,
@@ -180,7 +181,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                             indicatorSize: TabBarIndicatorSize.tab,
                           ),
                         ),
-                      ),
+                      ]),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
