@@ -24,13 +24,8 @@ class MomentsView extends StatefulWidget {
     this.onStoryShow,
     this.repeat = false,
     this.inline = false,
-  })  : assert(momentsItems != null && momentsItems.length > 0,
-            "[momentsItems] should not be null or empty"),
-        assert(
-          repeat != null,
-          "[repeat] cannot be null",
-        ),
-        assert(inline != null, "[inline] cannot be null");
+  })  : assert(momentsItems.length > 0,
+            "[momentsItems] should not be null or empty");
 
   @override
   State<StatefulWidget> createState() {
@@ -335,7 +330,7 @@ class StoryProgressIndicator extends StatelessWidget {
   StoryProgressIndicator(
     this.value, {
     this.indicatorHeight = 5,
-  }) : assert(indicatorHeight != null && indicatorHeight > 0,
+  }) : assert(indicatorHeight > 0,
             "[indicatorHeight] should not be null or less than 1");
 
   @override

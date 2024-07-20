@@ -133,8 +133,8 @@ class _GenreFeedState extends State<GenreFeed> {
       itemCount: feed.length,
       itemBuilder: (BuildContext context, int index) => GestureDetector(
         onTap: () {
-          navigateToPostDetailPage(context, feed[index].author,
-              feed[index].link, "none", false, () {});
+          navigateToPostDetailPage(context, feed[index].author!,
+              feed[index].link!, "none", false, () {});
         },
         child: (feed[index].summaryOfVotes < 0 ||
                 feed[index].jsonString?.hide == 1 ||

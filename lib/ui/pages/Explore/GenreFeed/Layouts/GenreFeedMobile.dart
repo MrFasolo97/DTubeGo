@@ -174,8 +174,8 @@ class _GenreFeedMobileState extends State<GenreFeedMobile> {
       crossAxisSpacing: 4.0,
       itemBuilder: (BuildContext context, int index) => GestureDetector(
         onTap: () {
-          navigateToPostDetailPage(context, feed[index].author,
-              feed[index].link, "none", false, () {});
+          navigateToPostDetailPage(context, feed[index].author!,
+              feed[index].link!, "none", false, () {});
         },
         child: (feed[index].summaryOfVotes < 0 ||
                 feed[index].jsonString?.hide == 1 ||
@@ -198,8 +198,8 @@ class _GenreFeedMobileState extends State<GenreFeedMobile> {
           description: feed[index].jsonString!.desc != null
               ? feed[index].jsonString!.desc!
               : "",
-          author: feed[index].author,
-          link: feed[index].link,
+          author: feed[index].author!,
+          link: feed[index].link!,
           publishDate: TimeAgo.timeInAgoTSShort(feed[index].ts),
           dtcValue: (feed[index].dist / 100).round().toString(),
           showDTCValue: false,
@@ -207,7 +207,7 @@ class _GenreFeedMobileState extends State<GenreFeedMobile> {
               seconds: int.tryParse(feed[index].jsonString!.dur) != null
                   ? int.parse(feed[index].jsonString!.dur)
                   : 0),
-          thumbnailUrl: feed[index].thumbUrl!,
+          thumbnailUrl: feed[index].thumbUrl,
           videoUrl: feed[index].videoUrl,
           videoSource: feed[index].videoSource,
           alreadyVoted: feed[index].alreadyVoted!,

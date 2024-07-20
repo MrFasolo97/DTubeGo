@@ -452,9 +452,9 @@ class SearchScreenTabletState extends State<SearchScreenTablet> {
                       ? searchResults[pos].dist
                       : 0,
                   dur: searchResults[pos].jsonString!.dur != null
-                      ? searchResults[pos].jsonString!.dur!
+                      ? searchResults[pos].jsonString!.dur
                       : "",
-                  link: searchResults[pos].link,
+                  link: searchResults[pos].link!,
                   tag: searchResults[pos].jsonString!.tag,
                   oc: searchResults[pos].jsonString!.oc != null
                       ? searchResults[pos].jsonString!.oc

@@ -166,7 +166,7 @@ class TagListState extends State<TagList> {
               width: 90.w,
               alreadyVoted: searchResults[pos].alreadyVoted!,
               alreadyVotedDirection: searchResults[pos].alreadyVotedDirection!,
-              author: searchResults[pos].author,
+              author: searchResults[pos].author!,
               blur: false,
               defaultCommentVotingWeight: _defaultCommentVotingWeight!,
               defaultPostVotingTip: _defaultPostVotingTip!,
@@ -181,7 +181,7 @@ class TagListState extends State<TagList> {
                           ? int.parse(searchResults[pos].jsonString!.dur)
                           : 0),
               indexOfList: pos,
-              link: searchResults[pos].link,
+              link: searchResults[pos].link!,
               mainTag: searchResults[pos].jsonString!.tag,
               oc: searchResults[pos].jsonString!.oc == 1 ? true : false,
               publishDate: TimeAgo.timeInAgoTSShort(searchResults[pos].ts),

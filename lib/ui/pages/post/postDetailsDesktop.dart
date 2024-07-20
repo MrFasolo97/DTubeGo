@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
-import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListSuggested.dart';
 import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListSuggestedPosts.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/Comments.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/DTubeCoinsChip.dart';
@@ -13,7 +12,6 @@ import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc.dart';
 import 'package:ovh.fso.dtubego/bloc/feed/feed_event.dart';
 import 'package:ovh.fso.dtubego/bloc/feed/feed_repository.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
-import 'package:ovh.fso.dtubego/ui/pages/feeds/lists/FeedListCarousel.dart';
 import 'package:ovh.fso.dtubego/ui/MainContainer/NavigationContainer.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/tags/TagChip.dart';
 import 'package:flutter/foundation.dart';
@@ -34,7 +32,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import 'dart:io' show Platform;
 
 class PostDetailPageDesktop extends StatefulWidget {
   String link;

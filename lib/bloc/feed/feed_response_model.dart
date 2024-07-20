@@ -7,14 +7,16 @@ class ApiResultModel {
 
   ApiResultModel(
       {required this.status, required this.totalResults, required this.feed});
-
   ApiResultModel.fromJson(List<dynamic> json, String currentUser) {
 //    status = json['status'];
 
     totalResults = json.length;
     feed = [];
     json.forEach((v) {
-      feed.add(new FeedItem.fromJson(v, currentUser));
+      FeedItem feedItem = new FeedItem.fromJson(v, currentUser);
+      if(feedItem.author != null && feedItem.link != null) {
+        feed.add(feedItem);
+      }
     });
   }
 
@@ -22,8 +24,9 @@ class ApiResultModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['totalResults'] = this.totalResults;
-
-    data['FeedItems'] = this.feed.map((v) => v.toJson()).toList();
+    data['FeedItems'] = this.feed.map((v) => {
+        v.toJson()
+    }).toList();
 
     return data;
   }
@@ -31,8 +34,8 @@ class ApiResultModel {
 
 class FeedItem {
   late String sId;
-  late String author;
-  late String link;
+  String? author;
+  String? link;
   // Null pa;
   // Null pp;
   JsonString? jsonString;
@@ -71,98 +74,98 @@ class FeedItem {
       required this.tags
       //required this.tags
       });
-
   FeedItem.fromJson(Map<String, dynamic> json, String currentUser) {
-    sId = json['_id'];
-    author = json['author'];
-    link = json['link'];
-    // pa = json['pa'];
-    // pp = json['pp'];
-    jsonString =
-        json['json'] != null ? new JsonString.fromJson(json['json']) : null;
-    if (json['votes'] != null) {
-      upvotes = [];
-      downvotes = [];
-      json['votes'].forEach((v) {
-        Votes _v = new Votes.fromJson(v);
-        summaryOfVotes = summaryOfVotes + _v.vt;
-        if (_v.vt > 0) {
-          upvotes!.add(_v);
-          if (_v.u == currentUser) {
-            alreadyVoted = true;
-            alreadyVotedDirection = true;
+      sId = json['_id'];
+      author = json['author'];
+      link = json['link'];
+      // pa = json['pa'];
+      // pp = json['pp'];
+      jsonString =
+      json['json'] != null ? new JsonString.fromJson(json['json']) : null;
+      if (json['votes'] != null) {
+        upvotes = [];
+        downvotes = [];
+        json['votes'].forEach((v) {
+          Votes _v = new Votes.fromJson(v);
+          summaryOfVotes = summaryOfVotes + _v.vt;
+          if (_v.vt > 0) {
+            upvotes!.add(_v);
+            if (_v.u == currentUser) {
+              alreadyVoted = true;
+              alreadyVotedDirection = true;
+            }
+          } else {
+            downvotes!.add(_v);
+            if (_v.u == currentUser) {
+              alreadyVoted = true;
+              alreadyVotedDirection = false;
+            }
           }
-        } else {
-          downvotes!.add(_v);
-          if (_v.u == currentUser) {
-            alreadyVoted = true;
-            alreadyVotedDirection = false;
+          if (_v.tag != null &&
+              _v.tag != "" &&
+              !tags.contains(_v.tag!.toLowerCase())) {
+            tags.add(_v.tag!.toLowerCase());
           }
-        }
-        if (_v.tag != null &&
-            _v.tag != "" &&
-            !tags.contains(_v.tag!.toLowerCase())) {
-          tags.add(_v.tag!.toLowerCase());
-        }
-      });
-    }
+        });
+      }
 
-    ts = json['ts'];
-    // tags = json['tags'] != null ? new Tags.fromJson(json['tags']) : null;
-    dist = json['dist'] + 0.0;
-    if (jsonString?.files != null) {
-      if (jsonString?.files?.youtube != null) {
-        videoUrl = jsonString!.files!.youtube!;
-        videoSource = "youtube";
-      } else if (jsonString?.files?.ipfs?.vid != null) {
-        videoSource = "ipfs";
-        String _gateway = UploadConfig.ipfsVideoUrl;
-        if (jsonString?.files?.ipfs!.gw != null) {
-          _gateway = jsonString!.files!.ipfs!.gw! + '/ipfs/';
-        }
-        if (jsonString?.files?.ipfs?.vid?.s480 != null) {
-          videoUrl = _gateway + jsonString!.files!.ipfs!.vid!.s480!;
-        } else if (jsonString?.files?.ipfs?.vid?.s240 != null) {
-          videoUrl = _gateway + jsonString!.files!.ipfs!.vid!.s240!;
-        } else {
-          if (jsonString!.files!.ipfs!.vid?.src != null) {
-            videoUrl = _gateway + jsonString!.files!.ipfs!.vid!.src!;
+      ts = json['ts'];
+      // tags = json['tags'] != null ? new Tags.fromJson(json['tags']) : null;
+      dist = json['dist'] + 0.0;
+      if (jsonString?.files != null) {
+        if (jsonString?.files?.youtube != null) {
+          videoUrl = jsonString!.files!.youtube!;
+          videoSource = "youtube";
+        } else if (jsonString?.files?.ipfs?.vid != null) {
+          videoSource = "ipfs";
+          String _gateway = UploadConfig.ipfsVideoUrl;
+          if (jsonString?.files?.ipfs!.gw != null) {
+            _gateway = jsonString!.files!.ipfs!.gw! + '/ipfs/';
           }
+          if (jsonString?.files?.ipfs?.vid?.s480 != null) {
+            videoUrl = _gateway + jsonString!.files!.ipfs!.vid!.s480!;
+          } else if (jsonString?.files?.ipfs?.vid?.s240 != null) {
+            videoUrl = _gateway + jsonString!.files!.ipfs!.vid!.s240!;
+          } else {
+            if (jsonString!.files!.ipfs!.vid?.src != null) {
+              videoUrl = _gateway + jsonString!.files!.ipfs!.vid!.src!;
+            }
+          }
+        } else if (jsonString!.files!.sia?.vid?.src != null) {
+          videoSource = "sia";
+          videoUrl = UploadConfig.siaVideoUrl + jsonString!.files!.sia!.vid!.src!;
+        } else {
+          videoUrl = "";
         }
-      } else if (jsonString!.files!.sia?.vid?.src != null) {
-        videoSource = "sia";
-        videoUrl = UploadConfig.siaVideoUrl + jsonString!.files!.sia!.vid!.src!;
       } else {
         videoUrl = "";
       }
-    } else {
-      videoUrl = "";
-    }
-    if (jsonString?.thumbnailUrl != "" && jsonString?.thumbnailUrl != null) {
-      if (jsonString!.thumbnailUrl!.contains("imgur") &&
-          (jsonString!.thumbnailUrl!.contains("jpg") ||
-              jsonString!.thumbnailUrl!.contains("png"))) {
-        thumbUrl = jsonString!.thumbnailUrl!;
-      } else {
-        thumbUrl = "";
-      }
-    } else {
-      if (jsonString?.files?.youtube != null) {
-        thumbUrl = "https://i.ytimg.com/vi/" +
-            jsonString!.files!.youtube! +
-            "/mqdefault.jpg";
-      } else {
-        String _gateway = UploadConfig.ipfsSnapUrl;
-
-        if (jsonString?.files?.ipfs?.img?.s360 != null) {
-          thumbUrl = _gateway + jsonString!.files!.ipfs!.img!.s360!;
-        } else if (jsonString?.files?.ipfs?.img?.s118 != null) {
-          thumbUrl = _gateway + jsonString!.files!.ipfs!.img!.s118!;
+      if (jsonString?.thumbnailUrl != "" && jsonString?.thumbnailUrl != null) {
+        if (jsonString!.thumbnailUrl!.contains("imgur") &&
+            (jsonString!.thumbnailUrl!.contains("jpg") ||
+                jsonString!.thumbnailUrl!.contains("png"))) {
+          thumbUrl = jsonString!.thumbnailUrl!;
         } else {
-          thumbUrl = '';
+          thumbUrl = "";
+        }
+      } else {
+        if (jsonString?.files?.youtube != null) {
+          thumbUrl = "https://i.ytimg.com/vi/" +
+              jsonString!.files!.youtube! +
+              "/mqdefault.jpg";
+        } else {
+          String _gateway = UploadConfig.ipfsSnapUrl;
+
+          if (jsonString?.files?.ipfs?.img?.s360 != null) {
+            thumbUrl = _gateway + jsonString!.files!.ipfs!.img!.s360!;
+          } else if (jsonString?.files?.ipfs?.img?.s118 != null) {
+            thumbUrl = _gateway + jsonString!.files!.ipfs!.img!.s118!;
+          } else {
+            thumbUrl = '';
+          }
         }
       }
-    }
+
   }
 
   Map<String, dynamic> toJson() {

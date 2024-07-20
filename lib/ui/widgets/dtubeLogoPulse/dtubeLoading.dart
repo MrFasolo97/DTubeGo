@@ -121,7 +121,7 @@ class DtubeLogoPulseWithSubtitle extends StatelessWidget {
     return Container(
       height: height == null ? size * 2 : height,
       child: Center(
-          child: Expanded(flex: 1, child: Column(
+          child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           DTubeLogoPulse(
@@ -139,7 +139,7 @@ class DtubeLogoPulseWithSubtitle extends StatelessWidget {
             ),
           ),
         ],
-      ))),
+      )),
     );
   }
 }

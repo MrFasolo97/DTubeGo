@@ -1,7 +1,7 @@
 import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
+import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:ovh.fso.dtubego/bloc/feed/feed_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/dmca/dmcaList.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
@@ -32,10 +32,8 @@ abstract class FeedRepository {
 }
 
 class FeedRepositoryImpl implements FeedRepository {
+  //moments feeds
   @override
-
-//moments feeds
-
   Future<List<FeedItem>> getNewFeedFiltered(String apiNode, String filterString,
       String tsRangeFilter, String applicationUser) async {
     String _url = apiNode +
@@ -48,7 +46,7 @@ class FeedRepositoryImpl implements FeedRepository {
 
     var response = await http.get(Uri.parse(_url));
 
-    if (response.statusCode == 200) {
+    if (isStatusCodeAcceptable(response.statusCode)) {
       var data = json.decode(response.body);
 
       List<FeedItem> _preFilterFeed =
@@ -89,7 +87,7 @@ class FeedRepositoryImpl implements FeedRepository {
             .replaceAll("##FILTERSTRING", filterString + tsRangeFilter);
 
     var response = await http.get(Uri.parse(_url));
-    if (response.statusCode == 200) {
+    if (isStatusCodeAcceptable(response.statusCode)) {
       var data = json.decode(response.body);
 
       List<FeedItem> _preFilterFeed =
@@ -225,7 +223,7 @@ class FeedRepositoryImpl implements FeedRepository {
               .replaceAll("##LINK", fromLink);
     }
     var response = await http.get(Uri.parse(_url));
-    if (response.statusCode == 200) {
+    if (isStatusCodeAcceptable(response.statusCode)) {
       var data = json.decode(response.body);
 
       List<String> _blockedUsers = blockedUsers.split(",");
@@ -234,7 +232,7 @@ class FeedRepositoryImpl implements FeedRepository {
       List<FeedItem> feed = [];
       for (var f in _preFilterFeed) {
         // check if creator is blocked from applicationUser
-        if (!_blockedUsers.contains(f.author) && isUserLinkDmcaBanned(f.author, f.link) != false) {
+        if (!_blockedUsers.contains(f.author)) {
           // go through downvotes and check if one is from the applicationuser
           if (f.downvotes != null && f.downvotes!.length > 0) {
             bool downvotedByAppUser = false;
@@ -316,7 +314,7 @@ class FeedRepositoryImpl implements FeedRepository {
               .replaceAll("##LINK", fromLink);
     }
     var response = await http.get(Uri.parse(_url));
-    if (response.statusCode == 200) {
+    if (isStatusCodeAcceptable(response.statusCode)) {
       var data = json.decode(response.body);
 
       List<String> _blockedUsers = blockedUsers.split(",");
@@ -325,9 +323,8 @@ class FeedRepositoryImpl implements FeedRepository {
       List<FeedItem> feed = [];
 
       for (var f in _preFilterFeed) {
-        // check if creator is blocked from applicationUser
-        bool isUserDmcaed = await isUserLinkDmcaBanned(f.author, f.link);
-        if (!_blockedUsers.contains(f.author) && !isUserDmcaed) {
+        // check if creator is blocked from applicationUser;
+        if (!_blockedUsers.contains(f.author)) {
           // go through downvotes and check if one is from the applicationuser
           if (f.downvotes != null && f.downvotes!.length > 0) {
             bool downvotedByAppUser = false;
@@ -387,7 +384,7 @@ class FeedRepositoryImpl implements FeedRepository {
             "&authors=dtube,dtube-onboarding&tsrange=" + tsFrom + "," + tsTo);
 
     var responseDTube = await http.get(Uri.parse(_url));
-    if (responseDTube.statusCode == 200) {
+    if (isStatusCodeAcceptable(responseDTube.statusCode)) {
       var data = json.decode(responseDTube.body);
       List<FeedItem> feed = ApiResultModel.fromJson(data, applicationUser).feed;
       //await sec.persistCurrenNewsTS(int.tryParse(tsTo)!);

@@ -31,6 +31,6 @@ class AppConfig {
   static int usernameMinLength = 12;
 }
 
-isStatusCodeAcceptable(statusCode) {
+bool isStatusCodeAcceptable(statusCode) {
   return 200 <= statusCode && statusCode <= 304;
 }

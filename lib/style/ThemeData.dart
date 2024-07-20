@@ -78,12 +78,10 @@ final ThemeData dtubeDarkTheme = ThemeData(
       primary: globalBlue,
       secondary: Color(0xff64ffda),
       surface: Color(0xff424242),
-      background: Color(0xff616161),
       error: Color(0xffd32f2f),
       onPrimary: globalTextColor,
       onSecondary: Color(0xff000000),
       onSurface: globalTextColor,
-      onBackground: globalTextColor,
       onError: Color(0xff000000),
       brightness: Brightness.dark,
     ),
@@ -281,9 +279,9 @@ final ThemeData dtubeDarkTheme = ThemeData(
   ),
 
   scrollbarTheme: ScrollbarThemeData(
-      thumbVisibility: MaterialStateProperty.all(true),
-      thickness: MaterialStateProperty.all(10),
-      thumbColor: MaterialStateProperty.all(Color.fromARGB(255, 118, 137, 182)),
+      thumbVisibility: WidgetStateProperty.all(true),
+      thickness: WidgetStateProperty.all(10),
+      thumbColor: WidgetStateProperty.all(Color.fromARGB(255, 118, 137, 182)),
       radius: const Radius.circular(10),
       minThumbLength: 100),
 
@@ -352,26 +350,26 @@ final ThemeData dtubeDarkTheme = ThemeData(
     ),
     borderRadius: BorderRadius.all(Radius.circular(0.0)),
   )), checkboxTheme: CheckboxThemeData(
- fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return Color(0xffef192f); }
  return null;
  }),
  ), radioTheme: RadioThemeData(
- fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return Color(0xffef192f); }
  return null;
  }),
  ), switchTheme: SwitchThemeData(
- thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ thumbColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return Color(0xffef192f); }
  return null;
  }),
- trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return Color(0xffef192f); }
+ trackColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return Color(0xffef192f); }
  return null;
  }),
  ), colorScheme: ColorScheme.fromSwatch(primarySwatch: MaterialColor(4280361249, {
@@ -385,5 +383,5 @@ final ThemeData dtubeDarkTheme = ThemeData(
     700: Color(0xff4d4d4d),
     800: Color(0xff333333),
     900: Color(0xff191919)
-  })).copyWith(background: Color(0xff616161)).copyWith(error: Color(0xffd32f2f)),
+  })).copyWith(surface: Color(0xff616161)).copyWith(error: Color(0xffd32f2f)),
 );

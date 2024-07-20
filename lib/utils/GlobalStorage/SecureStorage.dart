@@ -328,9 +328,7 @@ class SeenMomentsList {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.seenMoments != null) {
-      data['seenMoments'] = this.seenMoments.map((v) => v.toJson()).toList();
-    }
+    data['seenMoments'] = this.seenMoments.map((v) => v.toJson()).toList();
     return data;
   }
 }

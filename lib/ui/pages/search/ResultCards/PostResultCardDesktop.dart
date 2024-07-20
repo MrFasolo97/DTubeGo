@@ -712,7 +712,7 @@ class PostInfoBaseRow extends StatelessWidget {
                             child: ShadowedIcon(
                                 visible: globals.keyPermissions.contains(5),
                                 icon: FontAwesomeIcons.flag,
-                                color: alreadyVoted!
+                                color: alreadyVoted
                                     ? globalAlmostWhite
                                     : globalRed,
                                 shadowColor: Colors.black,
@@ -721,7 +721,7 @@ class PostInfoBaseRow extends StatelessWidget {
                             elevation: 0,
                             backgroundColor: Colors.transparent,
                             onTap: () {
-                              if (alreadyVoted!) {
+                              if (alreadyVoted) {
                                 if (autoPauseVideoOnPopup) {
                                   videoController.pause();
                                   ytController.pause();

@@ -6,7 +6,7 @@ bool isPasswordCompliant(String password, int minLength) {
   // at least 1 lower case character
   // at least 1 number
 
-  if (password == null || password.isEmpty) {
+  if (password.isEmpty) {
     return false;
   }
 
@@ -31,7 +31,7 @@ String checkPasswordCompliance(String password, int minLength) {
   // at least 1 upper case character
   // at least 1 lower case character
   // at least 1 number
-  if (password == null || password.isEmpty) {
+  if (password.isEmpty) {
     password = "";
   }
 

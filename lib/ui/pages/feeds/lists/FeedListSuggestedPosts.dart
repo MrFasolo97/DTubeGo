@@ -171,8 +171,8 @@ class FeedListSuggestedPosts extends StatelessWidget {
                   description: feed[pos].jsonString!.desc != null
                       ? feed[pos].jsonString!.desc!
                       : "",
-                  author: feed[pos].author,
-                  link: feed[pos].link,
+                  author: feed[pos].author!,
+                  link: feed[pos].link!,
                   publishDate: TimeAgo.timeInAgoTSShort(feed[pos].ts),
                   dtcValue: (feed[pos].dist / 100).round().toString(),
                   duration: new Duration(

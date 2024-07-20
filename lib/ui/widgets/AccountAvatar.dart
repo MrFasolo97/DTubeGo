@@ -1,20 +1,15 @@
 import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/system/ColorChangeCircularProgressIndicator.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayText.dart';
-import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart';
 import 'package:ovh.fso.dtubego/utils/Navigation/navigationShortcuts.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
-import 'package:ovh.fso.dtubego/style/OpenableHyperlink.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'dart:developer' as dev;
 
 
 class AvatarErrorPlaceholder extends StatelessWidget {

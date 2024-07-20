@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/DTubeCoinsChip.dart';

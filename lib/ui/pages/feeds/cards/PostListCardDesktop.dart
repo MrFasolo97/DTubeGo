@@ -117,7 +117,7 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      key: Key('postlist-large' + widget.feedItem.link),
+      key: Key('postlist-large' + widget.feedItem.link!),
       onVisibilityChanged: (visibilityInfo) {
         var visiblePercentage = visibilityInfo.visibleFraction * 100;
 
@@ -128,9 +128,9 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
           _ytController.pause();
           _bpController.pause();
           log("VISIBILITY OF " +
-              widget.feedItem.author +
+              widget.feedItem.author! +
               "/" +
-              widget.feedItem.link +
+              widget.feedItem.link! +
               "CHANGED TO " +
               visiblePercentage.toString());
           if (globals.enableAdvertisements && !this.countedForAds) {
@@ -152,8 +152,8 @@ class _PostListCardDesktopState extends State<PostListCardDesktop> {
           hideSpeedDial: widget.hideSpeedDial != null && widget.hideSpeedDial!
               ? true
               : false,
-          author: widget.feedItem.author,
-          link: widget.feedItem.link,
+          author: widget.feedItem.author!,
+          link: widget.feedItem.link!,
           thumbnailTapped: _thumbnailTapped,
           widget: widget,
           bpController: _bpController,
@@ -389,7 +389,7 @@ class _PostDataState extends State<PostData> {
         globals.disableAnimations
             ? PostInfoDetailsRow(
                 width: widget.width,
-                author: widget.feedItem.author,
+                author: widget.feedItem.author!,
                 dist: widget.feedItem.dist,
                 dur: int.tryParse(widget.feedItem.jsonString!.dur) != null
                     ? int.tryParse(widget.feedItem.jsonString!.dur)!
@@ -403,7 +403,7 @@ class _PostDataState extends State<PostData> {
                     AnimationPreferences(offset: Duration(milliseconds: 500)),
                 child: PostInfoDetailsRow(
                   width: widget.width,
-                  author: widget.feedItem.author,
+                  author: widget.feedItem.author!,
                   dist: widget.feedItem.dist,
                   dur: int.tryParse(widget.feedItem.jsonString!.dur) != null
                       ? int.tryParse(widget.feedItem.jsonString!.dur)!
@@ -603,8 +603,8 @@ class PostInfoBaseRow extends StatelessWidget {
       children: <Widget>[
         globals.disableAnimations
             ? TitleWidgetForRow(
-                author: feedItem.author,
-                link: feedItem.link,
+                author: feedItem.author!,
+                link: feedItem.link!,
                 title: feedItem.jsonString!.title,
                 width: width * 0.65
                 )
@@ -614,8 +614,8 @@ class PostInfoBaseRow extends StatelessWidget {
                   duration: Duration(milliseconds: 350),
                 ),
                 child: TitleWidgetForRow(
-                    author: feedItem.author,
-                    link: feedItem.link,
+                    author: feedItem.author!,
+                    link: feedItem.link!,
                     title: feedItem.jsonString!.title,
                     width: width * 0.65),
               ),
@@ -712,8 +712,8 @@ class PostInfoBaseRow extends StatelessWidget {
                                           repository: PostRepositoryImpl()),
                                       txBloc: BlocProvider.of<TransactionBloc>(
                                           context),
-                                      author: feedItem.author,
-                                      link: feedItem.link,
+                                      author: feedItem.author!,
+                                      link: feedItem.link!,
                                       downvote: true,
                                       //currentVT: state.vtBalance['v']! + 0.0,
                                       isPost: true,
@@ -768,8 +768,8 @@ class PostInfoBaseRow extends StatelessWidget {
                                   child: CommentDialog(
                                     txBloc: BlocProvider.of<TransactionBloc>(
                                         context),
-                                    originAuthor: feedItem.author,
-                                    originLink: feedItem.link,
+                                    originAuthor: feedItem.author!,
+                                    originLink: feedItem.link!,
                                     defaultCommentVote: double.parse(
                                         defaultCommentVotingWeight),
                                     okCallback: () {
@@ -836,8 +836,8 @@ class PostInfoBaseRow extends StatelessWidget {
                                           repository: PostRepositoryImpl()),
                                       txBloc: BlocProvider.of<TransactionBloc>(
                                           context),
-                                      author: feedItem.author,
-                                      link: feedItem.link,
+                                      author: feedItem.author!,
+                                      link: feedItem.link!,
                                       downvote: false,
                                       //currentVT: state.vtBalance['v']! + 0.0,
                                       isPost: true,
@@ -899,8 +899,8 @@ class PostInfoBaseRow extends StatelessWidget {
                                   },
                                   txBloc:
                                       BlocProvider.of<TransactionBloc>(context),
-                                  receiver: feedItem.author,
-                                  originLink: feedItem.link,
+                                  receiver: feedItem.author!,
+                                  originLink: feedItem.link!,
                                 ),
                               );
                             }),

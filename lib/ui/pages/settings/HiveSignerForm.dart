@@ -24,7 +24,7 @@ class _HiveSignerFormState extends State<HiveSignerForm> {
   @override
   void initState() {
     _usernameController = new TextEditingController(text: widget.username);
-    if (widget.username != null && widget.username.length > 3) {
+    if (widget.username.length > 3) {
       _usernameFilled = true;
     }
     super.initState();

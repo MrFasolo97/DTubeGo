@@ -7,7 +7,6 @@ import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/transaction/transaction_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

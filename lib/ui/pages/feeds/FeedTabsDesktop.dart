@@ -3,9 +3,7 @@ import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as glo
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:ovh.fso.dtubego/ui/pages/feeds/FeedTabContainer.dart';
 import 'package:ovh.fso.dtubego/ui/pages/feeds/FeedViewBase.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayText.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class FeedTabsDesktop extends StatelessWidget {
   const FeedTabsDesktop({

@@ -5,7 +5,6 @@ import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as glo
 import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
 import 'package:ovh.fso.dtubego/utils/Avalon/growInt.dart';
 import 'package:http/http.dart' as http;
-import 'dart:developer' as dev;
 import 'dart:convert';
 // import 'package:base58check/base58.dart';
 

@@ -84,7 +84,7 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
 
   void setMomentSeen() async {
     await sec.addSeenMoments(
-        widget.feedItem.author + "/" + widget.feedItem.link,
+        widget.feedItem.author! + "/" + widget.feedItem.link!,
         widget.feedItem.ts.toString());
   }
 
@@ -223,20 +223,20 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
                         widget.goingInBackgroundCallback();
                         navigateToUserDetailPage(
                             context,
-                            widget.feedItem.author,
+                            widget.feedItem.author!,
                             widget.goingInForegroundCallback);
                       },
                       child: Row(
                         children: [
                           AccountIconBase(
-                            username: widget.feedItem.author,
+                            username: widget.feedItem.author!,
                             avatarSize: 10.h,
                             showVerified: true,
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 2.w),
                             child: AccountNameBase(
-                                username: widget.feedItem.author,
+                                username: widget.feedItem.author!,
                                 width: 50.w,
                                 height: 10.h,
                                 mainStyle:
@@ -278,8 +278,8 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
                                   double.parse(widget.momentsVotingWeight),
                               defaultTip:
                                   double.parse(widget.defaultPostsVotingTip),
-                              author: widget.feedItem.author,
-                              link: widget.feedItem.link,
+                              author: widget.feedItem.author!,
+                              link: widget.feedItem.link!,
                               downvote: true,
                               postBloc: BlocProvider.of<PostBloc>(context),
 
@@ -357,8 +357,8 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
                                         context),
                                     defaultTip: double.parse(
                                         widget.defaultPostsVotingTip),
-                                    author: widget.feedItem.author,
-                                    link: widget.feedItem.link,
+                                    author: widget.feedItem.author!,
+                                    link: widget.feedItem.link!,
                                     downvote: false,
                                     //currentVT: state.vtBalance['v']! + 0.0,
                                     isPost: true,
@@ -409,8 +409,8 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
                                 child: CommentDialog(
                                   txBloc:
                                       BlocProvider.of<TransactionBloc>(context),
-                                  originAuthor: widget.feedItem.author,
-                                  originLink: widget.feedItem.link,
+                                  originAuthor: widget.feedItem.author!,
+                                  originLink: widget.feedItem.link!,
                                   defaultCommentVote: double.parse(
                                       widget.defaultCommentsVotingWeight),
                                   okCallback: () {
@@ -444,9 +444,9 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
                               // _videoController.pause();
                             });
                             Share.share('https://d.tube/#!/v/' +
-                                widget.feedItem.author +
+                                widget.feedItem.author! +
                                 '/' +
-                                widget.feedItem.link);
+                                widget.feedItem.link!);
                           },
                           child: ShadowedIcon(
                             icon: FontAwesomeIcons.share,
@@ -468,8 +468,8 @@ class _VideoPlayerMomentsMobileState extends State<VideoPlayerMomentsMobile> {
                             widget.goingInBackgroundCallback();
                             navigateToPostDetailPage(
                                 context,
-                                widget.feedItem.author,
-                                widget.feedItem.link,
+                                widget.feedItem.author!,
+                                widget.feedItem.link!,
                                 "none",
                                 false,
                                 widget.goingInForegroundCallback);

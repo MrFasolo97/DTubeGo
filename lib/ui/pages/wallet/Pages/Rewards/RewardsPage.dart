@@ -1,15 +1,9 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ovh.fso.dtubego/ui/pages/Governance/Pages/Rewards/RewardCard/RewardCardMobile.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc.dart';
 import 'package:ovh.fso.dtubego/bloc/rewards/rewards_bloc_full.dart';
-import 'package:ovh.fso.dtubego/bloc/rewards/rewards_event.dart';
-import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
-import 'package:ovh.fso.dtubego/ui/widgets/AccountAvatar.dart';
-import 'package:ovh.fso.dtubego/ui/pages/post/postDetailPage.dart';
-import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

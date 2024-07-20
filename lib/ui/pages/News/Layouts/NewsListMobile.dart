@@ -33,8 +33,8 @@ class NewsListMobile extends StatelessWidget {
           description: feed[pos].jsonString!.desc != null
               ? feed[pos].jsonString!.desc!
               : "",
-          author: feed[pos].author,
-          link: feed[pos].link,
+          author: feed[pos].author!,
+          link: feed[pos].link!,
           publishDate: TimeAgo.timeInAgoTSShort(feed[pos].ts),
 
           videoUrl: feed[pos].videoUrl,

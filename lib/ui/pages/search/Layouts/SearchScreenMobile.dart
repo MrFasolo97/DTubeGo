@@ -455,7 +455,7 @@ class SearchScreenMobileState extends State<SearchScreenMobile> {
                   alreadyVoted: searchResults[pos].alreadyVoted!,
                   alreadyVotedDirection:
                       searchResults[pos].alreadyVotedDirection!,
-                  author: searchResults[pos].author,
+                  author: searchResults[pos].author!,
                   blur: (_nsfwMode == 'Blur' &&
                               searchResults[pos].jsonString?.nsfw == 1) ||
                           (_hiddenMode == 'Blur' &&
@@ -480,7 +480,7 @@ class SearchScreenMobileState extends State<SearchScreenMobile> {
                               ? int.parse(searchResults[pos].jsonString!.dur)
                               : 0),
                   indexOfList: pos,
-                  link: searchResults[pos].link,
+                  link: searchResults[pos].link!,
                   mainTag: searchResults[pos].jsonString!.tag,
                   oc: searchResults[pos].jsonString!.oc == 1 ? true : false,
                   publishDate: TimeAgo.timeInAgoTSShort(searchResults[pos].ts),
