@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:ovh.fso.dtubego/res/Config/APINodesConfigValues.dart';
 import 'package:http/http.dart' as http;
@@ -9,13 +10,22 @@ import 'dart:collection';
 
 // Automatic node discovery based on their response time to request /count
 Future<String> discoverAPINode() async {
-  var _nodes = APINodeConfig.apiNodes;
+  List _nodes = APINodeConfig.apiNodes;
   int _retries = 0;
   //if we are using experimental features aka not merged PRs then this will get executed
   if (APINodeConfig.useDevNodes) {
     _nodes = APINodeConfig.apiNodesDev;
   }
-
+  try {
+    await http.get(Uri.parse(APINodeConfig.remoteAPINodesListUrl)).then((response) => {
+      if(isStatusCodeAcceptable(response.statusCode)) {
+        _nodes = json.decode(response.body) as List,
+      } else
+        Exception()
+    });
+  } catch(err) {
+    log(err.toString());
+  }
   Map<String, int> _nodeResponses = {};
   Map<String, int> _sortedApiNodesByResponseTime = {};
   Map<String, int> _apiNodesOnError = {};

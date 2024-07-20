@@ -4,6 +4,7 @@ class APINodeConfig {
   static bool useDevNodes =
       false; //activate for new features which has not been integrated
 
+  static String remoteAPINodesListUrl = "https://raw.githubusercontent.com/dtubego/dtube/main/public/DTube_files/avalon_apis.json";
   static List<String> apiNodesDev = [
     // development nodes for new features
     // 'https://dtube.club/mainnetapi',
