@@ -122,7 +122,7 @@ class FeedListCarousel extends StatelessWidget {
                             (_hiddenMode == 'Hide' && f.summaryOfVotes < 0) ||
                             (f.jsonString!.hide == 1 &&
                                 f.author != _applicationUser)) {
-                          log("skip item" + f.link);
+                          log("skip item" + f.link!);
                         } else {
                           _feedItems.add(f);
                         }
@@ -236,8 +236,8 @@ class FeedListCarousel extends StatelessWidget {
                         description: feed[index].jsonString!.desc != null
                             ? feed[index].jsonString!.desc!
                             : "",
-                        author: feed[index].author,
-                        link: feed[index].link,
+                        author: feed[index].author!,
+                        link: feed[index].link!,
                         publishDate: TimeAgo.timeInAgoTSShort(feed[index].ts),
                         dur: new Duration(
                             seconds:
@@ -319,8 +319,8 @@ class FeedListCarousel extends StatelessWidget {
                           description: feed[index].jsonString!.desc != null
                               ? feed[index].jsonString!.desc!
                               : "",
-                          author: feed[index].author,
-                          link: feed[index].link,
+                          author: feed[index].author!,
+                          link: feed[index].link!,
                           publishDate: TimeAgo.timeInAgoTSShort(feed[index].ts),
                           duration: new Duration(
                               seconds:

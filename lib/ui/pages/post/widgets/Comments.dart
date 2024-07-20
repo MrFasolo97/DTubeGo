@@ -12,7 +12,6 @@ import 'package:ovh.fso.dtubego/ui/pages/post/widgets/ReplyButton.dart';
 import 'package:ovh.fso.dtubego/ui/pages/post/widgets/VoteButtons.dart';
 
 import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_bloc_full.dart';
-import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,6 +46,7 @@ class CommentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var dmca = new DmcaCheck();
     return BlocBuilder<PostBloc, PostState>(
         bloc: postBloc,
         builder: (context, state) {
@@ -81,7 +81,7 @@ class CommentContainer extends StatelessWidget {
                           itemCount: state.post.comments!.length,
                           padding: EdgeInsets.zero,
                           itemBuilder: (BuildContext context, int index) {
-                            return isUserLinkDmcaBanned(state.post.author, state.post.link) == false ? Column(
+                            return dmca.isUserLinkDmcaBanned(state.post.author, state.post.link) == false ? Column(
                               children: [
 
                                 CommentDisplay(

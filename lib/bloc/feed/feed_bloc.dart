@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
+import 'package:ovh.fso.dtubego/bloc/dmca/dmcaList.dart';
 import 'package:ovh.fso.dtubego/bloc/feed/feed_state.dart';
 import 'package:ovh.fso.dtubego/bloc/feed/feed_event.dart';
 import 'package:ovh.fso.dtubego/bloc/feed/feed_response_model.dart';
@@ -12,6 +13,8 @@ import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
   FeedRepository repository;
   bool isFetching = false;
+
+  var dmca = new DmcaCheck();
 
   FeedBloc({required this.repository}) : super(FeedInitialState()) {
     on<InitFeedEvent>((event, emit) async {
@@ -58,13 +61,13 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         List<FeedItem> feedCopy = List.from(feed);
         for (var f in feedCopy) {
           bool momentAlreadySeen =
-              await sec.getSeenMomentAlready(f.author + "/" + f.link);
+              await sec.getSeenMomentAlready(f.author! + "/" + f.link!);
           if (momentAlreadySeen) {
             feed.remove(f);
           }
         }
         // reverse feed to have the moments in ascending order
-        List<FeedItem> feedReversed = new List.from(feed.reversed);
+        List<FeedItem> feedReversed = await dmca.filterFeed(new List.from(feed.reversed));
         emit(FeedLoadedState(
             feed: feedReversed,
             feedType: event.feedType,
@@ -107,6 +110,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
                 _applicationUser)
             : await repository.getMyFeedFiltered(_avalonApiNode,
                 "&tags=DTubeGo-Moments", _tsRangeFilter, _applicationUser);
+        feed = await dmca.filterFeed(feed);
         emit(FeedLoadedState(
             feed: feed, feedType: event.feedType, fetchedWholeFeed: true));
       } catch (e) {
@@ -146,6 +150,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
                 _blockedUsersFilter,
             _tsRangeFilter,
             _applicationUser);
+        feed = await dmca.filterFeed(feed);
         emit(FeedLoadedState(
             feed: feed, feedType: "tagSearch", fetchedWholeFeed: true));
       } catch (e) {
@@ -230,7 +235,9 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
             }
             break;
         }
-
+        if (event.feedType != 'NewsFeed') {
+          feed = await dmca.filterFeed(feed);
+        }
         emit(FeedLoadedState(
             feed: feed,
             feedType: event.feedType,
@@ -260,6 +267,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
             "" // tsrange currently not used here to load all uploads of the user
             ,
             _applicationUser);
+        feed = await dmca.filterFeed(feed);
         emit(FeedLoadedState(
             feed: feed, feedType: "UserFeed", fetchedWholeFeed: true));
       } catch (e) {
@@ -345,9 +353,9 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           if (_otherUsersFeed.length > 0) {
             for (var post in _otherUsersFeed) {
               if (_usersPostCount[post.author] == null) {
-                _usersPostCount[post.author] = 1;
+                _usersPostCount[post.author!] = 1;
               } else {
-                _usersPostCount[post.author] =
+                _usersPostCount[post.author!] =
                     _usersPostCount[post.author]! + 1;
               }
             }
@@ -423,9 +431,9 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           if (_otherUsersFeed.length > 0) {
             for (var post in _otherUsersFeed) {
               if (_usersPostCount[post.author] == null) {
-                _usersPostCount[post.author] = 1;
+                _usersPostCount[post.author!] = 1;
               } else {
-                _usersPostCount[post.author] =
+                _usersPostCount[post.author!] =
                     _usersPostCount[post.author]! + 1;
               }
             }
@@ -491,7 +499,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
             _applicationUser);
         emit(FeedLoadedState(
             feed:
-                _otherUsersFeed.take(ExploreConfig.maxUserSuggestions).toList(),
+                await dmca.filterFeed(_otherUsersFeed.take(ExploreConfig.maxUserSuggestions).toList()),
             feedType: "SuggestedPosts",
             fetchedWholeFeed: true));
       } catch (e) {
