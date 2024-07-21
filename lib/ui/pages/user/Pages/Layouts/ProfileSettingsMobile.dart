@@ -151,7 +151,7 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                       Flex(
                         direction: Axis.vertical,
                         children: [Container(
-                          width: 80.w,
+                          width: 70.w,
                           child: TabBar(
                             unselectedLabelColor: Colors.grey,
                             labelColor: globalAlmostWhite,
@@ -581,9 +581,8 @@ class _ProfileSettingsMobileState extends State<ProfileSettingsMobile>
                           : () async {
                               List<String> ytChannels = [];
                               if (_originalUserData.jsonString != null &&
-                                  _originalUserData.jsonString!.additionals!
-                                          .ytchannels !=
-                                      null) {
+                                  _originalUserData.jsonString!.additionals != null &&
+                                  _originalUserData.jsonString!.additionals!.ytchannels != null) {
                                 ytChannels = _originalUserData
                                     .jsonString!.additionals!.ytchannels!;
                               }
