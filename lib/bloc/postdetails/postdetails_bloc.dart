@@ -18,7 +18,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           DateTime.now().toIso8601String() +
           ")");
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       emit(PostLoadingState());
       try {
         Post post = await repository.getPost(
@@ -32,7 +32,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     });
     on<FetchTopLevelPostEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       emit(TopLevelPostLoadingState());
       try {
         Post post = await repository.getPost(

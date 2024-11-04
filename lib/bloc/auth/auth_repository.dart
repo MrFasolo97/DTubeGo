@@ -42,11 +42,13 @@ class AuthRepositoryImpl implements AuthRepository {
       String apiNode, String username, String privateKey) async {
     bool _keyIsValid = false;
 
-    var pub = privToPub(privateKey);
+    var pub = await privToPub(privateKey);
 
 //load user
     var response;
     try {
+      log("Getting "+(apiNode +
+          APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)).toString());
       response = await http
           .get(
         Uri.parse(apiNode +
@@ -62,7 +64,7 @@ class AuthRepositoryImpl implements AuthRepository {
       // username unknown
       _keyIsValid = false;
     } else {
-      if (response.statusCode == 200 || response.statusCode == 304) {
+      if (isStatusCodeAcceptable(response.statusCode)) {
         var data = json.decode(response.body);
         Auth authInformation = ApiResultModel.fromJson(data).auth;
         if (pub.toString() == authInformation.pub) {
@@ -100,13 +102,15 @@ class AuthRepositoryImpl implements AuthRepository {
 //load user
     var response;
     try {
+      log("Getting "+(apiNode +
+          APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
       response = await http
           .get(
         Uri.parse(apiNode +
             APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)),
-      )
-          .catchError((e) {
-        return [];
+      ).catchError((e) {
+            log(e.toString());
+            return e;
       });
     } catch (e) {
       return [];
@@ -115,7 +119,7 @@ class AuthRepositoryImpl implements AuthRepository {
       // username unknown
       return [];
     } else {
-      if (response.statusCode == 200 || response.statusCode == 304) {
+      if (isStatusCodeAcceptable(response.statusCode)) {
         var data = json.decode(response.body);
         Auth authInformation = ApiResultModel.fromJson(data).auth;
         List<int> _txTypes = [];

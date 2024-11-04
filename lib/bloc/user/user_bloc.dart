@@ -4,7 +4,7 @@ import 'package:ovh.fso.dtubego/bloc/user/user_event.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_state.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_repository.dart';
-
+import 'dart:developer' as dev;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -13,47 +13,50 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({required this.repository}) : super(UserInitialState()) {
     on<FetchAccountDataEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       emit(UserLoadingState());
       try {
         String _username =
             event.username != null ? event.username! : _applicationUser;
         if (event.username == "you") {
-          _username = _applicationUser;
+          _username = await sec.getUsername();
         }
-        User _user = await repository.getAccountData(
+        User? _user = await repository.getAccountData(
             _avalonApiNode, _username, _applicationUser);
         bool _verified =
             await repository.getAccountVerificationOffline(_username);
-
-        emit(UserLoadedState(user: _user, verified: _verified));
+        if (_user != null) {
+          emit(UserLoadedState(user: _user, verified: _verified));
+        }
       } catch (e) {
+        dev.log(e.toString()+'#1');
         emit(UserErrorState(message: e.toString()+'#1'));
       }
     });
 
     on<FetchMyAccountDataEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       emit(UserLoadingState());
       try {
-        User user = await repository.getAccountData(
+        User? user = await repository.getAccountData(
             _avalonApiNode, _applicationUser, _applicationUser);
         bool _verified = await repository.getAccountVerificationOffline(_applicationUser);
-        if (user.jsonString?.additionals?.blocking != null) {
+
+        if (user != null && user.jsonString?.additionals?.blocking != null) {
           await sec.persistBlockedUsers(
               user.jsonString!.additionals!.blocking!.join(","));
+          emit(UserLoadedState(user: user, verified: _verified));
         }
-
-        emit(UserLoadedState(user: user, verified: _verified));
       } catch (e) {
-        emit(UserErrorState(message: e.toString() + '#2'));
+        dev.log(e.toString()+' #2');
+        emit(UserErrorState(message: e.toString() + ' #2'));
       }
     });
 
     on<FetchDTCVPEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       emit(UserDTCVPLoadingState());
       try {
         Map<String, int> vtBalance = await repository.getVP(
@@ -62,7 +65,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             _avalonApiNode, _applicationUser, _applicationUser);
 
         emit(
-            UserDTCVPLoadedState(dtcBalance: dtcBalance, vtBalance: vtBalance));
+            await UserDTCVPLoadedState(dtcBalance: dtcBalance, vtBalance: vtBalance));
       } catch (e) {
         emit(UserErrorState(message: e.toString()+'#3'));
       }

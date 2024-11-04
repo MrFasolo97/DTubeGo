@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const authKey_usernameKey = 'USERNAME';
@@ -437,10 +439,11 @@ Future<int> getSecondsUntilHiveCooldownEnds() async {
 }
 
 Future<String> getUsername() async {
-  String? _setting = "";
+  late String? _setting;
   try {
     _setting = await _storage.read(key: authKey_usernameKey);
   } catch (e) {
+    log("Error getting username: " + e.toString());
     _setting = "";
   }
   if (_setting != null) {
@@ -451,7 +454,7 @@ Future<String> getUsername() async {
 }
 
 Future<String> getBlockedUsers() async {
-  String? _setting = "";
+  String? _setting;
   try {
     _setting = await _storage.read(key: settingKey_BlockedUsers);
   } catch (e) {
@@ -914,17 +917,17 @@ Future<String> getHiveSignerUsername() async {
   }
 }
 
-Future<String> getNode() async {
+String getNode() {
   String? _setting = "";
   try {
-    _setting = await _storage.read(key: settingKey_avalonNode);
+    _setting = _storage.read(key: settingKey_avalonNode) as String?;
   } catch (e) {
-    _setting = "https://avalon.d.tube";
+    _setting = "https://dtube.fso.ovh";
   }
   if (_setting != null) {
     return _setting;
   } else {
-    return 'https://avalon.d.tube';
+    return "https://dtube.fso.ovh";
   }
 }
 

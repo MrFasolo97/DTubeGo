@@ -11,7 +11,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   NotificationBloc({required this.repository})
       : super(NotificationInitialState()) {
     on<UpdateLastNotificationSeen>((event, emit) async {
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       String _avalonApiNode = await sec.getNode();
       List<AvalonNotification> notifications = await repository
           .getNotifications(_avalonApiNode, [], _applicationUser);
@@ -21,7 +21,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     });
 
     on<FetchNotificationsEvent>((event, emit) async {
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       String _avalonApiNode = await sec.getNode();
       String _tsLastNotificationSeen = await sec.getLastNotification();
       emit(NotificationLoadingState());

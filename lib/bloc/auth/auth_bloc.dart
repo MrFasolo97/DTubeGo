@@ -24,7 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // await remoteConfig.initConf(); // not needed anymore but let's keep it in the code for some more time
       // await config.initConf();
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
       String? _privKey = await sec.getPrivateKey();
       bool _onboardingJourneyDone = await sec.getOnbordingJourneyDone();
       bool _termsAccepted = await sec.getTermsAccepted();
@@ -106,7 +106,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         // if the login is legit
         if (keyIsValid) {
           // save the information in the secure storage
-          sec.persistUsernameKey(event.username, event.privateKey);
+          await sec.persistUsernameKey(event.username, event.privateKey);
 
           emit(SignedInState(firstSignIn: true, termsAccepted: _termsAccepted));
         } else {
@@ -143,7 +143,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await sec.persistOnbordingJourneyDone();
       emit(SignInLoadingState());
       try {
-        sec.persistUsernameKey("na", "na");
+        await sec.persistUsernameKey("na", "na");
         await repository.browseOnlyPermissions();
 
         emit(SignedInState(firstSignIn: true, termsAccepted: _termsAccepted));

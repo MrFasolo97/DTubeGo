@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
@@ -9,7 +11,7 @@ import 'dart:convert';
 // import 'package:base58check/base58.dart';
 
 abstract class UserRepository {
-  Future<User> getAccountData(
+  Future<User?> getAccountData(
       String apiNode, String username, String applicationUser);
 
   Future<bool> getAccountVerificationOnline(String username);
@@ -22,33 +24,38 @@ abstract class UserRepository {
 
 class UserRepositoryImpl implements UserRepository {
   @override
-  Future<User> getAccountData(
-      String apiNode, String username, applicationUser) async {
+  Future<User?> getAccountData(
+    String apiNode, String username, applicationUser) async {
     // if browse only mode
-    if (username == "na") {
-      username = "null";
+    if (await username == "na") {
+      username = "";
+      return null;
     }
+    log("Fetching user data of " + await username);
     var response = await http.get(Uri.parse(apiNode +
-        APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (isStatusCodeAcceptable(response.statusCode)) {
+        APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", await username)));
+    if (isStatusCodeAcceptable(await response.statusCode)) {
       var data = await json.decode(response.body);
       User user = await ApiResultModel
           .fromJson(data, applicationUser)
           .user;
       return user;
     } else {
-      throw Exception('Wrong status code!');
+      log(response.statusCode.toString());
+      throw Exception(
+          'Wrong status code! ' + response.statusCode.toString() + " ");
     }
   }
 
   Future<bool> getAccountVerificationOnline(String username) async {
     var response = await http.get(Uri.parse(
         AppConfig.originalDtuberCheckUrl.replaceAll("##USERNAME", username)));
-    if (response.statusCode == 200 || response.statusCode == 304) {
+    if (await isStatusCodeAcceptable(response.statusCode)) {
       bool data = json.decode(response.body);
       return data;
     } else {
-      throw Exception('Wrong status code!');
+      log(response.statusCode.toString());
+      throw Exception('Wrong status code! ' + response.statusCode.toString() + " ");
     }
   }
 
@@ -66,7 +73,7 @@ class UserRepositoryImpl implements UserRepository {
     int dtcBalance;
     var response = await http.get(Uri.parse(apiNode +
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (response.statusCode == 200 || response.statusCode == 304) {
+    if (isStatusCodeAcceptable(response.statusCode)) {
       var data = json.decode(response.body);
       dtcBalance = data['balance'] != null ? data['balance'] : -1;
       int vp = data['vt']['v'] != null ? data['vt']['v'] : -1;
@@ -74,13 +81,13 @@ class UserRepositoryImpl implements UserRepository {
 
       var configResponse =
           await http.get(Uri.parse(apiNode + APIUrlSchema.avalonConfig));
-      if (configResponse.statusCode == 200 || configResponse.statusCode == 304) {
+      if (isStatusCodeAcceptable(await configResponse.statusCode)) {
         var configData = json.decode(configResponse.body);
         int vpGrowth = configData['vtGrowth'] != null ? configData['vtGrowth'] : 0;
         currentVT = growInt(vp, vpTS, (dtcBalance / vpGrowth), 0, 0);
       } else {
-
-        throw Exception('Wrong status code!');
+        log(configResponse.statusCode.toString());
+        throw Exception('Wrong status code! ' + configResponse.statusCode.toString() + " ");
       }
     }
     return currentVT;
@@ -90,14 +97,16 @@ class UserRepositoryImpl implements UserRepository {
     int dtcBalance;
     var response = await http.get(Uri.parse(apiNode +
         APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (response.statusCode == 200 || response.statusCode == 304) {
+    if (isStatusCodeAcceptable(response.statusCode)) {
       var data = json.decode(response.body);
 
       User user = ApiResultModel.fromJson(data, applicationUser).user;
       dtcBalance = user.balance != null ? user.balance : -1;
     } else {
-      throw Exception('Wrong status code!');
+      log(response.statusCode.toString());
+      throw Exception('Wrong status code! ' + response.statusCode.toString() + " ");
     }
+
 
     return dtcBalance;
   }

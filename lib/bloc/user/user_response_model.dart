@@ -12,7 +12,7 @@ class ApiResultModel {
   }
 
   Future<Map<String, dynamic>> toJson() async {
-    String? _username = await sec.getUsername();
+    String _username = await sec.getUsername();
     Map<String, dynamic> data = new Map<String, dynamic>();
 
     data = this.user.toJson(_username);
