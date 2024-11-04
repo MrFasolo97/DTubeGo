@@ -385,8 +385,8 @@ class FeedRepositoryImpl implements FeedRepository {
 
     var responseDTube = await http.get(Uri.parse(_url));
     if (isStatusCodeAcceptable(responseDTube.statusCode)) {
-      var data = json.decode(responseDTube.body);
-      List<FeedItem> feed = ApiResultModel.fromJson(data, applicationUser).feed;
+      var data = await json.decode(await responseDTube.body);
+      List<FeedItem> feed = await ApiResultModel.fromJson(data, applicationUser).feed;
       //await sec.persistCurrenNewsTS(int.tryParse(tsTo)!);
       return feed;
     } else {

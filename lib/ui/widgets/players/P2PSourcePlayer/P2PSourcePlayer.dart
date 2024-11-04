@@ -43,7 +43,7 @@ class P2PSourcePlayer extends StatelessWidget {
     } else {
       return P2PSourcePlayerMobile(
         videoUrl: videoUrl,
-        autoplay: true,
+        autoplay: autoplay,
         looping: false,
         localFile: false,
         controls: true,

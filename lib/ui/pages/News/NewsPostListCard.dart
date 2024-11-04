@@ -477,7 +477,7 @@ class PlayerWidget extends StatelessWidget {
             // child:
             P2PSourcePlayer(
                 videoUrl: videoUrl,
-                autoplay: true,
+                autoplay: false,
                 looping: false,
                 localFile: false,
                 controls: true,
@@ -492,7 +492,7 @@ class PlayerWidget extends StatelessWidget {
             : (videoSource == 'youtube' && videoUrl != "")
                 ? YTPlayerIFrame(
                     videoUrl: videoUrl,
-                    autoplay: true,
+                    autoplay: false,
                     allowFullscreen: false,
                     controller: _ytController,
                   )

@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:video_player/video_player.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class PlayerWidget extends StatelessWidget {
@@ -36,42 +38,51 @@ class PlayerWidget extends StatelessWidget {
   final double placeholderWidth;
   final double placeholderSize;
 
+  Widget choosePlayer() {
+    if (["sia", "ipfs"].contains(videoSource) && videoUrl != "") {
+      // AspectRatio(
+      //     aspectRatio: 16 / 9,
+      // child:
+      return P2PSourcePlayer(
+          videoUrl: videoUrl,
+          autoplay: false,
+          looping: false,
+          localFile: false,
+          controls: true,
+          usedAsPreview: false,
+          allowFullscreen: true,
+          portraitVideoPadding: 33.w,
+          videocontroller: _bpController,
+          placeholderWidth: placeholderWidth,
+          placeholderSize: placeholderSize,
+          // ),
+        );
+    } else if (videoSource == 'youtube' && videoUrl != "") {
+      return YTPlayerIFrame(
+        videoUrl: videoUrl,
+        autoplay: false,
+        allowFullscreen: false,
+        controller: _ytController,
+      ) as Widget;
+    } else if (videoSource == "dailymotion" && videoUrl != "") {
+    WebViewController webController = WebViewController();
+        WebViewWidget webWidget = WebViewWidget(controller: webController);
+        webController.loadHtmlString('<html><body>' +
+    '<iframe id="player" frameborder="0" allowfullscreen="true" title="Dailymotion video player" width="100%" height="100%" src="https://www.dailymotion.com/embed/video/'+videoUrl+'?api=postMessage&amp;id=player&amp;mute=false;&amp;queue-enable=false"></iframe>' +
+    '</body></html>');
+        return webWidget;
+    } else {
+    return Text("no player detected") as Widget;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Visibility(
-        visible: _thumbnailTapped,
-        child: (["sia", "ipfs"].contains(videoSource) && videoUrl != "")
-            ?
-            // AspectRatio(
-            //     aspectRatio: 16 / 9,
-            // child:
-            P2PSourcePlayer(
-                videoUrl: videoUrl,
-                autoplay: true,
-                looping: false,
-                localFile: false,
-                controls: true,
-                usedAsPreview: false,
-                allowFullscreen: true,
-                portraitVideoPadding: 33.w,
-                videocontroller: _bpController,
-                placeholderWidth: placeholderWidth,
-                placeholderSize: placeholderSize,
-                // ),
-              )
-            : (videoSource == 'youtube' && videoUrl != "")
-                ? YTPlayerIFrame(
-                    videoUrl: videoUrl,
-                    autoplay: true,
-                    allowFullscreen: false,
-                    controller: _ytController,
-                  )
-                : Text("no player detected"),
-      ),
-    );
+    return choosePlayer();
   }
 }
+
+
 
 class ThumbnailWidget extends StatelessWidget {
   const ThumbnailWidget({

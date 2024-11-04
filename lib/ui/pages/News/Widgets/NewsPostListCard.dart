@@ -91,7 +91,7 @@ class _NewsPostListCardState extends State<NewsPostListCard> {
           desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
           privacyEnhanced: true,
           useHybridComposition: false,
-          autoPlay: true,
+          autoPlay: false,
       ),
     );
   }

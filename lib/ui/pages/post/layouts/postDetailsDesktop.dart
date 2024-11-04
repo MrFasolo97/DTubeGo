@@ -293,7 +293,7 @@ class _PostDetailsState extends State<PostDetails> {
                                       ? YTPlayerIFrame(
                                           controller: _controller,
                                           videoUrl: widget.post.videoUrl!,
-                                          autoplay: true,
+                                          autoplay: false,
                                           allowFullscreen: true,
                                         )
                                       : ["ipfs", "sia"]
