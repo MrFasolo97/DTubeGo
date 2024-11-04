@@ -45,7 +45,7 @@ class _MomentsListState extends State<MomentsList> {
   List<MomentsItem> moments = [];
   String? _nsfwMode;
   String? _hiddenMode;
-  String? _applicationUser;
+  late String _applicationUser;
   String? _defaultPostVotingWeight;
   String? _defaultPostVotingTip;
   String? _defaultCommentsVotingWeight;
@@ -185,7 +185,7 @@ class _MomentsListState extends State<MomentsList> {
                       return MomentsContainer(
                           momentItems: moments,
                           feedType: widget.feedType,
-                          appUser: _applicationUser!,
+                          appUser: _applicationUser,
                           defaultPostsVotingTip: _defaultPostVotingTip!,
                           defaultPostsVotingWeight: _defaultPostVotingWeight!,
                           defaultCommentsVotingWeight:

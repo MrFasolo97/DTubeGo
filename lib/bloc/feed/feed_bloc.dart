@@ -23,7 +23,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchMomentsEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -67,7 +67,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           }
         }
         // reverse feed to have the moments in ascending order
-        List<FeedItem> feedReversed = await dmca.filterFeed(new List.from(feed.reversed));
+        List<FeedItem> feedReversed =
+            await dmca.filterFeed(new List.from(feed.reversed));
         emit(FeedLoadedState(
             feed: feedReversed,
             feedType: event.feedType,
@@ -80,7 +81,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchMomentsOfUserEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -102,7 +103,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
       emit(FeedLoadingState());
       try {
-        List<FeedItem> feed = event.feedType == "NewUserMoments"
+        List<FeedItem>? feed = event.feedType == "NewUserMoments"
             ? await repository.getNewFeedFiltered(
                 _avalonApiNode,
                 "&authors=" + event.username + "&tags=DTubeGo-Moments",
@@ -121,7 +122,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchTagSearchResults>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -143,7 +144,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
       emit(FeedLoadingState());
       try {
-        List<FeedItem> feed = await repository.getNewFeedFiltered(
+        List<FeedItem>? feed = await repository.getNewFeedFiltered(
             _avalonApiNode,
             (event.tags != "all" ? "&tags=" + event.tags : "") +
                 "&authors=all,%5Es3rk47" +
@@ -161,7 +162,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchFeedEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -235,13 +236,21 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
             }
             break;
         }
-        if (event.feedType != 'NewsFeed') {
-          feed = await dmca.filterFeed(feed);
+        if (event.feedType != "NewsFeed") {
+          if (feed.length > 0) {
+            await dmca.filterFeed(feed).whenComplete(() {
+              emit(FeedLoadedState(
+                  feed: feed,
+                  feedType: event.feedType,
+                  fetchedWholeFeed: event.fromAuthor == null));
+            });
+          }
+        } else {
+          emit(FeedLoadedState(
+              feed: feed,
+              feedType: event.feedType,
+              fetchedWholeFeed: event.fromAuthor == null));
         }
-        emit(FeedLoadedState(
-            feed: feed,
-            feedType: event.feedType,
-            fetchedWholeFeed: event.fromAuthor == null));
       } catch (e) {
         emit(FeedErrorState(message: e.toString()));
       }
@@ -249,7 +258,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchUserFeedEvent>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -261,15 +270,15 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       }
       emit(FeedLoadingState());
       try {
-        List<FeedItem> feed = await repository.getNewFeedFiltered(
+        List<FeedItem>? feed = await repository.getNewFeedFiltered(
             _avalonApiNode,
             "&authors=" + event.username + "&tags=all,%5EDTubeGo-Moments",
             "" // tsrange currently not used here to load all uploads of the user
             ,
             _applicationUser);
-        feed = await dmca.filterFeed(feed);
-        emit(FeedLoadedState(
-            feed: feed, feedType: "UserFeed", fetchedWholeFeed: true));
+        feed = await dmca.filterFeed(feed).whenComplete(() => emit(
+            FeedLoadedState(
+                feed: feed!, feedType: "UserFeed", fetchedWholeFeed: true)));
       } catch (e) {
         log(e.toString());
         emit(FeedErrorState(message: e.toString()));
@@ -278,7 +287,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchSuggestedUsersForUserHistory>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -385,7 +394,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchSuggestedUsersForPost>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -463,7 +472,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
     on<FetchSuggestedPostsForPost>((event, emit) async {
       String _avalonApiNode = await sec.getNode();
-      String? _applicationUser = await sec.getUsername();
+      String _applicationUser = await sec.getUsername();
 
       // read and prepare the blocked list for the search filters
       String? _blockedUsers = await sec.getBlockedUsers();
@@ -487,7 +496,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
             ',' +
             (DateTime.now().millisecondsSinceEpoch / 1000).toString();
 
-        List<FeedItem> _otherUsersFeed = await repository.getNewFeedFiltered(
+        List<FeedItem>? _otherUsersFeed = await repository.getNewFeedFiltered(
             _avalonApiNode,
             "&authors=all,%5E" +
                 event.currentUsername + // not from the same user
@@ -497,11 +506,13 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
                 ",%5EDTubeGo-Moments",
             _tsRangeFilterOtherUsers, // only last x days
             _applicationUser);
-        emit(FeedLoadedState(
-            feed:
-                await dmca.filterFeed(_otherUsersFeed.take(ExploreConfig.maxUserSuggestions).toList()),
-            feedType: "SuggestedPosts",
-            fetchedWholeFeed: true));
+        _otherUsersFeed = await dmca
+            .filterFeed(
+                _otherUsersFeed.take(ExploreConfig.maxUserSuggestions).toList())
+            .whenComplete(() => emit(FeedLoadedState(
+                feed: _otherUsersFeed!,
+                feedType: "SuggestedPosts",
+                fetchedWholeFeed: true)));
       } catch (e) {
         print(e.toString());
         emit(FeedErrorState(message: e.toString()));
