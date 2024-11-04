@@ -242,7 +242,7 @@ class _AccountIconState extends State<AccountIcon> {
             );
           }
         } else if (state is UserErrorState) {
-          print(state.toString() + " happened for");
+          print(state.toString() + " happened for AccountIcon");
           return AvatarLoadingPlaceholder(size: widget.avatarSize);
         } else {
           print(state.toString() + " happened");

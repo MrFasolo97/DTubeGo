@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ovh.fso.dtubego/bloc/postdetails/postdetails_response_model.dart';
 import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:http/http.dart' as http;
@@ -56,7 +58,7 @@ class PostRepositoryImpl implements PostRepository {
             return _post;
           }
         } else {
-          print("post other exception");
+          log("post other exception");
           throw Exception();
         }
       }

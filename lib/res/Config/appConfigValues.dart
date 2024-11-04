@@ -32,5 +32,8 @@ class AppConfig {
 }
 
 bool isStatusCodeAcceptable(statusCode) {
-  return 200 <= statusCode && statusCode <= 304;
+  if (statusCode == null) {
+    return false;
+  }
+  return 200 <= statusCode && statusCode < 400;
 }
