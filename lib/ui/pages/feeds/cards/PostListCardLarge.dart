@@ -133,7 +133,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
       initialVideoId: widget.videoUrl,
       params: YoutubePlayerParams(
         useHybridComposition: false,
-        autoPlay: true,
+        autoPlay: false,
         desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
         privacyEnhanced: true,
         showControls: true,
