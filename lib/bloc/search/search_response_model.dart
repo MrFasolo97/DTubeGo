@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
 import 'package:ovh.fso.dtubego/utils/Avalon/growInt.dart';
 
 class SearchResults {
-  late int took;
+  late int? took;
   late bool timedOut;
   Shards? sShards;
   Hits? hits;
@@ -14,13 +16,13 @@ class SearchResults {
       required this.hits});
 
   SearchResults.fromJson(
-      Map<String, dynamic> json, int vpGrowth, String currentUser) {
-    took = json['took'];
+      Map<String, dynamic> json, int? vpGrowth, String currentUser) {
+    took = json['took'] != null ? json['took'] : 0;
     timedOut = json['timed_out'];
     sShards =
         json['_shards'] != null ? new Shards.fromJson(json['_shards']) : null;
     hits = json['hits'] != null
-        ? new Hits.fromJson(json['hits'], vpGrowth, currentUser)
+        ? new Hits.fromJson(json['hits'], vpGrowth != null ? vpGrowth : 0, currentUser)
         : null;
   }
 
@@ -39,10 +41,10 @@ class SearchResults {
 }
 
 class Shards {
-  late int total;
-  late int successful;
-  late int skipped;
-  late int failed;
+  int? total;
+  int? successful;
+  int? skipped;
+  int? failed;
 
   Shards(
       {required this.total,
@@ -51,10 +53,10 @@ class Shards {
       required this.failed});
 
   Shards.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    successful = json['successful'];
-    skipped = json['skipped'];
-    failed = json['failed'];
+    total = json['total'] != null ? json['total'] : 0;
+    successful = json['successful'] != null ? json['successful'] : 0;
+    skipped = json['skipped'] != null ? json['skipped'] : 0;
+    failed = json['failed'] != null ? json['failed'] : 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -68,19 +70,19 @@ class Shards {
 }
 
 class Hits {
-  late int total;
+  int? total;
 
   List<Hit>? hits;
 
   Hits({required this.total, required this.hits});
 
-  Hits.fromJson(Map<String, dynamic> json, int vpGrowth, String currentUser) {
-    total = json['total']['value'];
-
+  Hits.fromJson(Map<String, dynamic> json, int? vpGrowth, String currentUser) {
+    total = json['total']['value'] != null ? json['total']['value'] : 0;
+    hits = [];
     if (json['hits'] != null) {
-      hits = [];
       json['hits'].forEach((v) {
-        hits!.add(new Hit.fromJson(v, vpGrowth, currentUser));
+        log(v.toString());
+        hits!.add(new Hit.fromJson(v, vpGrowth != null ? vpGrowth : 0, currentUser));
       });
     }
   }
@@ -97,12 +99,12 @@ class Hits {
 }
 
 class Total {
-  late int value;
+  late int? value;
 
   Total({required this.value});
 
   Total.fromJson(Map<String, dynamic> json) {
-    value = json['value'];
+    value = json['value'] != null ? json['value'] : 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -123,11 +125,11 @@ class Hit {
     this.sSource,
   });
 
-  Hit.fromJson(Map<String, dynamic> json, int vpGrowth, String currentUser) {
+  Hit.fromJson(Map<String, dynamic> json, int? vpGrowth, String currentUser) {
     sId = json['_id'];
 
     sSource = json['_source'] != null
-        ? new Source.fromJson(json['_source'], vpGrowth, currentUser)
+        ? new Source.fromJson(json['_source'], vpGrowth != null ? vpGrowth : 0, currentUser)
         : null;
   }
 
@@ -148,7 +150,7 @@ class Source {
   //users
   int? balance;
   String? createdBy;
-  int? createdOn;
+  // late int createdOn;
   List<String>? followers;
   List<String>? follows;
   String? name;
@@ -173,19 +175,19 @@ class Source {
   bool? alreadyVotedDirection = false; // false = downvote | true = upvote
 
   Source(
-      {this.balance,
+      {required this.balance,
       this.followers,
       this.follows,
       this.name,
       this.pubLeader,
-      this.vt,
+      required this.vt,
       this.author,
       this.dist,
       this.link,
       this.tags,
-      this.ts});
+      required this.ts});
 
-  Source.fromJson(Map<String, dynamic> json, int vpGrowth, String currentUser) {
+  Source.fromJson(Map<String, dynamic> json, int? vpGrowth, String currentUser) {
     //users
     balance = json['balance'] != null ? json['balance'] : 0;
 
@@ -198,8 +200,8 @@ class Source {
     pubLeader = json['pub_leader'] != null ? json['pub_leader'] : "";
     if (json['vt'] != null) {
       var currentVT = growInt(
-          json['vt']['v'], json['vt']['t'], (json['balance'] / vpGrowth), 0, 0);
-      vt = currentVT['v'] != null ? currentVT['v'] : 0;
+          json['vt']['v'], json['vt']['t'], (balance! / (vpGrowth != null ? vpGrowth : 0)), 0, 0);
+      vt = currentVT['v'] != null ? currentVT['v']! : 0;
       vtTs = json['vt']['t'];
     }
     //posts
@@ -216,8 +218,8 @@ class Source {
       downvotes = [];
       json['votes'].forEach((v) {
         Votes _v = new Votes.fromJson(v);
-        summaryOfVotes = summaryOfVotes + _v.vt;
-        if (_v.vt > 0) {
+        summaryOfVotes = summaryOfVotes + _v.vt!;
+        if (_v.vt! > 0) {
           upvotes!.add(_v);
           if (_v.u == currentUser) {
             alreadyVoted = true;
@@ -536,8 +538,8 @@ class SiaVid {
 
 class Votes {
   late String u;
-  late int ts;
-  late int vt;
+  int? ts;
+  int? vt;
   String? tag;
   double? gross;
   double? claimable;

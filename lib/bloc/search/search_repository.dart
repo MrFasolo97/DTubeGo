@@ -15,17 +15,17 @@ class SearchRepositoryImpl implements SearchRepository {
   @override
   Future<SearchResults> getSearchResults(String searchQuery,
       String searchEntity, String apiNode, String currentUser) async {
-    // int vpGrowth = 360000000; // Hardcoded: Todo fix and fetch from chain config ASAP!
+    //int vpGrowth = 360000000; // Hardcoded: Todo fix and fetch from chain config ASAP!
     SearchResults results;
     var configResponse = await http.get(
         Uri.parse(apiNode + APIUrlSchema.avalonConfig));
     if (isStatusCodeAcceptable(configResponse.statusCode)) {
-      var configData = await json.decode(configResponse.body);
+      var configData = await json.decode(await configResponse.body);
 
       AvalonConfig conf = ApiResultModelAvalonConfig
           .fromJson(configData)
           .conf;
-      int vpGrowth = conf.vtGrowth;
+      int vpGrowth = await conf.vtGrowth;
       String _searchURL = "";
       switch (searchEntity) {
         case "Users":
@@ -43,10 +43,11 @@ class SearchRepositoryImpl implements SearchRepository {
         // var data = json.decode(response.data);
         var data = await json.decode(response.body);
         dev.log(data.toString());
-        results = SearchResults.fromJson(data, vpGrowth, currentUser);
+        results = await SearchResults.fromJson(data, vpGrowth, currentUser);
         return results;
-        // filter here for specfic notification types
+        // filter here for specific notification types
       } else {
+        dev.log("Wrong status code on search!");
         throw Exception();
       }
     }
