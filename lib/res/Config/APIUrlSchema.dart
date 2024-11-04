@@ -18,6 +18,7 @@ class APIUrlSchema {
   static String avatarUrl = "/image/avatar/##USERNAME";
   static String dmcaListUrl = 'https://raw.githubusercontent.com/dtubego/dmca/master/dmca.json';
   static String dmcaCheckUrl = 'https://dmca.dtube.fso.ovh/v/##USERNAME/##LINK';
+  static String dmcaFilterFeed = 'https://dmca.dtube.fso.ovh/feed';
 
   // rewards and history url schemes
   static String rewardsUrl = "/votes/##REWARDSTATE/##USERNAME/0";
@@ -37,7 +38,7 @@ class APIUrlSchema {
   static String accountDataUrl = "/account/##USERNAME";
 
 // other avalon url schemes
-  static String sendTransactionUrl = "/transactWaitConfirm";
+  static String sendTransactionUrl = "/transact";
   static String avalonConfig = "/config";
   static String accountPriceUrl = "/accountPrice/##USERNAME";
 
