@@ -386,12 +386,12 @@ class TxLimits {
   TxLimits({required this.i14, required this.i15, required this.i19, required this.i23, required this.i24, required this.i28});
 
   TxLimits.fromJson(Map<String, dynamic> json) {
-    i14 = json['14'];
-    i15 = json['15'];
-    i19 = json['19'];
-    i23 = json['23'];
-    i24 = json['24'];
-    i28 = json['28'];
+    i14 = json['14'] ?? 0;
+    i15 = json['15'] ?? 0;
+    i19 = json['19'] ?? 0;
+    i23 = json['23'] ?? 0;
+    i24 = json['24'] ?? 0;
+    i28 = json['28'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {

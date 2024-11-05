@@ -1,3 +1,4 @@
+//@dart=2.12
 import 'dart:convert';
 import 'dart:developer' as dev;
 import 'package:ovh.fso.dtubego/bloc/avalonConfig/avalonConfig_response_model.dart';
@@ -19,7 +20,7 @@ class SearchRepositoryImpl implements SearchRepository {
     SearchResults results;
     var configResponse = await http.get(
         Uri.parse(apiNode + APIUrlSchema.avalonConfig));
-    if (isStatusCodeAcceptable(configResponse.statusCode)) {
+    if (await isStatusCodeAcceptable(await configResponse.statusCode)) {
       var configData = await json.decode(await configResponse.body);
 
       AvalonConfig conf = ApiResultModelAvalonConfig

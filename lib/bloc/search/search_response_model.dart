@@ -189,7 +189,7 @@ class Source {
 
   Source.fromJson(Map<String, dynamic> json, int? vpGrowth, String currentUser) {
     //users
-    balance = json['balance'] != null ? json['balance'] : 0;
+    balance = json['balance'] ?? 0;
 
     followers =
         json['followers'] != null ? json['followers'].cast<String>() : [];
@@ -200,7 +200,7 @@ class Source {
     pubLeader = json['pub_leader'] != null ? json['pub_leader'] : "";
     if (json['vt'] != null) {
       var currentVT = growInt(
-          json['vt']['v'], json['vt']['t'], (balance! / (vpGrowth != null ? vpGrowth : 0)), 0, 0);
+          json['vt']['v'], json['vt']['t'], (balance! / (vpGrowth ?? 0)), 0, 0);
       vt = currentVT['v'] != null ? currentVT['v']! : 0;
       vtTs = json['vt']['t'];
     }
@@ -380,18 +380,18 @@ class JsonData {
     title = json['title'] != null ? json['title'] : "";
     tags = json['tags'] != null ? json['tags'].cast<String>() : null;
     refs = json['refs'] != null ? json['refs'].cast<String>() : null;
-    tag = json['tag'];
+    tag = json['tag'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['desc'] = this.desc != null ? this.desc : "";
-    data['dur'] = this.dur != null ? this.dur : "";
-    data['hide'] = this.hide != null ? this.hide : 0;
-    data['nsfw'] = this.nsfw != null ? this.nsfw : 0;
-    data['oc'] = this.oc != null ? this.oc : 0;
-    data['title'] = this.title != null ? this.title : "";
-    data['tags'] = this.tags != null ? this.tags : "";
+    data['desc'] = this.desc ?? "";
+    data['dur'] = this.dur ?? 0;
+    data['hide'] = this.hide ?? 0;
+    data['nsfw'] = this.nsfw ?? 0;
+    data['oc'] = this.oc ?? 0;
+    data['title'] = this.title ?? "";
+    data['tags'] = this.tags ?? [];
     data['tag'] = this.tag;
     if (this.files != null) {
       data['files'] = this.files!.toJson();
@@ -554,8 +554,8 @@ class Votes {
 
   Votes.fromJson(Map<String, dynamic> json) {
     u = json['u'];
-    ts = json['ts'];
-    vt = json['vt'];
+    ts = json['ts'] ?? 0;
+    vt = json['vt'] ?? 0;
     tag = json['tag'];
     gross = json['gross'] != null ? json['gross'] + 0.0 : 0.0;
     claimable = json['claimable'] != null ? json['claimable'] + 0.0 : 0.0;
