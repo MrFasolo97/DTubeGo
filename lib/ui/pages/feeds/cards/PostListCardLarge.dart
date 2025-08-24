@@ -130,7 +130,7 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
     _userBloc = BlocProvider.of<UserBloc>(context);
     _bpController = VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl) ?? "",
       flags: YoutubePlayerFlags(
         autoPlay: false, // We'll control this manually in onReady
         mute: false,

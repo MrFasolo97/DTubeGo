@@ -215,7 +215,7 @@ class _PostDetailsState extends State<PostDetails> {
           mute: false,
           enableCaption: false,
         ),
-      initialVideoId: widget.post.videoUrl!
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.post.videoUrl!) ?? ''
     );
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');

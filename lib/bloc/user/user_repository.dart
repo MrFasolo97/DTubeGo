@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:ovh.fso.dtubego/res/Config/APIUrlSchema.dart';
 import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
-import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart'
+    as globals;
 
 import 'package:ovh.fso.dtubego/bloc/user/user_response_model.dart';
 import 'package:ovh.fso.dtubego/utils/Avalon/growInt.dart';
@@ -25,25 +26,45 @@ abstract class UserRepository {
 class UserRepositoryImpl implements UserRepository {
   @override
   Future<User?> getAccountData(
-    String apiNode, String username, applicationUser) async {
+      String apiNode, String username, String applicationUser) async {
     // if browse only mode
-    if (await username == "na") {
-      username = "";
+    if (username == "na") {
       return null;
     }
-    log("Fetching user data of " + await username);
-    var response = await http.get(Uri.parse(apiNode +
-        APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", await username)));
-    if (isStatusCodeAcceptable(await response.statusCode)) {
-      var data = await json.decode(response.body);
-      User user = await ApiResultModel
-          .fromJson(data, applicationUser)
-          .user;
-      return user;
-    } else {
-      log(response.statusCode.toString());
-      throw Exception(
-          'Wrong status code! ' + response.statusCode.toString() + " ");
+
+    log("Fetching user data of $username");
+
+    try {
+      final url = Uri.parse(apiNode +
+          APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username));
+
+      final response = await http.get(url);
+
+      log("Response status: ${response.statusCode}");
+      log("Response body: ${response.body}");
+
+      if (isStatusCodeAcceptable(response.statusCode)) {
+        final data = json.decode(response.body);
+
+        if (data is List && data.isEmpty) {
+          log("Empty array response - user not found");
+          return null;
+        }
+
+        if (data is! Map<String, dynamic>) {
+          log("Unexpected response format: ${data.runtimeType}");
+          throw Exception('Unexpected response format');
+        }
+
+        final user = ApiResultModel.fromJson(data, applicationUser).user;
+        return user;
+      } else {
+        log("Error status code: ${response.statusCode}");
+        throw Exception('Wrong status code! ${response.statusCode}');
+      }
+    } catch (e) {
+      log("Error fetching user data: $e");
+      rethrow;
     }
   }
 
@@ -51,11 +72,12 @@ class UserRepositoryImpl implements UserRepository {
     var response = await http.get(Uri.parse(
         AppConfig.originalDtuberCheckUrl.replaceAll("##USERNAME", username)));
     if (await isStatusCodeAcceptable(response.statusCode)) {
-      bool data = json.decode(response.body);
+      bool data = await json.decode(response.body);
       return data;
     } else {
       log(response.statusCode.toString());
-      throw Exception('Wrong status code! ' + response.statusCode.toString() + " ");
+      throw Exception(
+          'Wrong status code! ' + response.statusCode.toString() + " ");
     }
   }
 
@@ -70,44 +92,73 @@ class UserRepositoryImpl implements UserRepository {
       "t": 0,
     };
 
-    int dtcBalance;
-    var response = await http.get(Uri.parse(apiNode +
-        APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (isStatusCodeAcceptable(response.statusCode)) {
-      var data = json.decode(response.body);
-      dtcBalance = data['balance'] != null ? data['balance'] : -1;
-      int vp = data['vt']['v'] != null ? data['vt']['v'] : -1;
-      int vpTS = data['vt']['t'] != null ? data['vt']['t'] : 0;
+    try {
+      final url = Uri.parse(apiNode +
+          APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username));
 
-      var configResponse =
-          await http.get(Uri.parse(apiNode + APIUrlSchema.avalonConfig));
-      if (isStatusCodeAcceptable(await configResponse.statusCode)) {
-        var configData = json.decode(configResponse.body);
-        int vpGrowth = configData['vtGrowth'] != null ? configData['vtGrowth'] : 0;
-        currentVT = growInt(vp, vpTS, (dtcBalance / vpGrowth), 0, 0);
-      } else {
-        log(configResponse.statusCode.toString());
-        throw Exception('Wrong status code! ' + configResponse.statusCode.toString() + " ");
+      final response = await http.get(url);
+
+      if (isStatusCodeAcceptable(response.statusCode)) {
+        final data = json.decode(response.body);
+
+        // Handle empty response
+        if (data is List && data.isEmpty) {
+          return currentVT;
+        }
+
+        if (data is! Map<String, dynamic>) {
+          return currentVT;
+        }
+
+        int dtcBalance = data['balance'] ?? -1;
+        int vp = data['vt'] != null && data['vt']['v'] != null
+            ? data['vt']['v']
+            : -1;
+        int vpTS =
+            data['vt'] != null && data['vt']['t'] != null ? data['vt']['t'] : 0;
+
+        final configUrl = Uri.parse(apiNode + APIUrlSchema.avalonConfig);
+        final configResponse = await http.get(configUrl);
+
+        if (isStatusCodeAcceptable(configResponse.statusCode)) {
+          final configData = json.decode(configResponse.body);
+          int vpGrowth = configData['vtGrowth'] ?? 0;
+          currentVT = growInt(vp, vpTS, (dtcBalance / vpGrowth), 0, 0);
+        }
       }
+      return currentVT;
+    } catch (e) {
+      log("Error getting VP: $e");
+      return currentVT;
     }
-    return currentVT;
   }
 
   Future<int> getDTC(String apiNode, String username, applicationUser) async {
-    int dtcBalance;
-    var response = await http.get(Uri.parse(apiNode +
-        APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username)));
-    if (isStatusCodeAcceptable(response.statusCode)) {
-      var data = json.decode(response.body);
+    try {
+      final url = Uri.parse(apiNode +
+          APIUrlSchema.accountDataUrl.replaceAll("##USERNAME", username));
 
-      User user = ApiResultModel.fromJson(data, applicationUser).user;
-      dtcBalance = user.balance != null ? user.balance : -1;
-    } else {
-      log(response.statusCode.toString());
-      throw Exception('Wrong status code! ' + response.statusCode.toString() + " ");
+      final response = await http.get(url);
+
+      if (isStatusCodeAcceptable(response.statusCode)) {
+        final data = json.decode(response.body);
+
+        // Handle empty response
+        if (data is List && data.isEmpty) {
+          return 0;
+        }
+
+        if (data is! Map<String, dynamic>) {
+          return 0;
+        }
+
+        // Use direct access instead of creating User object for better performance
+        return data['balance'] ?? 0;
+      }
+      return 0;
+    } catch (e) {
+      log("Error getting DTC: $e");
+      return 0;
     }
-
-
-    return dtcBalance;
   }
 }

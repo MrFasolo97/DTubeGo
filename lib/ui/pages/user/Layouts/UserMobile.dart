@@ -92,10 +92,12 @@ class _UserPageMobileState extends State<UserPageMobile> {
                   return kIsWeb
                       ? buildUserPageWeb(state.user, widget.ownUserpage)
                       : buildUserPageMobile(state.user, widget.ownUserpage);
+                } else if (state is UserNotFoundState) {
+                  return buildErrorUi('User "@${state.username}" not found');
                 } else if (state is UserErrorState) {
                   return buildErrorUi(state.message);
                 } else {
-                  return buildErrorUi('test');
+                  return buildErrorUi('Unknown state error');
                 }
               },
             ),
@@ -114,12 +116,44 @@ class _UserPageMobileState extends State<UserPageMobile> {
 
   Widget buildErrorUi(String message) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          message,
-          style: TextStyle(color: Colors.red),
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.error_outline,
+            size: 64,
+            color: Colors.red[400],
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Oops! Something went wrong',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.red[600],
+            ),
+          ),
+          SizedBox(height: 8),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32.0),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+              ),
+            ),
+          ),
+          SizedBox(height: 24),
+          ElevatedButton(
+            onPressed: () {
+              // Refresh or retry logic
+              userBloc.add(FetchAccountDataEvent(username: widget.username));
+            },
+            child: Text('Retry'),
+          ),
+        ],
       ),
     );
   }

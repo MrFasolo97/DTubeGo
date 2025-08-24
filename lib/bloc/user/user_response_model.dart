@@ -11,13 +11,10 @@ class ApiResultModel {
     user = new User.fromJson(json, currentUser);
   }
 
-  Future<Map<String, dynamic>> toJson() async {
-    String _username = await sec.getUsername();
-    Map<String, dynamic> data = new Map<String, dynamic>();
-
-    data = this.user.toJson(_username);
-
-    return data;
+  Map<String, dynamic> toJson(String currentUser) {
+    return {
+      'user': user.toJson(currentUser),
+    };
   }
 }
 
@@ -39,6 +36,9 @@ class User {
   String? pubLeader;
   late bool alreadyFollowing;
   Created? created;
+  int? voteLock;
+  List? proposalVotes;
+  int? claimedReward;
 
   User(
       {required this.sId,
@@ -57,39 +57,48 @@ class User {
       this.nodeAppr,
       this.pubLeader,
       required this.alreadyFollowing,
-      this.created});
+      this.created,
+      this.voteLock,
+      this.proposalVotes,
+      this.claimedReward
+      });
 
   User.fromJson(Map<String, dynamic> json, String currentUser) {
-    sId = json['_id'];
-    name = json['name'];
-    pub = json['pub'];
-    balance = json['balance'];
-    bw = json['bw'] != null ? new Bw.fromJson(json['bw']) : null;
-    vt = json['vt'] != null ? new Bw.fromJson(json['vt']) : null;
-    pr = json['pr'] != null ? new Bw.fromJson(json['pr']) : null;
-    created =
-        json['created'] != null ? new Created.fromJson(json['created']) : null;
-    uv = json['uv'];
-    follows = json['follows'] != null ? json['follows'].cast<String>() : null;
-    followers =
-        json['followers'] != null ? json['followers'].cast<String>() : null;
+    sId = json['_id'] ?? '';
+    name = json['name'] ?? '';
+    pub = json['pub'] ?? '';
+    balance = json['balance'] ?? 0;
+    bw = json['bw'] != null ? Bw.fromJson(json['bw']) : Bw(v: 0, t: 0);
+    vt = json['vt'] != null ? Bw.fromJson(json['vt']) : Bw(v: 0, t: 0);
+    pr = json['pr'] != null ? Bw.fromJson(json['pr']) : Bw(v: 0, t: 0);
+    uv = json['uv'] ?? 0;
+
+    // Handle list fields with null safety
+    follows = (json['follows'] as List<dynamic>?)?.cast<String>() ?? [];
+    followers = (json['followers'] as List<dynamic>?)?.cast<String>() ?? [];
+
+    // Handle keys list
+    keys = [];
     if (json['keys'] != null) {
-      keys = [];
-      json['keys'].forEach((v) {
-        keys.add(new Keys.fromJson(v));
-      });
+      for (var v in json['keys']) {
+        keys.add(Keys.fromJson(v));
+      }
     }
-    jsonString =
-        json['json'] != null ? new JsonString.fromJson(json['json']) : null;
-    approves =
-        json['approves'] != null ? json['approves'].cast<String>() : null;
-    nodeAppr = json['node_appr'] != null ? json['node_appr'] : null;
-    pubLeader = json['pub_leader'] != null ? json['pub_leader'] : null;
-    if (followers != null && followers!.contains(currentUser)) {
-      alreadyFollowing = true;
-    } else {
-      alreadyFollowing = false;
-    }
+
+    // Handle json field
+    jsonString = json['json'] != null ? JsonString.fromJson(json['json']) : JsonString();
+
+    approves = (json['approves'] as List<dynamic>?)?.cast<String>() ?? [];
+    nodeAppr = json['node_appr'] ?? 0;
+    pubLeader = json['pub_leader'] ?? '';
+    voteLock = json['voteLock'] ?? 0;
+    proposalVotes = json['proposalVotes'] ?? [];
+    claimedReward = json['claimedReward'] ?? 0;
+
+    // Check if current user is in followers
+    alreadyFollowing = followers?.contains(currentUser) ?? false;
+
+    created = json['created'] != null ? Created.fromJson(json['created']) : Created(by: '', ts: 0);
   }
 
   Map<String, dynamic> toJson(String currentUser) {
@@ -98,6 +107,7 @@ class User {
     data['name'] = this.name;
     data['pub'] = this.pub;
     data['balance'] = this.balance;
+    data['claimedReward'] = this.claimedReward;
     if (this.bw != null) {
       data['bw'] = this.bw!.toJson();
     }
@@ -119,6 +129,7 @@ class User {
     data['approves'] = this.approves;
     data['node_appr'] = this.nodeAppr;
     data['pub_leader'] = this.pubLeader;
+    data['voteLock'] = this.voteLock;
     if (followers != null && followers!.contains(currentUser)) {
       alreadyFollowing = true;
     } else {
@@ -197,9 +208,7 @@ class JsonString {
 
   JsonString.fromJson(Map<String, dynamic> json) {
     node = json['node'] != null ? new Node.fromJson(json['node']) : null;
-    if (json['profile'] != null) {
-      profile = new Profile.fromJson(json['profile']);
-    }
+    profile = json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
     additionals = json['additionals'] != null
         ? new Additionals.fromJson(json['additionals'])
         : null;
@@ -244,6 +253,7 @@ class Profile {
   String? website;
   String? steem;
   String? hive;
+  String? blurt;
 
   Profile(
       {this.avatar,
@@ -252,7 +262,9 @@ class Profile {
       this.location,
       this.website,
       this.steem,
-      this.hive});
+      this.hive,
+      this.blurt
+      });
 
   Profile.fromJson(Map<String, dynamic> json) {
     avatar = json['avatar'] != null ? json['avatar'] : '';
@@ -262,6 +274,7 @@ class Profile {
     website = json['website'] != null ? json['website'] : '';
     steem = json['steem'] != null ? json['steem'] : '';
     hive = json['hive'] != null ? json['hive'] : '';
+    blurt = json['blurt'] != null ? json['blurt'] : '';
   }
 
   Map<String, dynamic> toJson() {
@@ -273,6 +286,7 @@ class Profile {
     data['website'] = this.website;
     data['steem'] = this.steem;
     data['hive'] = this.hive;
+    data['blurt'] = this.blurt;
 
     return data;
   }

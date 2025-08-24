@@ -89,7 +89,7 @@ class _NewsPostListCardState extends State<NewsPostListCard> {
           mute: false,
           enableCaption: false,
         ),
-      initialVideoId: widget.videoUrl
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl) ?? ""
     );
   }
 

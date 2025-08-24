@@ -148,7 +148,7 @@ class _PostDetailsState extends State<PostDetails> {
           mute: false,
           enableCaption: false,
         ),
-        initialVideoId: YoutubePlayer.convertUrlToId(widget.post.videoUrl!)!);
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.post.videoUrl!) ?? '');
   }
 
   @override

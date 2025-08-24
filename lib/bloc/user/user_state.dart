@@ -34,6 +34,15 @@ class UserDTCVPLoadedState extends UserState {
   List<Object> get props => [vtBalance, dtcBalance];
 }
 
+class UserNotFoundState extends UserState {
+  final String username;
+
+  UserNotFoundState({required this.username});
+
+  @override
+  List<Object> get props => [username];
+}
+
 class UserErrorState extends UserState {
   final String message;
 

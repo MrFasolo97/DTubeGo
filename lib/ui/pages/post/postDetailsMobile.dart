@@ -256,7 +256,7 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
           mute: false,
           enableCaption: false,
         ),
-        initialVideoId: widget.post.videoUrl!);
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.post.videoUrl!) ?? '');
     _ytPlayer = YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: controller,);
         Container? mainContainer = Container(
             child: SingleChildScrollView(
