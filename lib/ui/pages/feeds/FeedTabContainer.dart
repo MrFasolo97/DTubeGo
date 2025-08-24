@@ -302,7 +302,7 @@ class _TabBarWithPositionState extends State<TabBarWithPosition> {
       child: Padding(
         padding: widget.padding,
         child: !widget.showLabels
-            ? Container(
+            ? Expanded(child: Container(
                 width: widget.menuSize,
                 child: TabBar(
                   unselectedLabelColor: globalAlmostWhite,
@@ -313,7 +313,7 @@ class _TabBarWithPositionState extends State<TabBarWithPosition> {
                   indicatorSize: TabBarIndicatorSize.label,
                   labelPadding: EdgeInsets.zero,
                 ),
-              )
+              ))
             : Padding(
                 padding: const EdgeInsets.only(top: 50.0),
                 child: Container(

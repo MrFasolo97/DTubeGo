@@ -25,7 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:ovh.fso.dtubego/utils/System/hw_none.dart' if(dart.lib.html) 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementOnDesktop.dart'
     if(dart.lib.io) 'package:ovh.fso.dtubego/ui/widgets/Ads/AdvertisementAfterPostSmartphone.dart';
 
@@ -130,14 +130,11 @@ class _PostListCardLargeState extends State<PostListCardLarge> {
     _userBloc = BlocProvider.of<UserBloc>(context);
     _bpController = VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
-      initialVideoId: widget.videoUrl,
-      params: YoutubePlayerParams(
-        useHybridComposition: false,
-        autoPlay: false,
-        desktopMode: kIsWeb ? true : !Platform.isIOS && !Platform.isAndroid,
-        privacyEnhanced: true,
-        showControls: true,
-        showFullscreenButton: true,
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+      flags: YoutubePlayerFlags(
+        autoPlay: false, // We'll control this manually in onReady
+        mute: false,
+        enableCaption: false,
       ),
     );
   }
@@ -801,7 +798,7 @@ class PostInfoBaseRow extends StatelessWidget {
                                           okCallback: () {
                                             votingCloseCallback();
                                             if (widget.autoPauseVideoOnPopup) {
-                                              ytController.play();
+                                              ytController.play()  ;
                                               videoController.play();
                                             }
                                           },

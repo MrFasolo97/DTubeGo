@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YTPlayerIFrame extends StatefulWidget {
   YTPlayerIFrame(
@@ -35,25 +35,20 @@ class _YTPlayerIFrameState extends State<YTPlayerIFrame> {
 
   @override
   void dispose() {
-    widget.controller.close();
     widget.controller.pause();
+    widget.controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    widget.controller.onEnterFullscreen = () {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
-    };
-    widget.controller.onExitFullscreen = () {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    };
-    return YoutubePlayerControllerProvider(
-      controller: widget.controller,
-      child: YoutubePlayerIFrame(
-        controller: widget.controller,
-        aspectRatio: 16 / 9,
-      ),
+    var _ytPlayer = YoutubePlayer(controller: widget.controller);
+    return YoutubePlayerBuilder(
+      player: _ytPlayer,
+      builder: (BuildContext context, Widget widget) {
+        return widget;
+      },
+
     );
   }
 }

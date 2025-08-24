@@ -19,7 +19,8 @@ import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 class PostDetailPageInlineView extends StatefulWidget {
   String link;
@@ -141,8 +142,13 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
-    YoutubePlayerParams youtubePlayerParams = YoutubePlayerParams(autoPlay: true, useHybridComposition: true, showFullscreenButton: true);
-    _ytController = YoutubePlayerController(initialVideoId: widget.post.videoUrl!, params: youtubePlayerParams);
+    _ytController = YoutubePlayerController(
+        flags: YoutubePlayerFlags(
+          autoPlay: false, // We'll control this manually in onReady
+          mute: false,
+          enableCaption: false,
+        ),
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.post.videoUrl!)!);
   }
 
   @override
@@ -152,7 +158,7 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   Widget build(BuildContext context) {
-    YoutubePlayerIFrame player = YoutubePlayerIFrame(controller: _ytController);
+    YoutubePlayer player = YoutubePlayer(controller: _ytController);
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UserDTCVPLoadedState) {}

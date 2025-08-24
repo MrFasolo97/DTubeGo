@@ -19,7 +19,7 @@ class _P2PSourcePlayerWebState extends State<P2PSourcePlayerWeb> {
   void initState() {
     super.initState();
     flickManager = FlickManager(
-      videoPlayerController: VideoPlayerController.networkUrl(Uri.parse(widget.url)),
+      videoPlayerController: VideoPlayerController.contentUri(Uri.parse(widget.url)),
     );
   }
 

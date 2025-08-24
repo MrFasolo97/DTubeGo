@@ -6,7 +6,7 @@ import 'package:ovh.fso.dtubego/ui/pages/feeds/FeedViewBase.dart';
 import 'package:flutter/material.dart';
 
 class FeedTabsDesktop extends StatelessWidget {
-  const FeedTabsDesktop({
+  const   FeedTabsDesktop({
     Key? key,
     required this.tabBarFeedItemList,
     required this.tabController,

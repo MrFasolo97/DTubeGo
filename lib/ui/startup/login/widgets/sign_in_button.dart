@@ -31,7 +31,7 @@ class SignInButton extends StatefulWidget {
 
 class _SignInButtonState extends State<SignInButton> {
   bool isLoading = false;
-  FirebaseService service = new FirebaseService();
+  //FirebaseService service = new FirebaseService();
   @override
   Widget build(BuildContext context) {
     return !isLoading
@@ -75,6 +75,7 @@ class _SignInButtonState extends State<SignInButton> {
     late String _provider;
     Resource? result = Resource(status: Status.Error);
     UserCredential? usercred;
+    /*
     try {
       switch (this.widget.loginType) {
         case LoginType.Google:
@@ -93,7 +94,6 @@ class _SignInButtonState extends State<SignInButton> {
           }
           _provider = "twitter";
           break;
-      /*
         case LoginType.Github:
           if (kIsWeb) {
             usercred = await service.signInWithGithubWeb();
@@ -103,7 +103,6 @@ class _SignInButtonState extends State<SignInButton> {
 
          _provider = "github";
           break;
-       */
         case LoginType.Facebook:
           service.signInWithFacebookMobile();
           _provider = "facebook";
@@ -119,6 +118,7 @@ class _SignInButtonState extends State<SignInButton> {
         showMessage(e);
       }
     }
+    */
 
   }
 }

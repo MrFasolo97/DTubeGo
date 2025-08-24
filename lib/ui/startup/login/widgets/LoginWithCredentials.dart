@@ -1,10 +1,10 @@
+import 'package:flutter_barcode_scanner_plus/flutter_barcode_scanner_plus.dart';
 import 'package:ovh.fso.dtubego/bloc/auth/auth_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/OpenableHyperlink.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:ovh.fso.dtubego/ui/startup/login/pages/RegisterNewAccount.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

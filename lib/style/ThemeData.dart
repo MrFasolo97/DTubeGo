@@ -308,7 +308,7 @@ final ThemeData dtubeDarkTheme = ThemeData(
       fontStyle: FontStyle.normal,
     ),
   ),
-  tabBarTheme: TabBarTheme(
+  tabBarTheme: TabBarThemeData(
     indicatorSize: TabBarIndicatorSize.tab,
     labelColor: globalTextColor,
     unselectedLabelColor: Color(0xb2ffffff),
@@ -341,7 +341,7 @@ final ThemeData dtubeDarkTheme = ThemeData(
       style: BorderStyle.none,
     )),
   ),
-  dialogTheme: DialogTheme(
+  dialogTheme: DialogThemeData(
       shape: RoundedRectangleBorder(
     side: BorderSide(
       color: Color(0xff000000),

@@ -3,9 +3,9 @@ import 'package:ovh.fso.dtubego/res/Config/appConfigValues.dart';
 import 'package:ovh.fso.dtubego/ui/pages/upload/dialogs/HivePostCooldownDialog.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/OverlayWidgets/OverlayText.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
-import 'package:gallery_saver/gallery_saver.dart';
+import 'package:saver_gallery/saver_gallery.dart';
 import 'dart:io';
-import 'package:disk_space/disk_space.dart';
+import 'package:disk_space_2/disk_space_2.dart';
 import 'package:ovh.fso.dtubego/bloc/appstate/appstate_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/UploadStartedDialog.dart';
@@ -117,7 +117,7 @@ class _MomentsUploadButtontate extends State<MomentsUploadButton> {
 
 // copy file to gallery
 
-    GallerySaver.saveVideo(videoPath, albumName: "DTube");
+    SaverGallery.saveFile(file: videoPath, name: _uploadData.title, androidExistNotSave: true);
     // upload moment
     final info = await VideoCompress.getMediaInfo(videoPath);
 

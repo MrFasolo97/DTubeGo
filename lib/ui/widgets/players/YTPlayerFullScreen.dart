@@ -1,7 +1,8 @@
-import 'package:auto_orientation/auto_orientation.dart';
+
 //import 'package:overlay_dialog/overlay_dialog.dart';
+import 'package:auto_orientation_v2/auto_orientation_v2.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
 class YoutubePlayerFullScreenPage extends StatefulWidget {
@@ -27,11 +28,12 @@ class _YoutubePlayerFullScreenPageState
   @override
   void initState() {
     _controller = YoutubePlayerController(
-      initialVideoId: '',
-      params: YoutubePlayerParams(
-          showControls: false,
-          showFullscreenButton: true,
-          ),
+        flags: YoutubePlayerFlags(
+          autoPlay: false, // We'll control this manually in onReady
+          mute: false,
+          enableCaption: false,
+        ),
+      initialVideoId: ''
     );
     AutoOrientation.landscapeAutoMode();
     super.initState();
@@ -40,7 +42,7 @@ class _YoutubePlayerFullScreenPageState
   @override
   void dispose() {
     _controller.pause();
-    _controller.close();
+    _controller.dispose();
     AutoOrientation.portraitAutoMode();
     super.dispose();
   }

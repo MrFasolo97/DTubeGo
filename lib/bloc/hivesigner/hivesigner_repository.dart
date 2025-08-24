@@ -1,7 +1,7 @@
 import 'package:ovh.fso.dtubego/res/Config/HiveConfigValues.dart';
 import 'package:ovh.fso.dtubego/res/Config/UploadConfigValues.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -24,7 +24,7 @@ abstract class HivesignerRepository {
 class HivesignerRepositoryImpl implements HivesignerRepository {
   @override
   Future<bool> requestNewAccessToken(String username) async {
-    final result = await FlutterWebAuth.authenticate(
+    final result = await FlutterWebAuth2.authenticate(
         url: HiveConfig.hiveSignerAccessTokenUrl,
         callbackUrlScheme: HiveConfig.hiveSignerCallbackUrlScheme);
 

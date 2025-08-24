@@ -23,7 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class PostResultCardDesktop extends StatefulWidget {
   const PostResultCardDesktop(
@@ -109,10 +109,12 @@ class _PostResultCardDesktopState extends State<PostResultCardDesktop> {
     _bpController = VideoPlayerController.asset('assets/videos/firstpage.mp4');
 
     _ytController = YoutubePlayerController(
-      initialVideoId: widget.videoUrl,
-      params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true),
+        flags: YoutubePlayerFlags(
+          autoPlay: false, // We'll control this manually in onReady
+          mute: false,
+          enableCaption: false,
+        ),
+      initialVideoId: widget.videoUrl
     );
   }
 

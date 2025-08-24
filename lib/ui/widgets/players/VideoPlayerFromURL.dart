@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:video_player/video_player.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerFromURL extends StatefulWidget {
   VideoPlayerFromURL({Key? key, required this.url}) : super(key: key);
@@ -26,11 +26,12 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
     _videoController =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
-      initialVideoId: widget.url,
-      params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true
+      flags: YoutubePlayerFlags(
+        autoPlay: false, // We'll control this manually in onReady
+        mute: false,
+        enableCaption: false,
       ),
+      initialVideoId: widget.url,
     );
   }
 
@@ -41,11 +42,13 @@ class _VideoPlayerFromURLState extends State<VideoPlayerFromURL> {
         return DtubeLogoPulseWithSubtitle(
             subtitle: "Loading video..", size: 10.w);
       } else if (state is PostLoadedState) {
-        _ytController = YoutubePlayerController(initialVideoId: widget.url,
-          params: YoutubePlayerParams(
-            showControls: true,
-            showFullscreenButton: true,
-          )
+        _ytController = YoutubePlayerController(
+            flags: YoutubePlayerFlags(
+              autoPlay: false, // We'll control this manually in onReady
+              mute: false,
+              enableCaption: false,
+            ),
+          initialVideoId: widget.url
         );
         return InkWell(
           onTap: () {

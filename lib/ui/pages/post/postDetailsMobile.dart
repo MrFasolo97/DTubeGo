@@ -31,9 +31,7 @@ import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart'
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
-
-
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class PostDetailPageMobile extends StatefulWidget {
   String link;
@@ -246,12 +244,19 @@ class _MobilePostDetailsState extends State<MobilePostDetails> {
     _controller.pause();
     _controller.dispose();
     */
+    controller.pause();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    controller = YoutubePlayerController(params: YoutubePlayerParams(showFullscreenButton: true, privacyEnhanced: true), initialVideoId: widget.post.videoUrl!);
+    controller = YoutubePlayerController(
+        flags: YoutubePlayerFlags(
+          autoPlay: false, // We'll control this manually in onReady
+          mute: false,
+          enableCaption: false,
+        ),
+        initialVideoId: widget.post.videoUrl!);
     _ytPlayer = YTPlayerIFrame(videoUrl: widget.post.videoUrl!, autoplay: true, allowFullscreen: true, controller: controller,);
         Container? mainContainer = Container(
             child: SingleChildScrollView(

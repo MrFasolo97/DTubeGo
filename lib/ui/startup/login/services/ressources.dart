@@ -7,7 +7,7 @@ enum Status { Success, Error, Cancelled }
 
 enum LoginType {
   Google,
-  Twitter,
+  //Twitter,
   //Github,
   Facebook,
 }

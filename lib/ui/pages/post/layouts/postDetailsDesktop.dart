@@ -30,7 +30,7 @@ import 'package:ovh.fso.dtubego/ui/pages/post/widgets/CollapsedDescription.dart'
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
 class PostDetailPageDesktop extends StatefulWidget {
@@ -210,11 +210,12 @@ class _PostDetailsState extends State<PostDetails> {
     _userBloc.add(FetchDTCVPEvent());
 
     _controller = YoutubePlayerController(
-      initialVideoId: widget.post.videoUrl!,
-      params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true
-      ),
+        flags: YoutubePlayerFlags(
+          autoPlay: false, // We'll control this manually in onReady
+          mute: false,
+          enableCaption: false,
+        ),
+      initialVideoId: widget.post.videoUrl!
     );
     _videocontroller =
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
@@ -223,7 +224,7 @@ class _PostDetailsState extends State<PostDetails> {
   @override
   void dispose() {
     _controller.pause();
-    _controller.close();
+    _controller.dispose();
 
     super.dispose();
   }

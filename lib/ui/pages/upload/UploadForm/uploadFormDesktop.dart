@@ -14,7 +14,7 @@ import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
 import 'package:ovh.fso.dtubego/style/ThemeData.dart';
 import 'dart:io';
-import 'package:disk_space/disk_space.dart';
+import 'package:disk_space_2/disk_space_2.dart';
 import 'package:ovh.fso.dtubego/bloc/settings/settings_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/user/user_bloc_full.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/players/YTplayerIframe.dart';
@@ -23,7 +23,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class UploadFormDesktop extends StatefulWidget {
   UploadFormDesktop(
@@ -108,8 +108,13 @@ class _UploadFormDesktopState extends State<UploadFormDesktop> {
         VideoPlayerController.asset('assets/videos/firstpage.mp4');
 
     _ytController =
-        YoutubePlayerController(initialVideoId: stateUploadData.videoLocation, params: YoutubePlayerParams(showFullscreenButton: true, showControls: true),);
-
+        YoutubePlayerController(
+            flags: YoutubePlayerFlags(
+              autoPlay: false, // We'll control this manually in onReady
+              mute: false,
+              enableCaption: false,
+            ),
+            initialVideoId: stateUploadData.videoLocation);
   }
 
   @override

@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Wizard3rdPartyDesktop extends StatefulWidget {
   Wizard3rdPartyDesktop(
@@ -80,10 +80,12 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
     _userBloc.add(FetchMyAccountDataEvent());
     _hivesignerBloc = BlocProvider.of<HivesignerBloc>(context);
     _ytController = YoutubePlayerController(
+      flags: YoutubePlayerFlags(
+        autoPlay: false, // We'll control this manually in onReady
+        mute: false,
+        enableCaption: false,
+      ),
       initialVideoId: '',
-      params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: false),
     );
     loadHiveSignerAccessToken();
   }
@@ -173,11 +175,14 @@ class _Wizard3rdPartyDesktopState extends State<Wizard3rdPartyDesktop> {
                                             _showVideo = true;
                                             _ytController =
                                                 YoutubePlayerController(
-                                                    initialVideoId: _foreignUrlController.text,
-                                                    params: YoutubePlayerParams(
-                                                    showControls: true,
-                                                    showFullscreenButton: false)
-                                            );
+                                                    flags: YoutubePlayerFlags(
+                                                      autoPlay: false, // We'll control this manually in onReady
+                                                      mute: false,
+                                                      enableCaption: false,
+                                                    ),
+                                                    initialVideoId:
+                                                        _foreignUrlController
+                                                            .text);
                                             _uploadData = UploadData(
                                                 link: "",
                                                 title: _ytController

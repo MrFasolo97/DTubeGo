@@ -1,5 +1,4 @@
 import 'package:ovh.fso.dtubego/bloc/web3storage/web3storage_bloc_full.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:ovh.fso.dtubego/bloc/hivesigner/hivesigner_bloc.dart';
 import 'package:ovh.fso.dtubego/bloc/hivesigner/hivesigner_bloc_full.dart';
 import 'package:ovh.fso.dtubego/bloc/transaction/transaction_bloc_full.dart';
@@ -8,6 +7,7 @@ import 'package:ovh.fso.dtubego/ui/pages/upload/UploadForm/uploadForm.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:saver_gallery/saver_gallery.dart';
 
 class WizardIPFSDesktop extends StatefulWidget {
   WizardIPFSDesktop(
@@ -63,8 +63,7 @@ class _WizardIPFSDesktopState extends State<WizardIPFSDesktop> {
 
 // save to gallery
 
-      GallerySaver.saveVideo(_uploadData.videoLocation, albumName: "DTube");
-
+      SaverGallery.saveFile(file: _uploadData.videoLocation, name: _uploadData.title, androidExistNotSave: true);
 // upload video to ipfs
 
       _uploadData = ud;

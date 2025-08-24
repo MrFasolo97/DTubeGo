@@ -9,7 +9,7 @@ import 'package:ovh.fso.dtubego/ui/pages/feeds/cards/PostListCardSuggestions.dar
 import 'package:ovh.fso.dtubego/ui/widgets/dtubeLogoPulse/dtubeLoading.dart';
 import 'package:ovh.fso.dtubego/utils/Strings/friendlyTimestamp.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
 typedef Bool2VoidFunc = void Function(bool);

@@ -1,6 +1,7 @@
 import 'package:ovh.fso.dtubego/ui/widgets/AppBar/DTubeSubAppBarDesktop.dart';
 import 'package:ovh.fso.dtubego/ui/widgets/DialogTemplates/DialogWithTitleLogo.dart';
-import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart' as globals;
+import 'package:ovh.fso.dtubego/utils/GlobalStorage/globalVariables.dart'
+    as globals;
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:ovh.fso.dtubego/bloc/hivesigner/hivesigner_bloc_full.dart';
@@ -15,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:textfield_tags/textfield_tags.dart';
+import 'package:super_tag_editor/tag_editor.dart';
 
 class SettingsTabContainerDesktop extends StatefulWidget {
   SettingsTabContainerDesktop({Key? key}) : super(key: key);
@@ -1226,107 +1227,169 @@ class _SettingsTabContainerDesktopState
                                 ),
                               ),
                               Container(
-                                width: 50.w,
-                                child: DTubeFormCard(
-                                  avoidAnimation: _visitedTabs.contains(2) ||
-                                      globals.disableAnimations,
-                                  waitBeforeFadeIn: Duration(milliseconds: 900),
-                                  childs: [
-                                    Stack(children: [
-                                      ShowHintIcon(
-                                        onPressed: () {
-                                          setState(() {
-                                            _showHiveDefaultTagsHint =
-                                                !_showHiveDefaultTagsHint;
-                                          });
-                                        },
-                                        alignment: Alignment.topRight,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 1.h, bottom: 1.h),
-                                        child: Text("Hive Tags",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineSmall),
-                                      ),
-                                    ]),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 30.w,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                  "Cross-posted videos can get tagged with up to 8 custom tags.",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: TextFieldTags(
-                                                    initialTags:
-                                                        _hiveDefaultTags,
-                                                    textFieldStyler:
-                                                        TextFieldStyler(
-                                                      //These are properties you can tweek for customization
-
-                                                      // bool textFieldFilled = false,
-                                                      // Icon icon,
-                                                      helperText: _hiveDefaultTags
-                                                              .length
-                                                              .toString() +
-                                                          ' tags (hit space to add tag)\n' +
-                                                          _hiveDefaultTags
-                                                              .join("\n"),
-                                                      // TextStyle helperStyle,
-                                                      hintText: '',
+                                  width: 50.w,
+                                  child: DTubeFormCard(
+                                      avoidAnimation:
+                                          _visitedTabs.contains(2) ||
+                                              globals.disableAnimations,
+                                      waitBeforeFadeIn:
+                                          Duration(milliseconds: 900),
+                                      childs: [
+                                        Stack(children: [
+                                          ShowHintIcon(
+                                            onPressed: () {
+                                              setState(() {
+                                                _showHiveDefaultTagsHint =
+                                                    !_showHiveDefaultTagsHint;
+                                              });
+                                            },
+                                            alignment: Alignment.topRight,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 1.h, bottom: 1.h),
+                                            child: Text("Hive Tags",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineSmall),
+                                          ),
+                                        ]),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 30.w,
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                      "Cross-posted videos can get tagged with up to 8 custom tags.",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: TagEditor(
+                                                      length: _hiveDefaultTags
+                                                          .length,
+                                                      tagBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return Container(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  4.0),
+                                                          margin: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      4.0),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                            color: globalRed,
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: [
+                                                              Text(
+                                                                _hiveDefaultTags[
+                                                                    index],
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyLarge
+                                                                    ?.copyWith(
+                                                                      color:
+                                                                          globalAlmostWhite,
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: 4),
+                                                              Icon(
+                                                                Icons.cancel,
+                                                                size: 4.w,
+                                                                color:
+                                                                    globalAlmostWhite,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                      onTagChanged:
+                                                          (String tag) {
+                                                        // Handle tag changes
+                                                      },
+                                                      suggestionBuilder:
+                                                          (BuildContext context,
+                                                              TagsEditorState<
+                                                                      dynamic>
+                                                                  state,
+                                                              dynamic
+                                                                  suggestion,
+                                                              int index,
+                                                              int length,
+                                                              bool
+                                                                  isHighlighted,
+                                                              String?
+                                                                  textEditingValue) {
+                                                        // You'll need to implement suggestion building based on your data
+                                                        return ListTile(
+                                                          title: Text(suggestion
+                                                              .toString()),
+                                                        );
+                                                      },
+                                                      findSuggestions:
+                                                          (String query) async {
+                                                        // Implement your suggestion search logic
+                                                        return [];
+                                                      },
+                                                      minTextFieldWidth: 160.0,
+                                                      tagSpacing: 4.0,
+                                                      delimiters: [
+                                                        ' '
+                                                      ], // Space to add tags
+                                                      inputDecoration:
+                                                          InputDecoration(
+                                                        helperText: _hiveDefaultTags
+                                                                .length
+                                                                .toString() +
+                                                            ' tags (hit space to add tag)\n' +
+                                                            _hiveDefaultTags
+                                                                .join("\n"),
+                                                        hintText: '',
+                                                        filled: false,
+                                                        isDense: true,
+                                                        contentPadding:
+                                                            EdgeInsets.all(8.0),
+                                                      ),
                                                       textStyle:
                                                           Theme.of(context)
                                                               .textTheme
                                                               .bodyLarge,
-                                                      // TextStyle hintStyle,
-                                                      // EdgeInsets contentPadding,
-                                                      // Color textFieldFilledColor,
-                                                      // bool isDense = true,
-                                                      // bool textFieldEnabled = true,
-                                                      // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
-                                                      // OutlineInputBorder textFieldFocusedBorder,
-                                                      // OutlineInputBorder textFieldDisabledBorder,
-                                                      // OutlineInputBorder textFieldEnabledBorder
+                                                      keyboardType:
+                                                          TextInputType.text,
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      focusNode: FocusNode(),
+                                                      controller:
+                                                          TextEditingController(),
+                                                      maxLines: 1,
+                                                      resetTextOnSubmitted:
+                                                          true,
+                                                      suggestionsBoxMaxHeight:
+                                                          200,
+                                                      debounceDuration:
+                                                          Duration(
+                                                              milliseconds:
+                                                                  300),
                                                     ),
-                                                    tagsStyler: TagsStyler(
-                                                      //These are properties you can tweek for customization
-
-                                                      // showHashtag = false,
-                                                      // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
-                                                      // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
-                                                      tagDecoration:
-                                                          BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .rectangle,
-                                                              borderRadius:
-                                                                  new BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    10.0),
-                                                              ),
-                                                              color: globalRed),
-                                                      tagTextStyle:
-                                                          Theme.of(context)
-                                                              .textTheme
-                                                              .bodyLarge,
-                                                      tagCancelIcon: Icon(
-                                                          Icons.cancel,
-                                                          size: 4.w,
-                                                          color:
-                                                              globalAlmostWhite),
-                                                    ),
-                                                    onTag: (String tag) {  },
-                                                    onDelete: (String tag) {  },
-                                                  ),
-                                                )],
+                                                  )
+                                                ],
                                               ),
                                             )
                                           ],
@@ -1343,8 +1406,9 @@ class _SettingsTabContainerDesktopState
                                 padding: EdgeInsets.only(top: 1.h, bottom: 1.h),
                                 child: Text(
                                     "Default Values for Regular Uploads",
-                                    style:
-                                        Theme.of(context).textTheme.headlineSmall),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
                               ),
                               Container(
                                 width: 50.w,
@@ -1659,8 +1723,9 @@ class _SettingsTabContainerDesktopState
                               Padding(
                                 padding: EdgeInsets.only(top: 1.h, bottom: 1.h),
                                 child: Text("Moment Values",
-                                    style:
-                                        Theme.of(context).textTheme.headlineSmall),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
                               ),
                               Container(
                                 width: 50.w,

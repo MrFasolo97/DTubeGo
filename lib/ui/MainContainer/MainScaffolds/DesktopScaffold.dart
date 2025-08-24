@@ -349,16 +349,13 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                     resizeToAvoidBottomInset: false,
                     appBar: AppBar(
                       shadowColor: Colors.transparent,
-                      backgroundColor: Color(0x00ffffff),
+                      backgroundColor: Colors.transparent,
                       automaticallyImplyLeading: false,
                       elevation: 0,
                       titleSpacing: 0,
-                      flexibleSpace: Container(
-                        width: 100.w,
-                        color: Colors.red,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                             Text("test"),
                             BottomNavigationBar(
                               type: BottomNavigationBarType.fixed,
@@ -539,7 +536,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
                           ],
                         ),
                       ),
-                    ),
                     body:
                         // show global snack bar to notify the user about transactions
                         BlocListener<TransactionBloc, TransactionState>(

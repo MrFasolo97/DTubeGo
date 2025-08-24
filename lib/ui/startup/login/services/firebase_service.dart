@@ -3,51 +3,74 @@ import 'dart:developer';
 
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
 
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+//import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 
 import 'package:ovh.fso.dtubego/ui/startup/login/services/ressources.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:github_sign_in/github_sign_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:twitter_login/twitter_login.dart';
 
 // more flows:
 // TODO: https://firebase.flutter.dev/docs/auth/social/ facebook, github, apple
 
 
-
+/*
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
+  //_auth = FirebaseAuth.instance;
+  /*
   signInwithGoogleMobile() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
+      // For web, you might need to initialize first
+      // await _googleSignIn.initialize(); // Uncomment if needed
+
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+      if (googleSignInAccount == null) {
+        // User canceled the sign-in
+        return null;
+      }
+
+      // Get the authentication tokens
       final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
+      await googleSignInAccount.authentication;
+
+      // Create the credential
+      final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      log(e.message!);
-      throw e;
-    }
-  }
 
+      // Sign in to Firebase
+      final UserCredential userCredential =
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      return userCredential.user;
+
+    } on FirebaseAuthException catch (e) {
+      log(e.message ?? 'Unknown Firebase Auth error');
+      rethrow;
+    } catch (e) {
+      log('Unexpected error: $e');
+      rethrow;
+    }
+   */
+  }
+  /*
   Future<void> signOutFromGoogle() async {
     await _googleSignIn.signOut();
     await _auth.signOut();
   }
+  */
 
   Future<UserCredential?> linkProviders(
       UserCredential userCredential, AuthCredential newCredential) async {
     return await userCredential.user!.linkWithCredential(newCredential);
   }
-
+  /*
   Future<Resource?> signInWithTwitterMobile() async {
     String _twitterApiKey =
         await sec.getLocalConfigString(sec.settingKey_twaKey);
@@ -79,7 +102,6 @@ class FirebaseService {
         return null;
     }
   }
-
   Future<UserCredential?> signInWithGoogleWeb() async {
     // Create a new provider
     GoogleAuthProvider googleProvider = GoogleAuthProvider();
@@ -91,7 +113,7 @@ class FirebaseService {
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithPopup(googleProvider);
   }
-
+  */
   Future<UserCredential?> signInWithTwitterWeb() async {
     final userCredential =
         await FirebaseAuth.instance.signInWithPopup(TwitterAuthProvider());
@@ -135,7 +157,6 @@ class FirebaseService {
     return await FirebaseAuth.instance
         .signInWithCredential(githubAuthCredential);
   }
-  */
   Future<UserCredential> signInWithFacebookMobile() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
@@ -148,4 +169,6 @@ class FirebaseService {
     return await FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential);
   }
+  */
 }
+*/

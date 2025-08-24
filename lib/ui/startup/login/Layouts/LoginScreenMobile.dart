@@ -163,7 +163,6 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                                               loggedInCallback:
                                                   loggedInCallback,
                                             ),
-                                            */
                                             SignInButton(
                                               width: 10.w,
                                               faIcon: FaIcon(
@@ -173,6 +172,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                                               loggedInCallback:
                                                   loggedInCallback,
                                             ),
+                                            */
                                           ],
                                         )
                                       : Container(),

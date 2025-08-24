@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class NewsPostListCard extends StatefulWidget {
   const NewsPostListCard({
@@ -97,10 +97,12 @@ class _NewsPostListCardState extends State<NewsPostListCard> {
     _userBloc = BlocProvider.of<UserBloc>(context);
     _bpController = VideoPlayerController.asset('assets/videos/firstpage.mp4');
     _ytController = YoutubePlayerController(
-      params: YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true,
-      ), initialVideoId: '',
+        flags: YoutubePlayerFlags(
+          autoPlay: false, // We'll control this manually in onReady
+          mute: false,
+          enableCaption: false,
+        ),
+      initialVideoId: ''
     );
   }
 

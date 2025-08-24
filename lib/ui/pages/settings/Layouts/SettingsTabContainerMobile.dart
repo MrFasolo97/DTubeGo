@@ -17,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ovh.fso.dtubego/utils/GlobalStorage/SecureStorage.dart' as sec;
-import 'package:textfield_tags/textfield_tags.dart';
+import 'package:super_tag_editor/tag_editor.dart';
 
 class SettingsTabContainerMobile extends StatefulWidget {
   SettingsTabContainerMobile({Key? key}) : super(key: key);
@@ -1414,104 +1414,112 @@ class _SettingsTabContainerMobileState extends State<SettingsTabContainerMobile>
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
-                                              child: TextFieldTags(
-                                                initialTags: _hiveDefaultTags,
-                                                textFieldStyler:
-                                                    TextFieldStyler(
-                                                  //These are properties you can tweek for customization
+                                              child: TagEditor(
+                                                length: _hiveDefaultTags.length,
+                                                tagBuilder: (BuildContext context, int index) {
+                                                  return Container(
+                                                    padding: EdgeInsets.all(4.0),
+                                                    margin: EdgeInsets.symmetric(horizontal: 4.0),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(10.0),
+                                                      color: globalRed,
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        Text(
+                                                          _hiveDefaultTags[index],
+                                                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                                            color: globalAlmostWhite,
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 4),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              _hiveDefaultTags.removeAt(index);
+                                                            });
+                                                          },
+                                                          child: Icon(
+                                                            Icons.cancel,
+                                                            size: 4.w,
+                                                            color: globalAlmostWhite,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                                onTagChanged: (String tag) {
+                                                  // Validate the tag before adding
+                                                  if (_hiveDefaultTags.length == 8) {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text("max 8 tags allowed")),
+                                                    );
+                                                    return;
+                                                  }
+                                                  if (!RegExp(r'^[a-z]+$').hasMatch(tag)) {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text("only alphabetic characters allowed")),
+                                                    );
+                                                    return;
+                                                  }
+                                                  if (_hiveDefaultTags.contains(tag)) {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text("tag is already in the list")),
+                                                    );
+                                                    return;
+                                                  }
+                                                  if (tag.toLowerCase() == "dtube") {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text("dtube is as default in the list")),
+                                                    );
+                                                    return;
+                                                  }
 
-                                                  // bool textFieldFilled = false,
-                                                  // Icon icon,
-                                                  helperText: _hiveDefaultTags
-                                                          .length
-                                                          .toString() +
-                                                      ' tags (hit space to add tag)\n' +
-                                                      _hiveDefaultTags
-                                                          .join("\n"),
-                                                  // TextStyle helperStyle,
-                                                  hintText: '',
-                                                  textStyle: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge,
-                                                  // TextStyle hintStyle,
-                                                  // EdgeInsets contentPadding,
-                                                  // Color textFieldFilledColor,
-                                                  // bool isDense = true,
-                                                  // bool textFieldEnabled = true,
-                                                  // OutlineInputBorder textFieldBorder = const OutlineInputBorder(),
-                                                  // OutlineInputBorder textFieldFocusedBorder,
-                                                  // OutlineInputBorder textFieldDisabledBorder,
-                                                  // OutlineInputBorder textFieldEnabledBorder
-                                                ),
-                                                tagsStyler: TagsStyler(
-                                                  //These are properties you can tweek for customization
-
-                                                  // showHashtag = false,
-                                                  // EdgeInsets tagPadding = const EdgeInsets.all(4.0),
-                                                  // EdgeInsets tagMargin = const EdgeInsets.symmetric(horizontal: 4.0),
-                                                  tagDecoration: BoxDecoration(
-                                                      shape: BoxShape.rectangle,
-                                                      borderRadius:
-                                                          new BorderRadius.all(
-                                                        Radius.circular(10.0),
-                                                      ),
-                                                      color: globalRed),
-                                                  tagTextStyle:
-                                                      Theme.of(context)
-                                                          .textTheme
-                                                          .bodyLarge,
-                                                  tagCancelIcon: Icon(
-                                                      Icons.cancel,
-                                                      size: 4.w,
-                                                      color: globalAlmostWhite),
-                                                ),
-                                                onTag: (tag) {
                                                   setState(() {
                                                     _hiveDefaultTags.add(tag);
                                                   });
                                                 },
-                                                onDelete: (tag) {
-                                                  setState(() {
-                                                    _hiveDefaultTags
-                                                        .remove(tag);
-                                                  });
+                                                suggestionBuilder: (BuildContext context, TagsEditorState<dynamic> state, dynamic suggestion, int index, int length, bool isHighlighted, String? textEditingValue) {
+                                                  // Return empty container if no suggestions needed
+                                                  return Container();
                                                 },
-                                                textSeparators: const [
-                                                  ' ',
-                                                  ','
-                                                ],
-                                                validator: (tag) {
-                                                  if (_hiveDefaultTags.length ==
-                                                      8) {
-                                                    return "max 8 tags allowed";
-                                                  }
-                                                  if (!RegExp(r'^[a-z]+$')
-                                                      .hasMatch(tag)) {
-                                                    return "only alhabetic characters allowed";
-                                                  }
-                                                  if (_hiveDefaultTags
-                                                      .contains(tag)) {
-                                                    return "tag is already in the list";
-                                                  }
-                                                  if (tag.toLowerCase() ==
-                                                      "dtube") {
-                                                    return "dtube is as default in the list";
-                                                  }
-                                                  return null;
+                                                findSuggestions: (String query) async {
+                                                  // Return empty list if no suggestions needed
+                                                  return [];
                                                 },
+                                                minTextFieldWidth: 160.0,
+                                                tagSpacing: 4.0,
+                                                delimiters: [' ', ','], // Space and comma to add tags
+                                                inputDecoration: InputDecoration(
+                                                  helperText: _hiveDefaultTags.length.toString() +
+                                                      ' tags (hit space or comma to add tag)\n' +
+                                                      _hiveDefaultTags.join("\n"),
+                                                  hintText: '',
+                                                  filled: false,
+                                                  isDense: true,
+                                                  contentPadding: EdgeInsets.all(8.0),
+                                                  border: OutlineInputBorder(),
+                                                  focusedBorder: OutlineInputBorder(),
+                                                  enabledBorder: OutlineInputBorder(),
+                                                  disabledBorder: OutlineInputBorder(),
+                                                ),
+                                                textStyle: Theme.of(context).textTheme.bodyLarge,
+                                                keyboardType: TextInputType.text,
+                                                textInputAction: TextInputAction.done,
+                                                focusNode: FocusNode(),
+                                                controller: TextEditingController(),
+                                                maxLines: 1,
+                                                resetTextOnSubmitted: true,
+                                                suggestionsBoxMaxHeight: 200,
+                                                debounceDuration: Duration(milliseconds: 300),
+                                                onSubmitted: (String value) {
+                                                  // Handle when user presses done/enter
+                                                  if (value.isNotEmpty) {
 
-                                                // TextFormField(
-                                                //   controller:
-                                                //       _hiveDefaultTagsController,
-                                                //   cursorColor: globalRed,
-                                                //   decoration: new InputDecoration(
-                                                //       labelText:
-                                                //           "hive tags (space-separated):"),
-                                                //   maxLines: 1,
-                                                //   style: Theme.of(context)
-                                                //       .textTheme
-                                                //       .bodyText1,
-                                                // ),
+                                                  }
+                                                },
                                               ),
                                             )
                                           ],
